@@ -1,0 +1,10 @@
+# This for the season of the Bliss SMP
+
+season: 2
+
+
+# 1 = Absolute accuracy (including bugs in the Bliss SMP)
+# 2 = Accurate and fixed (Recommended & Default)
+
+mode: 2
+
