@@ -6,3 +6,5 @@ This Remake contains an API for developers and a Skript addon for people who kno
 This repo is still in the works please ignore everything u see :)
 
 [For Plugin Developers](Wiki/PluginDev/Start.md) [For Skript Developers](Wiki/SkirptDev/Start.md) 
+
+test update
