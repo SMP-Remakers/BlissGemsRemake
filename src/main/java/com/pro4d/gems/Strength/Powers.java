@@ -22,7 +22,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
-//test
+
 public final class Powers implements Listener {
 
     @Getter
