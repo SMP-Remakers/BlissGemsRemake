@@ -16,7 +16,6 @@ import static com.pro4d.gems.Wealth.Powers.WealthSeconds;
 import static com.pro4d.gems.Wealth.Powers.WealthTicks;
 
 public final class blissgems extends SimplePlugin implements Listener {
-// Sky is the best
 
     public void onPluginStop() {
     }
