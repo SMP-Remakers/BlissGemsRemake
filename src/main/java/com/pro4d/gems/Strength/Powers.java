@@ -11,9 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
@@ -40,7 +38,6 @@ public final class Powers implements Listener {
         Frailer = new HashMap<>();
         Chad = new HashMap<>();
     }
-
 
     @EventHandler
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
@@ -72,14 +69,14 @@ public final class Powers implements Listener {
 
                     p.sendMessage(
                             Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                            Common.colorize("&x&b&8&f&f&f&b") + " You have activated " +
-                            Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
-                            Common.colorize("&x&b&8&f&f&f&b") + " skill on " + Common.colorize("&x&F&1&0&3&0&3") + e.getEntity() + Common.colorize("&7") + " (radius 5)"
-                        );
-                    }
+                                    Common.colorize("&x&b&8&f&f&f&b") + " You have activated " +
+                                    Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
+                                    Common.colorize("&x&b&8&f&f&f&b") + " skill on " + Common.colorize("&x&F&1&0&3&0&3") + e.getEntity() + Common.colorize("&7") + " (radius 5)"
+                    );
                 }
             }
         }
+    }
 
     @EventHandler
     public void GroupFrailerPower(PlayerInteractEvent e) {
