@@ -44,45 +44,42 @@ public final class Powers implements Listener {
 
     @EventHandler
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
-        if (e.getHand() == EquipmentSlot.HAND) { //damage
-
-            HumanEntity p = (HumanEntity) e.getDamager();
-            if (p.getInventory().getItemInMainHand().hasItemMeta()) {
+        HumanEntity p = (HumanEntity) e.getDamager();
+        if (p.getInventory().getItemInMainHand().hasItemMeta()) {
 
 
-                ItemStack gem = p.getInventory().getItemInMainHand();
+            ItemStack gem = p.getInventory().getItemInMainHand();
 
-                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
+            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
 
-                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
+            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
 
-                if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
+            if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
 
-                    if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
-                        long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
-                        if (cooldownmils - System.currentTimeMillis() >= 0) {
-                            return;
-                        }
+                if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
+                    long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
+                    if (cooldownmils - System.currentTimeMillis() >= 0) {
+                        return;
+                    }
+                }
+
+
+                if (Objects.equals(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
+
+                    if (!Frailer.containsKey(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
+                        Frailer.put(UUID.fromString(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
                     }
 
-
-                    if (Objects.equals(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
-
-                        if (!Frailer.containsKey(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Frailer.put(UUID.fromString(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
-                        }
-
-                        p.sendMessage(
-                                Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 5)"
+                    p.sendMessage(
+                            Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
+                            Common.colorize("&x&b&8&f&f&f&b") + " You have activated " +
+                            Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
+                            Common.colorize("&x&b&8&f&f&f&b") + " skill on " + Common.colorize("&x&F&1&0&3&0&3") + e.getEntity() + Common.colorize("&7") + " (radius 5)"
                         );
                     }
                 }
             }
         }
-    }
 
     @EventHandler
     public void GroupFrailerPower(PlayerInteractEvent e) {
