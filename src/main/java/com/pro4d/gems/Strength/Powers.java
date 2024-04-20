@@ -4,12 +4,16 @@ import com.pro4d.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
@@ -39,19 +43,20 @@ public final class Powers implements Listener {
 
 
     @EventHandler
-    public void FrailerPower(PlayerInteractEvent event) {
-        if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) { //check left click
+    public void SingleFrailerPower(EntityDamageByEntityEvent e) {
+        if (e.getHand() == EquipmentSlot.HAND) { //damage
 
-            if (event.getPlayer().getInventory().getItemInMainHand().hasItemMeta()) {
+            HumanEntity p = (HumanEntity) e.getDamager();
+            if (p.getInventory().getItemInMainHand().hasItemMeta()) {
 
 
-                ItemStack gem = event.getPlayer().getInventory().getItemInMainHand();
+                ItemStack gem = p.getInventory().getItemInMainHand();
 
                 NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
 
                 NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
 
-                if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
+                if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
 
                     if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
                         long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
@@ -61,13 +66,54 @@ public final class Powers implements Listener {
                     }
 
 
-                    if (Objects.equals(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
+                    if (Objects.equals(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
 
-                        if (!Frailer.containsKey(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Frailer.put(UUID.fromString(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
+                        if (!Frailer.containsKey(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
+                            Frailer.put(UUID.fromString(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
                         }
 
-                        event.getPlayer().sendMessage(
+                        p.sendMessage(
+                                Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
+                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
+                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 5)"
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void GroupFrailerPower(PlayerInteractEvent e) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) { //check left click
+
+            if (e.getPlayer().getInventory().getItemInMainHand().hasItemMeta()) {
+
+
+                ItemStack gem = e.getPlayer().getInventory().getItemInMainHand();
+
+                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
+
+                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
+
+                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
+
+                    if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
+                        long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
+                        if (cooldownmils - System.currentTimeMillis() >= 0) {
+                            return;
+                        }
+                    }
+
+
+                    if (Objects.equals(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
+
+                        if (!Frailer.containsKey(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
+                            Frailer.put(UUID.fromString(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
+                        }
+
+                        e.getPlayer().sendMessage(
                                 Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
                                         Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
                                         Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
@@ -75,18 +121,18 @@ public final class Powers implements Listener {
                         );
 
 
-                        for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
-                            if (entity != event.getPlayer()) {
-                                LivingEntity e = (LivingEntity) entity;
-                                if (e != null) {
-                                    e.clearActivePotionEffects();
-                                    e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
+                        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5)) {
+                            if (entity != e.getPlayer()) {
+                                LivingEntity entity2 = (LivingEntity) entity;
+                                if (entity2 != null) {
+                                    entity2.clearActivePotionEffects();
+                                    entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
                                 }
                             }
                         }
 
 
-                        Location loc = event.getPlayer().getLocation();
+                        Location loc = e.getPlayer().getLocation();
 
                         double spacing = 0.05;
                         strenghcircle(loc, 1, spacing);
