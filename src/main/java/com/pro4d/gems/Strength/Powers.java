@@ -14,6 +14,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.remain.Remain;
 
@@ -71,6 +72,49 @@ public final class Powers implements Listener {
                                         Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
                                         Common.colorize("&x&b&8&f&f&f&b") + " skill on " + Common.colorize("&x&F&1&0&3&0&3") + e.getEntity().getName() + Common.colorize("&7") + " (radius 5)"
                         );
+
+
+                        LivingEntity ent = (LivingEntity) e.getEntity();
+
+                        ent.clearActivePotionEffects();
+                        
+                        ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20, 0));
+
+                        e.getEntity().getLocation().toVector().subtract(e.getDamager().getLocation().toVector()).normalize().multiply(0.1);
+
+                        Particle.DustOptions circledust = new Particle.DustOptions(org.bukkit.Color.fromRGB(241, 3, 3), 1);
+
+                        final int[] i = {0};
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                if (i[0] < 100) {
+                                    i[0]++;
+                                    Location point1 = e.getDamager().getLocation();
+                                    point1.setY(point1.getY() + 1);
+
+                                    Location point2 = e.getEntity().getLocation();
+                                    point2.setY(point2.getY() + 1);
+
+                                    World world = point1.getWorld();
+                                    double distance = point1.distance(point2);
+                                    Vector vector = point2.toVector().subtract(point1.toVector()).normalize().multiply(0.1);
+                                    Location location = point1.clone();
+
+                                    for (int i = 0; i < distance * 10; i++) {
+                                        world.spawnParticle(Particle.REDSTONE, location, 0, circledust);
+
+                                        world.spawnParticle(Particle.SMOKE_NORMAL, location, 0);
+
+                                        location.add(vector);
+                                    }
+                                } else {
+                                    cancel();
+                                }
+                            }
+                        }.runTaskTimer(blissgems.getInstance(), 0, 0);
+
+
                     }
                 }
             }
