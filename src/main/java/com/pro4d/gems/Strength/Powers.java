@@ -77,8 +77,8 @@ public final class Powers implements Listener {
                         LivingEntity ent = (LivingEntity) e.getEntity();
 
                         ent.clearActivePotionEffects();
-                        
-                        ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20, 0));
+
+                        ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 400, 0));
 
                         e.getEntity().getLocation().toVector().subtract(e.getDamager().getLocation().toVector()).normalize().multiply(0.1);
 
@@ -114,6 +114,19 @@ public final class Powers implements Listener {
                             }
                         }.runTaskTimer(blissgems.getInstance(), 0, 0);
 
+
+                        final int[] a = {0};
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                if (a[0] < 400) {
+                                    a[0]++;
+
+                                } else {
+                                    cancel();
+                                }
+                            }
+                        }.runTaskTimer(blissgems.getInstance(), 0, 0);
 
                     }
                 }
