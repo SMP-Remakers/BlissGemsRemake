@@ -1,6 +1,6 @@
-package com.pro4d.gems.Speed;
+package com.hyperdondon.gems.Speed;
 
-import com.pro4d.blissgems;
+import com.hyperdondon.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;

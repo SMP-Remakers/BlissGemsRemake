@@ -1,4 +1,4 @@
-package com.pro4d;
+package com.hyperdondon;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,10 +10,10 @@ import org.mineacademy.fo.plugin.SimplePlugin;
 
 import java.io.File;
 
-import static com.pro4d.gems.Strength.Powers.StrengthSeconds;
-import static com.pro4d.gems.Strength.Powers.StrengthTicks;
-import static com.pro4d.gems.Wealth.Powers.WealthSeconds;
-import static com.pro4d.gems.Wealth.Powers.WealthTicks;
+import static com.hyperdondon.gems.Strength.Powers.StrengthSeconds;
+import static com.hyperdondon.gems.Strength.Powers.StrengthTicks;
+import static com.hyperdondon.gems.Wealth.Powers.WealthSeconds;
+import static com.hyperdondon.gems.Wealth.Powers.WealthTicks;
 
 public final class blissgems extends SimplePlugin implements Listener {
 
@@ -37,9 +37,9 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(this);
 
-        registerEvents(com.pro4d.gems.Strength.Powers.getInstance());
+        registerEvents(com.hyperdondon.gems.Strength.Powers.getInstance());
 
-        registerEvents(com.pro4d.gems.Wealth.Powers.getInstance());
+        registerEvents(com.hyperdondon.gems.Wealth.Powers.getInstance());
 
         getCommand("bliss").setExecutor(new SlashBliss());
 

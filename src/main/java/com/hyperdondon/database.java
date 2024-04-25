@@ -1,4 +1,4 @@
-package com.pro4d;
+package com.hyperdondon;
 
 import org.mineacademy.fo.collection.SerializedMap;
 import org.mineacademy.fo.database.SimpleFlatDatabase;
@@ -10,7 +10,7 @@ public class database extends SimpleFlatDatabase {
 
     @Override
     protected void onLoad(SerializedMap serializedMap, Object o) {
-        
+
     }
 
     @Override

@@ -1,29 +1,24 @@
-package com.pro4d.gems.Wealth;
+package com.hyperdondon.gems.Wealth;
 
-import com.pro4d.blissgems;
+import com.hyperdondon.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 public final class Powers implements Listener {
 
@@ -71,8 +66,8 @@ public final class Powers implements Listener {
 
                         event.getPlayer().sendMessage(
                                 Common.colorize("&x&0&e&c&9&1&2") + "🔮" +
-                                Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                Common.colorize("&f") + "\uD83D\uDCB8" + Common.colorize("&x&0&e&c&9&1&2") + "Rich Rush",
+                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                                        Common.colorize("&f") + "\uD83D\uDCB8" + Common.colorize("&x&0&e&c&9&1&2") + "Rich Rush",
                                 Common.colorize("&x&b&8&f&f&f&b") + "Skill for",
                                 Common.colorize("&x&0&e&c&9&1&2") + "5 Minutes"
 
@@ -108,10 +103,6 @@ public final class Powers implements Listener {
             }
         }
     }
-
-
-
-
 
 
     @EventHandler

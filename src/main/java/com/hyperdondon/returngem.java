@@ -1,4 +1,4 @@
-package com.pro4d;
+package com.hyperdondon;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
