@@ -4,6 +4,8 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +15,12 @@ public final class SlashBliss implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
         if (args.length == 1) {
+            HumanEntity a = (HumanEntity) commandSender;
+            a.getWorld().spawnEntity(a.getEyeLocation(), EntityType.ZOMBIE);
+            return true;
+        }
+
+        if (args.length == 2) {
             Player p = (Player) commandSender;
             p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
             return true;

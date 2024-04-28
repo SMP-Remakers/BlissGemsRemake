@@ -217,7 +217,11 @@ public final class Powers implements Listener {
 
 
     public static void StrengthTicks() {
-
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (ChadParticles.get(p.getUniqueId()) == 1) {
+                
+            }
+        }
     }
 
     public static void StrengthSeconds() {
