@@ -32,7 +32,7 @@ public final class Powers implements Listener {
     public static HashMap<UUID, Long> Frailer;
     public static HashMap<UUID, Long> Chad;
 
-    public static HashMap<UUID, Long> ChadParticles;
+    public static HashMap<UUID, Integer> ChadParticles;
 
     Powers() {
         Frailer = new HashMap<>();
@@ -42,6 +42,7 @@ public final class Powers implements Listener {
 
     @EventHandler
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
+
         if (e.getDamager().getType() == EntityType.PLAYER) {
             HumanEntity p = (HumanEntity) e.getDamager();
             if (p.getInventory().getItemInMainHand().hasItemMeta()) {
@@ -414,7 +415,19 @@ public final class Powers implements Listener {
 
     @EventHandler
     public void ChadHit(EntityDamageByEntityEvent event) {
-        
+        if (event.getDamager().getType().equals(EntityType.PLAYER)) {
+            HumanEntity attacker = (HumanEntity) event.getDamager();
+            if (attacker.getInventory().getItemInMainHand().isEmpty()) {
+                if (ChadParticles.containsKey(attacker.getUniqueId())) {
+                    if (ChadParticles.get(attacker.getUniqueId()) < 4) {
+                        Integer num = ChadParticles.get(attacker.getUniqueId()) + 1;
+                        ChadParticles.put(attacker.getUniqueId(), num);
+                    } else {
+                        ChadParticles.put(attacker.getUniqueId(), 1);
+                    }
+                }
+            }
+        }
     }
 }
 
