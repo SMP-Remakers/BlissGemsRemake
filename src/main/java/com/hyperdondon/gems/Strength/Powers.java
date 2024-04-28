@@ -32,9 +32,12 @@ public final class Powers implements Listener {
     public static HashMap<UUID, Long> Frailer;
     public static HashMap<UUID, Long> Chad;
 
+    public static HashMap<UUID, Long> ChadParticles;
+
     Powers() {
         Frailer = new HashMap<>();
         Chad = new HashMap<>();
+        ChadParticles = new HashMap<>();
     }
 
     @EventHandler
@@ -246,6 +249,8 @@ public final class Powers implements Listener {
 
                     UUID id = UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
 
+                    String FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
+                    String ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
                     if (Objects.equals(gem.getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) {
                         if (Frailer.containsKey(id)) {
 
@@ -264,16 +269,45 @@ public final class Powers implements Listener {
 
 
                             if (time.equals("")) {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!");
+                                FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
 
                             } else {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time);
+                                FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time;
                             }
 
                         }
 
                         typekey = null;
                         idkey = null;
+
+                        if (Chad.containsKey(id)) {
+
+                            Duration duration = Duration.ofMillis(Chad.get(id) - System.currentTimeMillis());
+
+
+                            long minutes = duration.toMinutes();
+                            long seconds = duration.toSecondsPart();
+
+                            String time;
+                            if (minutes > 0) {
+                                time = (seconds > 0) ? minutes + "m " + seconds + "s" : minutes + "m";
+                            } else {
+                                time = (seconds > 0) ? seconds + "s" : "";
+                            }
+
+
+                            if (time.equals("")) {
+                                ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
+
+                            } else {
+                                ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.AQUA + time;
+                            }
+
+                        }
+                        typekey = null;
+                        idkey = null;
+
+                        Remain.sendActionBar(p, FrailerString + " " + ChadString);
                     }
                 }
             }
@@ -319,7 +353,7 @@ public final class Powers implements Listener {
 
 
                     if (Chad.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
-                        long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
+                        long cooldownmils = Chad.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
                         if (cooldownmils - System.currentTimeMillis() >= 0) {
                             return;
                         }
@@ -328,14 +362,14 @@ public final class Powers implements Listener {
 
                     if (Objects.equals(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
 
-                        if (!Frailer.containsKey(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Frailer.put(UUID.fromString(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
+                        if (!Chad.containsKey(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
+                            Chad.put(UUID.fromString(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
                         }
 
                         event.getPlayer().sendMessage(
                                 Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
                                         Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
+                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Chad" +
                                         Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 5)"
                         );
 
@@ -375,6 +409,12 @@ public final class Powers implements Listener {
                 }
             }
         }
+    }
+
+
+    @EventHandler
+    public void ChadHit(EntityDamageByEntityEvent event) {
+        
     }
 }
 
