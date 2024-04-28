@@ -1,4 +1,4 @@
-# BlissGems
+# BlissGems new temp repo is at https://github.com/HyperDondon/BlissGemsRemakeTempRepo
 ## One of the best bliss remakes ever.
 
 This Remake contains an API for developers and a Skript addon for people who know how to use Skript.
