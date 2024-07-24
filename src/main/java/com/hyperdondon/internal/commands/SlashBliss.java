@@ -1,5 +1,7 @@
-package com.hyperdondon;
+package com.hyperdondon.internal.commands;
 
+import com.hyperdondon.internal.SQLLiteData;
+import com.hyperdondon.returngem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,9 +17,14 @@ public final class SlashBliss implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
         if (args.length == 1) {
-            HumanEntity a = (HumanEntity) commandSender;
-            a.getWorld().spawnEntity(a.getEyeLocation(), EntityType.ZOMBIE);
-            return true;
+            if (args[0] == "toggle") {
+                SQLLiteData.Addvar("", "true");
+            }
+            else {
+                HumanEntity a = (HumanEntity) commandSender;
+                a.getWorld().spawnEntity(a.getEyeLocation(), EntityType.ZOMBIE);
+                return true;
+            }
         }
 
         if (args.length == 2) {

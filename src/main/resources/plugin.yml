@@ -13,6 +13,10 @@ softdepend: [ AuthMe, BanManager, BungeeChatAPI, CMI, DiscordSRV, Factions, Feud
 # Load the following libraries
 libraries:
   - org.openjdk.nashorn:nashorn-core:15.4
+  - com.zaxxer:HikariCP:5.1.0
+  - org.mariadb.jdbc:mariadb-java-client:3.0.3
+  - mysql:mysql-connector-java:8.0.33
+  - sqlite-jdbc:org.xerial:3.46.0.0
 
 
 

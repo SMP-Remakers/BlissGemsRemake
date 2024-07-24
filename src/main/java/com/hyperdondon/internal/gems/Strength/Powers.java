@@ -1,4 +1,4 @@
-package com.hyperdondon.gems.Strength;
+package com.hyperdondon.internal.gems.Strength;
 
 import com.hyperdondon.blissgems;
 import lombok.Getter;
@@ -80,7 +80,9 @@ public final class Powers implements Listener {
 
                         LivingEntity ent = (LivingEntity) e.getEntity();
 
-                        ent.clearActivePotionEffects();
+                        for(PotionEffect pe : ent.getActivePotionEffects()) {
+                            ent.removePotionEffect(pe.getType());
+                        }
 
                         ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 400, 0));
 
@@ -179,7 +181,9 @@ public final class Powers implements Listener {
                             if (entity != e.getPlayer()) {
                                 LivingEntity entity2 = (LivingEntity) entity;
                                 if (entity2 != null) {
-                                    entity2.clearActivePotionEffects();
+                                    for(PotionEffect pe : entity2.getActivePotionEffects()) {
+                                        entity2.removePotionEffect(pe.getType());
+                                    }
                                     entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
                                 }
                             }
@@ -382,7 +386,9 @@ public final class Powers implements Listener {
                         for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
                             if (entity != event.getPlayer()) {
                                 LivingEntity e = (LivingEntity) entity;
-                                e.clearActivePotionEffects();
+                                for(PotionEffect pe : e.getActivePotionEffects()) {
+                                    e.removePotionEffect(pe.getType());
+                                }
                                 e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
                             }
                         }
@@ -421,7 +427,7 @@ public final class Powers implements Listener {
     public void ChadHit(EntityDamageByEntityEvent event) {
         if (event.getDamager().getType().equals(EntityType.PLAYER)) {
             HumanEntity attacker = (HumanEntity) event.getDamager();
-            if (attacker.getInventory().getItemInMainHand().isEmpty()) {
+            if (attacker.getInventory().getItemInMainHand().getType() == Material.AIR) {
                 if (ChadParticles.containsKey(attacker.getUniqueId())) {
                     if (ChadParticles.get(attacker.getUniqueId()) < 4) {
                         Integer num = ChadParticles.get(attacker.getUniqueId()) + 1;

@@ -1,4 +1,4 @@
-package com.hyperdondon.gems.Speed;
+package com.hyperdondon.internal.gems.Speed;
 
 import com.hyperdondon.blissgems;
 import lombok.Getter;

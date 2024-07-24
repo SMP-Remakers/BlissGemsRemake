@@ -17,6 +17,7 @@ import java.util.UUID;
 public final class returngem {
     public static ItemStack returngem(String gem, int tier, int energy, int quicknodrop, int quicknoremove) {
 
+        //Strength
 
         if (Objects.equals(gem, "strength")) {
 
@@ -70,10 +71,23 @@ public final class returngem {
             ));
 
 
-            //"sᴛʀᴇɴɢᴛʜ"
+
+
             item.setItemMeta(itemMeta);
             return item;
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         if (Objects.equals(gem, "wealth")) {
@@ -131,6 +145,19 @@ public final class returngem {
             item.setItemMeta(itemMeta);
             return item;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (Objects.equals(gem, "speed")) {
 
             ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
@@ -179,6 +206,23 @@ public final class returngem {
                     ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
             ));
+
+            //    itemMeta.setLore(Arrays.asList(
+            //
+            //                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+            //                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+            //                    ChatColor.of(new Color(87, 255, 199)) + "Pristine",
+            //                    " " + ChatColor.of(new Color(254, 253, 23)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 2, Immune to soul sand",
+            //                    ChatColor.GRAY + " Auto enchant efficiency 2",
+            //                    "",
+            //                    ChatColor.of(new Color(150, 184, 255)) + "" + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+            //                    ChatColor.of(new Color(254, 253, 23)) + "Terminal Acceleration" + ChatColor.GRAY + ": Eating food, crits and",
+            //                    " " + ChatColor.GRAY + "by using that players items to feed the tracking",
+            //                    "",
+            //                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+            //                    ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + " " + ChatColor.WHITE + ChatColor.BOLD + "required"
+            //            ));
+
 
 
             //"Speed"

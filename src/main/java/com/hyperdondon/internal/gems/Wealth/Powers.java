@@ -1,4 +1,4 @@
-package com.hyperdondon.gems.Wealth;
+package com.hyperdondon.internal.gems.Wealth;
 
 import com.hyperdondon.blissgems;
 import lombok.Getter;
