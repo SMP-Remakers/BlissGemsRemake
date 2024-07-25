@@ -10,7 +10,7 @@ public final class GemGiver implements Listener {
 
     public void OnJoin(PlayerJoinEvent e) {
         if (!e.getPlayer().hasPlayedBefore()) {
-
+            
         }
     }
 }

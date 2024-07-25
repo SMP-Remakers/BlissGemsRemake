@@ -4,6 +4,7 @@ import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.GemGiver;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
@@ -56,6 +57,8 @@ public final class blissgems extends SimplePlugin implements Listener {
         registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.getInstance());
 
         getCommand("bliss").setExecutor(new SlashBliss());
+
+        getCommand("progression").setExecutor(new SlashProg());
 
         String path = "config.yml";
         File settings = new File(blissgems.plugin.getDataFolder(), path);
