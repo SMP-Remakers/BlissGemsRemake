@@ -8,6 +8,7 @@ import org.mineacademy.fo.collection.SerializedMap;
 import org.mineacademy.fo.database.SimpleDatabase;
 
 import java.sql.ResultSet;
+import java.util.function.Consumer;
 
 public final class PlayerParticlePreferences extends SimpleDatabase {
 
@@ -25,28 +26,40 @@ public final class PlayerParticlePreferences extends SimpleDatabase {
     }
 
 
-    public String get(Player p) {
+    public void get(Player p, Consumer<String> consumer) {
         Common.runAsync(() -> {
             try {
                 ResultSet data = this.query("SELECT * FROM PlayerParticles WHERE UUID='" + p.getUniqueId() + "'");
-                Bukkit.broadcastMessage(data.getString("Setting").toString());
-                return data.getString("Setting").toString();
+                consumer.accept(data.getString("Setting"));
+
             } catch(Throwable t) {
                 Common.error(t, "Could not load data for " + p.getName());
             }
         });
-
-
-        return "skibidi?";
     }
 
     public void put(Player p, String preference) {
         Common.runAsync(() -> {
             try {
-                this.insert(SerializedMap.ofArray(
-                        "UUID", "test",
-                        "Setting", "test"
-                ));
+                //Put Data
+                ResultSet data = this.query("SELECT * FROM PlayerParticles WHERE UUID='" + p.getUniqueId() + "'");
+                if (data.getString("Setting") == null) { //if it doesnt exist
+                    this.insert(SerializedMap.ofArray(
+                            "UUID", p.getUniqueId().toString(),
+                            "Setting", preference
+                    ));
+                }
+
+                else { //if this data already exists: update it instead of inserting new data
+                    this.update
+                            (
+                    "UPDATE PlayerParticles" +
+                        " SET Setting = '" + preference + "'" +
+                        " WHERE UUID = '" + p.getUniqueId() + "';"
+                            );
+                }
+
+
             } catch(Throwable t) {
                 Common.error(t, "Could not load data for " + p.getName());
             }
