@@ -1,16 +1,16 @@
-package com.hyperdondon.internal.commands;
+package com.hyperdondon.blissgemsremake.internal.commands;
 
-import com.hyperdondon.internal.SQLLiteData;
-import com.hyperdondon.returngem;
+import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public final class SlashBliss implements CommandExecutor, Listener {
 
@@ -18,18 +18,23 @@ public final class SlashBliss implements CommandExecutor, Listener {
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
         if (args.length == 1) {
             if (args[0] == "toggle") {
-                SQLLiteData.Addvar("", "true");
+                Player p = (Player) commandSender;
+                PlayerParticlePreferences.getInstance().put(p, "Default");
+                Bukkit.broadcastMessage(Objects.requireNonNull(PlayerParticlePreferences.getInstance().get(p)));
+                return true;
             }
             else {
-                HumanEntity a = (HumanEntity) commandSender;
-                a.getWorld().spawnEntity(a.getEyeLocation(), EntityType.ZOMBIE);
+                Player p = (Player) commandSender;
+                PlayerParticlePreferences.getInstance().put(p, "Default");
+                Bukkit.broadcastMessage(Objects.requireNonNull(PlayerParticlePreferences.getInstance().get(p)));
                 return true;
             }
         }
 
+
         if (args.length == 2) {
             Player p = (Player) commandSender;
-            p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
+            //p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
             return true;
         } else if (args.length == 0) {
             Player p = (Player) commandSender;

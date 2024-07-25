@@ -1,6 +1,6 @@
-package com.hyperdondon.internal.gems.Wealth;
+package com.hyperdondon.blissgemsremake.internal.gems.Wealth;
 
-import com.hyperdondon.blissgems;
+import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;

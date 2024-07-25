@@ -1,24 +1,23 @@
-package com.hyperdondon;
+package com.hyperdondon.blissgemsremake;
 
-import com.hyperdondon.internal.GemGiver;
-import com.hyperdondon.internal.SQLLiteData;
-import com.hyperdondon.internal.commands.SlashBliss;
-import com.hyperdondon.internal.gems.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
+import com.hyperdondon.blissgemsremake.internal.GemGiver;
+import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
+import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.mineacademy.fo.database.SimpleDatabase;
 import org.mineacademy.fo.plugin.SimplePlugin;
 
 import java.io.File;
 
-import static com.hyperdondon.internal.gems.Strength.Powers.StrengthSeconds;
-import static com.hyperdondon.internal.gems.Strength.Powers.StrengthTicks;
-import static com.hyperdondon.internal.gems.Wealth.Powers.WealthSeconds;
-import static com.hyperdondon.internal.gems.Wealth.Powers.WealthTicks;
+import static com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.StrengthSeconds;
+import static com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.StrengthTicks;
+import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.WealthSeconds;
+import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.WealthTicks;
 
 public final class blissgems extends SimplePlugin implements Listener {
 
@@ -39,7 +38,13 @@ public final class blissgems extends SimplePlugin implements Listener {
 
     public void Mainstart() {
 
-        SQLLiteData.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
+
+        this.loadLibrary("org.openjdk.nashorn", "nashorn-core", "15.4");
+        this.loadLibrary("org.mariadb.jdbc", "mariadb-java-client", "3.0.3");
+        this.loadLibrary("com.mysql", "mysql-connector-j", "9.0.0");
+        this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
+
+        PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/PlayerParticlePreferences.db");
 
         plugin = this;
 
@@ -49,7 +54,7 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(GemGiver.getInstance());
 
-        registerEvents(com.hyperdondon.internal.gems.Wealth.Powers.getInstance());
+        registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.getInstance());
 
         getCommand("bliss").setExecutor(new SlashBliss());
 

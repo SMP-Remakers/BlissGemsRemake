@@ -1,6 +1,6 @@
-package com.hyperdondon.internal.gems.Strength;
+package com.hyperdondon.blissgemsremake.internal.gems.Strength;
 
-import com.hyperdondon.blissgems;
+import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -222,9 +222,7 @@ public final class Powers implements Listener {
 
     public static void StrengthTicks() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (ChadParticles.get(p.getUniqueId()) == 1) {
-                
-            }
+
         }
     }
 

@@ -11,7 +11,7 @@
 
     <!-- Ninja: We read pom.xml file to find the Foundation version to use -->
     <xmlproperty file="pom.xml" prefix="pom" keeproot="false"/>
-    <property name="foundation.version" value="6.7.5"/>
+    <property name="foundation.version" value="6.9.1"/>
 
     <!-- Change the name="" key on the top to your plugin's name
          and edit the path below to where your server is located.

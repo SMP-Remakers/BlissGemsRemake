@@ -1,6 +1,6 @@
-package com.hyperdondon.internal.gems.Speed;
+package com.hyperdondon.blissgemsremake.internal.gems.Speed;
 
-import com.hyperdondon.blissgems;
+import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -79,7 +79,9 @@ public final class Powers implements Listener {
                             if (entity != event.getPlayer()) {
                                 LivingEntity e = (LivingEntity) entity;
                                 if (e != null) {
-                                    e.clearActivePotionEffects();
+                                    for(PotionEffect pe : e.getActivePotionEffects()) {
+                                        e.removePotionEffect(pe.getType());
+                                    }
                                     e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
                                 }
                             }
@@ -247,7 +249,9 @@ public final class Powers implements Listener {
                         for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
                             if (entity != event.getPlayer()) {
                                 LivingEntity e = (LivingEntity) entity;
-                                e.clearActivePotionEffects();
+                                for(PotionEffect pe : e.getActivePotionEffects()) {
+                                    e.removePotionEffect(pe.getType());
+                                }
                                 e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
                             }
                         }

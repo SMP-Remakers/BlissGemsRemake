@@ -6,6 +6,6 @@
  */
 
 
-package com.hyperdondon.internal.gems.Wealth;
+package com.hyperdondon.blissgemsremake.internal.gems.Speed;
 
 

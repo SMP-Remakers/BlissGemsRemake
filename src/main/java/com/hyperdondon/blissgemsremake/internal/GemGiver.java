@@ -1,4 +1,4 @@
-package com.hyperdondon.internal;
+package com.hyperdondon.blissgemsremake.internal;
 
 import lombok.Getter;
 import org.bukkit.event.Listener;

@@ -6,6 +6,6 @@
  */
 
 
-package com.hyperdondon.internal.commands;
+package com.hyperdondon.blissgemsremake.internal.commands;
 
 

@@ -1,4 +1,4 @@
-package com.hyperdondon;
+package com.hyperdondon.blissgemsremake;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
