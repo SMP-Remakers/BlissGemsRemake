@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
+import com.hyperdondon.blissgemsremake.returngem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,10 +25,10 @@ public final class SlashBliss implements CommandExecutor, Listener {
             }
         }
 
+        if (args.length == 2) {
+            if (args[0].equals("particles") || args[0].equals("particle")) {
 
-        if (args[0].equals("particles") || args[0].equals("particle")) {
 
-            if (args.length == 2) {
 
                 if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
                     Player p = (Player) commandSender;
@@ -40,14 +41,14 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
 
 
-        if (args.length == 2) {
+        if (args.length == 3) {
             Player p = (Player) commandSender;
-            //p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
+            p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
             return true;
-        } else if (args.length == 0) {
+            }
+        if (args.length == 0) {
             Player p = (Player) commandSender;
             p.sendMessage(
-
                     ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system",
                     ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player",
                     ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player",
@@ -60,6 +61,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
                     ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
 
             );
+            return true;
         }
         return true;
     }

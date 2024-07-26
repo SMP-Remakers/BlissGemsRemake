@@ -26,6 +26,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.mineacademy.fo.Common;
+
+import java.util.Objects;
 
 public class EnchantedObsidian implements Listener, CommandExecutor {
 
@@ -34,15 +37,25 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
     private static volatile EnchantedObsidian instance = new EnchantedObsidian();
 
 
-    private static final String ENCHANTED_OBSIDIAN_NAME = ChatColor.translateAlternateColorCodes('&', "&lEnchanted Obsidian");
+    private static final String ENCHANTED_OBSIDIAN_NAME = Common.colorize("&dEnchanted Obsidian");
 
 
     public static void startGlowCheckTask() {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                boolean hasEnchantedObsidian = player.getInventory().containsAtLeast(new ItemStack(Material.OBSIDIAN), 1) &&
-                        player.getInventory().all(Material.OBSIDIAN).values().stream()
-                                .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
-
+                boolean hasEnchantedObsidian = false;
+                for (ItemStack i : player.getInventory().getContents()) {
+                    if (i != null) {
+                        if (i.hasItemMeta()) {
+                            if (i.getItemMeta().hasDisplayName()) {
+                                if (i.getItemMeta().getDisplayName().equals(ENCHANTED_OBSIDIAN_NAME)) {
+                                    if (hasEnchantedObsidian == false) {
+                                        hasEnchantedObsidian = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 if (hasEnchantedObsidian) {
                     player.setGlowing(true);
                 } else {
@@ -55,13 +68,13 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack droppedItem = event.getItemDrop().getItemStack();
         if (isEnchantedObsidian(droppedItem)) {
-            event.getPlayer().setGlowing(false);
+            //event.getPlayer().setGlowing(false);
             Item dropped = event.getItemDrop();
             dropped.setGlowing(true);
 
             // Give back enchanted obsidian
-            event.getPlayer().getInventory().addItem(droppedItem);
-            dropped.remove();
+            //event.getPlayer().getInventory().addItem(droppedItem);
+            //dropped.remove();
         }
     }
 
@@ -93,23 +106,6 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
     }
 
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent event) {
-        ItemStack placedItem = event.getItemInHand();
-        if (isEnchantedObsidian(placedItem)) {
-            event.getPlayer().setGlowing(false);
-            Block block = event.getBlockPlaced();
-            block.setType(Material.AIR);
-
-            // Drop enchanted obsidian at the location
-            Item dropped = block.getWorld().dropItemNaturally(block.getLocation(), placedItem);
-            dropped.setGlowing(true);
-
-            // Give back enchanted obsidian to player
-            event.getPlayer().getInventory().addItem(placedItem);
-        }
-    }
-
-    @EventHandler
     public void onPlayerPortal(PlayerPortalEvent event) {
         if (event.getPlayer().getWorld().getEnvironment() == World.Environment.NETHER) {
             // Check if portal is made with enchanted obsidian
@@ -117,7 +113,7 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
                     event.getPlayer().getInventory().all(Material.OBSIDIAN).values().stream()
                             .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
             if (!hasEnchantedObsidian) {
-                //event.setCancelled(true);
+                //  event.setCancelled(true);
                 event.getPlayer().sendMessage(ChatColor.RED + "You Can't Go Through The Nether as You Are On Progression One");
             }
         }
@@ -135,6 +131,13 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
                 }
             }
         }
+    }
+
+
+    @EventHandler
+    public void onPortalNether(PortalCreateEvent event) {
+        event.setCancelled(true);
+        event.getEntity().sendMessage(ChatColor.RED + "You Can't Go Through The Nether as You Are On Progression One");
     }
 
     private boolean isEnchantedObsidian(ItemStack item) {
