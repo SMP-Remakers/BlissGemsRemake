@@ -1,5 +1,8 @@
 package com.hyperdondon.blissgemsremake.internal.progression;
 
+import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,16 +27,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class EnchantedObsidian extends JavaPlugin implements Listener, CommandExecutor {
+public class EnchantedObsidian implements Listener, CommandExecutor {
+
+
+    @Getter
+    private static volatile EnchantedObsidian instance = new EnchantedObsidian();
+
 
     private static final String ENCHANTED_OBSIDIAN_NAME = ChatColor.translateAlternateColorCodes('&', "&lEnchanted Obsidian");
 
-    @Override
-    public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(this, this);
-        getCommand("progobsidian").setExecutor(this);
-        startGlowCheckTask();
-    }
 
     private void startGlowCheckTask() {
         new BukkitRunnable() {
@@ -51,7 +53,7 @@ public class EnchantedObsidian extends JavaPlugin implements Listener, CommandEx
                     }
                 }
             }
-        }.runTaskTimer(this, 0L, 20L); // Run every second (20 ticks)
+        }.runTaskTimer(blissgems.getInstance(), 0L, 20L); // Run every second (20 ticks)
     }
 
     @EventHandler
@@ -80,7 +82,7 @@ public class EnchantedObsidian extends JavaPlugin implements Listener, CommandEx
                                     .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
                     player.setGlowing(hasEnchantedObsidian);
                 }
-            }.runTaskLater(this, 1L); // Run one tick later to ensure the inventory update is processed
+            }.runTaskLater(blissgems.getInstance(), 1L); // Run one tick later to ensure the inventory update is processed
         }
     }
 
@@ -134,7 +136,7 @@ public class EnchantedObsidian extends JavaPlugin implements Listener, CommandEx
         if (enchantedObsidianUsed) {
             for (BlockState block : event.getBlocks()) {
                 if (block.getType() == Material.OBSIDIAN) {
-                    block.setMetadata(ENCHANTED_OBSIDIAN_NAME, new FixedMetadataValue(this, true));
+                    block.setMetadata(ENCHANTED_OBSIDIAN_NAME, new FixedMetadataValue(blissgems.getInstance(), true));
                 }
             }
         }

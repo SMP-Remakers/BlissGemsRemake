@@ -6,6 +6,7 @@ import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
@@ -48,6 +49,12 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
         plugin = this;
+
+
+        Bukkit.getPluginManager().registerEvents(EnchantedObsidian.getInstance(), this);
+
+
+        getCommand("progobsidian").setExecutor(EnchantedObsidian.getInstance());
 
         registerEvents(this);
 

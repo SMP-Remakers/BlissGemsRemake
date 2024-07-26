@@ -12,6 +12,7 @@
     <name>blissgems</name>
 
     <properties>
+        <foundation.path>com.github.kangarko</foundation.path>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -44,6 +45,7 @@
                     <target>17</target>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
+
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -57,6 +59,20 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <artifactSet>
+                                <includes>
+                                    <!-- Important: This will ensure only Foundation is shaded to your jar. If you have
+                                         other dependencies that should be compiled, duplicate this line for each. -->
+                                    <include>${foundation.path}:Foundation*</include>
+                                </includes>
+                            </artifactSet>
+                            <relocations>
+                                <!-- This moves Foundation into your own package in "lib" subpackage to prevent interference. -->
+                                <relocation>
+                                    <pattern>org.mineacademy.fo</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
