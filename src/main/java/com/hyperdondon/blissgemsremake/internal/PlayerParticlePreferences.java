@@ -3,6 +3,7 @@ package com.hyperdondon.blissgemsremake.internal;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.collection.SerializedMap;
 import org.mineacademy.fo.database.SimpleDatabase;
@@ -14,6 +15,7 @@ public final class PlayerParticlePreferences extends SimpleDatabase {
 
     @Getter
     private static volatile PlayerParticlePreferences instance = new PlayerParticlePreferences();
+
 
     @Override
     protected void onConnected() {

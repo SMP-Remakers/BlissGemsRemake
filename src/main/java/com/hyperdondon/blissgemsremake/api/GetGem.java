@@ -1,4 +1,4 @@
-package com.hyperdondon.blissgemsremake;
+package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
-public final class returngem {
+public final class GetGem {
     public static ItemStack returngem(String gem, int tier, int energy, int quicknodrop, int quicknoremove) {
 
         //Strength

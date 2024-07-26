@@ -1,18 +1,12 @@
-#season: <>
+#season: <int>
 # This for the season of the Bliss SMP
-# RN it's only 1
+# RN it's only 3
 #
 #
-#mode: <>
-# 1 = Absolute accuracy (including bugs in the Bliss SMP)
-# 2 = Accurate and fixed (Recommended & Default)
-#
-#
-#givegemonfirstjoin: <>
+#givegemonfirstjoin: <boolean>
 # false = Don't give a player a gem when they first join
 # true = Give a player a gem when they first join
 #
 season: 3
-mode: 2
 givegemonfirstjoin: false
 

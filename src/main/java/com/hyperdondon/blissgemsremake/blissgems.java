@@ -1,5 +1,7 @@
 package com.hyperdondon.blissgemsremake;
 
+import com.hyperdondon.blissgemsremake.internal.LeaveJoinStorer;
+import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.GemGiver;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
@@ -58,6 +60,8 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(this);
 
+        registerEvents(LeaveJoinStorer.getInstance());
+
         registerEvents(Powers.getInstance());
 
         registerEvents(GemGiver.getInstance());
@@ -82,6 +86,8 @@ public final class blissgems extends SimplePlugin implements Listener {
         season = config.getInt("season");
 
 
+
+
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -102,7 +108,8 @@ public final class blissgems extends SimplePlugin implements Listener {
 
 
     public void randomgem(PlayerJoinEvent event) {
-        if (!event.getPlayer().hasPlayedBefore())
+        if (!event.getPlayer().hasPlayedBefore()) {
             event.getPlayer().getInventory().addItem(new ItemStack(Material.PRISMARINE_SHARD));
+        }
     }
 }

@@ -1,8 +1,11 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
+import com.hyperdondon.blissgemsremake.api.Settings;
+import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.returngem;
+import com.hyperdondon.blissgemsremake.api.GetGem;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,11 +18,23 @@ public final class SlashBliss implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
 
+
+
         if (args.length == 1) {
+            if (args[0].equals("test")) {
+                Player p = (Player) commandSender;
+                Bukkit.broadcastMessage(String.valueOf(Settings.getGiveGemOnJoin()));
+                Settings.setGiveGemOnJoin(true);
+                Bukkit.broadcastMessage(String.valueOf(Settings.getGiveGemOnJoin()));
+
+                return true;
+            }
+
             if (args[0].equals("toggle")) {
                 Player p = (Player) commandSender;
 
-                
+
+
 
                 return true;
             }
@@ -43,7 +58,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
         if (args.length == 3) {
             Player p = (Player) commandSender;
-            p.getInventory().addItem(returngem.returngem(args[0], 2, 5, 1, 1));
+            p.getInventory().addItem(GetGem.returngem(args[0], 2, 5, 1, 1));
             return true;
             }
         if (args.length == 0) {
