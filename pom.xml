@@ -58,7 +58,11 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+
+
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+
+                            <!--Foundation Shade-->
                             <artifactSet>
                                 <includes>
                                     <!-- Important: This will ensure only Foundation is shaded to your jar. If you have
@@ -73,6 +77,8 @@
                                     <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
                                 </relocation>
                             </relocations>
+
+
                         </configuration>
                     </execution>
                 </executions>

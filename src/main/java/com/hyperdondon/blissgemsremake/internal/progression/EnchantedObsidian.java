@@ -37,23 +37,18 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
     private static final String ENCHANTED_OBSIDIAN_NAME = ChatColor.translateAlternateColorCodes('&', "&lEnchanted Obsidian");
 
 
-    private void startGlowCheckTask() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    boolean hasEnchantedObsidian = player.getInventory().containsAtLeast(new ItemStack(Material.OBSIDIAN), 1) &&
-                            player.getInventory().all(Material.OBSIDIAN).values().stream()
-                                    .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
+    public static void startGlowCheckTask() {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                boolean hasEnchantedObsidian = player.getInventory().containsAtLeast(new ItemStack(Material.OBSIDIAN), 1) &&
+                        player.getInventory().all(Material.OBSIDIAN).values().stream()
+                                .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
 
-                    if (hasEnchantedObsidian) {
-                        player.setGlowing(true);
-                    } else {
-                        player.setGlowing(false);
-                    }
+                if (hasEnchantedObsidian) {
+                    player.setGlowing(true);
+                } else {
+                    player.setGlowing(false);
                 }
             }
-        }.runTaskTimer(blissgems.getInstance(), 0L, 20L); // Run every second (20 ticks)
     }
 
     @EventHandler
@@ -122,7 +117,7 @@ public class EnchantedObsidian implements Listener, CommandExecutor {
                     event.getPlayer().getInventory().all(Material.OBSIDIAN).values().stream()
                             .anyMatch(item -> item.getItemMeta() != null && ENCHANTED_OBSIDIAN_NAME.equals(item.getItemMeta().getDisplayName()));
             if (!hasEnchantedObsidian) {
-                event.setCancelled(true);
+                //event.setCancelled(true);
                 event.getPlayer().sendMessage(ChatColor.RED + "You Can't Go Through The Nether as You Are On Progression One");
             }
         }

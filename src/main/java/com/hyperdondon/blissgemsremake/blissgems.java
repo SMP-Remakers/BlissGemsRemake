@@ -85,6 +85,7 @@ public final class blissgems extends SimplePlugin implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+                EnchantedObsidian.startGlowCheckTask();
                 StrengthTicks();
                 WealthTicks();
             }
