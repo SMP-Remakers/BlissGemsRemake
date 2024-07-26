@@ -101,7 +101,7 @@ public class EnchantedObsidian extends JavaPlugin implements Listener, CommandEx
         if (isEnchantedObsidian(placedItem)) {
             event.getPlayer().setGlowing(false);
             Block block = event.getBlockPlaced();
-            block.setType(Material.AIR); // Remove placed block
+            block.setType(Material.AIR);
 
             // Drop enchanted obsidian at the location
             Item dropped = block.getWorld().dropItemNaturally(block.getLocation(), placedItem);
