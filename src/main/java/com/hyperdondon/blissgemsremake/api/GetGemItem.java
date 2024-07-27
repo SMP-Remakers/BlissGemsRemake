@@ -24,67 +24,38 @@ public final class GetGemItem {
         if (energy == 10) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9")  + "5";
-        }
-
-
-        else if (energy == 9) {
+                    + Common.colorize("#96FFD9") + "5";
+        } else if (energy == 9) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9")  + "4";
-        }
-
-
-
-        else if (energy == 8) {
+                    + Common.colorize("#96FFD9") + "4";
+        } else if (energy == 8) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9")  + "3";
-        }
-
-
-        else if (energy == 7) {
+                    + Common.colorize("#96FFD9") + "3";
+        } else if (energy == 7) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9")  + "2";
-        }
-
-
-        else if (energy == 6) {
+                    + Common.colorize("#96FFD9") + "2";
+        } else if (energy == 6) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9")  + "1";
-        }
-
-
-        else if (energy == 5) {
+                    + Common.colorize("#96FFD9") + "1";
+        } else if (energy == 5) {
             energystage = Common.colorize("#57FFC7") + "Pristine";
-        }
-
-        else if (energy == 4) {
+        } else if (energy == 4) {
             energystage = Common.colorize("#57FF8F") + "Scratched";
-        }
-
-        else if (energy == 3) {
+        } else if (energy == 3) {
             energystage = Common.colorize("#7958DB") + "Cracked";
-        }
-
-        else if (energy == 2) {
+        } else if (energy == 2) {
             energystage = Common.colorize("#FFC929") + "Damaged";
-        }
-
-        else if (energy == 1) {
+        } else if (energy == 1) {
             energystage = Common.colorize("#FF1111") + "Ruined";
-        }
-
-        else if (energy < 1) {
+        } else if (energy < 1) {
+            energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+        } else {
             energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
         }
-
-        else {
-            energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
-        }
-
 
 
         //Strength
@@ -122,249 +93,253 @@ public final class GetGemItem {
                         itemMeta.addItemFlags(flag);
                     }
 
-                    itemMeta.setLore(Arrays.asList(
+                    if (energy > 4) {
+                        itemMeta.setLore(Arrays.asList(
 
-                            ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                            ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-                            energystage,
-                            " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
-                            ChatColor.GRAY + " Auto enchants sharpness 5",
-                            ChatColor.GRAY + " BloodThorns, deal more damage the",
-                            ChatColor.GRAY + " lower in health you are",
-                            "",
-                            ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                            ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
-                            ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
-                            ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                            ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
-                            ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
-                            "",
-                            ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                            ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                            ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
+                                ChatColor.GRAY + " Auto enchants sharpness 5",
+                                ChatColor.GRAY + " BloodThorns, deal more damage the",
+                                ChatColor.GRAY + " lower in health you are",
+                                "",
+                                ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
+                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
-                    ));
+                        ));
 
 
-                    item.setItemMeta(itemMeta);
-                    return item;
+                        if (energy == 4) {
+                            itemMeta.setLore(Arrays.asList(
+
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                    energystage,
+                                    " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
+                                    ChatColor.GRAY + " Auto enchants sharpness 5",
+                                    ChatColor.GRAY + " BloodThorns, deal more damage the",
+                                    ChatColor.GRAY + " lower in health you are",
+                                    "",
+                                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                    ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
+                                    ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                    ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
+                                    ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                    "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                    ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
+                                    ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
+
+                            ));
+
+
+                            item.setItemMeta(itemMeta);
+                            return item;
+                        }
                     }
                 }
 
 
-            if (Settings.getSeason() == 3) {
-                if (tier == 2) {
+                if (Settings.getSeason() == 3) {
+                    if (tier == 2) {
 
-                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-                    ItemMeta itemMeta = item.getItemMeta();
-
-
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
-
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
-                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
-
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
-
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
-                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
-                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+                        ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                        ItemMeta itemMeta = item.getItemMeta();
 
 
-                    itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
-                    itemMeta.setCustomModelData(10);
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
+                        NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                        itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
+
+                        NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                        itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                        NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                        itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+
+                        NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                        itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                        NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                        itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
+                        itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                        itemMeta.setCustomModelData(10);
+                        for (ItemFlag flag : ItemFlag.values()) {
+                            itemMeta.addItemFlags(flag);
+                        }
+
+                        itemMeta.setLore(Arrays.asList(
+
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                "",
+                                ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
+                                ChatColor.GRAY + " Auto enchants sharpness 5",
+                                ChatColor.GRAY + " BloodThorns, deal more damage the",
+                                ChatColor.GRAY + " lower in health you are",
+                                "",
+                                ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
+                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
+
+                        ));
+
+
+                        item.setItemMeta(itemMeta);
+                        return item;
                     }
-
-                    itemMeta.setLore(Arrays.asList(
-
-                            ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                            Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                            "",
-                            ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-                            " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
-                            ChatColor.GRAY + " Auto enchants sharpness 5",
-                            ChatColor.GRAY + " BloodThorns, deal more damage the",
-                            ChatColor.GRAY + " lower in health you are",
-                            "",
-                            ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                            ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
-                            ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
-                            ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                            ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
-                            ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
-                            "",
-                            ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                            ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                            ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
-
-                    ));
-
-
-                    item.setItemMeta(itemMeta);
-                    return item;
                 }
             }
-        }
 
 
+            if (Objects.equals(gem, "wealth")) {
+
+                ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
 
 
+                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
+
+                NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+
+                NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
+                itemMeta.setDisplayName(ChatColor.of(new Color(14, 201, 18)) + "" + ChatColor.BOLD + "ᴡᴇᴀʟᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                itemMeta.setCustomModelData(12);
+                for (ItemFlag flag : ItemFlag.values()) {
+                    itemMeta.addItemFlags(flag);
+                }
+
+                itemMeta.setLore(Arrays.asList(
+
+                        "" + ChatColor.BOLD +
+                                "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
+
+                        ChatColor.of(new Color(255, 228, 171)) +
+                                "ᴘᴀssɪᴠᴇs",
+
+                        ChatColor.of(new Color(87, 255, 199)) +
+                                "Pristine",
+
+                        ChatColor.of(new Color(14, 201, 18)) +
+                                "\uD83D\uDD2E" +
+
+                                Common.colorize("&7") +
+                                "Even cheaper villager trades, Luck",
+
+                        Common.colorize(" &7") +
+                                "Auto enchants looting"
+
+                ));
 
 
-
-
-
-
-
-
-        if (Objects.equals(gem, "wealth")) {
-
-            ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-            ItemMeta itemMeta = item.getItemMeta();
-
-
-            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
-
-            NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
-            itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
-
-            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-            itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
-
-            NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
-            itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-            NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
-            itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
-
-
-            itemMeta.setDisplayName(ChatColor.of(new Color(14, 201, 18)) + "" + ChatColor.BOLD + "ᴡᴇᴀʟᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
-            itemMeta.setCustomModelData(12);
-            for (ItemFlag flag : ItemFlag.values()) {
-                itemMeta.addItemFlags(flag);
+                //"wealth"
+                item.setItemMeta(itemMeta);
+                return item;
             }
 
-            itemMeta.setLore(Arrays.asList(
 
-                    "" + ChatColor.BOLD +
-                            "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
+            if (Objects.equals(gem, "speed")) {
 
-                    ChatColor.of(new Color(255, 228, 171)) +
-                            "ᴘᴀssɪᴠᴇs",
-
-                    ChatColor.of(new Color(87, 255, 199)) +
-                            "Pristine",
-
-                    ChatColor.of(new Color(14, 201, 18)) +
-                            "\uD83D\uDD2E" +
-
-                            Common.colorize("&7") +
-                            "Even cheaper villager trades, Luck",
-
-                    Common.colorize(" &7") +
-                            "Auto enchants looting"
-
-            ));
+                ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
 
 
-            //"wealth"
-            item.setItemMeta(itemMeta);
-            return item;
-        }
+                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
+
+                NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+
+                NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
+                itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴘᴇᴇᴅ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                itemMeta.setCustomModelData(8);
+                for (ItemFlag flag : ItemFlag.values()) {
+                    itemMeta.addItemFlags(flag);
+                }
+
+                itemMeta.setLore(Arrays.asList(
+
+                        ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                        ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                        ChatColor.of(new Color(87, 255, 199)) + "Pristine",
+                        " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 3,Dolphins Grace",
+                        ChatColor.GRAY + "and Immune to Soul Sand, Auto enchants Efficiency 5",
+                        "",
+                        ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                        ChatColor.GRAY + "-" + ChatColor.WHITE + Common.colorize("&7-&r&e \uD83C\uDFAF&f") + ChatColor.GRAY + "" + ChatColor.BOLD + "sʟᴏᴛʜs sᴇᴅᴀᴛɪᴠᴇ",
+                        ChatColor.DARK_RED + Common.colorize("Slowness 2, Mining Fatuge 3"),
+                        ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                        ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
+                        ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                        "",
+                        ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                        ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
+                        ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
+
+                ));
+
+                //    itemMeta.setLore(Arrays.asList(
+                //
+                //                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                //                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                //                    ChatColor.of(new Color(87, 255, 199)) + "Pristine",
+                //                    " " + ChatColor.of(new Color(254, 253, 23)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 2, Immune to soul sand",
+                //                    ChatColor.GRAY + " Auto enchant efficiency 2",
+                //                    "",
+                //                    ChatColor.of(new Color(150, 184, 255)) + "" + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                //                    ChatColor.of(new Color(254, 253, 23)) + "Terminal Acceleration" + ChatColor.GRAY + ": Eating food, crits and",
+                //                    " " + ChatColor.GRAY + "by using that players items to feed the tracking",
+                //                    "",
+                //                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                //                    ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + " " + ChatColor.WHITE + ChatColor.BOLD + "required"
+                //            ));
 
 
-
-
-
-
-
-
-
-
-
-        if (Objects.equals(gem, "speed")) {
-
-            ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-            ItemMeta itemMeta = item.getItemMeta();
-
-
-            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
-
-            NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
-            itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
-
-            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-            itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
-
-            NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
-            itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-            NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
-            itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
-
-
-            itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴘᴇᴇᴅ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
-            itemMeta.setCustomModelData(8);
-            for (ItemFlag flag : ItemFlag.values()) {
-                itemMeta.addItemFlags(flag);
+                //"Speed"
+                item.setItemMeta(itemMeta);
+                return item;
             }
-
-            itemMeta.setLore(Arrays.asList(
-
-                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-                    ChatColor.of(new Color(87, 255, 199)) + "Pristine",
-                    " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 3,Dolphins Grace",
-                    ChatColor.GRAY + "and Immune to Soul Sand, Auto enchants Efficiency 5",
-                    "",
-                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                    ChatColor.GRAY + "-" + ChatColor.WHITE + Common.colorize("&7-&r&e \uD83C\uDFAF&f") + ChatColor.GRAY + "" + ChatColor.BOLD + "sʟᴏᴛʜs sᴇᴅᴀᴛɪᴠᴇ",
-                    ChatColor.DARK_RED + Common.colorize("Slowness 2, Mining Fatuge 3"),
-                    ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                    ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
-                    ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
-                    "",
-                    ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                    ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                    ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
-
-            ));
-
-            //    itemMeta.setLore(Arrays.asList(
-            //
-            //                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-            //                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-            //                    ChatColor.of(new Color(87, 255, 199)) + "Pristine",
-            //                    " " + ChatColor.of(new Color(254, 253, 23)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 2, Immune to soul sand",
-            //                    ChatColor.GRAY + " Auto enchant efficiency 2",
-            //                    "",
-            //                    ChatColor.of(new Color(150, 184, 255)) + "" + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-            //                    ChatColor.of(new Color(254, 253, 23)) + "Terminal Acceleration" + ChatColor.GRAY + ": Eating food, crits and",
-            //                    " " + ChatColor.GRAY + "by using that players items to feed the tracking",
-            //                    "",
-            //                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-            //                    ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + " " + ChatColor.WHITE + ChatColor.BOLD + "required"
-            //            ));
-
-
-
-            //"Speed"
-            item.setItemMeta(itemMeta);
-            return item;
         }
-
         return null;
     }
 }
+
