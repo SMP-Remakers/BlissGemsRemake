@@ -50,11 +50,11 @@ public final class blissgems extends SimplePlugin implements Listener {
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
+        PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
+
         plugin = this;
 
-
         Bukkit.getPluginManager().registerEvents(EnchantedObsidian.getInstance(), this);
-
 
         getCommand("progobsidian").setExecutor(EnchantedObsidian.getInstance());
 

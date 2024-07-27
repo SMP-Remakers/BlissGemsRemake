@@ -1,9 +1,8 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.api.Settings;
-import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.api.GetGem;
+import com.hyperdondon.blissgemsremake.api.GetGemItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public final class SlashBliss implements CommandExecutor, Listener {
@@ -57,8 +57,10 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
 
         if (args.length == 3) {
+            Settings.setSeason(3);
             Player p = (Player) commandSender;
-            p.getInventory().addItem(GetGem.returngem(args[0], 2, 5, 1, 1));
+            ItemStack gem = GetGemItem.returngem("strength", 2, 6, 1, 1);
+            p.getInventory().addItem(gem);
             return true;
             }
         if (args.length == 0) {

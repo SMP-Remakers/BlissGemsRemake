@@ -85,9 +85,7 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
                     (
                         command
 
-                    );
-
-
+            );
         });
     }
 }
