@@ -20,6 +20,8 @@ public final class GetGemItem {
     public static ItemStack returngem(String gem, int tier, int energy, int quicknodrop, int quicknoremove) {
         //Energy
 
+
+
         String energystage = "";
         if (energy == 10) {
             energystage = Common.colorize("#57FFC7") + "Pristine"

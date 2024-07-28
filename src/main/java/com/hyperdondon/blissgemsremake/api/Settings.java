@@ -1,7 +1,9 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.blissgems;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 import org.mineacademy.fo.Common;
 
 import java.io.File;
@@ -20,7 +22,6 @@ public final class Settings {
     }
 
     public static boolean getGiveGemOnJoin() {
-
         YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
         boolean givegemonfirstjoin = config.getBoolean("givegemonfirstjoin");
 

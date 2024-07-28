@@ -1,5 +1,6 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
+import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.api.Settings;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.api.GetGemItem;
