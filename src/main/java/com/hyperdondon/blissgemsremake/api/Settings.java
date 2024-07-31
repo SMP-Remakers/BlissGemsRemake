@@ -29,6 +29,31 @@ public final class Settings {
     }
 
 
+    public static boolean getAutoUpdateGem() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        boolean autoupdategem = config.getBoolean("autoupdategem");
+
+        return autoupdategem;
+    }
+
+    public static boolean getAllowDrop() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        boolean allowdrop = config.getBoolean("allowdrop");
+
+        return allowdrop;
+    }
+
+    public static boolean getAllowRemove() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        boolean allowremove = config.getBoolean("allowremove");
+
+        return allowremove;
+    }
+
+
+
+
+
     public static void setSeason(int number) {
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
@@ -46,6 +71,45 @@ public final class Settings {
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
         config.set("givegemonfirstjoin", value);
+        try {
+            config.save(GetSettingsFile);
+        }
+        catch (Exception exc){
+            Common.error(exc);
+        }
+
+    }
+
+    public static void setAutoUpdateGem(boolean value) {
+
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        config.set("autoupdategem", value);
+        try {
+            config.save(GetSettingsFile);
+        }
+        catch (Exception exc){
+            Common.error(exc);
+        }
+
+    }
+
+    public static void setAllowDrop(boolean value) {
+
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        config.set("allowdrop", value);
+        try {
+            config.save(GetSettingsFile);
+        }
+        catch (Exception exc){
+            Common.error(exc);
+        }
+
+    }
+
+    public static void setAllowRemove(boolean value) {
+
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        config.set("allowremove", value);
         try {
             config.save(GetSettingsFile);
         }

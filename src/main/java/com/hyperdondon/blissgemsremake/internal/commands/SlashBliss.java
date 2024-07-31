@@ -1,9 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
-import com.hyperdondon.blissgemsremake.api.Gem;
-import com.hyperdondon.blissgemsremake.api.Settings;
+import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.api.GetGemItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.mineacademy.fo.Common;
+
+import java.util.List;
 
 public final class SlashBliss implements CommandExecutor, Listener {
 
@@ -60,8 +61,45 @@ public final class SlashBliss implements CommandExecutor, Listener {
         if (args.length == 3) {
             Settings.setSeason(3);
             Player p = (Player) commandSender;
-            ItemStack gem = GetGemItem.returngem("strength", 2, 6, 1, 1);
-            p.getInventory().addItem(gem);
+            //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
+
+            int allowremoveint;
+            int allowdropint;
+            if (Settings.getAllowRemove()) {
+                allowremoveint = 1;
+            }
+
+            else  {
+                allowremoveint = 0;
+            }
+
+
+
+            if (Settings.getAllowDrop()) {
+                allowdropint = 1;
+            }
+
+            else  {
+                allowdropint = 0;
+            }
+
+            Gem g = Gem.GemConstructor(GemType.Strength, 2, Energy.Pristine, allowdropint, allowremoveint, 2);
+
+            p.getInventory().setItemInOffHand(g.toItemStack());
+
+
+            //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
+
+
+            //Bukkit.broadcastMessage(g.getID());
+
+            //p.getInventory().addItem(gem);
+            //p.getInventory().addItem(g.toItemStack());
+
+
+
+
+
             return true;
             }
         if (args.length == 0) {

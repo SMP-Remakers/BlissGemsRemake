@@ -1,13 +1,34 @@
 #season: <int>
+#1-3
+# 3 (Default)
 # This for the season of the Bliss SMP
-# RN it's only 3
+#
 #
 #
 #givegemonfirstjoin: <boolean>
-# false = Don't give a player a gem when they first join
+# false = Don't give a player a gem when they first join (Default)
 # true = Give a player a gem when they first join
+#
+#
+#
+#autoupdateseasonofgem: <boolean>
+# false = Don't update the values of the player's gem when they join
+# true = update the values of the player's gem when they join (Default)
+#
+#
+#
+#allowdrop: <boolean>
+# false = Don't allow the player to drop their gem (Default)
+# true = allow the player to drop their gem
+#
+#
+#
+#allowremove: <boolean>
+# false = Don't allow the player to remove their gem from their inventory (Default)
+# true = Don't allow the player to remove their gem from their inventory
 #
 season: 3
 givegemonfirstjoin: false
-
-
+autoupdategem: true
+allowdrop: false
+allowremove: false

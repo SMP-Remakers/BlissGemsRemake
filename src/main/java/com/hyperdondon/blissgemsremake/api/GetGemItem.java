@@ -1,8 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
-import net.milkbowl.vault.chat.Chat;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
@@ -13,47 +11,44 @@ import org.mineacademy.fo.Common;
 
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.UUID;
 
 public final class GetGemItem {
-    public static ItemStack returngem(String gem, int tier, int energy, int quicknodrop, int quicknoremove) {
+    public static ItemStack returngem(GemType gem, int tier, Energy energy, int quicknodrop, int quicknoremove, int season) {
         //Energy
 
-
-
         String energystage = "";
-        if (energy == 10) {
+        if (energy == Energy.Pristine_5) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
                     + Common.colorize("#96FFD9") + "5";
-        } else if (energy == 9) {
+        } else if (energy == Energy.Pristine_4) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
                     + Common.colorize("#96FFD9") + "4";
-        } else if (energy == 8) {
+        } else if (energy == Energy.Pristine_3) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
                     + Common.colorize("#96FFD9") + "3";
-        } else if (energy == 7) {
+        } else if (energy == Energy.Pristine_2) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
                     + Common.colorize("#96FFD9") + "2";
-        } else if (energy == 6) {
+        } else if (energy == Energy.Pristine_1) {
             energystage = Common.colorize("#57FFC7") + "Pristine"
                     + ChatColor.WHITE + " + "
                     + Common.colorize("#96FFD9") + "1";
-        } else if (energy == 5) {
+        } else if (energy == Energy.Pristine) {
             energystage = Common.colorize("#57FFC7") + "Pristine";
-        } else if (energy == 4) {
+        } else if (energy == Energy.Scratched) {
             energystage = Common.colorize("#57FF8F") + "Scratched";
-        } else if (energy == 3) {
+        } else if (energy == Energy.Cracked) {
             energystage = Common.colorize("#7958DB") + "Cracked";
-        } else if (energy == 2) {
+        } else if (energy == Energy.Damaged) {
             energystage = Common.colorize("#FFC929") + "Damaged";
-        } else if (energy == 1) {
+        } else if (energy == Energy.Ruined) {
             energystage = Common.colorize("#FF1111") + "Ruined";
-        } else if (energy < 1) {
+        } else if (energy == Energy.Broken) {
             energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
         } else {
             energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
@@ -62,11 +57,11 @@ public final class GetGemItem {
 
         //Strength
 
-        if (Objects.equals(gem, "strength")) {
+        if (gem == GemType.Strength) {
             if (tier == 2) {
 
 
-                if (Settings.getSeason() == 2) {
+                if (season == 2) {
 
 
                     ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
@@ -80,7 +75,7 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                     NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
                     NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
@@ -95,7 +90,7 @@ public final class GetGemItem {
                         itemMeta.addItemFlags(flag);
                     }
 
-                    if (energy > 4) {
+                    if (Gem.isPristineorHigher(energy)) {
                         itemMeta.setLore(Arrays.asList(
 
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
@@ -118,33 +113,6 @@ public final class GetGemItem {
                                 ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
                         ));
-
-
-                        if (energy == 4) {
-                            itemMeta.setLore(Arrays.asList(
-
-                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-                                    energystage,
-                                    " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
-                                    ChatColor.GRAY + " Auto enchants sharpness 5",
-                                    ChatColor.GRAY + " BloodThorns, deal more damage the",
-                                    ChatColor.GRAY + " lower in health you are",
-                                    "",
-                                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
-                                    ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
-                                    ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                                    ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
-                                    ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
-                                    "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                                    ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                                    ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
-
-                            ));
-
-
                             item.setItemMeta(itemMeta);
                             return item;
                         }
@@ -152,8 +120,7 @@ public final class GetGemItem {
                 }
 
 
-                if (Settings.getSeason() == 3) {
-                    if (tier == 2) {
+                if (season == 3) {
 
                         ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                         ItemMeta itemMeta = item.getItemMeta();
@@ -166,7 +133,7 @@ public final class GetGemItem {
                         itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                         NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                        itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+                        itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
                         NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                         itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
@@ -176,7 +143,6 @@ public final class GetGemItem {
 
 
                         itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
-                        itemMeta.setCustomModelData(10);
                         for (ItemFlag flag : ItemFlag.values()) {
                             itemMeta.addItemFlags(flag);
                         }
@@ -204,16 +170,15 @@ public final class GetGemItem {
                                 ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
                         ));
-
-
+                        itemMeta.setCustomModelData(10);
                         item.setItemMeta(itemMeta);
                         return item;
                     }
-                }
-            }
 
 
-            if (Objects.equals(gem, "wealth")) {
+
+
+            if (gem == GemType.Wealth) {
 
                 ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                 ItemMeta itemMeta = item.getItemMeta();
@@ -226,7 +191,7 @@ public final class GetGemItem {
                 itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                 NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "wealth");
 
                 NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                 itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
@@ -270,7 +235,7 @@ public final class GetGemItem {
             }
 
 
-            if (Objects.equals(gem, "speed")) {
+            if (gem == GemType.Speed) {
 
                 ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                 ItemMeta itemMeta = item.getItemMeta();
@@ -283,7 +248,7 @@ public final class GetGemItem {
                 itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                 NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, gem);
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "speed");
 
                 NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                 itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);

@@ -13,4 +13,5 @@ public enum Energy {
     Ruined(),
     Broken(),
     N_A();
+
 }
