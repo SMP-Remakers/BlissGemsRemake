@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
@@ -57,9 +58,8 @@ public final class GetGemItem {
 
         //Strength
 
-        if (gem == GemType.Strength) {
-            if (tier == 2) {
-
+        if (tier == 2) {
+            if (gem == GemType.Strength) {
 
                 if (season == 2) {
 
@@ -84,7 +84,7 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                    itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                     itemMeta.setCustomModelData(10);
                     for (ItemFlag flag : ItemFlag.values()) {
                         itemMeta.addItemFlags(flag);
@@ -96,19 +96,19 @@ public final class GetGemItem {
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
+                                " " + Common.colorize("#F10303") + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
                                 ChatColor.GRAY + " Auto enchants sharpness 5",
                                 ChatColor.GRAY + " BloodThorns, deal more damage the",
                                 ChatColor.GRAY + " lower in health you are",
                                 "",
-                                ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                Common.colorize("#B8FFFB") + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
                                 ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
                                 ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
                                 ChatColor.GRAY + " gives weakness 1 for 20 seconds",
                                 ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
                                 ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
                                 "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
                                 ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
                                 ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
@@ -142,7 +142,7 @@ public final class GetGemItem {
                         itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                        itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                        itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                         for (ItemFlag flag : ItemFlag.values()) {
                             itemMeta.addItemFlags(flag);
                         }
@@ -152,23 +152,19 @@ public final class GetGemItem {
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
                                 "",
-                                ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
-                                " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
-                                ChatColor.GRAY + " Auto enchants sharpness 5",
-                                ChatColor.GRAY + " BloodThorns, deal more damage the",
-                                ChatColor.GRAY + " lower in health you are",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Strength",
+                                ChatColor.GRAY + "- Enchants Sharpness",
                                 "",
-                                ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
-                                ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
-                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                                ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
-                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
                                 "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                                ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                                ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
-
+                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A" + ChatColor.GRAY + " ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A" + ChatColor.GRAY + " ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                "",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
                         ));
                         itemMeta.setCustomModelData(10);
                         item.setItemMeta(itemMeta);
@@ -200,7 +196,7 @@ public final class GetGemItem {
                 itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                itemMeta.setDisplayName(ChatColor.of(new Color(14, 201, 18)) + "" + ChatColor.BOLD + "ᴡᴇᴀʟᴛʜ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                itemMeta.setDisplayName(ChatColor.of(new Color(14, 201, 18)) + "" + ChatColor.BOLD + "ᴡᴇᴀʟᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                 itemMeta.setCustomModelData(12);
                 for (ItemFlag flag : ItemFlag.values()) {
                     itemMeta.addItemFlags(flag);
@@ -257,7 +253,7 @@ public final class GetGemItem {
                 itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                itemMeta.setDisplayName(ChatColor.of(new Color(241, 3, 3)) + "" + ChatColor.BOLD + "sᴘᴇᴇᴅ" + " " + ChatColor.of(new Color(255, 215, 115)) + "ɢᴇᴍ");
+                itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴘᴇᴇᴅ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                 itemMeta.setCustomModelData(8);
                 for (ItemFlag flag : ItemFlag.values()) {
                     itemMeta.addItemFlags(flag);
@@ -268,7 +264,7 @@ public final class GetGemItem {
                         ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
                         ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
                         ChatColor.of(new Color(87, 255, 199)) + "Pristine",
-                        " " + ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 3,Dolphins Grace",
+                        " " + Common.colorize("#F10303") + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 3,Dolphins Grace",
                         ChatColor.GRAY + "and Immune to Soul Sand, Auto enchants Efficiency 5",
                         "",
                         ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
@@ -278,7 +274,7 @@ public final class GetGemItem {
                         ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
                         ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
                         "",
-                        ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + ChatColor.of(new Color(145, 13, 13)) + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                        ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
                         ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
                         ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
 
@@ -297,7 +293,7 @@ public final class GetGemItem {
                 //                    " " + ChatColor.GRAY + "by using that players items to feed the tracking",
                 //                    "",
                 //                    ChatColor.of(new Color(164, 244, 254)) + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                //                    ChatColor.of(new Color(241, 3, 3)) + "\uD83D\uDD2E" + " " + ChatColor.WHITE + ChatColor.BOLD + "required"
+                //                    Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + ChatColor.WHITE + ChatColor.BOLD + "required"
                 //            ));
 
 

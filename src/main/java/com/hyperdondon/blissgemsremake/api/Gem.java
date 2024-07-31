@@ -407,6 +407,7 @@ public class Gem {;
         int allowremoveint;
         int allowdropint;
 
+        Bukkit.broadcastMessage(String.valueOf(Settings.getAllowRemove()));
         if (Settings.getAllowRemove()) {
             allowremoveint = 1;
         }

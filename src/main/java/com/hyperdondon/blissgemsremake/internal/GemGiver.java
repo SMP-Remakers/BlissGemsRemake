@@ -1,8 +1,14 @@
 package com.hyperdondon.blissgemsremake.internal;
 
+import com.hyperdondon.blissgemsremake.api.Energy;
+import com.hyperdondon.blissgemsremake.api.Gem;
+import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.Settings;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Random;
@@ -11,10 +17,14 @@ public final class GemGiver implements Listener {
     @Getter
     private static volatile GemGiver instance = new GemGiver();
 
-    public void OnJoin(PlayerJoinEvent e) {
-        if (!e.getPlayer().hasPlayedBefore()) {
+
+    @EventHandler
+    public void givegem(PlayerJoinEvent e) {
+        Bukkit.broadcastMessage("s");
+        if (e.getPlayer().hasPlayedBefore()) {
             if (Settings.getGiveGemOnJoin()) {
-                int randomNumber;
+                GemType type = GemType.Strength;
+                int randomNumber = 0;
                 if (Settings.getSeason() == 1) {
                     Random random = new Random();
                     randomNumber = random.nextInt(6) + 1;
@@ -30,7 +40,43 @@ public final class GemGiver implements Listener {
                     randomNumber = random.nextInt(8) + 1;
                 }
 
-                
+
+                randomNumber = 2;
+                if (randomNumber == 1) {
+                    type = GemType.Life;
+                }
+
+                if (randomNumber == 2) {
+                    type = GemType.Strength;
+                }
+
+                if (randomNumber == 3) {
+                    type = GemType.Fire;
+                }
+
+                if (randomNumber == 4) {
+                    type = GemType.Speed;
+                }
+
+                if (randomNumber == 5) {
+                    type = GemType.Wealth;
+                }
+
+                if (randomNumber == 6) {
+                    type = GemType.Wealth;
+                }
+
+                if (randomNumber == 7) {
+                    type = GemType.Astra;
+                }
+
+                if (randomNumber == 8) {
+                    type = GemType.Flux;
+                }
+
+                Gem g = Gem.GemConstructor(type, 2, Energy.Pristine);
+                e.getPlayer().getInventory().addItem(g.toItemStack());
+
             }
         }
     }
