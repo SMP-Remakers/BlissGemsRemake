@@ -1,9 +1,9 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,6 +17,7 @@ import java.util.UUID;
 public final class GetGemItem {
     public static ItemStack returngem(GemType gem, int tier, Energy energy, int quicknodrop, int quicknoremove, int season) {
         //Energy
+        season = 3;
 
         String energystage = "";
         if (energy == Energy.Pristine_5) {
@@ -50,9 +51,19 @@ public final class GetGemItem {
         } else if (energy == Energy.Ruined) {
             energystage = Common.colorize("#FF1111") + "Ruined";
         } else if (energy == Energy.Broken) {
-            energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+            if (season == 2) {
+                energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+            }
+            if (season == 3) {
+                energystage = ChatColor.RED + "BROKEN";
+            }
         } else {
-            energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+            if (season == 2) {
+                energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+            }
+            if (season == 3) {
+                energystage = ChatColor.RED + "BROKEN";
+            }
         }
 
 
@@ -84,92 +95,289 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
-                    itemMeta.setCustomModelData(10);
+                    itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                     for (ItemFlag flag : ItemFlag.values()) {
                         itemMeta.addItemFlags(flag);
                     }
 
                     if (Gem.isPristineorHigher(energy)) {
+                        if (energy == Energy.Pristine_5) {
+                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        }
+
+                        itemMeta.setCustomModelData(10);
                         itemMeta.setLore(Arrays.asList(
 
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                " " + Common.colorize("#F10303") + "\uD83D\uDD2E" + ChatColor.GRAY + " Strength 2,",
+                                ChatColor.GRAY + " " + Common.colorize("#F10303") + "\uD83D\uDD2E " + ChatColor.GRAY + "Strength 2,",
                                 ChatColor.GRAY + " Auto enchants sharpness 5",
                                 ChatColor.GRAY + " BloodThorns, deal more damage the",
-                                ChatColor.GRAY + " lower in health you are",
-                                "",
-                                Common.colorize("#B8FFFB") + "" + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "" + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
-                                ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " lower in health you are ",
+                                ChatColor.GRAY + " ",
+                                Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + Common.colorize("#B5B5B5") + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Clears potion effects",
                                 ChatColor.GRAY + " gives weakness 1 for 20 seconds",
-                                ChatColor.DARK_RED + " \uD83E\uDD3C" + ChatColor.GRAY + "  Clears potion effects",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + " Clears potion effects",
                                 ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
-                                "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
-                                ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB" + ChatColor.GRAY + " Every 3 crits charges a hit that deals 2x the dmg",
-                                ChatColor.GREEN + " \uD83E\uDD3C" + ChatColor.GRAY + " Every 8 crits charges a hit that deals 2x the dmg"
-
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔" + Common.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
                         ));
-                            item.setItemMeta(itemMeta);
-                            return item;
+                    }
+
+                        if (energy == Energy.Scratched) {
+                            itemMeta.setCustomModelData(30);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    energystage,
+                                    ChatColor.GRAY + " " + Common.colorize("#F10303") + "\uD83D\uDD2E " + ChatColor.GRAY + "Strength 2,",
+                                    ChatColor.GRAY + " Auto enchants sharpness 4",
+                                    ChatColor.GRAY + " BloodThorns, deal more damage the",
+                                    ChatColor.GRAY + " lower in health you are",
+                                    ChatColor.GRAY + " ",
+                                    Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + Common.colorize("#B5B5B5") + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                    ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Clears potion effects",
+                                    ChatColor.GRAY + " gives weakness 1 for 20 seconds" + "",
+                                    ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + " Clears potion effects",
+                                    ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔" + Common.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                    ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                                    ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                            ));
                         }
+
+                    if (energy == Energy.Cracked) {
+                        itemMeta.setCustomModelData(50);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#F10303") + "\uD83D\uDD2E " + ChatColor.GRAY + "Strength 2,",
+                                ChatColor.GRAY + " Auto enchants sharpness 3",
+                                ChatColor.GRAY + " ",
+                                Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + Common.colorize("#B5B5B5") + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Clears potion effects",
+                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔" + Common.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                        ));
+                    }
+
+                    if (energy == Energy.Damaged) {
+                        itemMeta.setCustomModelData(70);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#F10303") + "\uD83D\uDD2E " + ChatColor.GRAY + "Auto enchants sharpness 2",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + Common.colorize("#B5B5B5") + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Clears potion effects",
+                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔" + Common.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                        ));
+                    }
+
+                    if (energy == Energy.Ruined) {
+                        itemMeta.setCustomModelData(90);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#F10303") + "\uD83D\uDD2E " + ChatColor.GRAY + "No passives",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD3A " + Common.colorize("#B5B5B5") + ChatColor.BOLD + "ғʀᴀɪʟᴇʀ",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Clears potion effects",
+                                ChatColor.GRAY + " gives weakness 1 for 20 seconds",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + " Clears potion effects",
+                                ChatColor.GRAY + " and gives withering, " + ChatColor.WHITE + "40s, R5",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "⚔" + Common.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.WHITE + "R4 40s",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                                ChatColor.GRAY + " " + ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                        itemMeta.setCustomModelData(96);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
+                        item.setItemMeta(itemMeta);
+                        return item;
                     }
                 }
 
 
                 if (season == 3) {
 
-                        ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-                        ItemMeta itemMeta = item.getItemMeta();
+                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                    ItemMeta itemMeta = item.getItemMeta();
 
 
-                        NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-                        itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID()));
 
-                        NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
-                        itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                        NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-                        itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                        NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
-                        itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                        NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
-                        itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                        itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
+                    itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
+                    for (ItemFlag flag : ItemFlag.values()) {
+                        itemMeta.addItemFlags(flag);
+                    }
+                    if (Gem.isPristineorHigher(energy)) {
+                        if (energy == Energy.Pristine_5) {
+                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         }
 
+                        itemMeta.setCustomModelData(10);
                         itemMeta.setLore(Arrays.asList(
-
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                "",
-                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 ChatColor.GRAY + "- Strength",
                                 ChatColor.GRAY + "- Enchants Sharpness",
-                                "",
+                                ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
                                 ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
-                                "",
+                                ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A" + ChatColor.GRAY + " ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A" + ChatColor.GRAY + " ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
-                                "",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
                         ));
-                        itemMeta.setCustomModelData(10);
-                        item.setItemMeta(itemMeta);
-                        return item;
                     }
+
+                    if (energy == Energy.Scratched) {
+                        itemMeta.setCustomModelData(30);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Strength",
+                                ChatColor.GRAY + "- Enchants Sharpness",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                        ));
+                    }
+
+                    if (energy == Energy.Cracked) {
+                        itemMeta.setCustomModelData(50);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Strength",
+                                ChatColor.GRAY + "- Enchants Sharpness",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                        ));
+                    }
+
+                    if (energy == Energy.Damaged) {
+                        itemMeta.setCustomModelData(70);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Enchants Sharpness",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                        ));
+                    }
+
+                    if (energy == Energy.Ruined) {
+                        itemMeta.setCustomModelData(90);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "No Passives",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
+                                ChatColor.GRAY + "",
+                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                        itemMeta.setCustomModelData(96);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
+                    item.setItemMeta(itemMeta);
+                    return item;
+                }
 
 
 
@@ -207,7 +415,7 @@ public final class GetGemItem {
                         "" + ChatColor.BOLD +
                                 "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
 
-                        ChatColor.of(new Color(255, 228, 171)) +
+                        Common.colorize("#FFE4AB") +
                                 "ᴘᴀssɪᴠᴇs",
 
                         ChatColor.of(new Color(87, 255, 199)) +
@@ -262,7 +470,7 @@ public final class GetGemItem {
                 itemMeta.setLore(Arrays.asList(
 
                         ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                        ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                        Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                         ChatColor.of(new Color(87, 255, 199)) + "Pristine",
                         " " + Common.colorize("#F10303") + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 3,Dolphins Grace",
                         ChatColor.GRAY + "and Immune to Soul Sand, Auto enchants Efficiency 5",
@@ -283,7 +491,7 @@ public final class GetGemItem {
                 //    itemMeta.setLore(Arrays.asList(
                 //
                 //                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                //                    ChatColor.of(new Color(255, 228, 171)) + "ᴘᴀssɪᴠᴇs",
+                //                    Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                 //                    ChatColor.of(new Color(87, 255, 199)) + "Pristine",
                 //                    " " + ChatColor.of(new Color(254, 253, 23)) + "\uD83D\uDD2E" + ChatColor.GRAY + " Speed 2, Immune to soul sand",
                 //                    ChatColor.GRAY + " Auto enchant efficiency 2",

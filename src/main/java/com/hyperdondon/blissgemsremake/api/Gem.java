@@ -253,16 +253,6 @@ public class Gem {;
         }
 
 
-        //Broken
-        else if (gem.getItemMeta().getLore().contains(ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ")) {
-            gem2.energy = Energy.Broken;
-            gem2.season = 2;
-        }
-
-
-
-
-
         //Pris+5
         else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5" + Common.colorize("&f)"))) {
             gem2.energy = Energy.Pristine_5;
@@ -334,9 +324,14 @@ public class Gem {;
 
 
         //Broken
-        else if (gem.getItemMeta().getLore().contains(ChatColor.RED + "BROKEN")) {
+        else if (gem.getItemMeta().getLore().contains(ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss")) {
             gem2.energy = Energy.Broken;
-            gem2.season = 3;
+            if (gem.getItemMeta().getCustomModelData() == 99) {
+                gem2.season = 3;
+            }
+            if (gem.getItemMeta().getCustomModelData() == 95) {
+                gem2.season = 2;
+            }
         }
 
         //N/A

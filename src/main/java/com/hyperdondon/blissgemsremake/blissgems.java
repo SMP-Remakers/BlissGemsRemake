@@ -1,9 +1,6 @@
 package com.hyperdondon.blissgemsremake;
 
-import com.hyperdondon.blissgemsremake.internal.LeaveJoinStorer;
-import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer;
-import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.internal.GemGiver;
+import com.hyperdondon.blissgemsremake.internal.*;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
@@ -67,6 +64,8 @@ public final class blissgems extends SimplePlugin implements Listener {
         registerEvents(GemGiver.getInstance());
 
         registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.getInstance());
+
+        registerEvents(TexturePackLoader.getInstance());
 
         getCommand("bliss").setExecutor(new SlashBliss());
 

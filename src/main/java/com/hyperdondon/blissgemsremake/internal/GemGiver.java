@@ -74,6 +74,7 @@ public final class GemGiver implements Listener {
                     type = GemType.Flux;
                 }
 
+                Settings.setSeason(2);
                 Gem g = Gem.GemConstructor(type, 2, Energy.Pristine);
                 e.getPlayer().getInventory().addItem(g.toItemStack());
 

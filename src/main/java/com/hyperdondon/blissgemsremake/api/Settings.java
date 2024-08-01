@@ -50,6 +50,13 @@ public final class Settings {
         return allowremove;
     }
 
+    public static boolean getTexturePackLoading() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        boolean allowremove = config.getBoolean("texturepackloading");
+
+        return allowremove;
+    }
+
 
 
 
@@ -112,10 +119,21 @@ public final class Settings {
         config.set("allowremove", value);
         try {
             config.save(GetSettingsFile);
+        } catch (Exception exc) {
+            Common.error(exc);
+        }
+    }
+
+    public static void setTexturePackLoading(boolean value) {
+
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(GetSettingsFile);
+        config.set("texturepackloading", value);
+        try {
+            config.save(GetSettingsFile);
         }
         catch (Exception exc){
             Common.error(exc);
         }
-
     }
+
 }

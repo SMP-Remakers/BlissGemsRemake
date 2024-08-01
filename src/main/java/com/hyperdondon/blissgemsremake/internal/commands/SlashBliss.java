@@ -59,7 +59,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
 
         if (args.length == 3) {
-            Settings.setSeason(3);
+            //Settings.setSeason(3);
             Player p = (Player) commandSender;
             //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
 
@@ -83,7 +83,9 @@ public final class SlashBliss implements CommandExecutor, Listener {
                 allowdropint = 0;
             }
 
-            Gem g = Gem.GemConstructor(GemType.Strength, 2, Energy.Pristine, allowdropint, allowremoveint, 2);
+            Settings.setSeason(3);
+
+            Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
 
             p.getInventory().setItemInOffHand(g.toItemStack());
 

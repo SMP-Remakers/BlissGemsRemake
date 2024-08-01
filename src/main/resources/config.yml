@@ -25,10 +25,17 @@
 #
 #allowremove: <boolean>
 # false = Don't allow the player to remove their gem from their inventory (Default)
-# true = Don't allow the player to remove their gem from their inventory
+# true = allow the player to remove their gem from their inventory
+#
+#
+#
+#texturepackloading: <boolean>
+# false = Don't load the texture pack
+# true = load the texture pack (Default)
 #
 season: 3
 givegemonfirstjoin: false
 autoupdategem: true
 allowdrop: false
 allowremove: false
+texturepackloading: true
