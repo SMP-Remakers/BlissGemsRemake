@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.MinecraftVersion;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;
@@ -64,15 +65,13 @@ public final class Powers implements Listener {
                             RichRush.put(UUID.fromString(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
                         }
 
-                        event.getPlayer().sendMessage(
-                                Common.colorize("&x&0&e&c&9&1&2") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "\uD83D\uDCB8" + Common.colorize("&x&0&e&c&9&1&2") + "Rich Rush",
-                                Common.colorize("&x&b&8&f&f&f&b") + "Skill for",
-                                Common.colorize("&x&0&e&c&9&1&2") + "5 Minutes"
-
-
-                        );
+                            event.getPlayer().sendMessage(
+                                    Common.colorize("#0EC912") + "🔮" +
+                                    Common.colorize("#B8FFFB") + "You have activated group " +
+                                    Common.colorize("&f") + "\uD83D\uDCB8 " + Common.colorize("#0EC912") + "Rich Rush " +
+                                    Common.colorize("#B8FFFB") + "Skill for " +
+                                    Common.colorize("#0EC912") + "5 Minutes"
+                            );
 
 
                         Location loc = event.getPlayer().getLocation();

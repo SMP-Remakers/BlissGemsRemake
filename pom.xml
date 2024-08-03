@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hyperdondon</groupId>
-    <artifactId>blissgems</artifactId>
+    <artifactId>blissgemsremake</artifactId>
     <version>1</version>
     <packaging>jar</packaging>
 
-    <name>blissgems</name>
+    <name>blissgemsremake</name>
 
     <properties>
         <foundation.path>com.github.kangarko</foundation.path>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.18-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 

@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.MinecraftVersion;
 
 import java.util.List;
 
@@ -85,10 +86,9 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             Settings.setSeason(3);
 
-            Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
 
-            p.getInventory().setItemInOffHand(g.toItemStack());
-
+            //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
 
             //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
 
@@ -96,7 +96,8 @@ public final class SlashBliss implements CommandExecutor, Listener {
             //Bukkit.broadcastMessage(g.getID());
 
             //p.getInventory().addItem(gem);
-            //p.getInventory().addItem(g.toItemStack());
+
+           // p.getInventory().addItem(g.toItemStack());
 
 
 
@@ -106,19 +107,35 @@ public final class SlashBliss implements CommandExecutor, Listener {
             }
         if (args.length == 0) {
             Player p = (Player) commandSender;
-            p.sendMessage(
-                    ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system",
-                    ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player",
-                    ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player",
-                    ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive specific player",
-                    ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set player's energy",
-                    ChatColor.AQUA + "/bliss reload " + ChatColor.GRAY + "- reload the configuration",
-                    ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive banned player",
-                    ChatColor.AQUA + "/bliss withdraw [amount] " + ChatColor.GRAY + "- withdraw energy",
-                    ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set energy for player",
-                    ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
 
-            );
+            //Spigot/Bukkit 1.18 added support for multiple strings to be sent at the same time
+            if (MinecraftVersion.newerThan(MinecraftVersion.V.v1_17)) {
+                p.sendMessage(
+                        ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system",
+                        ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player",
+                        ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player",
+                        ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive specific player",
+                        ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set player's energy",
+                        ChatColor.AQUA + "/bliss reload " + ChatColor.GRAY + "- reload the configuration",
+                        ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive banned player",
+                        ChatColor.AQUA + "/bliss withdraw [amount] " + ChatColor.GRAY + "- withdraw energy",
+                        ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set energy for player",
+                        ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
+
+                );
+            }
+            else {
+                p.sendMessage(ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system");
+                p.sendMessage(ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player");
+                p.sendMessage(ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player");
+                p.sendMessage(ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive specific player");
+                p.sendMessage(ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set player's energy");
+                p.sendMessage(ChatColor.AQUA + "/bliss reload " + ChatColor.GRAY + "- reload the configuration");
+                p.sendMessage(ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive banned player");
+                p.sendMessage(ChatColor.AQUA + "/bliss withdraw [amount] " + ChatColor.GRAY + "- withdraw energy");
+                p.sendMessage(ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set energy for player");
+                p.sendMessage(ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting");
+            }
             return true;
         }
         return true;

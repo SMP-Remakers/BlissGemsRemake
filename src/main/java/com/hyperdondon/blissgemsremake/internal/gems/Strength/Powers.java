@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.gems.Strength;
 
 import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -170,10 +171,10 @@ public final class Powers implements Listener {
                         }
 
                         e.getPlayer().sendMessage(
-                                Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 5)"
+                                Common.colorize("#F10303") + "🔮 " +
+                                Common.colorize("#B8FFFB") + "You have activated group " +
+                                Common.colorize("&f") + "🤺" + Common.colorize("#F10303") + "Frailer " +
+                                Common.colorize("#B8FFFB") + "skill " + Common.colorize("&7") + "(radius 5)"
                         );
 
 
@@ -335,8 +336,12 @@ public final class Powers implements Listener {
 
             // spawn your particle here
             // for example, if 'loc' is your location object and 'world' is your World object
-            player.getWorld().spawnParticle(Particle.REDSTONE, player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-
+            if (VersionChecker.OlderThanNBTChange()) {
+                player.getWorld().spawnParticle(Particle.REDSTONE, player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
+            }
+            else {
+                player.getWorld().spawnParticle(Particle.valueOf("DUST"), player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
+            }
             player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, player.getX() + x, player.getY(), player.getZ() + y, 0);
 
         }

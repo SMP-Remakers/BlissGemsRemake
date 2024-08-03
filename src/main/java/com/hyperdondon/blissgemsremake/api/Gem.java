@@ -2,6 +2,7 @@ package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -93,6 +94,9 @@ public class Gem {;
         ItemMeta itemMeta = gem.getItemMeta();
 
 
+        NamespacedKey idkey2 = new NamespacedKey("blissgems", "shard-id");
+        String id3 = itemMeta.getPersistentDataContainer().get(idkey2, PersistentDataType.STRING);
+
         NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
         String id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
 
@@ -108,80 +112,9 @@ public class Gem {;
         NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
         int remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
 
+
+
         Gem gem2 = new Gem();
-
-        gem2.id = id2;
-        gem2.tier = tier2;
-
-
-        if (Objects.equals(type2, "life")) {
-            gem2.type = GemType.Life;
-        }
-
-
-        else if (Objects.equals(type2, "strength")) {
-            gem2.type = GemType.Strength;
-        }
-
-
-        else if (Objects.equals(type2, "fire")) {
-            gem2.type = GemType.Fire;
-        }
-
-
-        else if (Objects.equals(type2, "speed")) {
-            gem2.type = GemType.Speed;
-        }
-
-
-        else if (Objects.equals(type2, "wealth")) {
-            gem2.type = GemType.Wealth;
-        }
-
-
-        else if (Objects.equals(type2, "astra")) {
-            gem2.type = GemType.Astra;
-        }
-
-
-        else if (Objects.equals(type2, "puff")) {
-            gem2.type = GemType.Puff;
-        }
-
-
-        else if (Objects.equals(type2, "flux")) {
-            gem2.type = GemType.Flux;
-        }
-
-
-        else if (Objects.equals(type2, "gold")) {
-            gem2.type = GemType.Gold;
-        }
-
-
-
-
-
-
-        if (drop2 == 1) {
-            gem2.allowdrop = true;
-        }
-
-        else {
-            gem2.allowdrop = false;
-        }
-
-
-
-
-
-        if (remove2 == 1) {
-            gem2.allowremove = true;
-        }
-
-        else {
-            gem2.allowremove = false;
-        }
 
         //Pris+5
         if (gem.getItemMeta().getLore().contains(Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5")) {
@@ -340,7 +273,74 @@ public class Gem {;
             gem2.season = 1;
         }
 
+        if (gem2.season == 1) {
+            gem2.id = id3;
+            if (gem.getType() == Material.PRISMARINE_SHARD) {
+                gem2.season = 2;
 
+            } else {
+                gem2.season = 1;
+
+            }
+        }
+
+        else {
+            gem2.id = id2;
+            gem2.tier = tier2;
+        }
+
+
+
+        if (gem2.season != 1) {
+            if (Objects.equals(type2, "life")) {
+                gem2.type = GemType.Life;
+            } else if (Objects.equals(type2, "strength")) {
+                gem2.type = GemType.Strength;
+            } else if (Objects.equals(type2, "fire")) {
+                gem2.type = GemType.Fire;
+            } else if (Objects.equals(type2, "speed")) {
+                gem2.type = GemType.Speed;
+            } else if (Objects.equals(type2, "wealth")) {
+                gem2.type = GemType.Wealth;
+            } else if (Objects.equals(type2, "astra")) {
+                gem2.type = GemType.Astra;
+            } else if (Objects.equals(type2, "puff")) {
+                gem2.type = GemType.Puff;
+            } else if (Objects.equals(type2, "flux")) {
+                gem2.type = GemType.Flux;
+            } else if (Objects.equals(type2, "gold")) {
+                gem2.type = GemType.Gold;
+            }
+        }else {
+            if (gem.getItemMeta().getDisplayName().contains("")) {
+
+            }
+        }
+
+
+
+
+
+
+        if (drop2 == 1) {
+            gem2.allowdrop = true;
+        }
+
+        else {
+            gem2.allowdrop = false;
+        }
+
+
+
+
+
+        if (remove2 == 1) {
+            gem2.allowremove = true;
+        }
+
+        else {
+            gem2.allowremove = false;
+        }
 
 
         return gem2;

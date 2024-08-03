@@ -33,8 +33,7 @@ public final class SlashProg implements CommandExecutor, Listener {
             Player p = (Player) commandSender;
             p.sendMessage(
 
-                    ChatColor.AQUA + "/bliss progitems (player)" + ChatColor.GRAY + "- give progitems to specific player",
-                    ChatColor.AQUA + "/bliss toggleprog [setting] " + ChatColor.GRAY + "- toggle progsystem"
+                    ChatColor.AQUA + "/bliss progitems (player)" + ChatColor.GRAY + "- give progitems to specific player"
 
             );
         }
