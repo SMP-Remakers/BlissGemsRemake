@@ -1,6 +1,5 @@
 package com.hyperdondon.blissgemsremake.internal;
 
-import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;

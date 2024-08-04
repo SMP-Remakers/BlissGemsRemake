@@ -84,14 +84,18 @@ public final class SlashBliss implements CommandExecutor, Listener {
                 allowdropint = 0;
             }
 
-            Settings.setSeason(3);
+            Settings.setSeason(2);
+
+            Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Pristine, 1, 1);
+
+            p.getInventory().addItem(gem.toItemStack());
+
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
 
             //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
 
             //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
-
 
             //Bukkit.broadcastMessage(g.getID());
 

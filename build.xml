@@ -20,7 +20,7 @@
          to compile your plugin to multiple servers. -->
 
     <target name="Build">
-        <jar jarfile="C:\Users\danie\AppData\Roaming\.feather\player-server\servers\370ddd92-a13a-4d33-922f-626fef36d153\plugins\blissgems-1.jar"
+        <jar jarfile="C:\Users\danie\AppData\Roaming\.feather\player-server\servers\370ddd92-a13a-4d33-922f-626fef36d153\plugins\blissgemsremake-1.jar"
              basedir="./target/classes/" includes="**/*">
 
             <!-- IF you have Foundation on your disk, remove the <zipgroupfileset> line and uncomment the <fileset> one. Repeat for the other <jar> goal below.
