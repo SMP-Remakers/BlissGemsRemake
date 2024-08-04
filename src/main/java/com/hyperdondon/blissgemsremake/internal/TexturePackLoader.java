@@ -13,7 +13,7 @@ public final class TexturePackLoader implements Listener {
     @EventHandler
     public void PackLoader(PlayerJoinEvent e) {
         if (Settings.getSeason() == 3) {
-            e.getPlayer().setResourcePack("https://download.mc-packs.net/pack/2edc325993a4cd4dc7ca16abd37d1652aeee27c4.zip");
+            e.getPlayer().setResourcePack("https://download.mc-packs.net/pack/4260d63d42da9e7ede0782193e09d13551ff8df3.zip");
         }
         if (Settings.getSeason() == 2) {
             e.getPlayer().setResourcePack("https://download.mc-packs.net/pack/4260d63d42da9e7ede0782193e09d13551ff8df3.zip");
