@@ -2,6 +2,7 @@ package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
+import io.lumine.mythic.bukkit.entities.BukkitTadpole;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -86,7 +87,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             Settings.setSeason(2);
 
-            Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Pristine, 1, 1);
+            Gem gem = Gem.GemConstructor(GemType.Life, 2, Energy.Ruined, 1,1 ,2);
 
             p.getInventory().addItem(gem.toItemStack());
 

@@ -292,7 +292,6 @@ public class Gem {;
         }
 
 
-
         if (gem2.season != 1) {
             if (Objects.equals(type2, "life")) {
                 gem2.type = GemType.Life;
@@ -322,7 +321,7 @@ public class Gem {;
             }
             gem2.allowremove = false;
             gem2.allowdrop = false;
-            if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE0B4B") + ChatColor.BOLD + "Life " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE0B4B") + ChatColor.BOLD + "Life " + Common.colorize("#C7C7C7") + "Gem")) {
+            if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + ChatColor.BOLD + "Life " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + ChatColor.BOLD + "Life " + Common.colorize("#C7C7C7") + "Gem")) {
                 gem2.type = GemType.Life;
             } else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + "Strength " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + ChatColor.BOLD + "Strength " + Common.colorize("#C7C7C7") + "Gem")) {
                 gem2.type = GemType.Strength;
