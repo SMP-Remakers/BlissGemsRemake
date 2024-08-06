@@ -47,9 +47,9 @@ public final class Powers implements Listener {
 
                 ItemStack gem = event.getPlayer().getInventory().getItemInMainHand();
 
-                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
+                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
 
-                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
 
                 if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
 
@@ -129,7 +129,7 @@ public final class Powers implements Listener {
                 ItemStack gem = new ItemStack(Material.AIR);
 
 
-                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
 
                 if (p.getInventory().getItemInMainHand().hasItemMeta()) {
                     if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING)) {
@@ -147,7 +147,7 @@ public final class Powers implements Listener {
 
                 if (gem.hasItemMeta()) {
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
 
 
                     UUID id = UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
@@ -217,9 +217,9 @@ public final class Powers implements Listener {
 
                 ItemStack gem = event.getPlayer().getInventory().getItemInMainHand();
 
-                NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type"); //will be used to check and get the gem type
+                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
 
-                NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
 
                 if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
 

@@ -1,5 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
+import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.chat.Chat;
@@ -83,7 +84,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
                     itemMeta.setDisplayName(Common.colorize("#F10303") + "Strength " + Common.colorize("#FFD773") + "Gem");
@@ -140,19 +141,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -293,19 +294,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -427,7 +428,7 @@ public final class GetGemItem {
 
 
                     if (energy == Energy.Broken || energy == Energy.N_A) {
-                        itemMeta.setCustomModelData(96);
+                        itemMeta.setCustomModelData(100);
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
                         ));
@@ -446,7 +447,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID().toString()));
 
                     itemMeta.setDisplayName(Common.colorize("#FEFD17") + ChatColor.BOLD + "Speed " + Common.colorize("#FFD773") + "Gem");
@@ -508,19 +509,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "speed");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -690,19 +691,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "speed");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -824,7 +825,7 @@ public final class GetGemItem {
 
 
                     if (energy == Energy.Broken || energy == Energy.N_A) {
-                        itemMeta.setCustomModelData(96);
+                        itemMeta.setCustomModelData(100);
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
                         ));
@@ -844,7 +845,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID().toString()));
 
                     itemMeta.setDisplayName(Common.colorize("#FE04B4") + ChatColor.BOLD + "Life " + Common.colorize("#FFD773") + "Gem");
@@ -904,19 +905,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "68e42971-2824-48c2-8df2-3647a5783cb6");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -1064,139 +1065,316 @@ public final class GetGemItem {
 
                 if (season == 3) {
 
+
                     ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    itemMeta.setDisplayName(Common.colorize("#FEFD17") + ChatColor.BOLD + "sᴘᴇᴇᴅ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
+                    itemMeta.setDisplayName(Common.colorize("#FE04B4") + ChatColor.BOLD + "ʟɪғᴇ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                     for (ItemFlag flag : ItemFlag.values()) {
                         itemMeta.addItemFlags(flag);
                     }
+
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) {
                             itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         }
-
-                        itemMeta.setCustomModelData(8);
+                        itemMeta.setCustomModelData(4);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Speed",
-                                ChatColor.GRAY + "- Dolphins grace",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Radiant Fist",
+                                ChatColor.GRAY + "- Bonus Saturation",
+                                ChatColor.GRAY + "- Bonus Absorption",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
                         ));
                     }
 
+
                     if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(28);
+                        itemMeta.setCustomModelData(24);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Speed",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Radiant Fist",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                        ));
                     }
 
                     if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(48);
+                        itemMeta.setCustomModelData(44);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Speed",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                         ));
                     }
 
                     if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(68);
+                        itemMeta.setCustomModelData(64);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- No Passives",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
                         ));
                     }
 
                     if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(88);
+                        itemMeta.setCustomModelData(84);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 ChatColor.GRAY + "- No Passives",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                        itemMeta.setCustomModelData(100);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
+                    item.setItemMeta(itemMeta);
+                    return item;
+                }
+            }
+
+
+            //Astra
+
+            if (gem == GemType.Astra) {
+                if (season == 2) {
+
+
+                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                    ItemMeta itemMeta = item.getItemMeta();
+
+
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fcbf8753-a7b1-4b1a-91a7-13daa8377cda");
+
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "astra");
+
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
+                    itemMeta.setDisplayName(Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴀsᴛʀᴀ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
+                    for (ItemFlag flag : ItemFlag.values()) {
+                        itemMeta.addItemFlags(flag);
+                    }
+
+                    if (Gem.isPristineorHigher(energy)) {
+                        if (energy == Energy.Pristine_5) {
+                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        }
+                        itemMeta.setCustomModelData(14);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                Common.colorize("#A01FFF") + " ",
+                                ChatColor.GRAY + " ",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + ChatColor.GRAY + "10% of attacks will phase",
+                                ChatColor.GRAY + " through you. Adsorbing souls will heal you 2.5 hearts",
+                                ChatColor.GRAY + " if mob, and 5 if player.",
+                                ChatColor.GRAY + " Capture 2 mobs inside your gem, releasing",
+                                ChatColor.GRAY + " them in the oppoiste order they were captured.",
+                                ChatColor.WHITE + "",
+                                Common.colorize("#A01FFF") + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + " " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one",
+                                ChatColor.GRAY + " they take 3 hearts or damage and their gem is",
+                                ChatColor.GRAY + " disabled for 10 seconds of every dagger they're hit with.",
+                                ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
+                                ChatColor.GRAY + " when that player receives damage. Leaving the body",
+                                ChatColor.GRAY + " will haunt them, disabling their gem for 10 seconds",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
+                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
+                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
+                                ChatColor.GRAY + " caster only can steal health while zone is active",
+                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Scratched) {
+                        itemMeta.setCustomModelData(24);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + "Feed animals and grow plants",
+                                ChatColor.GRAY + " by crouch clicking with bare hand. 3x dmg",
+                                ChatColor.GRAY + " to undead mobs. Immune to withering",
+                                ChatColor.GRAY + " Heal half a heart ever 5 seconds",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
+                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
+                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
+                                ChatColor.GRAY + " caster only can steal health while zone is active",
+                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                        ));
+                    }
+
+                    if (energy == Energy.Cracked) {
+                        itemMeta.setCustomModelData(44);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + "Feed animals by crouch",
+                                ChatColor.GRAY + " clicking with bare hand. Immune to withering.",
+                                ChatColor.GRAY + " Heal half a heart ever 5 seconds",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
+                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
+                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
+                                ChatColor.GRAY + " caster only can steal health while zone is active",
+                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                        ));
+                    }
+
+                    if (energy == Energy.Damaged) {
+                        itemMeta.setCustomModelData(64);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + " Heal half a heart ever 5 seconds",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
+                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
+                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
+                                ChatColor.GRAY + " caster only can steal health while zone is active",
+                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                        ));
+                    }
+
+                    if (energy == Energy.Ruined) {
+                        itemMeta.setCustomModelData(84);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                energystage,
+                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " No passives",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
+                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
+                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
+                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
+                                ChatColor.GRAY + " caster only can steal health while zone is active",
+                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
                         ));
                     }
 
@@ -1210,8 +1388,163 @@ public final class GetGemItem {
                     item.setItemMeta(itemMeta);
                     return item;
                 }
-        }
 
+
+
+
+                if (season == 3) {
+
+
+                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                    ItemMeta itemMeta = item.getItemMeta();
+
+
+                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
+
+                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
+
+                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
+                    itemMeta.setDisplayName(Common.colorize("#FE04B4") + ChatColor.BOLD + "ʟɪғᴇ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
+                    for (ItemFlag flag : ItemFlag.values()) {
+                        itemMeta.addItemFlags(flag);
+                    }
+
+                    if (Gem.isPristineorHigher(energy)) {
+                        if (energy == Energy.Pristine_5) {
+                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        }
+                        itemMeta.setCustomModelData(4);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Radiant Fist",
+                                ChatColor.GRAY + "- Bonus Saturation",
+                                ChatColor.GRAY + "- Bonus Absorption",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Scratched) {
+                        itemMeta.setCustomModelData(24);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Radiant Fist",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                        ));
+                    }
+
+                    if (energy == Energy.Cracked) {
+                        itemMeta.setCustomModelData(44);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Green Thumb",
+                                ChatColor.GRAY + "- Wither Immune",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                         ));
+                    }
+
+                    if (energy == Energy.Damaged) {
+                        itemMeta.setCustomModelData(64);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- No Passives",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                        ));
+                    }
+
+                    if (energy == Energy.Ruined) {
+                        itemMeta.setCustomModelData(84);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- No Passives",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                ChatColor.WHITE + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                        ));
+                    }
+
+
+                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                        itemMeta.setCustomModelData(100);
+                        itemMeta.setLore(Arrays.asList(
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
+                    item.setItemMeta(itemMeta);
+                    return item;
+                }
+            }
         }
         return null;
     }

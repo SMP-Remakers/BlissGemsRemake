@@ -1,5 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
+import com.hyperdondon.blissgemsremake.blissgems;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -261,24 +262,24 @@ public class Gem {;
         String type2 = "";
 
         if (gem2.season == 1) {
-            NamespacedKey idkey2 = new NamespacedKey("blissgems", "shard_id");
+            NamespacedKey idkey2 = new NamespacedKey(blissgems.getInstance(), "shard_id");
             id3 = itemMeta.getPersistentDataContainer().get(idkey2, PersistentDataType.STRING);
         }
 
         if (gem2.season == 2 || gem2.season == 3) {
-        NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
         id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
 
-        NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
         tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
 
-        NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+        NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
         type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
 
-        NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+        NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
         drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
 
-        NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+        NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
         remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
         }
 
@@ -397,10 +398,10 @@ public class Gem {;
 
 
         if (season == 2 || season == 3) {
-            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         } else if (season == 1)  {
-            NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
+            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         }
 
