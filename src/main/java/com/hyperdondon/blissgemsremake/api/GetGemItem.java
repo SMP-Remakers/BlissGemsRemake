@@ -2,8 +2,14 @@ package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
+import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.nbtapi.NBTCompound;
+import de.tr7zw.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.chat.Chat;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -16,8 +22,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.MinecraftVersion;
+import net.minecraft.nbt.NBTTagList;
 
-import java.awt.*;
+import java.util.*;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -27,49 +34,109 @@ public final class GetGemItem {
 
 
         String energystage = "";
-        if (energy == Energy.Pristine_5) {
-            energystage = Common.colorize("#57FFC7") + "Pristine"
-                    + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9") + "5";
-        } else if (energy == Energy.Pristine_4) {
-            energystage = Common.colorize("#57FFC7") + "Pristine"
-                    + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9") + "4";
-        } else if (energy == Energy.Pristine_3) {
-            energystage = Common.colorize("#57FFC7") + "Pristine"
-                    + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9") + "3";
-        } else if (energy == Energy.Pristine_2) {
-            energystage = Common.colorize("#57FFC7") + "Pristine"
-                    + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9") + "2";
-        } else if (energy == Energy.Pristine_1) {
-            energystage = Common.colorize("#57FFC7") + "Pristine"
-                    + ChatColor.WHITE + " + "
-                    + Common.colorize("#96FFD9") + "1";
-        } else if (energy == Energy.Pristine) {
-            energystage = Common.colorize("#57FFC7") + "Pristine";
-        } else if (energy == Energy.Scratched) {
-            energystage = Common.colorize("#57FF8F") + "Scratched";
-        } else if (energy == Energy.Cracked) {
-            energystage = Common.colorize("#7958DB") + "Cracked";
-        } else if (energy == Energy.Damaged) {
-            energystage = Common.colorize("#FFC929") + "Damaged";
-        } else if (energy == Energy.Ruined) {
-            energystage = Common.colorize("#FF1111") + "Ruined";
-        } else if (energy == Energy.Broken) {
-            if (season == 2) {
-                energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
-            }
+        if (VersionChecker.OlderThanNBTChange()) {
             if (season == 3) {
-                energystage = ChatColor.RED + "BROKEN";
+                if (energy == Energy.Pristine_5) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\" + \",\"italic\":false,\"color\":\"white\"},{\"text\":\"5)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#96FFD9\",\"bold\":false}]}";
+                } else if (energy == Energy.Pristine_4) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\" + \",\"italic\":false,\"color\":\"white\"},{\"text\":\"4)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#96FFD9\",\"bold\":false}]}";
+                } else if (energy == Energy.Pristine_3) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\" + \",\"italic\":false,\"color\":\"white\"},{\"text\":\"3)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#96FFD9\",\"bold\":false}]}";
+                } else if (energy == Energy.Pristine_2) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\" + \",\"italic\":false,\"color\":\"white\"},{\"text\":\"2)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#96FFD9\",\"bold\":false}]}";
+                } else if (energy == Energy.Pristine_1) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\" + \",\"italic\":false,\"color\":\"white\"},{\"text\":\"1)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#96FFD9\",\"bold\":false}]}";
+                } else if (energy == Energy.Pristine) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Pristine\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FFC7\",\"bold\":false},{\"text\":\")\",\"italic\":false,\"color\":\"white\"}]}";
+                } else if (energy == Energy.Scratched) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Scratched\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#57FF8F\",\"bold\":false},{\"text\":\")\",\"italic\":false,\"color\":\"white\"}]}";
+                } else if (energy == Energy.Cracked) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Cracked\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#7958DB\",\"bold\":false},{\"text\":\")\",\"italic\":false,\"color\":\"white\"}]}";
+                } else if (energy == Energy.Damaged) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Damaged\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFC929\",\"bold\":false},{\"text\":\")\",\"italic\":false,\"color\":\"white\"}]}";
+                } else if (energy == Energy.Ruined) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"(\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"Ruined\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF1111\",\"bold\":false},{\"text\":\")\",\"italic\":false,\"color\":\"white\"}]}";
+                } else if (energy == Energy.Broken) {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"ᴜsᴇʟᴇss\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}";
+                } else {
+                    energystage = "{\"text\":\"\",\"extra\":[{\"text\":\"ᴜsᴇʟᴇss\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}";
+                }
+
+            }else if (season != 1) {
+                if (energy == Energy.Pristine_5) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "5";
+                } else if (energy == Energy.Pristine_4) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "4";
+                } else if (energy == Energy.Pristine_3) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "3";
+                } else if (energy == Energy.Pristine_2) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "2";
+                } else if (energy == Energy.Pristine_1) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "1";
+                } else if (energy == Energy.Pristine) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine";
+                } else if (energy == Energy.Scratched) {
+                    energystage = Common.colorize("#57FF8F") + "Scratched";
+                } else if (energy == Energy.Cracked) {
+                    energystage = Common.colorize("#7958DB") + "Cracked";
+                } else if (energy == Energy.Damaged) {
+                    energystage = Common.colorize("#FFC929") + "Damaged";
+                } else if (energy == Energy.Ruined) {
+                    energystage = Common.colorize("#FF1111") + "Ruined";
+                } else if (energy == Energy.Broken) {
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                } else {
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                }
             }
-        } else {
-            if (season == 2) {
-                energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
-            }
-            if (season == 3) {
-                energystage = ChatColor.RED + "BROKEN";
+
+        }else {
+            if (season != 1) {
+                if (energy == Energy.Pristine_5) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "5";
+                } else if (energy == Energy.Pristine_4) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "4";
+                } else if (energy == Energy.Pristine_3) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "3";
+                } else if (energy == Energy.Pristine_2) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "2";
+                } else if (energy == Energy.Pristine_1) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine"
+                            + ChatColor.WHITE + " + "
+                            + Common.colorize("#96FFD9") + "1";
+                } else if (energy == Energy.Pristine) {
+                    energystage = Common.colorize("#57FFC7") + "Pristine";
+                } else if (energy == Energy.Scratched) {
+                    energystage = Common.colorize("#57FF8F") + "Scratched";
+                } else if (energy == Energy.Cracked) {
+                    energystage = Common.colorize("#7958DB") + "Cracked";
+                } else if (energy == Energy.Damaged) {
+                    energystage = Common.colorize("#FFC929") + "Damaged";
+                } else if (energy == Energy.Ruined) {
+                    energystage = Common.colorize("#FF1111") + "Ruined";
+                } else if (energy == Energy.Broken) {
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                } else {
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                }
             }
         }
 
@@ -91,7 +158,7 @@ public final class GetGemItem {
 
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
-                    // this is due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
+                    // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
                     if (VersionChecker.OlderThanNBTChange()) {
                         itemMeta.addItemFlags(
@@ -155,6 +222,8 @@ public final class GetGemItem {
 
                     NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
 
 
                     itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ " + Common.colorize("#FFD773") + "ɢᴇᴍ");
@@ -311,37 +380,112 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) {
                             itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         }
 
+
                         itemMeta.setCustomModelData(10);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Strength",
-                                ChatColor.GRAY + "- Enchants Sharpness",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Strength\",\"italic\":false,\"color\":\"gray\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Sharpness\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bounty Hunter\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ғʀᴀɪʟᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ɴᴜʟʟɪғʏ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Strength",
+                                    ChatColor.GRAY + "- Enchants Sharpness",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ғʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪғʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.GRAY + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                            ));
                     }
+
 
                     if (energy == Energy.Scratched) {
                         itemMeta.setCustomModelData(30);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Strength\",\"italic\":false,\"color\":\"gray\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Sharpness\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bloodthorns\",\"italic\":false,\"color\":\"gray\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bounty Hunter\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ғʀᴀɪʟᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ɴᴜʟʟɪғʏ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
@@ -349,13 +493,14 @@ public final class GetGemItem {
                                 Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 ChatColor.GRAY + "- Strength",
                                 ChatColor.GRAY + "- Enchants Sharpness",
+                                ChatColor.GRAY + "- Bloodthorns",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
                                 ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ғʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪғʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
                                 ChatColor.GRAY + "",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
@@ -364,6 +509,44 @@ public final class GetGemItem {
 
                     if (energy == Energy.Cracked) {
                         itemMeta.setCustomModelData(50);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Strength\",\"italic\":false,\"color\":\"gray\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Sharpness\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bounty Hunter\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ғʀᴀɪʟᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ɴᴜʟʟɪғʏ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
@@ -376,29 +559,69 @@ public final class GetGemItem {
                                 ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ғʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪғʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
                                 ChatColor.GRAY + "",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
+
                     if (energy == Energy.Damaged) {
                         itemMeta.setCustomModelData(70);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Strength\",\"italic\":false,\"color\":\"gray\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Sharpness\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bounty Hunter\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ғʀᴀɪʟᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ɴᴜʟʟɪғʏ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                ChatColor.GRAY + "- Strength",
                                 ChatColor.GRAY + "- Enchants Sharpness",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
                                 ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ғʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪғʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
                                 ChatColor.GRAY + "",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
@@ -407,6 +630,43 @@ public final class GetGemItem {
 
                     if (energy == Energy.Ruined) {
                         itemMeta.setCustomModelData(90);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"No Passives\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Bounty Hunter\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ғʀᴀɪʟᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🤺 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ɴᴜʟʟɪғʏ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B5B5B5\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⚔\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#910D0D\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                 Common.colorize("&f(") + energystage + Common.colorize("&f)"),
@@ -418,8 +678,8 @@ public final class GetGemItem {
                                 ChatColor.GRAY + "- " + Common.colorize("#F10303") + "Bounty Hunter",
                                 ChatColor.GRAY + "",
                                 Common.colorize("#F10303") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ꜰʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪꜰʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ғʀᴀɪʟᴇʀ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83E\uDD3A " + ChatColor.GRAY + "ɴᴜʟʟɪғʏ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
                                 ChatColor.GRAY + "",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 ChatColor.GRAY + "- " + ChatColor.WHITE + "⚔ " + Common.colorize("#910D0D") + "ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + ChatColor.GREEN + "\uD83E\uDD3C"
@@ -429,9 +689,29 @@ public final class GetGemItem {
 
                     if (energy == Energy.Broken || energy == Energy.N_A) {
                         itemMeta.setCustomModelData(100);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴛʀᴇɴɢᴛʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#F10303\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add(energystage);
+
+                            return nbt.getItem();
+
+                        }else {
+                            itemMeta.setLore(Arrays.asList(
+                                    energystage
+                            ));
+                        }
+
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -454,7 +734,7 @@ public final class GetGemItem {
 
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
-                    // this is due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
+                    // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
                     if (VersionChecker.OlderThanNBTChange()) {
                         itemMeta.addItemFlags(
@@ -852,7 +1132,7 @@ public final class GetGemItem {
 
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
-                    // this is due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
+                    // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
                     if (VersionChecker.OlderThanNBTChange()) {
                         itemMeta.addItemFlags(

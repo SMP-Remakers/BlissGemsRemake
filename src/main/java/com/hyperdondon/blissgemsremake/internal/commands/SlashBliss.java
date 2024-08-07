@@ -2,9 +2,15 @@ package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
+import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.nbtapi.NBTCompound;
+import de.tr7zw.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
 import io.lumine.mythic.bukkit.entities.BukkitTadpole;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.MinecraftVersion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class SlashBliss implements CommandExecutor, Listener {
@@ -88,9 +95,8 @@ public final class SlashBliss implements CommandExecutor, Listener {
             Settings.setSeason(2);
 
             Gem gem = Gem.GemConstructor(GemType.Astra, 2, Energy.Pristine, 1,1 ,2);
-            Bukkit.broadcastMessage(gem.getType().toString());
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Astra, 2, Energy.Pristine, 1,1 ,2));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine_1, 1,1 ,3));
 
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
