@@ -92,11 +92,11 @@ public final class SlashBliss implements CommandExecutor, Listener {
                 allowdropint = 0;
             }
 
-            Settings.setSeason(2);
+            Settings.setSeason(3);
 
-            Gem gem = Gem.GemConstructor(GemType.Astra, 2, Energy.Pristine, 1,1 ,2);
+            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Pristine, 1,1 ,3);
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine_1, 1,1 ,3));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Speed, 2, Energy.Pristine, 1,1 ,3));
 
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());

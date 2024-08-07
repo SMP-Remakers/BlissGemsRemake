@@ -4,6 +4,7 @@ import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -17,6 +18,7 @@ public class LeaveJoinStorer implements Listener {
     @Getter
     private static volatile LeaveJoinStorer instance = new LeaveJoinStorer();
 
+    //@EventHandler disable this shit
     public void Store(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         for (ItemStack i : p.getInventory().getContents()) {
@@ -52,7 +54,7 @@ public class LeaveJoinStorer implements Listener {
         }
     }
 
-
+    //@EventHandler disable this shit
     public void Load(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         for (ItemStack i : p.getInventory().getContents()) {
