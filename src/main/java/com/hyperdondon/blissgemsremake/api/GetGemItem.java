@@ -1056,24 +1056,65 @@ public final class GetGemItem {
 
                     if (energy == Energy.Scratched) {
                         itemMeta.setCustomModelData(28);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Speed",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴘᴇᴇᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Speed\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Dolphins grace\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Efficiency\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Soul Speed\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\" Terminal Velocity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🎯 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ʙʟᴜʀ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE86E\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Speed",
+                                    ChatColor.GRAY + "- Dolphins grace",
+                                    ChatColor.GRAY + "- Enchants Efficiency",
+                                    ChatColor.GRAY + "- Enchants Soul Speed",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDFAF " + Common.colorize("#FFE863") + "ʙʟᴜʀ",
+                                    ChatColor.GRAY + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Cracked) {
