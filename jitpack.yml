@@ -1,0 +1,3 @@
+build:
+  # Specify the custom POM file for JitPack
+  file: pom-jitpack.xml
