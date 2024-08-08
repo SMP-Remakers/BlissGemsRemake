@@ -1,3 +1,2 @@
-build:
-  script:
+install:
     - mvn clean install -DskipTests -f pom-jitpack.xml
