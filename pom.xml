@@ -13,7 +13,7 @@
 
     <properties>
         <foundation.path>com.github.kangarko</foundation.path>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -45,50 +45,50 @@
                     <target>17</target>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
-
             </plugin>
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.5.2</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
 
 
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        <createDependencyReducedPom>false</createDependencyReducedPom>
 
-                            <!--Foundation Shade-->
-                            <artifactSet>
-                                <includes>
-                                    <!-- Important: This will ensure only Foundation is shaded to your jar. If you have
-                                         other dependencies that should be compiled, duplicate this line for each. -->
-                                    <include>${foundation.path}:Foundation*</include>
-                                    <include>de.tr7zw:item-nbt-api-plugin</include>
-                                </includes>
-                            </artifactSet>
-                            <relocations>
-                                <!-- This moves Foundation into your own package in "lib" subpackage to prevent interference. -->
-                                <relocation>
-                                    <pattern>org.mineacademy.fo</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.foundation</shadedPattern>
-                                </relocation>
+                        <!--Foundation Shade-->
+                        <artifactSet>
+                            <includes>
+                                <!-- Important: This will ensure only Foundation is shaded to your jar. If you have
+                                     other dependencies that should be compiled, duplicate this line for each. -->
+                                <include>${foundation.path}:Foundation*</include>
+                                <include>de.tr7zw:item-nbt-api-plugin</include>
+                            </includes>
+                        </artifactSet>
+                        <relocations>
+                            <!-- This moves Foundation into your own package in "lib" subpackage to prevent interference. -->
+                            <relocation>
+                                <pattern>org.mineacademy.fo</pattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.foundation</shadedPattern>
+                            </relocation>
 
-                                <relocation>
-                                    <pattern>de.tr7zw.nbtapi</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.nbtapi</shadedPattern>
-                                </relocation>
-                            </relocations>
+                            <relocation>
+                                <pattern>de.tr7zw.nbtapi</pattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.nbtapi</shadedPattern>
+                            </relocation>
+                        </relocations>
 
 
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
         <resources>
             <resource>

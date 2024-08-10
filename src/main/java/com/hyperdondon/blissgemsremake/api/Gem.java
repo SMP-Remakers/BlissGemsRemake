@@ -262,26 +262,35 @@ public class Gem {;
         String type2 = "";
 
         if (gem2.season == 1) {
-            NamespacedKey idkey2 = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            NamespacedKey idkey2 = new NamespacedKey("blissgems", "shard_id");
             id3 = itemMeta.getPersistentDataContainer().get(idkey2, PersistentDataType.STRING);
         }
 
         if (gem2.season == 2 || gem2.season == 3) {
-        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-        id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
-
-        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
-        tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
-
-        NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-        type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
-
-        NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
-        drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
-
-        NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
-        remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
+            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+            id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
+    
+            NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+            tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
+    
+            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+            type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
+    
+            NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+            drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
+    
+            NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+            remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
         }
+
+        if (type2 == null) {
+            Bukkit.broadcastMessage("adasdas");
+        }
+        else {
+            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+            Bukkit.broadcastMessage(itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING) + "asda" + String.valueOf(gem2.season));
+        }
+
 
         if (gem2.season == 1) {
             gem2.id = id3;
@@ -363,6 +372,7 @@ public class Gem {;
         }
 
 
+        Bukkit.broadcastMessage(gem2.type.toString());
         return gem2;
     }
 
@@ -398,10 +408,10 @@ public class Gem {;
 
 
         if (season == 2 || season == 3) {
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         } else if (season == 1)  {
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         }
 

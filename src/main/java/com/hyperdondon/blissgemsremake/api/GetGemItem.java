@@ -93,9 +93,9 @@ public final class GetGemItem {
                 } else if (energy == Energy.Ruined) {
                     energystage = Common.colorize("#FF1111") + "Ruined";
                 } else if (energy == Energy.Broken) {
-                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss";
                 } else {
-                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss";
                 }
             }
 
@@ -132,9 +132,9 @@ public final class GetGemItem {
                 } else if (energy == Energy.Ruined) {
                     energystage = Common.colorize("#FF1111") + "Ruined";
                 } else if (energy == Energy.Broken) {
-                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss";
                 } else {
-                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜѕᴇʟᴇѕѕ";
+                    energystage = ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss";
                 }
             }
         }
@@ -150,7 +150,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
                     itemMeta.setDisplayName(Common.colorize("#F10303") + "Strength " + Common.colorize("#FFD773") + "Gem");
@@ -207,19 +207,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -362,19 +362,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "9f969b5e-8b9a-4dd5-b5bc-9a23774721b4");
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -726,7 +726,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID().toString()));
 
                     itemMeta.setDisplayName(Common.colorize("#FEFD17") + ChatColor.BOLD + "Speed " + Common.colorize("#FFD773") + "Gem");
@@ -788,19 +788,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "speed");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -970,19 +970,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "a95b1359-cdd0-4e74-b4d4-76fb2e256c7d");
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "speed");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -1201,7 +1201,7 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, String.valueOf(UUID.randomUUID().toString()));
 
                     itemMeta.setDisplayName(Common.colorize("#FE04B4") + ChatColor.BOLD + "Life " + Common.colorize("#FFD773") + "Gem");
@@ -1261,19 +1261,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -1426,19 +1426,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -1584,19 +1584,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fcbf8753-a7b1-4b1a-91a7-13daa8377cda");
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "astra");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
@@ -1755,19 +1755,19 @@ public final class GetGemItem {
                     ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
                     itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "life");
 
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
