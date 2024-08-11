@@ -1,5 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
+import net.kyori.adventure.text.serializer.ComponentDecoder;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import de.tr7zw.nbtapi.NBT;
@@ -7,6 +8,10 @@ import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
@@ -388,6 +393,7 @@ public final class GetGemItem {
                         itemMeta.setCustomModelData(10);
                         item.setItemMeta(itemMeta);
                         if (VersionChecker.OlderThanNBTChange()) {
+
                             NBTItem nbt = new NBTItem(item);
 
                             nbt.setInteger("HideFlags", 255);
@@ -423,7 +429,10 @@ public final class GetGemItem {
                             for (ItemFlag flag : ItemFlag.values()) {
                                 itemMeta.addItemFlags(flag);
                             }
+                            Component textComponent = Component.text().content("Hello").color(TextColor.fromHexString("#F10303")).build();
 
+
+                            Bukkit.broadcastMessage("das");
                             itemMeta.setLore(Arrays.asList(
                                     ChatColor.WHITE + "" + ChatColor.BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
                                     Common.colorize("&f(") + energystage + Common.colorize("&f)"),

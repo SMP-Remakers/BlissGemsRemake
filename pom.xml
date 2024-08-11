@@ -69,6 +69,7 @@
                                      other dependencies that should be compiled, duplicate this line for each. -->
                                 <include>${foundation.path}:Foundation*</include>
                                 <include>de.tr7zw:item-nbt-api-plugin</include>
+                                <include>net.kyori:adventure-api</include>
                             </includes>
                         </artifactSet>
                         <relocations>
@@ -80,7 +81,12 @@
 
                             <relocation>
                                 <pattern>de.tr7zw.nbtapi</pattern>
-                                <shadedPattern>${project.groupId}.${project.artifactId}.nbtapi</shadedPattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.nbt-api</shadedPattern>
+                            </relocation>
+
+                            <relocation>
+                                <pattern>net.kyori.adventure</pattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.adventure-api</shadedPattern>
                             </relocation>
                         </relocations>
 
@@ -126,6 +132,11 @@
             <layout>default</layout>
         </repository>
 
+        <repository>
+            <id>sonatype-oss-snapshots1</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
@@ -152,6 +163,12 @@
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api-plugin</artifactId>
             <version>2.13.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.17.0</version>
         </dependency>
 
     </dependencies>

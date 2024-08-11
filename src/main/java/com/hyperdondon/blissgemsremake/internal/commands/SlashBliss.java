@@ -8,6 +8,9 @@ import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
 import io.lumine.mythic.bukkit.entities.BukkitTadpole;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -97,6 +100,9 @@ public final class SlashBliss implements CommandExecutor, Listener {
             Gem gem = Gem.GemConstructor(GemType.Strength, 2, Energy.Pristine, 1,1 ,3);
 
             p.getInventory().addItem(gem.toItemStack());
+
+
+            p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));
 
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
