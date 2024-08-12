@@ -13,6 +13,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.json.JSONComponentSerializer;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
@@ -1130,73 +1131,209 @@ public final class GetGemItem {
 
                     if (energy == Energy.Cracked) {
                         itemMeta.setCustomModelData(48);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Speed",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴘᴇᴇᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Speed\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Efficiency\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Soul Speed\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\" Terminal Velocity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🎯 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ʙʟᴜʀ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE86E\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Speed",
+                                    ChatColor.GRAY + "- Enchants Efficiency",
+                                    ChatColor.GRAY + "- Enchants Soul Speed",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDFAF " + Common.colorize("#FFE863") + "ʙʟᴜʀ",
+                                    ChatColor.GRAY + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Damaged) {
                         itemMeta.setCustomModelData(68);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Enchants Efficiency",
-                                ChatColor.GRAY + "- Enchants Soul Speed",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴘᴇᴇᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Speed\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Dolphins grace\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Efficiency\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\" Terminal Velocity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🎯 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ʙʟᴜʀ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE86E\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Speed",
+                                    ChatColor.GRAY + "- Dolphins grace",
+                                    ChatColor.GRAY + "- Enchants Efficiency",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDFAF " + Common.colorize("#FFE863") + "ʙʟᴜʀ",
+                                    ChatColor.GRAY + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Ruined) {
                         itemMeta.setCustomModelData(88);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- No Passives",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
-                                ChatColor.GRAY + "",
-                                Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
-                                ChatColor.GRAY + "- " + "\uD83C\uDFAF " + Common.colorize("#FEFD17") + "ʙʟᴜʀ",
-                                ChatColor.GRAY + "",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴘᴇᴇᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"No Passives\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\" Terminal Velocity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🎯 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ʙʟᴜʀ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE86E\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🌩 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"sᴘᴇᴇᴅʏ sᴛᴏʀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#61FFEA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "No Passives",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FEFD17") + " Terminal Velocity",
+                                    ChatColor.GRAY + "",
+                                    Common.colorize("#FEFD17") + "\uD83D\uDD2E " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDFAF " + Common.colorize("#FFE863") + "ʙʟᴜʀ",
+                                    ChatColor.GRAY + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83C\uDF29 " + Common.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + ChatColor.DARK_RED + "\uD83E\uDD3C"
+                            ));
+                        }
                     }
 
 
                     if (energy == Energy.Broken || energy == Energy.N_A) {
                         itemMeta.setCustomModelData(100);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"sᴘᴇᴇᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FEFD17\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add(energystage);
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                            ));
+                        }
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -1439,7 +1576,7 @@ public final class GetGemItem {
 
 
                     NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "d9a2dbb6-3647-4a35-ba85-d4b58ded6e94");
 
                     NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
@@ -1464,121 +1601,331 @@ public final class GetGemItem {
                             itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         }
                         itemMeta.setCustomModelData(4);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Green Thumb",
-                                ChatColor.GRAY + "- Radiant Fist",
-                                ChatColor.GRAY + "- Bonus Saturation",
-                                ChatColor.GRAY + "- Bonus Absorption",
-                                ChatColor.GRAY + "- Wither Immune",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
-                                ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Radiant Fist\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Saturation\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Absorption\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Wither Immune\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setCustomModelData(4);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Green Thumb",
+                                    ChatColor.GRAY + "- Radiant Fist",
+                                    ChatColor.GRAY + "- Bonus Saturation",
+                                    ChatColor.GRAY + "- Bonus Absorption",
+                                    ChatColor.GRAY + "- Wither Immune",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                            ));
+                        }
                     }
 
 
                     if (energy == Energy.Scratched) {
                         itemMeta.setCustomModelData(24);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Green Thumb",
-                                ChatColor.GRAY + "- Radiant Fist",
-                                ChatColor.GRAY + "- Wither Immune",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
-                                ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Saturation\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Absorption\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Wither Immune\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setCustomModelData(4);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Green Thumb",
+                                    ChatColor.GRAY + "- Bonus Saturation",
+                                    ChatColor.GRAY + "- Bonus Absorption",
+                                    ChatColor.GRAY + "- Wither Immune",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Cracked) {
                         itemMeta.setCustomModelData(44);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- Green Thumb",
-                                ChatColor.GRAY + "- Wither Immune",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
-                                ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"                         ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Saturation\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setCustomModelData(4);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Green Thumb",
+                                    ChatColor.GRAY + "- Bonus Saturation",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Damaged) {
                         itemMeta.setCustomModelData(64);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- No Passives",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
-                                ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setCustomModelData(4);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Green Thumb",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                            ));
+                        }
                     }
 
                     if (energy == Energy.Ruined) {
                         itemMeta.setCustomModelData(84);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                ChatColor.GRAY + "- No Passives",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
-                                ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"No Passives\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setCustomModelData(4);
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "No Passives",
+                                    Common.colorize("#FE04B4") + "\uD83D\uDD2E" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
+                                    ChatColor.WHITE + " ",
+                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                            ));
+                        }
                     }
 
 
                     if (energy == Energy.Broken || energy == Energy.N_A) {
                         itemMeta.setCustomModelData(100);
-                        itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
-                        ));
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add(energystage);
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                            ));
+                        }
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -1597,7 +1944,7 @@ public final class GetGemItem {
 
 
                     NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fcbf8753-a7b1-4b1a-91a7-13daa8377cda");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
                     NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
@@ -1624,125 +1971,149 @@ public final class GetGemItem {
                         itemMeta.setCustomModelData(14);
                         itemMeta.setLore(Arrays.asList(
                                 ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
-                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 Common.colorize("#A01FFF") + " ",
                                 ChatColor.GRAY + " ",
+                                Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
                                 ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + ChatColor.GRAY + "10% of attacks will phase",
-                                ChatColor.GRAY + " through you. Adsorbing souls will heal you 2.5 hearts",
+                                ChatColor.GRAY + " through you. Absorbing souls will heal you 2.5 hearts",
                                 ChatColor.GRAY + " if mob, and 5 if player.",
-                                ChatColor.GRAY + " Capture 2 mobs inside your gem, releasing",
-                                ChatColor.GRAY + " them in the oppoiste order they were captured.",
+                                ChatColor.GRAY + " Capture 2 mobs inside your gem, releasing ",
+                                ChatColor.GRAY + " them in the opposite order they were captured.",
                                 ChatColor.WHITE + "",
-                                Common.colorize("#A01FFF") + "ᴘᴏᴡᴇʀs",
-                                ChatColor.WHITE + " " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
-                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one",
-                                ChatColor.GRAY + " they take 3 hearts or damage and their gem is",
-                                ChatColor.GRAY + " disabled for 10 seconds of every dagger they're hit with.",
+                                Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + "\uD83D\uDD2A " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one ",
+                                ChatColor.GRAY + " they take 3 hearts of damage and their gem is ",
+                                ChatColor.GRAY + " disabled for 10 seconds for every dagger they're hit with.",
                                 ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
                                 ChatColor.GRAY + " when that player receives damage. Leaving the body",
                                 ChatColor.GRAY + " will haunt them, disabling their gem for 10 seconds",
                                 ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
-                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
-                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
-                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
-                                ChatColor.GRAY + " caster only can steal health while zone is active",
-                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC7B " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ",
+                                ChatColor.GRAY + " Become a projection and explore in a 150 block ",
+                                ChatColor.GRAY + " radius. Spook players by left clicking with your gem,",
+                                ChatColor.GRAY + " or tag them with right click, tagging makes that player glow for you, ",
+                                ChatColor.GRAY + " and everyone in your trust list.",
+                                ChatColor.GRAY + " You exit the Astral state if your npc is hit,",
+                                ChatColor.GRAY + " or you click the air with an empty hand"
                         ));
                     }
 
 
                     if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(24);
+                        itemMeta.setCustomModelData(34);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
+                                Common.colorize("#A01FFF") + " ",
+                                ChatColor.GRAY + " ",
                                 Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + "Feed animals and grow plants",
-                                ChatColor.GRAY + " by crouch clicking with bare hand. 3x dmg",
-                                ChatColor.GRAY + " to undead mobs. Immune to withering",
-                                ChatColor.GRAY + " Heal half a heart ever 5 seconds",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + ChatColor.GRAY + "10% of attacks will phase",
+                                ChatColor.GRAY + " through you. Absorbing souls will heal you 2.5 hearts",
+                                ChatColor.GRAY + " if mob, and 5 if player.",
+                                ChatColor.GRAY + " Capture 2 mobs inside your gem, releasing ",
+                                ChatColor.GRAY + " them in the opposite order they were captured.",
                                 ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
-                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
-                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
-                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
-                                ChatColor.GRAY + " caster only can steal health while zone is active",
-                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                                Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + "\uD83D\uDD2A " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one ",
+                                ChatColor.GRAY + " they take 3 hearts of damage and their gem is ",
+                                ChatColor.GRAY + " disabled for 10 seconds for every dagger they're hit with.",
+                                ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
+                                ChatColor.GRAY + " when that player receives damage. Leaving the body",
+                                ChatColor.GRAY + " will haunt them, disabling their gem for 10 seconds",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC7B " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ",
+                                ChatColor.GRAY + " Become a projection and explore in a 150 block ",
+                                ChatColor.GRAY + " radius. Spook players by left clicking with your gem,",
+                                ChatColor.GRAY + " or tag them with right click, tagging makes that player glow for you, ",
+                                ChatColor.GRAY + " and everyone in your trust list.",
+                                ChatColor.GRAY + " You exit the Astral state if your npc is hit,",
+                                ChatColor.GRAY + " or you click the air with an empty hand"
                         ));
                     }
 
                     if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(44);
+                        itemMeta.setCustomModelData(54);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
+                                Common.colorize("#A01FFF") + " ",
+                                ChatColor.GRAY + " ",
                                 Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + "Feed animals by crouch",
-                                ChatColor.GRAY + " clicking with bare hand. Immune to withering.",
-                                ChatColor.GRAY + " Heal half a heart ever 5 seconds",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + "Absorbing souls will heal",
+                                ChatColor.GRAY + " you 2.5 hearts if mob, 5 if player.",
+                                ChatColor.GRAY + " Capture 2 mobs inside your gem, releasing ",
+                                ChatColor.GRAY + " them in the opposite order they were captured.",
                                 ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
-                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
-                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
-                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
-                                ChatColor.GRAY + " caster only can steal health while zone is active",
-                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                                Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + "\uD83D\uDD2A " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one ",
+                                ChatColor.GRAY + " they take 3 hearts of damage and their gem is ",
+                                ChatColor.GRAY + " disabled for 10 seconds for every dagger they're hit with.",
+                                ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
+                                ChatColor.GRAY + " when that player receives damage. Leaving the body",
+                                ChatColor.GRAY + " will haunt them, disabling their gem for 10 seconds",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC7B " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ",
+                                ChatColor.GRAY + " Become a projection and explore in a 150 block ",
+                                ChatColor.GRAY + " radius. Spook players by left clicking with your gem,",
+                                ChatColor.GRAY + " or tag them with right click, tagging makes that player glow for you, ",
+                                ChatColor.GRAY + " You exit the Astral state if your npc is hit,",
+                                ChatColor.GRAY + " or you click the air with an empty hand"
                         ));
                     }
 
                     if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(64);
+                        itemMeta.setCustomModelData(74);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
                                 Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " " + ChatColor.GRAY + " Heal half a heart ever 5 seconds",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + ChatColor.GRAY + "No passives",
                                 ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
-                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
-                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
-                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
-                                ChatColor.GRAY + " caster only can steal health while zone is active",
-                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                                Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + "\uD83D\uDD2A " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one ",
+                                ChatColor.GRAY + " they take 3 hearts of damage and their gem is ",
+                                ChatColor.GRAY + " disabled for 10 seconds for every dagger they're hit with.",
+                                ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
+                                ChatColor.GRAY + " when that player receives damage. Leaving the body",
+                                ChatColor.GRAY + " will haunt them disabling their gem for 10 seconds",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC7B " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ",
+                                ChatColor.GRAY + " Become a projection and explore in a 150 block ",
+                                ChatColor.GRAY + " radius. Spook players by left clicking with your gem,",
+                                ChatColor.GRAY + " or tag them with right click, tagging makes that player glow for you, ",
+                                ChatColor.GRAY + " You exit the Astral state if your npc is hit,",
+                                ChatColor.GRAY + " or you click the air with an empty hand"
                         ));
                     }
 
                     if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(84);
+                        itemMeta.setCustomModelData(94);
                         itemMeta.setLore(Arrays.asList(
-                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
+                                ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
                                 Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                ChatColor.GRAY + " " + Common.colorize("#FE04B4") + "\uD83D\uDD2E" + ChatColor.GRAY + " No passives",
-                                ChatColor.WHITE + " ",
-                                Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ", //emoji color is not accurate, i dont have the color for it
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Removes 4 hearts " + ChatColor.WHITE + "20s",
-                                ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Removes 2 hearts " + ChatColor.WHITE + "R4, 1m",
+                                ChatColor.GRAY + " " + Common.colorize("#A01FFF") + "\uD83D\uDD2E " + ChatColor.GRAY + "No passives",
                                 ChatColor.WHITE + "",
-                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ",
-                                ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "Summons a 8 block wide zone that follows you",
-                                ChatColor.GRAY + " Gives trusted +4, Untrusted -4 hearts",
-                                ChatColor.GRAY + " slowly mends armour and tools if trusted",
-                                ChatColor.GRAY + " caster only can steal health while zone is active",
-                                ChatColor.GREEN + "\uD83E\uDD3C " + ChatColor.GRAY + "Gives trusted players +5 hearts for " + ChatColor.WHITE + "1m 30s, R4"
+                                Common.colorize("#A01FFF") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                ChatColor.WHITE + "\uD83D\uDD2A " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs",
+                                ChatColor.GRAY + "Shoot 5 daggers, if a player is hit with one ",
+                                ChatColor.GRAY + " they take 3 hearts of damage and their gem is ",
+                                ChatColor.GRAY + " disabled for 10 seconds for every dagger they're hit with.",
+                                ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "Enter the body of that player, exit by crouching or",
+                                ChatColor.GRAY + " when that player receives damage. Leaving the body",
+                                ChatColor.GRAY + " will haunt them disabling their gem for 10 seconds",
+                                ChatColor.WHITE + "",
+                                ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC7B " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ",
+                                ChatColor.GRAY + " Become a projection and explore in a 150 block ",
+                                ChatColor.GRAY + " radius. Spook players by left clicking with your gem,",
+                                ChatColor.GRAY + " or tag them with right click, tagging makes that player glow for you, ",
+                                ChatColor.GRAY + " You exit the Astral state if your npc is hit,",
+                                ChatColor.GRAY + " or you click the air with an empty hand"
                         ));
                     }
 

@@ -15,6 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
@@ -104,23 +105,12 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             Settings.setSeason(3);
 
-            Gem gem = Gem.GemConstructor(GemType.Strength, 2, Energy.Pristine, 1,1 ,3);
+            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
-            p.getInventory().addItem(gem.toItemStack());
-
-            TextComponent comp = Component.text()
-                    .content(TextColor.HEX_PREFIX + "#F10303 test")
-                    .build();
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Astra, 2, Energy.Broken, 1,1 ,2));
 
 
-            // Assume 'plugin' is your JavaPlugin instance
-            BukkitAudiences audience = BukkitAudiences.create(blissgems.getInstance());
 
-            // Assume 'player' is the player you want to send the message to
-            audience.player(p).sendMessage(comp);
-
-            // Assume 'player' is the player you want to send the message to
-            //audience.player(player).sendMessage(comp)
 
 
             //p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));

@@ -252,6 +252,8 @@ public class Gem {;
         else {
             gem2.energy = Energy.N_A;
             gem2.season = 1;
+            Bukkit.broadcastMessage("aikodja");
+
         }
 
         String id3 = "";
