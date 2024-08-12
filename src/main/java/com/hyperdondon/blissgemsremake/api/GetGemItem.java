@@ -12,6 +12,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.json.JSONComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
@@ -383,6 +384,8 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
+
+
                     itemMeta.setDisplayName(Common.colorize("#F10303") + ChatColor.BOLD + "sᴛʀᴇɴɢᴛʜ" + " " + Common.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) {
@@ -429,7 +432,7 @@ public final class GetGemItem {
                             for (ItemFlag flag : ItemFlag.values()) {
                                 itemMeta.addItemFlags(flag);
                             }
-                            Component textComponent = Component.text().content("Hello").color(TextColor.fromHexString("#F10303")).build();
+
 
 
                             Bukkit.broadcastMessage("das");

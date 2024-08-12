@@ -70,23 +70,25 @@
                                 <include>${foundation.path}:Foundation*</include>
                                 <include>de.tr7zw:item-nbt-api-plugin</include>
                                 <include>net.kyori:adventure-api</include>
+                                <include>net.kyori:adventure-text-serializer-legacy</include>
+                                <include>net.kyori:adventure-text-serializer-gson</include>
+                                <include>net.kyori:adventure-platform-bukkit</include>
                             </includes>
                         </artifactSet>
                         <relocations>
-                            <!-- This moves Foundation into your own package in "lib" subpackage to prevent interference. -->
                             <relocation>
                                 <pattern>org.mineacademy.fo</pattern>
-                                <shadedPattern>${project.groupId}.${project.artifactId}.foundation</shadedPattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.libs.foundation</shadedPattern>
                             </relocation>
 
                             <relocation>
                                 <pattern>de.tr7zw.nbtapi</pattern>
-                                <shadedPattern>${project.groupId}.${project.artifactId}.nbt-api</shadedPattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.libs.nbt-api</shadedPattern>
                             </relocation>
 
                             <relocation>
                                 <pattern>net.kyori.adventure</pattern>
-                                <shadedPattern>${project.groupId}.${project.artifactId}.adventure-api</shadedPattern>
+                                <shadedPattern>${project.groupId}.${project.artifactId}.libs.adventure</shadedPattern>
                             </relocation>
                         </relocations>
 
@@ -131,12 +133,6 @@
             <url>https://repo.codemc.io/repository/maven-public/</url>
             <layout>default</layout>
         </repository>
-
-        <repository>
-            <id>sonatype-oss-snapshots1</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-
     </repositories>
 
     <dependencies>
@@ -169,6 +165,30 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-api</artifactId>
             <version>4.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-legacy</artifactId>
+            <version>4.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-gson</artifactId>
+            <version>4.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>4.17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>4.3.4</version>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.api.*;
+import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import de.tr7zw.nbtapi.NBT;
 import de.tr7zw.nbtapi.NBTCompound;
@@ -8,10 +9,14 @@ import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
 import io.lumine.mythic.bukkit.entities.BukkitTadpole;
+import net.kyori.adventure.audience.Audiences;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,6 +31,8 @@ import org.mineacademy.fo.MinecraftVersion;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.hyperdondon.blissgemsremake.blissgems.plugin;
 
 public final class SlashBliss implements CommandExecutor, Listener {
 
@@ -101,8 +108,22 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             p.getInventory().addItem(gem.toItemStack());
 
+            TextComponent comp = Component.text()
+                    .content(TextColor.HEX_PREFIX + "#F10303 test")
+                    .build();
 
-            p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));
+
+            // Assume 'plugin' is your JavaPlugin instance
+            BukkitAudiences audience = BukkitAudiences.create(blissgems.getInstance());
+
+            // Assume 'player' is the player you want to send the message to
+            audience.player(p).sendMessage(comp);
+
+            // Assume 'player' is the player you want to send the message to
+            //audience.player(player).sendMessage(comp)
+
+
+            //p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));
 
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
