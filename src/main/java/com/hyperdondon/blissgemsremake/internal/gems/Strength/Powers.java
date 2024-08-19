@@ -20,6 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;
@@ -268,14 +269,23 @@ public final class Powers implements Listener {
                             Duration duration = Duration.ofMillis(Frailer.get(id) - System.currentTimeMillis());
 
 
+
                             long minutes = duration.toMinutes();
                             long seconds = duration.toSecondsPart();
 
-                            String time;
+                            String time = "";
                             if (minutes > 0) {
-                                time = (seconds > 0) ? minutes + "m " + seconds + "s" : minutes + "m";
+
+                                if (seconds > 0) {
+                                    time = minutes + "m " + seconds + "s";
+                                }else {
+                                    time = minutes + "m";
+                                }
+
                             } else {
-                                time = (seconds > 0) ? seconds + "s" : "";
+                                if (seconds > 0) {
+                                    time = seconds + "s";
+                                }
                             }
 
 
@@ -336,7 +346,6 @@ public final class Powers implements Listener {
 
             double x = Math.cos(i) * scaleX;
             double y = Math.sin(i) * scaleY;
-
             // spawn your particle here
             // for example, if 'loc' is your location object and 'world' is your World object
             if (VersionChecker.OlderThanNBTChange()) {
@@ -350,7 +359,52 @@ public final class Powers implements Listener {
         }
     }
 
+    public static void createFlameRings(final Player p) {
+        int scaleY = 1;  // use these to tune the size of your circle
+        int scaleZ = 1;
+        double density = 0.15;  // smaller numbers make the particles denser
 
+        for (double i = 0; i < 2 * Math.PI; i += density) {
+
+            double y = Math.cos(i) * scaleY;
+            double z = Math.sin(i) * scaleZ;
+
+            Location loc = p.getLocation();
+            loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
+            loc.setZ(loc.getZ() + z);
+
+            //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
+        }
+
+
+        double rotationAngle = 76;  // variable to control the rotation of the circle
+
+        for (double i = 0; i < 2 * Math.PI; i += density) {
+
+            double y = Math.cos(i) * scaleY;
+            double z = Math.sin(i) * scaleZ;
+
+            final Vector circleDir = p.getLocation().getDirection().clone().setX(100);
+            double angle = Math.acos((p.getLocation().getX() - p.getLocation().getX()) / 1);
+            //Location loc = p.getLocation().getDirection().clone().rotateAroundAxis(circleDir, 20);
+            //loc.add(p.getLocation().getDirection().clone()
+                    //.rotateAroundAxis(circleDir, 20)
+            //);
+
+            //loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
+            //loc.setZ(loc.getZ() + z);
+
+            //loc.add(p.getLocation().getDirection().clone()
+                    //.rotateAroundAxis(circleDir, angle)
+            //);
+
+
+            //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
+        }
+
+    }
+
+    //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, x, 0, 1);
     @EventHandler
     public void ChadPower(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) { //check right click

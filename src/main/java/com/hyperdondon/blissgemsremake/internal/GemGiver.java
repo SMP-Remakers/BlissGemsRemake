@@ -4,6 +4,7 @@ import com.hyperdondon.blissgemsremake.api.Energy;
 import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.Settings;
+import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

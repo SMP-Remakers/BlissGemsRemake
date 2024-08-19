@@ -1,6 +1,5 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import com.hyperdondon.blissgemsremake.blissgems;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.Common;
 
 import java.util.Objects;
-import java.util.UUID;
 
-public class Gem {;
+public class Gem {
+    ;
 
     private String id;
     private GemType type;
@@ -23,7 +22,6 @@ public class Gem {;
     private boolean allowdrop;
     private boolean allowremove;
     private int season;
-
 
 
     public Energy getEnergy() {
@@ -56,10 +54,6 @@ public class Gem {;
     }
 
 
-
-
-
-
     public void setEnergy(Energy e) {
         energy = e;
     }
@@ -88,7 +82,6 @@ public class Gem {;
     public void setSeason(int s) {
         season = s;
     }
-
 
 
     public static Gem fromGemItem(ItemStack gem) {
@@ -168,42 +161,54 @@ public class Gem {;
 
 
         //Pris+5
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "5" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine_5;
             gem2.season = 3;
         }
 
 
         //Pris+4
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "4" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "4)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "4" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "4" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine_4;
             gem2.season = 3;
         }
 
 
         //Pris+3
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "3" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "3)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "3" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "3" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine_3;
             gem2.season = 3;
         }
 
 
         //Pris+2
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "2" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "2)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "2" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "2" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine_2;
             gem2.season = 3;
         }
 
 
         //Pris+1
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "1" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "1)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "1" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + ChatColor.WHITE + " + " + Common.colorize("#96FFD9") + "1" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine_1;
             gem2.season = 3;
         }
 
 
         //Pris
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&f)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&7)") ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&7) ")) {
             gem2.energy = Energy.Pristine;
             gem2.season = 3;
         }
@@ -271,24 +276,23 @@ public class Gem {;
         if (gem2.season == 2 || gem2.season == 3) {
             NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
             id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
-    
+
             NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
             tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
-    
+
             NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
             type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
-    
+
             NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
             drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
-    
+
             NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
             remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
         }
 
         if (type2 == null) {
             Bukkit.broadcastMessage("adasdas");
-        }
-        else {
+        } else {
             NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
             Bukkit.broadcastMessage(itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING) + "asda" + String.valueOf(gem2.season));
         }
@@ -296,9 +300,7 @@ public class Gem {;
 
         if (gem2.season == 1) {
             gem2.id = id3;
-        }
-
-        else {
+        } else {
             gem2.id = id2;
             gem2.tier = tier2;
         }
@@ -327,8 +329,7 @@ public class Gem {;
         } else {
             if (gem.getType() == Material.AMETHYST_SHARD) {
                 gem2.tier = 1;
-            }
-            else {
+            } else {
                 gem2.tier = 2;
             }
             gem2.allowremove = false;
@@ -349,27 +350,16 @@ public class Gem {;
         }
 
 
-
-
-
-
         if (drop2 == 1) {
             gem2.allowdrop = true;
-        }
-
-        else {
+        } else {
             gem2.allowdrop = false;
         }
 
 
-
-
-
         if (remove2 == 1) {
             gem2.allowremove = true;
-        }
-
-        else {
+        } else {
             gem2.allowremove = false;
         }
 
@@ -379,9 +369,6 @@ public class Gem {;
     }
 
 
-
-
-
     @Nullable
     public ItemStack toItemStack() {
         int allowremoveint;
@@ -389,19 +376,14 @@ public class Gem {;
 
         if (allowremove) {
             allowremoveint = 1;
-        }
-
-        else  {
+        } else {
             allowremoveint = 0;
         }
 
 
-
         if (allowdrop) {
             allowdropint = 1;
-        }
-
-        else  {
+        } else {
             allowdropint = 0;
         }
 
@@ -412,7 +394,7 @@ public class Gem {;
         if (season == 2 || season == 3) {
             NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
-        } else if (season == 1)  {
+        } else if (season == 1) {
             NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         }
@@ -424,13 +406,10 @@ public class Gem {;
     }
 
 
-
     public static boolean isPristineorHigher(Energy en) {
         if (en == Energy.Pristine || en == Energy.Pristine_1 || en == Energy.Pristine_2 || en == Energy.Pristine_3 || en == Energy.Pristine_4 || en == Energy.Pristine_5) {
             return true;
-        }
-
-        else {
+        } else {
             return false;
         }
     }
@@ -442,19 +421,14 @@ public class Gem {;
 
         if (Settings.getAllowRemove()) {
             allowremoveint = 1;
-        }
-
-        else  {
+        } else {
             allowremoveint = 0;
         }
 
 
-
         if (Settings.getAllowDrop()) {
             allowdropint = 1;
-        }
-
-        else  {
+        } else {
             allowdropint = 0;
         }
 
@@ -467,9 +441,7 @@ public class Gem {;
 
         if (Settings.getAllowRemove()) {
             allowremoveint = 1;
-        }
-
-        else  {
+        } else {
             allowremoveint = 0;
         }
 
@@ -485,7 +457,6 @@ public class Gem {;
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint, int season) {
         return (Gem.fromGemItem(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, season)));
     }
-
 
 
 }

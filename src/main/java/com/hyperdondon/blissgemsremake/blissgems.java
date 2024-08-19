@@ -8,7 +8,9 @@ import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -67,7 +69,7 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(TexturePackLoader.getInstance());
 
-        getCommand("bliss").setExecutor(new SlashBliss());
+        getCommand("blissgems").setExecutor(new SlashBliss());
 
         getCommand("progression").setExecutor(new SlashProg());
 
@@ -83,8 +85,6 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(settings);
         season = config.getInt("season");
-
-
 
 
         new BukkitRunnable() {
@@ -110,5 +110,10 @@ public final class blissgems extends SimplePlugin implements Listener {
         if (!event.getPlayer().hasPlayedBefore()) {
             event.getPlayer().getInventory().addItem(new ItemStack(Material.PRISMARINE_SHARD));
         }
+    }
+
+    @EventHandler
+    public void test(BlockPlaceEvent e) {
+        //e.getBlockPlaced().setGlowing(true);
     }
 }

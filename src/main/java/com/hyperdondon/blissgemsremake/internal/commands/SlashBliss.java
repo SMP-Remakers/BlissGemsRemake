@@ -1,45 +1,21 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.hyperdondon.blissgemsremake.api.*;
-import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import de.tr7zw.nbtapi.NBT;
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.iface.ReadWriteNBT;
-import de.tr7zw.nbtapi.iface.ReadWriteNBTList;
-import io.lumine.mythic.bukkit.entities.BukkitTadpole;
-import net.kyori.adventure.audience.Audiences;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.mineacademy.fo.Common;
 import org.mineacademy.fo.MinecraftVersion;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.hyperdondon.blissgemsremake.blissgems.plugin;
 
 public final class SlashBliss implements CommandExecutor, Listener {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
-
 
 
         if (args.length == 1) {
@@ -56,15 +32,12 @@ public final class SlashBliss implements CommandExecutor, Listener {
                 Player p = (Player) commandSender;
 
 
-
-
                 return true;
             }
         }
 
         if (args.length == 2) {
             if (args[0].equals("particles") || args[0].equals("particle")) {
-
 
 
                 if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
@@ -77,7 +50,6 @@ public final class SlashBliss implements CommandExecutor, Listener {
         }
 
 
-
         if (args.length == 3) {
             //Settings.setSeason(3);
             Player p = (Player) commandSender;
@@ -87,19 +59,14 @@ public final class SlashBliss implements CommandExecutor, Listener {
             int allowdropint;
             if (Settings.getAllowRemove()) {
                 allowremoveint = 1;
-            }
-
-            else  {
+            } else {
                 allowremoveint = 0;
             }
 
 
-
             if (Settings.getAllowDrop()) {
                 allowdropint = 1;
-            }
-
-            else  {
+            } else {
                 allowdropint = 0;
             }
 
@@ -107,11 +74,9 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Astra, 2, Energy.Broken, 1,1 ,2));
-
-
-
-
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Astra, 2, Energy.Pristine, 1, 1, 3));
+            Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+            Bukkit.broadcastMessage(g.getEnergy().toString());
 
             //p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));
 
@@ -126,14 +91,11 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             //p.getInventory().addItem(gem);
 
-           // p.getInventory().addItem(g.toItemStack());
-
-
-
+            // p.getInventory().addItem(g.toItemStack());
 
 
             return true;
-            }
+        }
         if (args.length == 0) {
             Player p = (Player) commandSender;
 
@@ -152,8 +114,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
                         ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
 
                 );
-            }
-            else {
+            } else {
                 p.sendMessage(ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system");
                 p.sendMessage(ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player");
                 p.sendMessage(ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player");

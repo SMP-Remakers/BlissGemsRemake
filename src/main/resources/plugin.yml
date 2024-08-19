@@ -1,13 +1,14 @@
 name: BlissGems
-version: '1.2.1'
+version: 'dev'
 main: com.hyperdondon.blissgemsremake.blissgems
-description: §x§f§f§e§4§a§b§lBliss §7by Pro4D/aglerr
+description: §x§f§f§e§4§a§b§lBlissGemsRemake §fby §4Hyper_Dondon §band §0Cupm §f(Original by Pro4D)
 api-version: '1.17'
 authors:
-  - aglerr
-  - Pro4D
+  - Hyper_Dondon
+  - Cupm
 commands:
-  bliss:
+  blissgems:
+    aliases: bliss
     description: Main command for BlissGems
     usage: /<command>
 
