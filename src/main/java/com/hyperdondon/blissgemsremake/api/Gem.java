@@ -1,7 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -206,37 +205,46 @@ public class Gem {
 
 
         //Pris
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&f)") ||
-                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&7)") ||
-                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + "&7) ")) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + Common.colorize("&f)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FFC7") + "Pristine" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Pristine;
             gem2.season = 3;
         }
 
 
         //Scratched
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FF8F") + "Scratched" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FF8F") + "Scratched" + Common.colorize("&f)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FF8F") + "Scratched" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#57FF8F") + "Scratched" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Scratched;
             gem2.season = 3;
         }
 
 
         //Cracked
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#7958DB") + "Cracked" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#7958DB") + "Cracked" + Common.colorize("&f)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#7958DB") + "Cracked" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#7958DB") + "Cracked" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Cracked;
             gem2.season = 3;
         }
 
 
         //Damaged
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FFC929") + "Damaged" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FFC929") + "Damaged" + Common.colorize("&f)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FFC929") + "Damaged" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FFC929") + "Damaged" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Damaged;
             gem2.season = 3;
         }
 
 
         //Ruined
-        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FF1111") + "Ruined" + Common.colorize("&f)"))) {
+        else if (gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FF1111") + "Ruined" + Common.colorize("&f)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FF1111") + "Ruined" + Common.colorize("&7)")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(\"") + Common.colorize("#FF1111") + "Ruined" + Common.colorize("&f\")")) ||
+                gem.getItemMeta().getLore().contains(Common.colorize("&f(") + Common.colorize("#FF1111") + "Ruined" + Common.colorize("&7) "))) {
             gem2.energy = Energy.Ruined;
             gem2.season = 3;
         }
@@ -257,8 +265,6 @@ public class Gem {
         else {
             gem2.energy = Energy.N_A;
             gem2.season = 1;
-            Bukkit.broadcastMessage("aikodja");
-
         }
 
         String id3 = "";
@@ -289,23 +295,12 @@ public class Gem {
             NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
             remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
         }
-
-        if (type2 == null) {
-            Bukkit.broadcastMessage("adasdas");
-        } else {
-            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
-            Bukkit.broadcastMessage(itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING) + "asda" + String.valueOf(gem2.season));
-        }
-
-
         if (gem2.season == 1) {
             gem2.id = id3;
         } else {
             gem2.id = id2;
             gem2.tier = tier2;
         }
-
-
         if (gem2.season != 1) {
             if (Objects.equals(type2, "life")) {
                 gem2.type = GemType.Life;
@@ -344,7 +339,7 @@ public class Gem {
                 gem2.type = GemType.Speed;
             } else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + ChatColor.BOLD + "Wealth " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + ChatColor.BOLD + "Wealth " + Common.colorize("#C7C7C7") + "Gem")) {
                 gem2.type = GemType.Wealth;
-            } else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#EFEFEF") + ChatColor.BOLD + "Puff Gem")) {
+            } else if (gem.getItemMeta().getDisplayName().contains(ChatColor.WHITE + "" + ChatColor.BOLD + "Puff Gem")) {
                 gem2.type = GemType.Puff;
             }
         }
@@ -364,7 +359,7 @@ public class Gem {
         }
 
 
-        Bukkit.broadcastMessage(gem2.type.toString());
+        //Bukkit.broadcastMessage(gem2.type.toString());
         return gem2;
     }
 

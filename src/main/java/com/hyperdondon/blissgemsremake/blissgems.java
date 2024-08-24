@@ -5,14 +5,12 @@ import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
+import lombok.Getter;
+import lombok.NonNull;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.plugin.SimplePlugin;
 
@@ -25,15 +23,29 @@ import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.Wealth
 
 public final class blissgems extends SimplePlugin implements Listener {
 
-    public void onPluginStop() {
-    }
-
+    @Getter
+    public static BukkitAudiences adventure;
     public static Integer season;
     public static blissgems plugin;
+
+
+    public @NonNull BukkitAudiences adventure() {
+        if (adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return adventure;
+    }
 
     @Override
     public void onPluginStart() {
 
+    }
+
+    public void onPluginStop() {
+        if (adventure != null) {
+            adventure.close();
+            adventure = null;
+        }
     }
 
     public void onReloadablesStart() {
@@ -47,6 +59,8 @@ public final class blissgems extends SimplePlugin implements Listener {
         this.loadLibrary("org.mariadb.jdbc", "mariadb-java-client", "3.0.3");
         this.loadLibrary("com.mysql", "mysql-connector-j", "9.0.0");
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
+
+        adventure = BukkitAudiences.create(this);
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
         PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
@@ -103,17 +117,5 @@ public final class blissgems extends SimplePlugin implements Listener {
                 WealthSeconds();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 20);
-    }
-
-
-    public void randomgem(PlayerJoinEvent event) {
-        if (!event.getPlayer().hasPlayedBefore()) {
-            event.getPlayer().getInventory().addItem(new ItemStack(Material.PRISMARINE_SHARD));
-        }
-    }
-
-    @EventHandler
-    public void test(BlockPlaceEvent e) {
-        //e.getBlockPlaced().setGlowing(true);
     }
 }

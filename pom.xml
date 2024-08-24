@@ -13,7 +13,7 @@
 
     <properties>
         <foundation.path>com.github.kangarko</foundation.path>
-        <java.version>17</java.version>
+        <java.version>16</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -41,9 +41,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
 
@@ -70,26 +69,26 @@
                                     <include>${foundation.path}:Foundation*</include>
                                     <include>de.tr7zw:item-nbt-api-plugin</include>
                                     <include>net.kyori:adventure-api</include>
-                                    <include>net.kyori:adventure-text-serializer-legacy</include>
-                                    <include>net.kyori:adventure-text-serializer-gson</include>
+                                    <include>net.kyori:adventure-text-minimessage</include>
                                     <include>net.kyori:adventure-platform-bukkit</include>
                                 </includes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
                                     <pattern>org.mineacademy.fo</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.foundation
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.org.mineacademy.fo
                                     </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>de.tr7zw.nbtapi</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.nbt-api</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.de.tr7zw.nbtapi
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>net.kyori.adventure</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.adventure
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.net.kyori.adventure
                                     </shadedPattern>
                                 </relocation>
                             </relocations>
@@ -109,6 +108,12 @@
     </build>
 
     <repositories>
+        <repository>
+            <id>Paper Repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+
+
         <repository>
             <id>Maven Central</id>
             <url>https://repo1.maven.org/maven2/</url>
@@ -151,6 +156,13 @@
         </dependency>
 
         <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.18-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.18-R0.1-SNAPSHOT</version>
@@ -168,17 +180,17 @@
             <artifactId>adventure-api</artifactId>
             <version>4.17.0</version>
         </dependency>
-
+        
         <dependency>
             <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-serializer-legacy</artifactId>
-            <version>4.17.0</version>
+            <artifactId>adventure-platform-api</artifactId>
+            <version>4.3.4</version>
         </dependency>
 
         <dependency>
             <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-serializer-gson</artifactId>
-            <version>4.17.0</version>
+            <artifactId>adventure-platform-facet</artifactId>
+            <version>4.3.4</version>
         </dependency>
 
         <dependency>

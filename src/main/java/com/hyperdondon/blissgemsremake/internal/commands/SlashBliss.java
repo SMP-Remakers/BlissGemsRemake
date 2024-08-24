@@ -1,6 +1,9 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
-import com.hyperdondon.blissgemsremake.api.*;
+import com.hyperdondon.blissgemsremake.api.Energy;
+import com.hyperdondon.blissgemsremake.api.GemType;
+import com.hyperdondon.blissgemsremake.api.GetGemItem;
+import com.hyperdondon.blissgemsremake.api.Settings;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -74,11 +77,15 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Astra, 2, Energy.Pristine, 1, 1, 3));
-            Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
-            Bukkit.broadcastMessage(g.getEnergy().toString());
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Puff, 2, Energy.Pristine, 1, 1, 3));
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+            //Bukkit.broadcastMessage(g.getEnergy().toString());
+            //var mm = MiniMessage.miniMessage();
+            //Component parsed = mm.deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+            //Audience player = blissgems.adventure.player(p);
 
-            //p.sendMessage(Component.text(NamedTextColor.HEX_PREFIX + "#F10303 dsa"));
+
+            //player.sendMessage(component);
 
 
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
