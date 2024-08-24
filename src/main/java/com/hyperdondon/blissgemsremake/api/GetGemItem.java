@@ -2186,7 +2186,6 @@ public final class GetGemItem {
                     ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                     ItemMeta itemMeta = item.getItemMeta();
 
-
                     NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "a6a2db68-e82e-4ab8-b883-0fe5f3ad3def");
 
@@ -2247,8 +2246,6 @@ public final class GetGemItem {
 
 
                         } else {
-                            itemMeta.setCustomModelData(4);
-
                             String ending = Common.colorize("&f)");
                             if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
                                 ending = ")";
@@ -2257,30 +2254,29 @@ public final class GetGemItem {
                             itemMeta.setLore(Arrays.asList(
                                     ChatColor.WHITE + "" + ChatColor.BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
                                     Common.colorize("&f(") + energystage + ending,
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    ChatColor.GRAY + "- Green Thumb",
-                                    ChatColor.GRAY + "- Radiant Fist",
-                                    ChatColor.GRAY + "- Bonus Saturation",
-                                    ChatColor.GRAY + "- Bonus Absorption",
-                                    ChatColor.GRAY + "- Wither Immune",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
                                     ChatColor.WHITE + "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Fall Damage immunity",
+                                    ChatColor.GRAY + "- Enchants Power",
+                                    ChatColor.GRAY + "- Enchants Punch",
+                                    ChatColor.GRAY + "- Sculk Silence",
+                                    ChatColor.GRAY + "- Crop Tramp-Less",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "Double Jump",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⏫" + Common.colorize("#EFEFEF") + " ᴅᴀsʜ"
                             ));
                         }
                     }
 
 
                     if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(24);
+                        itemMeta.setCustomModelData(26);
                         item.setItemMeta(itemMeta);
                         if (VersionChecker.OlderThanNBTChange()) {
                             NBTItem nbt = new NBTItem(item);
@@ -2291,58 +2287,59 @@ public final class GetGemItem {
                             ReadWriteNBTList<String> lore = display.getStringList("Lore");
 
 
-                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴘᴜғғ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
 
 
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
                             lore.add(energystage);
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Saturation\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Absorption\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Wither Immune\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Fall Damage immunity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Power\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Punch\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Crop Tramp-Less\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Double Jump\",\"italic\":false,\"color\":\"white\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
-
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⏫\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴅᴀsʜ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":false}]}");
                             return nbt.getItem();
 
 
                         } else {
-                            itemMeta.setCustomModelData(4);
+                            String ending = Common.colorize("&f)");
+                            if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                                ending = ")";
+                            }
+
                             itemMeta.setLore(Arrays.asList(
-                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    ChatColor.GRAY + "- Green Thumb",
-                                    ChatColor.GRAY + "- Bonus Saturation",
-                                    ChatColor.GRAY + "- Bonus Absorption",
-                                    ChatColor.GRAY + "- Wither Immune",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
+                                    Common.colorize("&f(") + energystage + ending,
                                     ChatColor.WHITE + "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Fall Damage immunity",
+                                    ChatColor.GRAY + "- Enchants Power",
+                                    ChatColor.GRAY + "- Enchants Punch",
+                                    ChatColor.GRAY + "- Crop Tramp-Less",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "Double Jump",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⏫" + Common.colorize("#EFEFEF") + " ᴅᴀsʜ"
                             ));
                         }
                     }
 
                     if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(44);
+                        itemMeta.setCustomModelData(46);
                         item.setItemMeta(itemMeta);
                         if (VersionChecker.OlderThanNBTChange()) {
                             NBTItem nbt = new NBTItem(item);
@@ -2353,54 +2350,57 @@ public final class GetGemItem {
                             ReadWriteNBTList<String> lore = display.getStringList("Lore");
 
 
-                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴘᴜғғ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
 
 
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
                             lore.add(energystage);
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Bonus Saturation\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Fall Damage immunity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Enchants Punch\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Crop Tramp-Less\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Double Jump\",\"italic\":false,\"color\":\"white\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
-
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⏫\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴅᴀsʜ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":false}]}");
                             return nbt.getItem();
 
 
                         } else {
-                            itemMeta.setCustomModelData(4);
+                            String ending = Common.colorize("&f)");
+                            if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                                ending = ")";
+                            }
+
                             itemMeta.setLore(Arrays.asList(
-                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    ChatColor.GRAY + "- Green Thumb",
-                                    ChatColor.GRAY + "- Bonus Saturation",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
+                                    Common.colorize("&f(") + energystage + ending,
                                     ChatColor.WHITE + "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Fall Damage immunity",
+                                    ChatColor.GRAY + "- Enchants Punch",
+                                    ChatColor.GRAY + "- Crop Tramp-Less",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "Double Jump",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⏫" + Common.colorize("#EFEFEF") + " ᴅᴀsʜ"
                             ));
                         }
                     }
 
                     if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(64);
+                        itemMeta.setCustomModelData(66);
                         item.setItemMeta(itemMeta);
                         if (VersionChecker.OlderThanNBTChange()) {
                             NBTItem nbt = new NBTItem(item);
@@ -2411,52 +2411,57 @@ public final class GetGemItem {
                             ReadWriteNBTList<String> lore = display.getStringList("Lore");
 
 
-                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴘᴜғғ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
 
 
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
                             lore.add(energystage);
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Green Thumb\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Fall Damage immunity\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"  - (Not Dripstone Immune)\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Crop Tramp-Less\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Double Jump\",\"italic\":false,\"color\":\"white\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
-
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⏫\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴅᴀsʜ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":false}]}");
                             return nbt.getItem();
 
 
                         } else {
-                            itemMeta.setCustomModelData(4);
+                            String ending = Common.colorize("&f)");
+                            if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                                ending = ")";
+                            }
+
                             itemMeta.setLore(Arrays.asList(
-                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    ChatColor.GRAY + "- Green Thumb",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
+                                    Common.colorize("&f(") + energystage + ending,
                                     ChatColor.WHITE + "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Fall Damage immunity",
+                                    ChatColor.GRAY + "  - (Not Dripstone Immune)",
+                                    ChatColor.GRAY + "- Crop Tramp-Less",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "Double Jump",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⏫" + Common.colorize("#EFEFEF") + " ᴅᴀsʜ"
                             ));
                         }
                     }
 
                     if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(84);
+                        itemMeta.setCustomModelData(86);
                         item.setItemMeta(itemMeta);
                         if (VersionChecker.OlderThanNBTChange()) {
                             NBTItem nbt = new NBTItem(item);
@@ -2467,45 +2472,47 @@ public final class GetGemItem {
                             ReadWriteNBTList<String> lore = display.getStringList("Lore");
 
 
-                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴘᴜғғ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
 
 
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
                             lore.add(energystage);
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"No Passives\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Vitalaty Vortex\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Double Jump\",\"italic\":false,\"color\":\"white\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💘\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʜᴇᴀʀᴛʟᴏᴄᴋ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FF429A\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"☁\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ʙʀᴇᴇᴢʏ ʙᴀsʜ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FAE7E6\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
                             lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
-                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"💖\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFA\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
-
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"⏫\",\"italic\":false,\"color\":\"white\"},{\"text\":\" ᴅᴀsʜ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":false}]}");
                             return nbt.getItem();
 
 
                         } else {
-                            itemMeta.setCustomModelData(4);
+                            String ending = Common.colorize("&f)");
+                            if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                                ending = ")";
+                            }
+
                             itemMeta.setLore(Arrays.asList(
-                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
-                                    Common.colorize("&f(") + energystage + Common.colorize("&f)"),
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FE04B4") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    ChatColor.GRAY + "No Passives",
-                                    Common.colorize("#FE04B4") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    ChatColor.GRAY + "- " + Common.colorize("#FE04B4") + "Vitalaty Vortex",
-                                    ChatColor.WHITE + " ",
-                                    Common.colorize("#FFE4AB") + "ᴘᴏᴡᴇʀs ",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛ ᴅʀᴀɪɴᴇʀ" + ChatColor.DARK_RED + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "\uD83D\uDC98" + Common.colorize("#FF429A") + " ʜᴇᴀʀᴛʟᴏᴄᴋ" + ChatColor.DARK_RED + " \uD83E\uDD3C",
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
+                                    Common.colorize("&f(") + energystage + ending,
                                     ChatColor.WHITE + "",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDDD1\uD83C\uDFFB",
-                                    ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83D\uDC96" + Common.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ" + ChatColor.GREEN + " \uD83E\uDD3C"
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "No Passives",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "Double Jump",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.WHITE + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "☁" + Common.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "⏫" + Common.colorize("#EFEFEF") + " ᴅᴀsʜ"
                             ));
                         }
                     }
@@ -2522,7 +2529,7 @@ public final class GetGemItem {
 
                             ReadWriteNBTList<String> lore = display.getStringList("Lore");
 
-                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ʟɪғᴇ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FE04B4\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴘᴜғғ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#EFEFEF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
 
                             lore.add(energystage);
                             return nbt.getItem();
@@ -2821,6 +2828,300 @@ public final class GetGemItem {
                                     ChatColor.GRAY + " ",
                                     Common.colorize("#A01FFF") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
                                     ChatColor.GRAY + "- " + Common.colorize("#A01FFF") + "Dimensional Drift",
+                                    ChatColor.WHITE + "",
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + ChatColor.GRAY + "ᴜɴʙᴏᴜɴᴅᴇᴅ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴠᴏɪᴅ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                            ));
+                        }
+                    }
+
+                    if (energy == Energy.Cracked) {
+                        itemMeta.setCustomModelData(54);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴀsᴛʀᴀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Soul Healing\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Soul Capture\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Dimensional Drift\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴅᴀɢɢᴇʀs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#BFB8B8\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴜɴʙᴏᴜɴᴅᴇᴅ \",\"italic\":false,\"color\":\"gray\"},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴠᴏɪᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&7)"),
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Soul Healing",
+                                    ChatColor.GRAY + "- Soul Capture",
+                                    Common.colorize("#A01FFF") + " ",
+                                    ChatColor.GRAY + " ",
+                                    Common.colorize("#A01FFF") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#A01FFF") + "Dimensional Drift",
+                                    ChatColor.WHITE + "",
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + ChatColor.GRAY + "ᴜɴʙᴏᴜɴᴅᴇᴅ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴠᴏɪᴅ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                            ));
+                        }
+                    }
+
+                    if (energy == Energy.Damaged) {
+                        itemMeta.setCustomModelData(74);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴀsᴛʀᴀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔺 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Phasing\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Soul Healing\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Dimensional Drift\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴅᴀɢɢᴇʀs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#BFB8B8\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴜɴʙᴏᴜɴᴅᴇᴅ \",\"italic\":false,\"color\":\"gray\"},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴠᴏɪᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&7)"),
+                                    Common.colorize("#A01FFF") + "",
+                                    Common.colorize("#A01FFF") + "\uD83D\uDD3A " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Phasing",
+                                    ChatColor.GRAY + "- Soul Healing",
+                                    ChatColor.GRAY + " ",
+                                    Common.colorize("#A01FFF") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#A01FFF") + "Dimensional Drift",
+                                    ChatColor.WHITE + "",
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + ChatColor.GRAY + "ᴜɴʙᴏᴜɴᴅᴇᴅ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴠᴏɪᴅ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                            ));
+                        }
+                    }
+
+                    if (energy == Energy.Ruined) {
+                        itemMeta.setCustomModelData(94);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴀsᴛʀᴀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"No Passives\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Dimensional Drift\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴅᴀɢɢᴇʀs \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#BFB8B8\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"🔪 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴜɴʙᴏᴜɴᴅᴇᴅ \",\"italic\":false,\"color\":\"gray\"},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"green\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"👻 \",\"italic\":false,\"color\":\"white\"},{\"text\":\"ᴀsᴛʀᴀʟ ᴠᴏɪᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#AABBBF\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&7)"),
+                                    Common.colorize("#A01FFF") + "",
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "No Passives",
+                                    ChatColor.GRAY + " ",
+                                    Common.colorize("#A01FFF") + "🔮" + " " + Common.colorize("#82F3FF") + ChatColor.BOLD + "ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#A01FFF") + "Dimensional Drift",
+                                    ChatColor.WHITE + "",
+                                    Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs ",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + ChatColor.GRAY + "ᴜɴʙᴏᴜɴᴅᴇᴅ " + ChatColor.DARK_RED + "\uD83E\uDD3C",
+                                    ChatColor.WHITE + "",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴘʀᴏᴊᴇᴄᴛɪᴏɴ " + ChatColor.GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                    ChatColor.GRAY + "- " + ChatColor.WHITE + "👻 " + Common.colorize("#AABBBF") + "ᴀsᴛʀᴀʟ ᴠᴏɪᴅ " + ChatColor.GREEN + "\uD83E\uDD3C"
+                            ));
+                        }
+                    }
+
+
+                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                        itemMeta.setCustomModelData(100);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ᴀsᴛʀᴀ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#A01FFF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add(energystage);
+                            return nbt.getItem();
+
+
+                        } else {
+                            for (ItemFlag flag : ItemFlag.values()) {
+                                itemMeta.addItemFlags(flag);
+                            }
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴜsᴇʟᴇss"
+                            ));
+                        }
+                    }
+                    item.setItemMeta(itemMeta);
+                    return item;
+                }
+            }
+
+
+            //Flux
+
+            if (gem == GemType.Flux) {
+
+
+                if (season == 3) {
+
+
+                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                    ItemMeta itemMeta = item.getItemMeta();
+
+
+                    NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fb1c4eab-dfae-4302-9441-47026b6d33ae");
+
+                    NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                    NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "flux");
+
+                    NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                    NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
+                    itemMeta.setDisplayName(Common.colorize("#5ED7FF") + ChatColor.BOLD + "ғʟᴜx " + Common.colorize("#FFD773") + "ɢᴇᴍ");
+                    for (ItemFlag flag : ItemFlag.values()) {
+                        itemMeta.addItemFlags(flag);
+                    }
+
+                    if (Gem.isPristineorHigher(energy)) {
+                        if (energy == Energy.Pristine_5) {
+                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        }
+
+                        itemMeta.setCustomModelData(16);
+                        item.setItemMeta(itemMeta);
+                        if (VersionChecker.OlderThanNBTChange()) {
+                            NBTItem nbt = new NBTItem(item);
+
+                            nbt.setInteger("HideFlags", 255);
+                            NBTCompound display = nbt.getOrCreateCompound("display");
+
+                            ReadWriteNBTList<String> lore = display.getStringList("Lore");
+
+
+                            display.setString("Name", "{\"text\":\"\",\"extra\":[{\"text\":\"ғʟᴜx \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#5ED7FF\",\"bold\":true},{\"text\":\"ɢᴇᴍ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFD773\",\"bold\":false}]}");
+
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":true}]}");
+                            lore.add(energystage);
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\"ᴘᴀssɪᴠᴇs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#FFE4AB\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Flow State\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Shocking Chance\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Tireless\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Conduction\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- Charged\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\" \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\" ᴀʙɪʟɪᴛʏ\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#82F3FF\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Kinetic Burst\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"🔮 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\"ᴘᴏᴡᴇʀs\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#B8FFFB\",\"bold\":true}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- ☄ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"ᴇɴᴇʀɢʏ ʙᴇᴀᴍ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\"🧑🏻\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- ☄ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"ɢʀᴏᴜɴᴅ \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\" \",\"italic\":false,\"color\":\"gray\"},{\"text\":\"🤼\",\"italic\":false,\"color\":\"dark_red\"}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"\",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"white\",\"bold\":false}]}");
+                            lore.add("{\"text\":\"\",\"extra\":[{\"text\":\"- 🌀 \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"gray\",\"bold\":false},{\"text\":\"Kinetic Overdrive \",\"obfuscated\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"color\":\"#03EAFF\",\"bold\":false},{\"text\":\"🤼\",\"italic\":false,\"color\":\"green\"}]}");
+                            return nbt.getItem();
+
+
+                        } else {
+                            itemMeta.setLore(Arrays.asList(
+                                    ChatColor.WHITE + "" + ChatColor.BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                                    Common.colorize("&f(") + energystage + Common.colorize("&7) "),
+                                    Common.colorize("#03EAFF") + "🔮 " + Common.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                    ChatColor.GRAY + "- Flow State",
+                                    ChatColor.GRAY + "- Shocking Chance",
+                                    ChatColor.GRAY + "- Tireless",
+                                    ChatColor.GRAY + "- Conduction",
+                                    ChatColor.GRAY + "- Charged",
+                                    ChatColor.WHITE + "",
+                                    Common.colorize("#03EAFF") + "🔮 " + Common.colorize("#82F3FF") + ChatColor.BOLD + " ᴀʙɪʟɪᴛʏ",
+                                    ChatColor.GRAY + "- " + Common.colorize("#03EAFF") + "Kinetic Burst",
                                     ChatColor.WHITE + "",
                                     Common.colorize("#A01FFF") + "🔮 " + Common.colorize("#B8FFFB") + ChatColor.BOLD + "ᴘᴏᴡᴇʀs ",
                                     ChatColor.GRAY + "- " + ChatColor.WHITE + "🔪 " + Common.colorize("#BFB8B8") + "ᴅᴀɢɢᴇʀs " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",

@@ -77,7 +77,7 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Puff, 2, Energy.Pristine, 1, 1, 3));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Flux, 2, Energy.Pristine, 1, 1, 3));
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
             //Bukkit.broadcastMessage(g.getEnergy().toString());
             //var mm = MiniMessage.miniMessage();

@@ -3,9 +3,6 @@ package com.hyperdondon.blissgemsremake.internal.gems.Strength;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import lombok.Getter;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -20,7 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.mineacademy.fo.Common;
-import org.mineacademy.fo.plugin.SimplePlugin;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;
@@ -85,7 +81,7 @@ public final class Powers implements Listener {
 
                         LivingEntity ent = (LivingEntity) e.getEntity();
 
-                        for(PotionEffect pe : ent.getActivePotionEffects()) {
+                        for (PotionEffect pe : ent.getActivePotionEffects()) {
                             ent.removePotionEffect(pe.getType());
                         }
 
@@ -163,6 +159,7 @@ public final class Powers implements Listener {
                     if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
                         long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
                         if (cooldownmils - System.currentTimeMillis() >= 0) {
+                            
                             return;
                         }
                     }
@@ -176,9 +173,9 @@ public final class Powers implements Listener {
 
                         e.getPlayer().sendMessage(
                                 Common.colorize("#F10303") + "🔮 " +
-                                Common.colorize("#B8FFFB") + "You have activated group " +
-                                Common.colorize("&f") + "🤺" + Common.colorize("#F10303") + "Frailer " +
-                                Common.colorize("#B8FFFB") + "skill " + Common.colorize("&7") + "(radius 5)"
+                                        Common.colorize("#B8FFFB") + "You have activated group " +
+                                        Common.colorize("&f") + "🤺" + Common.colorize("#F10303") + "Frailer " +
+                                        Common.colorize("#B8FFFB") + "skill " + Common.colorize("&7") + "(radius 5)"
                         );
 
 
@@ -186,7 +183,7 @@ public final class Powers implements Listener {
                             if (entity != e.getPlayer()) {
                                 LivingEntity entity2 = (LivingEntity) entity;
                                 if (entity2 != null) {
-                                    for(PotionEffect pe : entity2.getActivePotionEffects()) {
+                                    for (PotionEffect pe : entity2.getActivePotionEffects()) {
                                         entity2.removePotionEffect(pe.getType());
                                     }
                                     entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
@@ -269,7 +266,6 @@ public final class Powers implements Listener {
                             Duration duration = Duration.ofMillis(Frailer.get(id) - System.currentTimeMillis());
 
 
-
                             long minutes = duration.toMinutes();
                             long seconds = duration.toSecondsPart();
 
@@ -278,7 +274,7 @@ public final class Powers implements Listener {
 
                                 if (seconds > 0) {
                                     time = minutes + "m " + seconds + "s";
-                                }else {
+                                } else {
                                     time = minutes + "m";
                                 }
 
@@ -350,8 +346,7 @@ public final class Powers implements Listener {
             // for example, if 'loc' is your location object and 'world' is your World object
             if (VersionChecker.OlderThanNBTChange()) {
                 player.getWorld().spawnParticle(Particle.REDSTONE, player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-            }
-            else {
+            } else {
                 player.getWorld().spawnParticle(Particle.valueOf("DUST"), player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
             }
             player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, player.getX() + x, player.getY(), player.getZ() + y, 0);
@@ -388,14 +383,14 @@ public final class Powers implements Listener {
             double angle = Math.acos((p.getLocation().getX() - p.getLocation().getX()) / 1);
             //Location loc = p.getLocation().getDirection().clone().rotateAroundAxis(circleDir, 20);
             //loc.add(p.getLocation().getDirection().clone()
-                    //.rotateAroundAxis(circleDir, 20)
+            //.rotateAroundAxis(circleDir, 20)
             //);
 
             //loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
             //loc.setZ(loc.getZ() + z);
 
             //loc.add(p.getLocation().getDirection().clone()
-                    //.rotateAroundAxis(circleDir, angle)
+            //.rotateAroundAxis(circleDir, angle)
             //);
 
 
@@ -446,7 +441,7 @@ public final class Powers implements Listener {
                         for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
                             if (entity != event.getPlayer()) {
                                 LivingEntity e = (LivingEntity) entity;
-                                for(PotionEffect pe : e.getActivePotionEffects()) {
+                                for (PotionEffect pe : e.getActivePotionEffects()) {
                                     e.removePotionEffect(pe.getType());
                                 }
                                 e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
