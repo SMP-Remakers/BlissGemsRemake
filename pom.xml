@@ -71,6 +71,8 @@
                                     <include>net.kyori:adventure-api</include>
                                     <include>net.kyori:adventure-text-minimessage</include>
                                     <include>net.kyori:adventure-platform-bukkit</include>
+                                    <include>net.kyori:adventure-platform-api</include>
+                                    <include>net.kyori:adventure-platform-facet</include>
                                 </includes>
                             </artifactSet>
                             <relocations>

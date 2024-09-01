@@ -5,6 +5,9 @@ import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.GetGemItem;
 import com.hyperdondon.blissgemsremake.api.Settings;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
+import com.hyperdondon.blissgemsremake.internal.VersionChecker;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -77,7 +80,12 @@ public final class SlashBliss implements CommandExecutor, Listener {
 
             //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Flux, 2, Energy.Pristine, 1, 1, 3));
+            //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+            // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
+            //p.sendMessage(parsed);
+
+            Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Strength, 2, Energy.Scratched, 1, 1, 3));
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
             //Bukkit.broadcastMessage(g.getEnergy().toString());
             //var mm = MiniMessage.miniMessage();

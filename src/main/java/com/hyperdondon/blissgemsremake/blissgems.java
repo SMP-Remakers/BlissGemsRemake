@@ -23,18 +23,22 @@ import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.Wealth
 
 public final class blissgems extends SimplePlugin implements Listener {
 
+    /*
     @Getter
     public static BukkitAudiences adventure;
+    */
     public static Integer season;
     public static blissgems plugin;
 
 
+    /*
     public @NonNull BukkitAudiences adventure() {
         if (adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
         }
         return adventure;
     }
+    */
 
     @Override
     public void onPluginStart() {
@@ -42,10 +46,12 @@ public final class blissgems extends SimplePlugin implements Listener {
     }
 
     public void onPluginStop() {
+        /*
         if (adventure != null) {
             adventure.close();
             adventure = null;
         }
+         */
     }
 
     public void onReloadablesStart() {
@@ -60,7 +66,7 @@ public final class blissgems extends SimplePlugin implements Listener {
         this.loadLibrary("com.mysql", "mysql-connector-j", "9.0.0");
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
 
-        adventure = BukkitAudiences.create(this);
+        //adventure = BukkitAudiences.create(this);
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
         PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
