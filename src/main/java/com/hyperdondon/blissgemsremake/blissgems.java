@@ -8,10 +8,13 @@ import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import lombok.Getter;
 import lombok.NonNull;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
 
 import java.io.File;
@@ -89,7 +92,8 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(TexturePackLoader.getInstance());
 
-        getCommand("blissgems").setExecutor(new SlashBliss());
+        getCommand("blissgems").setExecutor(SlashBliss.getInstance());
+        getCommand("blissgems").setTabCompleter(SlashBliss.getInstance());
 
         getCommand("progression").setExecutor(new SlashProg());
 
@@ -123,5 +127,12 @@ public final class blissgems extends SimplePlugin implements Listener {
                 WealthSeconds();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 20);
+    }
+
+    public static String colorize(String s) {
+        var sc = MiniMessage.miniMessage().deserialize(s);
+        s = LegacyComponentSerializer.legacySection().serialize(sc);
+        s = Common.colorize(s);
+        return s;
     }
 }

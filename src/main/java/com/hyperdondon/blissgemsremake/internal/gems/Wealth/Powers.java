@@ -66,11 +66,11 @@ public final class Powers implements Listener {
                         }
 
                             event.getPlayer().sendMessage(
-                                    Common.colorize("#0EC912") + "🔮" +
-                                    Common.colorize("#B8FFFB") + "You have activated group " +
-                                    Common.colorize("&f") + "\uD83D\uDCB8 " + Common.colorize("#0EC912") + "Rich Rush " +
-                                    Common.colorize("#B8FFFB") + "Skill for " +
-                                    Common.colorize("#0EC912") + "5 Minutes"
+                                    blissgems.colorize("#0EC912") + "🔮" +
+                                    blissgems.colorize("#B8FFFB") + "You have activated group " +
+                                    blissgems.colorize("&f") + "\uD83D\uDCB8 " + blissgems.colorize("#0EC912") + "Rich Rush " +
+                                    blissgems.colorize("#B8FFFB") + "Skill for " +
+                                    blissgems.colorize("#0EC912") + "5 Minutes"
                             );
 
 
@@ -164,10 +164,10 @@ public final class Powers implements Listener {
 
 
                             if (time.equals("")) {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!");
+                                Remain.sendActionBar(p, blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!");
 
                             } else {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time);
+                                Remain.sendActionBar(p, blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time);
                             }
 
                         }

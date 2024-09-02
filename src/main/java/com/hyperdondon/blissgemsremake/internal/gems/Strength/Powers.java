@@ -72,10 +72,10 @@ public final class Powers implements Listener {
                         }
 
                         p.sendMessage(
-                                Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Frailer" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill on " + Common.colorize("&x&F&1&0&3&0&3") + e.getEntity().getName() + Common.colorize("&7") + " (radius 5)"
+                                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated " +
+                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Frailer" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill on " + blissgems.colorize("&x&F&1&0&3&0&3") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
                         );
 
 
@@ -172,10 +172,10 @@ public final class Powers implements Listener {
                         }
 
                         e.getPlayer().sendMessage(
-                                Common.colorize("#F10303") + "🔮 " +
-                                        Common.colorize("#B8FFFB") + "You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("#F10303") + "Frailer " +
-                                        Common.colorize("#B8FFFB") + "skill " + Common.colorize("&7") + "(radius 5)"
+                                blissgems.colorize("#F10303") + "🔮 " +
+                                        blissgems.colorize("#B8FFFB") + "You have activated group " +
+                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer " +
+                                        blissgems.colorize("#B8FFFB") + "skill " + blissgems.colorize("&7") + "(radius 5)"
                         );
 
 
@@ -258,8 +258,8 @@ public final class Powers implements Listener {
 
                     UUID id = UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
 
-                    String FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
-                    String ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
+                    String FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
+                    String ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
                     if (Objects.equals(gem.getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) {
                         if (Frailer.containsKey(id)) {
 
@@ -286,10 +286,10 @@ public final class Powers implements Listener {
 
 
                             if (time.equals("")) {
-                                FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
+                                FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
 
                             } else {
-                                FrailerString = Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time;
+                                FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time;
                             }
 
                         }
@@ -314,10 +314,10 @@ public final class Powers implements Listener {
 
 
                             if (time.equals("")) {
-                                ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
+                                ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
 
                             } else {
-                                ChadString = Common.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.AQUA + time;
+                                ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.AQUA + time;
                             }
 
                         }
@@ -431,10 +431,10 @@ public final class Powers implements Listener {
                         }
 
                         event.getPlayer().sendMessage(
-                                Common.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&1&0&3&0&3") + "Chad" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 5)"
+                                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Chad" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 5)"
                         );
 
 

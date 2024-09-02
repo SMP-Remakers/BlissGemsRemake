@@ -1,116 +1,44 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
+import com.comphenix.protocol.PacketType;
 import com.hyperdondon.blissgemsremake.api.Energy;
 import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.GetGemItem;
 import com.hyperdondon.blissgemsremake.api.Settings;
+import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
+import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
+import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.MinecraftVersion;
 
-public final class SlashBliss implements CommandExecutor, Listener {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+public final class SlashBliss implements CommandExecutor, TabCompleter {
+
+    @Getter
+    private static volatile SlashBliss instance = new SlashBliss();
+
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
 
 
-        if (args.length == 1) {
-            if (args[0].equals("test")) {
-                Player p = (Player) commandSender;
-                Bukkit.broadcastMessage(String.valueOf(Settings.getGiveGemOnJoin()));
-                Settings.setGiveGemOnJoin(true);
-                Bukkit.broadcastMessage(String.valueOf(Settings.getGiveGemOnJoin()));
-
-                return true;
-            }
-
-            if (args[0].equals("toggle")) {
-                Player p = (Player) commandSender;
-
-
-                return true;
-            }
-        }
-
-        if (args.length == 2) {
-            if (args[0].equals("particles") || args[0].equals("particle")) {
-
-
-                if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
-                    Player p = (Player) commandSender;
-                    PlayerParticlePreferences.getInstance().put(p, args[1]);
-                    return true;
-                }
-
-            }
-        }
-
-
-        if (args.length == 3) {
-            //Settings.setSeason(3);
-            Player p = (Player) commandSender;
-            //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
-
-            int allowremoveint;
-            int allowdropint;
-            if (Settings.getAllowRemove()) {
-                allowremoveint = 1;
-            } else {
-                allowremoveint = 0;
-            }
-
-
-            if (Settings.getAllowDrop()) {
-                allowdropint = 1;
-            } else {
-                allowdropint = 0;
-            }
-
-            Settings.setSeason(3);
-
-            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
-
-            //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
-            // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
-            //p.sendMessage(parsed);
-
-            Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Strength, 2, Energy.Scratched, 1, 1, 3));
-            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
-            //Bukkit.broadcastMessage(g.getEnergy().toString());
-            //var mm = MiniMessage.miniMessage();
-            //Component parsed = mm.deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
-            //Audience player = blissgems.adventure.player(p);
-
-
-            //player.sendMessage(component);
-
-
-            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
-
-            //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
-
-            //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
-
-            //Bukkit.broadcastMessage(g.getID());
-
-            //p.getInventory().addItem(gem);
-
-            // p.getInventory().addItem(g.toItemStack());
-
-
-            return true;
-        }
         if (args.length == 0) {
             Player p = (Player) commandSender;
 
@@ -143,6 +71,84 @@ public final class SlashBliss implements CommandExecutor, Listener {
             }
             return true;
         }
+
+
+        if (args.length == 2) {
+            if (args[0].equals("particles") || args[0].equals("particle")) {
+                if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
+                    Player p = (Player) commandSender;
+                    PlayerParticlePreferences.getInstance().put(p, args[1].toLowerCase());
+                    p.sendMessage(blissgems.colorize("#FFD773") + "🔮 " + "" + ChatColor.GREEN + "Particle Level changed to " + ChatColor.YELLOW + args[1].toUpperCase());
+                    return true;
+                }
+            }
+
+        }
+
+
+        if (args.length == 3) {
+            //Settings.setSeason(3);
+            Player p = (Player) commandSender;
+            //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
+
+            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
+
+            //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+            // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
+            //p.sendMessage(parsed);
+
+            //Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Fire, 2, Energy.Broken, 1, 1, 3));
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+            //Bukkit.broadcastMessage(g.getEnergy().toString());
+            //var mm = MiniMessage.miniMessage();
+            //Audience player = blissgems.adventure.player(p);
+
+
+            //player.sendMessage(component);
+
+
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+
+            //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
+
+            //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
+
+            //Bukkit.broadcastMessage(g.getID());
+
+            //p.getInventory().addItem(gem);
+
+            // p.getInventory().addItem(g.toItemStack());
+
+
+            return true;
+        }
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        if (strings.length == 1) {
+            if (Settings.getSeason() == 3)
+                return List.of("gem", "item", "particles", "revive", "setenergy", "set-charge", "withdraw");
+            if (Settings.getSeason() == 2)
+                return List.of("gem", "item", "particles", "revive", "setenergy", "withdraw");
+        }
+
+        if (strings[0].equals("gem")) {
+            if (strings.length == 2) {
+                List<String> pl = new ArrayList<>();
+                for (Player p : Bukkit.getOnlinePlayers())
+                    pl.add(p.getName());
+                return pl;
+            }
+            if (strings.length == 3) {
+                return List.of("astra", "fire", "life", "puff", "random", "speed", "strength", "flux", "wealth");
+            }
+            if (strings.length == 4) {
+                return List.of("(tier)");
+            }
+        }
+        return List.of();
     }
 }

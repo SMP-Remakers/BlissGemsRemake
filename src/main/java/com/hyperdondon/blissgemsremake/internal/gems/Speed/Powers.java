@@ -68,10 +68,10 @@ public final class Powers implements Listener {
                         }
 
                         event.getPlayer().sendMessage(
-                                Common.colorize("&x&F&E&F&D&1&7") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&E&F&D&1&7") + "Sloths Sedative" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 4)"
+                                blissgems.colorize("&x&F&E&F&D&1&7") + "🔮" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&E&F&D&1&7") + "Sloths Sedative" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 4)"
                         );
 
 
@@ -170,10 +170,10 @@ public final class Powers implements Listener {
 
 
                             if (time.equals("")) {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!");
+                                Remain.sendActionBar(p, blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!");
 
                             } else {
-                                Remain.sendActionBar(p, Common.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time);
+                                Remain.sendActionBar(p, blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time);
                             }
 
                         }
@@ -239,10 +239,10 @@ public final class Powers implements Listener {
                         }
 
                         event.getPlayer().sendMessage(
-                                Common.colorize("&x&F&E&F&D&1&7") + "🔮" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        Common.colorize("&f") + "🤺" + Common.colorize("&x&F&E&F&D&1&7") + "Sloths Sedative" +
-                                        Common.colorize("&x&b&8&f&f&f&b") + " skill" + Common.colorize("&7") + " (radius 4)"
+                                blissgems.colorize("&x&F&E&F&D&1&7") + "🔮" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&E&F&D&1&7") + "Sloths Sedative" +
+                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 4)"
                         );
 
 
