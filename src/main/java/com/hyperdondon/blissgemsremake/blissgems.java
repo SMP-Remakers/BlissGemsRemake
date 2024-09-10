@@ -69,6 +69,8 @@ public final class blissgems extends SimplePlugin implements Listener {
         this.loadLibrary("com.mysql", "mysql-connector-j", "9.0.0");
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
 
+
+
         //adventure = BukkitAudiences.create(this);
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");

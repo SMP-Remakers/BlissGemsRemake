@@ -98,7 +98,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             //p.sendMessage(parsed);
 
             //Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Fire, 2, Energy.Broken, 1, 1, 3));
+            p.getInventory().addItem(GetGemItem.returngem(GemType.Wealth, 2, Energy.Pristine, 1, 1, 1));
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
             //Bukkit.broadcastMessage(g.getEnergy().toString());
             //var mm = MiniMessage.miniMessage();

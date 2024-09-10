@@ -2469,7 +2469,7 @@ public final class GetGemItem {
                     NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    itemMeta.setDisplayName(blissgems.colorize("#FE8120") + ChatColor.BOLD + "Wealth " + blissgems.colorize("#FFD773") + "Gem");
+                    itemMeta.setDisplayName(blissgems.colorize("#0EC912") + ChatColor.BOLD + "Wealth " + blissgems.colorize("#FFD773") + "Gem");
 
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
@@ -2491,16 +2491,18 @@ public final class GetGemItem {
                     }
 
 
-                    itemMeta.setCustomModelData(2);
+                    itemMeta.setCustomModelData(12);
                     itemMeta.setLore(Arrays.asList(
 
-                            ChatColor.WHITE + "" + ChatColor.BOLD + "Control fire and become fire",
+                            ChatColor.WHITE + "" + ChatColor.BOLD + "Become wealthier than elon musk",
                             blissgems.colorize("#FFE4AB") + "Passives",
-                            ChatColor.GRAY + " " + blissgems.colorize("#FE8120") + "🔮 Auto Smelting Longer FireThorns",
-                            ChatColor.GRAY + " Fire Aspect 2, Flame",
+                            ChatColor.GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + ChatColor.GRAY + "Even cheaper villager trades, Auto enchants all",
+                            ChatColor.GRAY + " swords with looting 3, and all pickaxes with fortune 3",
+                            ChatColor.GRAY + " get two more ore for every 3 ores mined",
+                            ChatColor.GRAY + " 2x the netherite scrap when taken out of furnace",
                             ChatColor.WHITE + " ",
                             blissgems.colorize("#B8FFFB") + ChatColor.BOLD + "Powers",
-                            ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDDE8 " + blissgems.colorize("#FF5F33") + "Fireball",
+                            ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83C\uDF40 " + ChatColor.RED + "Unfortune",
                             ChatColor.GRAY + " Spawns a fireball that charges up",
                             ChatColor.GRAY + " when on obsidian, lava, fire, netherack",
                             ChatColor.GRAY + " and magma, when fully charged can one shot",
