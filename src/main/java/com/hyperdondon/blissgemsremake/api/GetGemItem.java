@@ -2484,6 +2484,9 @@ public final class GetGemItem {
                                 ItemFlag.HIDE_PLACED_ON,
                                 ItemFlag.HIDE_POTION_EFFECTS,
                                 ItemFlag.HIDE_DYE);
+                        /*NBTItem nbtItem = new NBTItem(item);
+                        nbtItem.setInteger("HideFlags", 127);
+                        item = nbtItem.getItem();*/
                     } else {
                         for (ItemFlag flag : ItemFlag.values()) {
                             itemMeta.addItemFlags(flag);
@@ -2503,13 +2506,11 @@ public final class GetGemItem {
                             ChatColor.WHITE + " ",
                             blissgems.colorize("#B8FFFB") + ChatColor.BOLD + "Powers",
                             ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83C\uDF40 " + ChatColor.RED + "Unfortune",
-                            ChatColor.GRAY + " Spawns a fireball that charges up",
-                            ChatColor.GRAY + " when on obsidian, lava, fire, netherack",
-                            ChatColor.GRAY + " and magma, when fully charged can one shot",
-                            ChatColor.GRAY + " protection 4 netherite players",
+                            ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDD3C " + ChatColor.GRAY + "1/3 of actions canceled " + ChatColor.WHITE + "40s, R2",
+                            ChatColor.GRAY + " " + ChatColor.DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + ChatColor.GRAY + "1/2 of actions canceled " + ChatColor.WHITE + "40s",
                             ChatColor.WHITE + "",
                             ChatColor.GRAY + "-" + ChatColor.WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "Cozy Campfire",
-                            ChatColor.GRAY + " Spawns a campfire that heals when near it"
+                            ChatColor.GRAY + " Spawns a campfire that heals when near it 432423"
                     ));
 
                     item.setItemMeta(itemMeta);
