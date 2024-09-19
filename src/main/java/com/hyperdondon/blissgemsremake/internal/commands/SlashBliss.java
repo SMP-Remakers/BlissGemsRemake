@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.comphenix.protocol.PacketType;
+import com.github.puregero.multilib.MultiLib;
 import com.hyperdondon.blissgemsremake.api.Energy;
 import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.GetGemItem;
@@ -38,6 +39,45 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
 
+        //Usage CMDS
+        if (args.length == 1) {
+            switch (args[0]) {
+                case "gem":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                    return true;
+                case "item":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss item (item) (player) (amount)"));
+                    return true;
+                case "particle": case "particles":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss particles (level)"));
+                    return true;
+                case "revive":
+                    return true;
+                case "setenergy":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss setenergy (player) [amount]"));
+                    return true;
+                case "withdraw":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss energy amount"));
+                    return true;
+            }
+        }
+        if (args.length == 2) {
+            if (args[0].equals("gem")) {
+                //Check if the 2nd arg is a player
+                boolean IsAPlayer = false;
+                for (Player p : MultiLib.getAllOnlinePlayers()) {
+                    if (args[1].equals(p.getName())) {
+                        IsAPlayer = true;
+                    }
+                }
+
+                if (!IsAPlayer)
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                    return true;
+            }
+
+        }
+
 
         if (args.length == 0) {
             Player p = (Player) commandSender;
@@ -71,7 +111,6 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             }
             return true;
         }
-
 
         if (args.length == 2) {
             if (args[0].equals("particles") || args[0].equals("particle")) {
@@ -138,7 +177,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
         if (strings[0].equals("gem")) {
             if (strings.length == 2) {
                 List<String> pl = new ArrayList<>();
-                for (Player p : Bukkit.getOnlinePlayers())
+                for (Player p : MultiLib.getAllOnlinePlayers())
                     pl.add(p.getName());
                 return pl;
             }

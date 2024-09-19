@@ -49,7 +49,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.2</version>
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -57,24 +57,34 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-
-
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-
-                            <!--Foundation Shade-->
                             <artifactSet>
                                 <includes>
-                                    <!-- Important: This will ensure only Foundation is shaded to your jar. If you have
-                                         other dependencies that should be compiled, duplicate this line for each. -->
                                     <include>${foundation.path}:Foundation*</include>
                                     <include>de.tr7zw:item-nbt-api-plugin</include>
                                     <include>net.kyori:adventure-api</include>
+                                    <include>net.kyori:adventure-key</include>
+                                    <include>net.kyori:adventure-text-serializer-gson</include>
+                                    <include>net.kyori:adventure-text-serializer-legacy</include>
+                                    <include>net.kyori:examination-api</include>
+                                    <include>net.kyori:examination-string</include>
+                                    <include>net.kyori:adventure-nbt</include>
+                                    <include>net.kyori:adventure-text-serializer-bungeecord</include>
+                                    <include>net.kyori:adventure-text-serializer-gson-legacy-impl</include>
+                                    <include>net.kyori:adventure-platform-viaversion</include>
                                     <include>net.kyori:adventure-text-minimessage</include>
                                     <include>net.kyori:adventure-platform-bukkit</include>
                                     <include>net.kyori:adventure-platform-api</include>
                                     <include>net.kyori:adventure-platform-facet</include>
+                                    <include>com.github.puregero:multilib</include>
+                                    <include>com.github.puregero:multilib-multipaper</include>
+                                    <include>com.github.puregero:multilib-common</include>
+                                    <include>com.github.puregero:multilib-bukkit</include>
+                                    <include>com.github.puregero:regionized-paper</include>
+                                    <include>com.github.puregero:regionized-common</include>
+                                    <include>com.github.puregero:regionized-bukkit</include>
                                 </includes>
                             </artifactSet>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
                             <relocations>
                                 <relocation>
                                     <pattern>org.mineacademy.fo</pattern>
@@ -93,9 +103,13 @@
                                     <shadedPattern>${project.groupId}.${project.artifactId}.libs.net.kyori.adventure
                                     </shadedPattern>
                                 </relocation>
+
+                                <relocation>
+                                    <pattern>com.github.puregero</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.com.github.puregero
+                                    </shadedPattern>
+                                </relocation>
                             </relocations>
-
-
                         </configuration>
                     </execution>
                 </executions>
@@ -142,6 +156,11 @@
             <url>https://repo.codemc.io/repository/maven-public/</url>
             <layout>default</layout>
         </repository>
+
+        <repository>
+            <id>clojars</id>
+            <url>https://repo.clojars.org</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -162,6 +181,13 @@
             <artifactId>paper-api</artifactId>
             <version>1.18-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.puregero</groupId>
+            <artifactId>multilib</artifactId>
+            <version>1.2.4</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
