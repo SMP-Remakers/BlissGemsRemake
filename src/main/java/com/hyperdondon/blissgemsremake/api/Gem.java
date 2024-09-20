@@ -457,7 +457,7 @@ public class Gem {
     }
 
 
-    public static void GiveGem(Gem gem, Player p , boolean silent) {
+    public static void GiveGem(Gem gem, Player p , boolean silent, String tier) {
         if (!silent) {
             String gemmessage = "N/A";
             if (gem.type == GemType.Strength)
@@ -477,7 +477,7 @@ public class Gem {
             else if (gem.type == GemType.Wealth)
                 gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
 
-            p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have received a " + gemmessage + "#B8FFFB gem &7Tier &b" + gem.tier));
+            p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have received a " + gemmessage + "#B8FFFB gem &7Tier &b" + tier));
         }
         p.getInventory().addItem(gem.toItemStack());
 
