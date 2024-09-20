@@ -2,10 +2,7 @@ package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.comphenix.protocol.PacketType;
 import com.github.puregero.multilib.MultiLib;
-import com.hyperdondon.blissgemsremake.api.Energy;
-import com.hyperdondon.blissgemsremake.api.GemType;
-import com.hyperdondon.blissgemsremake.api.GetGemItem;
-import com.hyperdondon.blissgemsremake.api.Settings;
+import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
@@ -24,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.MinecraftVersion;
 
 import java.lang.reflect.Array;
@@ -38,46 +36,6 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
-
-        //Usage CMDS
-        if (args.length == 1) {
-            switch (args[0]) {
-                case "gem":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
-                    return true;
-                case "item":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss item (item) (player) (amount)"));
-                    return true;
-                case "particle": case "particles":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss particles (level)"));
-                    return true;
-                case "revive":
-                    return true;
-                case "setenergy":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss setenergy (player) [amount]"));
-                    return true;
-                case "withdraw":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss energy amount"));
-                    return true;
-            }
-        }
-        if (args.length == 2) {
-            if (args[0].equals("gem")) {
-                //Check if the 2nd arg is a player
-                boolean IsAPlayer = false;
-                for (Player p : MultiLib.getAllOnlinePlayers()) {
-                    if (args[1].equals(p.getName())) {
-                        IsAPlayer = true;
-                    }
-                }
-
-                if (!IsAPlayer)
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
-                    return true;
-            }
-
-        }
-
 
         if (args.length == 0) {
             Player p = (Player) commandSender;
@@ -112,6 +70,35 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        //Usage CMDS
+        if (args.length == 1) {
+            switch (args[0]) {
+                case "gem":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                    return true;
+                case "item":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss item (item) (player) (amount)"));
+                    return true;
+                case "particle": case "particles":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss particles (level)"));
+                    return true;
+                case "setenergy":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss setenergy (player) [amount]"));
+                    return true;
+                case "withdraw":
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss energy amount"));
+                    return true;
+                default:
+                    return true;
+            }
+        }
+        
+        if (args.length == 2) 
+            if (args[0].equals("gem")) {
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                return true;
+            }
+
         if (args.length == 2) {
             if (args[0].equals("particles") || args[0].equals("particle")) {
                 if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
@@ -127,7 +114,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
         if (args.length == 3) {
             //Settings.setSeason(3);
-            Player p = (Player) commandSender;
+            //Player p = (Player) commandSender;
             //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
 
             //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
@@ -137,7 +124,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             //p.sendMessage(parsed);
 
             //Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
-            p.getInventory().addItem(GetGemItem.returngem(GemType.Wealth, 2, Energy.Pristine, 1, 1, 1));
+            //p.getInventory().addItem(GetGemItem.returngem(GemType.Wealth, 2, Energy.Pristine, 1, 1, 1));
             //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
             //Bukkit.broadcastMessage(g.getEnergy().toString());
             //var mm = MiniMessage.miniMessage();
@@ -162,6 +149,100 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
             return true;
         }
+        
+        if (args.length == 4) {
+            if (args[0].equals("gem")) {
+                //Check if the 2nd arg is a player
+                boolean Usage = false;
+                boolean IsPlayer = false;
+                for (Player p : MultiLib.getAllOnlinePlayers())
+                    if (args[1].equals(p.getName()))
+                        IsPlayer = true;
+                if (!IsPlayer)
+                    Usage = true;
+
+
+                if (Settings.getSeason() == 3)
+                    if (!args[2].equals("astra") &&
+                            !args[2].equals("fire") &&
+                            !args[2].equals("life") &&
+                            !args[2].equals("puff") &&
+                            !args[2].equals("random") &&
+                            !args[2].equals("speed") &&
+                            !args[2].equals("strength") &&
+                            !args[2].equals("flux") &&
+                            !args[2].equals("wealth"))
+                        Usage = true;
+
+                if (Settings.getSeason() == 2)
+                    if (!args[2].equals("astra") &&
+                            !args[2].equals("fire") &&
+                            !args[2].equals("life") &&
+                            !args[2].equals("puff") &&
+                            !args[2].equals("random") &&
+                            !args[2].equals("speed") &&
+                            !args[2].equals("strength") &&
+                            !args[2].equals("wealth"))
+                        Usage = true;
+
+                if (Settings.getSeason() == 1)
+                    if (!args[2].equals("fire") &&
+                            !args[2].equals("life") &&
+                            !args[2].equals("puff") &&
+                            !args[2].equals("random") &&
+                            !args[2].equals("speed") &&
+                            !args[2].equals("strength") &&
+                            !args[2].equals("wealth"))
+                        Usage = true;
+
+                if (Usage) {
+                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                    return true;
+                }
+
+                try {
+                    // Check if number by catching the error/exception
+                    Integer.parseInt(args[3]);
+
+                }catch (NumberFormatException e) {
+                    commandSender.sendMessage(blissgems.colorize("#FFD773\uD83D\uDD2E #FC8888Argument must be an integer/number"));
+                    return true;
+                }
+
+                int tier = 1;
+                if (Integer.parseInt(args[3]) == 2)
+                    tier = 2;
+                GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
+                Gem gem = Gem.GemConstructor(type, tier, Energy.Pristine);
+                Player p = Bukkit.getPlayer(args[1]);
+
+
+                String gemmessage = "";
+                if (type == GemType.Strength)
+                    gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
+                else if (type == GemType.Speed)
+                    gemmessage = blissgems.colorize("#FEFD17&lsᴘᴇᴇᴅ");
+                else if (type == GemType.Life)
+                    gemmessage = blissgems.colorize("#FE04B4&lʟɪғᴇ");
+                else if (type == GemType.Puff)
+                    gemmessage = blissgems.colorize("#EFEFEF&lᴘᴜғғ");
+                else if (type == GemType.Astra)
+                    gemmessage = blissgems.colorize("#A01FFF&lᴀsᴛʀᴀ");
+                else if (type == GemType.Flux)
+                    gemmessage = blissgems.colorize("#5ED7FF&lғʟᴜx");
+                else if (type == GemType.Fire)
+                    gemmessage = blissgems.colorize("#FE8120&lғɪʀᴇ");
+                else if (type == GemType.Wealth)
+                    gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
+
+                p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + gemmessage + "#B8FFFB gem &7Tier &b" + tier));
+
+                Gem.GiveGem(gem, p, false);
+
+
+            }
+        }
+        
         return true;
     }
 
@@ -182,11 +263,15 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 return pl;
             }
             if (strings.length == 3) {
-                return List.of("astra", "fire", "life", "puff", "random", "speed", "strength", "flux", "wealth");
+                if (Settings.getSeason() == 3)
+                    return List.of("astra", "fire", "life", "puff", "random", "speed", "strength", "flux", "wealth");
+                if (Settings.getSeason() == 2)
+                    return List.of("astra", "fire", "life", "puff", "random", "speed", "strength", "wealth");
+                if (Settings.getSeason() == 1)
+                    return List.of("fire", "life", "puff", "random", "speed", "strength", "flux", "wealth");
             }
-            if (strings.length == 4) {
+            if (strings.length == 4)
                 return List.of("(tier)");
-            }
         }
         return List.of();
     }

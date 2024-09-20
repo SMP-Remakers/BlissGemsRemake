@@ -1,8 +1,10 @@
 package com.hyperdondon.blissgemsremake.api;
 
+import com.hyperdondon.blissgemsremake.blissgems;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -275,24 +277,24 @@ public class Gem {
         String type2 = "";
 
         if (gem2.season == 1) {
-            NamespacedKey idkey2 = new NamespacedKey("blissgems", "shard_id");
+            NamespacedKey idkey2 = new NamespacedKey(blissgems.getInstance(), "shard_id");
             id3 = itemMeta.getPersistentDataContainer().get(idkey2, PersistentDataType.STRING);
         }
 
         if (gem2.season == 2 || gem2.season == 3) {
-            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
             id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
 
-            NamespacedKey tierkey = new NamespacedKey("blissgems", "gem-tier");
+            NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
             tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
 
-            NamespacedKey typekey = new NamespacedKey("blissgems", "gem-type");
+            NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
             type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
 
-            NamespacedKey quicknodropkey = new NamespacedKey("blissgems", "quick-no-drop");
+            NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
             drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
 
-            NamespacedKey quicknoremovekey = new NamespacedKey("blissgems", "quick-no-remove");
+            NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
             remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
         }
         if (gem2.season == 1) {
@@ -383,14 +385,15 @@ public class Gem {
         }
 
         ItemStack item = GetGemItem.returngem(type, tier, energy, allowdropint, allowremoveint, season);
+        assert item != null;
         ItemMeta itemMeta = item.getItemMeta();
 
 
         if (season == 2 || season == 3) {
-            NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id");
+            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         } else if (season == 1) {
-            NamespacedKey idkey = new NamespacedKey("blissgems", "shard_id");
+            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         }
 
@@ -440,18 +443,45 @@ public class Gem {
             allowremoveint = 0;
         }
 
-        return (Gem.fromGemItem(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason())));
+        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
 
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint) {
-        return (Gem.fromGemItem(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason())));
+        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
 
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint, int season) {
-        return (Gem.fromGemItem(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, season)));
+        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, season))));
     }
 
+
+    public static void GiveGem(Gem gem, Player p , boolean silent) {
+        if (!silent) {
+            String gemmessage = "N/A";
+            if (gem.type == GemType.Strength)
+                gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
+            else if (gem.type == GemType.Speed)
+                gemmessage = blissgems.colorize("#FEFD17&lsᴘᴇᴇᴅ");
+            else if (gem.type == GemType.Life)
+                gemmessage = blissgems.colorize("#FE04B4&lʟɪғᴇ");
+            else if (gem.type == GemType.Puff)
+                gemmessage = blissgems.colorize("#EFEFEF&lᴘᴜғғ");
+            else if (gem.type == GemType.Astra)
+                gemmessage = blissgems.colorize("#A01FFF&lᴀsᴛʀᴀ");
+            else if (gem.type == GemType.Flux)
+                gemmessage = blissgems.colorize("#5ED7FF&lғʟᴜx");
+            else if (gem.type == GemType.Fire)
+                gemmessage = blissgems.colorize("#FE8120&lғɪʀᴇ");
+            else if (gem.type == GemType.Wealth)
+                gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
+
+            p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have received a " + gemmessage + "#B8FFFB gem &7Tier &b" + gem.tier));
+        }
+        p.getInventory().addItem(gem.toItemStack());
+
+
+    }
 
 }
