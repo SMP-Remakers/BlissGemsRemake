@@ -285,11 +285,13 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 int tier = 1;
                 if (Integer.parseInt(args[3]) == 2)
                     tier = 2;
-                GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                Gem gem = Gem.GemConstructor(type, tier, Energy.Pristine);
+
+                //GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
+                //Gem gem = Gem.GemConstructor(type, tier, Energy.Pristine);
 
 
 
+                /*
                 String gemmessage = "";
                 if (type == GemType.Strength)
                     gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
@@ -307,10 +309,12 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                     gemmessage = blissgems.colorize("#FE8120&lғɪʀᴇ");
                 else if (type == GemType.Wealth)
                     gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
+                    */
 
-                p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + gemmessage + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                Gem.GiveGem(gem, p, false, args[3]);
+                p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + "#B8FFFB gem &7Tier &b" + args[3]));
+
+                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds","ds", 2));
             }
 
         }

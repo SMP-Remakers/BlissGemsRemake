@@ -1,6 +1,8 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.blissgems;
+import lombok.Getter;
+import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,77 +15,19 @@ import org.mineacademy.fo.Common;
 
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Gem {
     ;
 
     private String id;
     private GemType type;
     private int tier;
+
     private Energy energy;
     private boolean allowdrop;
     private boolean allowremove;
     private int season;
-
-
-    public Energy getEnergy() {
-        return energy;
-    }
-
-    @Nullable
-    public String getID() {
-        return id;
-    }
-
-    public GemType getType() {
-        return type;
-    }
-
-    public boolean getDrop() {
-        return allowdrop;
-    }
-
-    public boolean getRemove() {
-        return allowremove;
-    }
-
-    public int getTier() {
-        return tier;
-    }
-
-    public int getSeason() {
-        return season;
-    }
-
-
-    public void setEnergy(Energy e) {
-        energy = e;
-    }
-
-    @Nullable
-    public void setID(String i) {
-        id = i;
-    }
-
-    public void setType(GemType gt) {
-        type = gt;
-    }
-
-    public void setDrop(boolean d) {
-        allowdrop = d;
-    }
-
-    public void setRemove(boolean r) {
-        allowremove = r;
-    }
-
-    public void setTier(int t) {
-        tier = t;
-    }
-
-    public void setSeason(int s) {
-        season = s;
-    }
-
 
     public static Gem fromGemItem(ItemStack gem) {
         ItemMeta itemMeta = gem.getItemMeta();

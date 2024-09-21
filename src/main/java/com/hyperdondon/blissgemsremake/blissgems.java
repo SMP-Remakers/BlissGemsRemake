@@ -86,7 +86,7 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(LeaveJoinStorer.getInstance());
 
-        registerEvents(Powers.getInstance());
+        registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.getInstance());
 
         registerEvents(GemGiver.getInstance());
 
