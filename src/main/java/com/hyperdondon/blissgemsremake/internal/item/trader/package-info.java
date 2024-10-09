@@ -6,6 +6,6 @@
  */
 
 
-package com.hyperdondon.blissgemsremake.internal.gems.Wealth;
+package com.hyperdondon.blissgemsremake.internal.item.trader;
 
 

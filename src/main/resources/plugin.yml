@@ -19,3 +19,9 @@ commands:
   progobsidian:
     description: Gives the player enchanted obsidian
     usage: /<command>
+
+libraries:
+  - org.openjdk.nashorn:nashorn-core:15.4
+  - org.mariadb.jdbc:mariadb-java-client:3.0.3
+  - com.mysql:mysql-connector-j:9.0.0
+  - org.xerial:sqlite-jdbc:3.46.0.0

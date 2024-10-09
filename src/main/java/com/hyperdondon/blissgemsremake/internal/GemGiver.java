@@ -4,12 +4,10 @@ import com.hyperdondon.blissgemsremake.api.Energy;
 import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.Settings;
-import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Random;
@@ -21,10 +19,9 @@ public final class GemGiver implements Listener {
 
     @EventHandler
     public void givegem(PlayerJoinEvent e) {
-        Bukkit.broadcastMessage("s");
-        if (e.getPlayer().hasPlayedBefore()) {
+        if (!e.getPlayer().hasPlayedBefore()) {
             if (Settings.getGiveGemOnJoin()) {
-                GemType type = GemType.Strength;
+                GemType type = null;
                 int randomNumber = 0;
                 if (Settings.getSeason() == 1) {
                     Random random = new Random();
@@ -42,7 +39,7 @@ public final class GemGiver implements Listener {
                 }
 
 
-                randomNumber = 2;
+                //randomNumber = 2;
                 if (randomNumber == 1) {
                     type = GemType.Life;
                 }
@@ -76,7 +73,7 @@ public final class GemGiver implements Listener {
                 }
 
                 Settings.setSeason(2);
-                Gem g = Gem.GemConstructor(type, 2, Energy.Pristine);
+                Gem g = Gem.GemConstructor(type, 1, Energy.Pristine);
                 e.getPlayer().getInventory().addItem(g.toItemStack());
 
             }

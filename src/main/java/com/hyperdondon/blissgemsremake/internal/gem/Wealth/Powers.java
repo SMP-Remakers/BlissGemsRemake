@@ -1,4 +1,4 @@
-package com.hyperdondon.blissgemsremake.internal.gems.Wealth;
+package com.hyperdondon.blissgemsremake.internal.gem.Wealth;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
@@ -12,8 +12,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.mineacademy.fo.Common;
-import org.mineacademy.fo.MinecraftVersion;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package com.hyperdondon.blissgemsremake.internal.gems.Strength;
+package com.hyperdondon.blissgemsremake.internal.gem.Strength;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
@@ -16,7 +16,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import org.mineacademy.fo.Common;
 import org.mineacademy.fo.remain.Remain;
 
 import java.time.Duration;

@@ -6,6 +6,6 @@
  */
 
 
-package com.hyperdondon.blissgemsremake.internal.gems.Strength;
+package com.hyperdondon.blissgemsremake.internal.gem.Wealth;
 
 

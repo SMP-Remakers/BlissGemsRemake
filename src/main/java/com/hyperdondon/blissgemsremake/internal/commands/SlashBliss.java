@@ -1,32 +1,25 @@
 package com.hyperdondon.blissgemsremake.internal.commands;
 
-import com.comphenix.protocol.PacketType;
 import com.github.puregero.multilib.MultiLib;
 import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.internal.VersionChecker;
-import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.item.trader.Trader;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.MinecraftVersion;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public final class SlashBliss implements CommandExecutor, TabCompleter {
 
@@ -36,6 +29,46 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
+
+        if (args[0].equals("test")) {
+            Trader.OpenGUI((Player) commandSender);
+            //commandSender.sendMessage(colorize2("&c&fSkibidi #FFD773🔮"));
+            //Settings.setSeason(3);
+            //Player p = (Player) commandSender;
+            //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
+
+            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
+
+            //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+            // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
+            //p.sendMessage(parsed);
+
+            //Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
+            //p.getInventory().addItem(GetGemItem.returngem(GemType.Wealth, 2, Energy.Pristine, 1, 1, 1));
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+            //Bukkit.broadcastMessage(g.getEnergy().toString());
+            //var mm = MiniMessage.miniMessage();
+            //Audience player = blissgems.adventure.player(p);
+
+
+            //player.sendMessage(component);
+
+
+            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
+
+            //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
+
+            //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
+
+            //Bukkit.broadcastMessage(g.getID());
+
+            //p.getInventory().addItem(gem);
+
+            // p.getInventory().addItem(g.toItemStack());
+
+
+            return true;
+        }
 
         if (args.length == 0) {
             Player p = (Player) commandSender;
@@ -109,47 +142,6 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             }
 
         }
-
-
-
-
-        if (args.length == 3) {
-            //Settings.setSeason(3);
-            //Player p = (Player) commandSender;
-            //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
-
-            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
-
-            //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
-            // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
-            //p.sendMessage(parsed);
-
-            //Bukkit.broadcastMessage(String.valueOf(VersionChecker.OlderThanNBTChange()));
-            //p.getInventory().addItem(GetGemItem.returngem(GemType.Wealth, 2, Energy.Pristine, 1, 1, 1));
-            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
-            //Bukkit.broadcastMessage(g.getEnergy().toString());
-            //var mm = MiniMessage.miniMessage();
-            //Audience player = blissgems.adventure.player(p);
-
-
-            //player.sendMessage(component);
-
-
-            //Gem g = Gem.fromGemItem(p.getInventory().getItemInMainHand());
-
-            //p.getInventory().setItemInOffHand(GetGemItem.returngem(GemType.Strength, 2, Energy.N_A, 1, 1, 1));
-
-            //g.UpdateWithItemStack(p.getInventory().getItemInOffHand());
-
-            //Bukkit.broadcastMessage(g.getID());
-
-            //p.getInventory().addItem(gem);
-
-            // p.getInventory().addItem(g.toItemStack());
-
-
-            return true;
-        }
         
         if (args.length == 4) {
             if (args[0].equals("gem")) {
@@ -217,8 +209,10 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 int tier = 1;
                 if (Integer.parseInt(args[3]) == 2)
                     tier = 2;
+
+                Settings.setSeason(2);
                 GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                Gem gem = Gem.GemConstructor(type, tier, Energy.Pristine);
+                Gem gem = Gem.GemConstructor(type, tier, Energy.Scratched);
                 
                 
 
@@ -258,8 +252,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                         p = player;
                     }
 
-                if (!IsPlayer)
-                    Usage = true;
+                Usage = !IsPlayer;
 
                 if (!args[1].equals("energy") &&
                         !args[1].equals("repair") &&
@@ -314,7 +307,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds","ds", 2));
+                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds","ds", 3));
             }
 
         }

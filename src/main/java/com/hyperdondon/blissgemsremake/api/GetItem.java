@@ -41,7 +41,15 @@ public final class GetItem {
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.INTEGER, 1);
 
             itemMeta.setCustomModelData(0);
-            itemMeta.setLore(Arrays.asList(
+            if (season == 2 || season == 3)
+                itemMeta.setLore(Arrays.asList(
+                        ChatColor.GRAY + "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ʏᴏᴜʀ ɢᴇᴍ ᴛʏᴘᴇ",
+                        ChatColor.GRAY + "ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ ᴀ ʀᴀɴᴅᴏᴍ ᴛɪᴇʀ ᴏɴᴇ ɢᴇᴍ",
+                        ChatColor.WHITE + "",
+                        ChatColor.RED + "ᴡᴀʀɴɪɴɢ: ᴜsɪɴɢ ᴛʜɪs ᴡɪʟʟ ʟᴏsᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ɢᴇᴍ"
+                ));
+            else
+                itemMeta.setLore(Arrays.asList(
                     ChatColor.GRAY + "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ʏᴏᴜʀ ɢᴇᴍ ᴛʏᴘᴇ",
                     ChatColor.GRAY + "ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ ᴀ ʀᴀɴᴅᴏᴍ ᴛɪᴇʀ ᴏɴᴇ ɢᴇᴍ",
                     ChatColor.WHITE + "",
@@ -83,26 +91,13 @@ public final class GetItem {
                 profileField.set(skullMeta, profile);
 
             }catch (Exception e) {
-                Common.error(e, "Base64 Encoding for Trader Skull encountered an exception.");
+                Common.error(e, "Base64 Encoding for Trader Head encountered an exception. This could also happen because your server is in offline mode.");
             }
 
             item.setItemMeta(skullMeta);
 
             NBTItem nbtItem = new NBTItem(item);
             nbtItem.setInteger("HideFlags", 255);
-
-            NBTCompound SkullOwner = nbtItem.getOrCreateCompound("SkullOwner");
-
-            NBTList<Integer> intList = SkullOwner.getIntegerList("Id");
-            //intList.add(-2041578254);
-            //intList.add(-1379710610);
-            //intList.add(-1313167349);
-            //intList.add(221204661);
-
-
-
-            //SkullOwner.setString("Name", "Bliss_SMP");
-
 
             item = nbtItem.getItem();
 

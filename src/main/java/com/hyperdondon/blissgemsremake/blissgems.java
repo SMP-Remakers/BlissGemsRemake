@@ -2,27 +2,20 @@ package com.hyperdondon.blissgemsremake;
 
 import com.hyperdondon.blissgemsremake.internal.*;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
-import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.item.trader.Trader;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
-import lombok.Getter;
-import lombok.NonNull;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
-
 import java.io.File;
-
-import static com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.StrengthSeconds;
-import static com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.StrengthTicks;
-import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.WealthSeconds;
-import static com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.WealthTicks;
+import static com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers.*;
+import static com.hyperdondon.blissgemsremake.internal.gem.Wealth.Powers.*;
 
 public final class blissgems extends SimplePlugin implements Listener {
 
@@ -62,19 +55,14 @@ public final class blissgems extends SimplePlugin implements Listener {
     }
 
     public void Mainstart() {
-
-
+        /*
+        For a Foundation version that has Libby
         this.loadLibrary("org.openjdk.nashorn", "nashorn-core", "15.4");
         this.loadLibrary("org.mariadb.jdbc", "mariadb-java-client", "3.0.3");
         this.loadLibrary("com.mysql", "mysql-connector-j", "9.0.0");
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
-
-
-
+         */
         //adventure = BukkitAudiences.create(this);
-
-        PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
-        PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + "/Data.db");
 
         plugin = this;
 
@@ -82,15 +70,15 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         getCommand("progobsidian").setExecutor(EnchantedObsidian.getInstance());
 
-        registerEvents(this);
+        registerEvents(Trader.getInstance());
 
         registerEvents(LeaveJoinStorer.getInstance());
 
-        registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers.getInstance());
+        registerEvents(Powers.getInstance());
 
         registerEvents(GemGiver.getInstance());
 
-        registerEvents(com.hyperdondon.blissgemsremake.internal.gems.Wealth.Powers.getInstance());
+        registerEvents(com.hyperdondon.blissgemsremake.internal.gem.Wealth.Powers.getInstance());
 
         registerEvents(TexturePackLoader.getInstance());
 
@@ -101,16 +89,24 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         getCommand("progobsidian").setExecutor(new EnchantedObsidian());
 
-        String path = "config.yml";
-        File settings = new File(blissgems.plugin.getDataFolder(), path);
+        String configfilename = "config.yml";
+        File settings = new File(blissgems.plugin.getDataFolder(), configfilename);
 
         if (!settings.exists()) {
-            plugin.saveResource(path, false);
-            settings = new File(plugin.getDataFolder(), path);
+            plugin.saveResource(configfilename, false);
+            //settings = new File(plugin.getDataFolder(), configfilename);
         }
 
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(settings);
-        season = config.getInt("season");
+        String databasefilename = "Data.db";
+        File db = new File(blissgems.plugin.getDataFolder(), "Data.db");
+
+        if (!db.exists()) {
+            plugin.saveResource("Data.db", false);
+            //db = new File(plugin.getDataFolder(), "Data.db");
+        }
+
+        PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + databasefilename);
+        PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + databasefilename);
 
 
         new BukkitRunnable() {
@@ -137,4 +133,6 @@ public final class blissgems extends SimplePlugin implements Listener {
         s = Common.colorize(s);
         return s;
     }
+
+
 }

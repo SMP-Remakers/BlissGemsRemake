@@ -1,10 +1,9 @@
 package com.hyperdondon.blissgemsremake.internal;
 
-import com.hyperdondon.blissgemsremake.internal.gems.Strength.Powers;
+import com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
