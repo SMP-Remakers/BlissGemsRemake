@@ -11,10 +11,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.Common;
 
 import java.util.Objects;
+import java.util.UUID;
+
 import static net.md_5.bungee.api.ChatColor.*;
 
 @Getter
@@ -25,12 +28,99 @@ public class Gem {
     private String id;
     private GemType type;
     private int tier;
-
     private Energy energy;
     private boolean allowdrop;
     private boolean allowremove;
     private int season;
 
+
+    /**Internal Use only!*/
+    private Gem() {
+
+    }
+
+    //Constructors
+
+    /**Constructs a gem using information you have passed.*/
+    public Gem(GemType gemtype, int gemtier, Energy gemenergy) {
+        boolean allowremovebool;
+        boolean allowdropint;
+
+        if (Settings.getAllowRemove()) {
+            allowremovebool = true;
+        } else {
+            allowremovebool = false;
+        }
+
+
+        if (Settings.getAllowDrop()) {
+            allowdropint = true;
+        } else {
+            allowdropint = false;
+        }
+
+        id = UUID.randomUUID().toString();
+        type = gemtype;
+        tier = gemtier;
+        energy = gemenergy;
+        allowremove = allowremovebool;
+        allowdrop = allowdropint;
+        season = Settings.getSeason();
+    }
+
+    /**Constructs a gem using information you have passed.*/
+    public Gem(GemType gemtype, int gemtier, Energy gemenergy, boolean allowremovebool, boolean allowdropbool) {
+        id = UUID.randomUUID().toString();
+        type = gemtype;
+        tier = gemtier;
+        energy = gemenergy;
+        allowremove = allowremovebool;
+        allowdrop = allowdropbool;
+        season = Settings.getSeason();
+    }
+
+    /**Constructs a gem using information you have passed.*/
+    public Gem(GemType gemtype, int gemtier, Energy gemenergy, boolean allowremovebool, boolean allowdropbool, int gemseason) {
+        id = UUID.randomUUID().toString();
+        type = gemtype;
+        tier = gemtier;
+        energy = gemenergy;
+        allowremove = allowremovebool;
+        allowdrop = allowdropbool;
+        season = gemseason;
+    }
+
+    /**Constructs a gem using information you have passed.*/
+    public Gem(GemType gemtype, int gemtier, Energy gemenergy, int gemseason) {
+        boolean allowremovebool;
+        boolean allowdropbool;
+
+        if (Settings.getAllowRemove()) {
+            allowremovebool = true;
+        } else {
+            allowremovebool = false;
+        }
+
+
+        if (Settings.getAllowDrop()) {
+            allowdropbool = true;
+        } else {
+            allowdropbool = false;
+        }
+
+        id = UUID.randomUUID().toString();
+        type = gemtype;
+        tier = gemtier;
+        energy = gemenergy;
+        allowremove = allowremovebool;
+        allowdrop = allowdropbool;
+        season = gemseason;
+    }
+
+
+
+
+    /**Returns a Gem using the values from an ItemStack that should be a gem.*/
     public static Gem fromGemItem(ItemStack gem) {
         ItemMeta itemMeta = gem.getItemMeta();
 
@@ -312,6 +402,7 @@ public class Gem {
     }
 
 
+    /**Turns your Gem to an ItemStack using the information given.*/
     @Nullable
     public ItemStack toItemStack() {
         int allowremoveint;
@@ -348,7 +439,7 @@ public class Gem {
         return item;
     }
 
-
+    /**Checks if the energy that is given is Energy.Pristine or higher.*/
     public static boolean isPristineorHigher(Energy en) {
         if (en == Energy.Pristine || en == Energy.Pristine_1 || en == Energy.Pristine_2 || en == Energy.Pristine_3 || en == Energy.Pristine_4 || en == Energy.Pristine_5) {
             return true;
@@ -357,7 +448,8 @@ public class Gem {
         }
     }
 
-
+    /**@deprecated Please use the built-in constructor, Gem mygem = new Gem(arguments here). Constructs a gem using information you have passed.*/
+    @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy) {
         int allowremoveint;
         int allowdropint;
@@ -375,10 +467,11 @@ public class Gem {
             allowdropint = 0;
         }
 
-        return (Gem.fromGemItem(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason())));
+        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
-
+    /**@deprecated Please use the built-in constructor, Gem mygem = new Gem(arguments here). Constructs a gem using information you have passed.*/
+    @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint) {
         int allowremoveint;
 
@@ -391,17 +484,19 @@ public class Gem {
         return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
-
+    /**@deprecated Please use the built-in constructor, Gem mygem = new Gem(arguments here). Constructs a gem using information you have passed.*/
+    @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint) {
         return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
-
+    /**@deprecated Please use the built-in constructor, Gem mygem = new Gem(arguments here). Constructs a gem using information you have passed.*/
+    @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint, int season) {
         return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, season))));
     }
 
-
+    /**Gives a player the Gem you provided as an item.*/
     public static void GiveGem(Gem gem, Player p , boolean silent, String tier) {
         if (!silent) {
             String gemmessage = "N/A";
@@ -427,6 +522,11 @@ public class Gem {
         p.getInventory().addItem(gem.toItemStack());
 
 
+    }
+
+    /**Gives you the player's energy.*/
+    public static Energy GetPlayerEnergy(Player p) {
+        return Energy.N_A;
     }
 
 }

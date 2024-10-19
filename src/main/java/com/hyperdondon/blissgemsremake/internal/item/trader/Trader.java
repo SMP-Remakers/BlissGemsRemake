@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 
 import static java.util.Objects.isNull;
-import static net.md_5.bungee.api.ChatColor.BOLD;
+import static net.md_5.bungee.api.ChatColor.*;
 
 public class Trader implements Listener {
 
@@ -170,12 +170,63 @@ public class Trader implements Listener {
         ItemStack strengthgem = GemToGUI("strength", currentgem, strengthname, tier, StrengthNormalCMD, StrengthGUICMD, Gems.get(p.getUniqueId()).size(), p);
         ItemStack lifegem = GemToGUI("life", currentgem, lifename, tier, LifeNormalCMD, LifeGUICMD, Gems.get(p.getUniqueId()).size(), p);
 
+        String currentenergy = "";
+        for (ItemStack item : p.getInventory()) {
+            if (item.hasItemMeta()) {
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
+                    currentgem = "puff";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#F10303") + "" + BOLD + "sᴛʀᴇɴɢᴛʜ "))
+                    currentgem = "strength";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE04B4") + "" + BOLD + "ʟɪғᴇ "))
+                    currentgem = "life";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE8120") + "" + BOLD + "ғɪʀᴇ "))
+                    currentgem = "fire";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#0EC912") + "" + BOLD + "ᴡᴇᴀʟᴛʜ "))
+                    currentgem = "wealth";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#A01FFF") + "" + BOLD + "ᴀsᴛʀᴀ "))
+                    currentgem = "astra";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx "))
+                    currentgem = "flux";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FEFD17") + "" + BOLD + "sᴘᴇᴇᴅ "))
+                    currentgem = "speed";
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#C7C7C7") + "ɢᴇᴍ"))
+                    break;
+
+                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FFD773") + "ɢᴇᴍ")) {
+                    tier = 2;
+                    break;
+                }
+            }
+        }
+
+        ItemStack energybtl = new ItemStack(Material.NAUTILUS_SHELL);
+        ItemMeta energymta = energybtl.getItemMeta();
+        energymta.setCustomModelData(300);
+        energymta.setDisplayName(ChatColor.of("#96FFD9") + "" + BOLD + "ᴇɴᴇʀɢʏ " + ChatColor.of("#FFECB8") + "ɪɴ ᴀ ʙᴏᴛᴛʟᴇ");
+        energymta.setLore(
+                Arrays.asList(
+                        WHITE + "Left click to trade!",
+                        WHITE + "This will leave you on the " + WHITE + "state"
+                )
+        );
+        energybtl.setItemMeta(energymta);
+
+
 
         gui.setItem(17, puffgem);
         gui.setItem(16, astragem);
         gui.setItem(15, fluxgem);
         gui.setItem(14, wealthgem);
-
+        gui.setItem(13, energybtl);
         gui.setItem(12, speedgem);
         gui.setItem(11, firegem);
         gui.setItem(10, strengthgem);
