@@ -7,7 +7,4 @@ This repo is still in the works please ignore everything u see :)
 
 
 # Importing into Maven or Gradle
-Go to https://jitpack.io/#SMP-Remakers/BlissGemsRemakeOLD/ and select the version of the plugin and import as a dependency and put the jitpack repo.
-
-[For Plugin Developers](Wiki/PluginDev/Start.md) [For Skript Developers](Wiki/SkirptDev/Start.md) 
-
+https://github.com/SMP-Remakers/BlissGemsRemake/wiki#importing-the-api-using-jitpack
