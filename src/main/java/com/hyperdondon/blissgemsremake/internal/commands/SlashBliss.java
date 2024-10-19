@@ -37,7 +37,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             //Player p = (Player) commandSender;
             //ItemStack gem = GetGemItem.returngem(GemType.Strength, 2, Energy.Pristine, 1, 1);
 
-            //Gem gem = Gem.GemConstructor(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
+            //Gem gem = new Gem(GemType.Speed, 2, Energy.Cracked, 1,1 ,3);
 
             //Component parsed = MiniMessage.miniMessage().deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
             // serialized = miniMessage.serialize(LegacyComponentSerializer.legacySection().deserialize(serialized));
@@ -212,7 +212,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 Settings.setSeason(2);
                 GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                Gem gem = Gem.GemConstructor(type, tier, Energy.Scratched);
+                Gem gem = new Gem(type, tier, Energy.Scratched);
                 
                 
 
@@ -280,7 +280,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                     tier = 2;
 
                 //GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                //Gem gem = Gem.GemConstructor(type, tier, Energy.Pristine);
+                //Gem gem = new Gem(type, tier, Energy.Pristine);
 
 
 

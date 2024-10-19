@@ -23,7 +23,6 @@ public final class blissgems extends SimplePlugin implements Listener {
     @Getter
     public static BukkitAudiences adventure;
     */
-    public static Integer season;
     public static blissgems plugin;
 
 
