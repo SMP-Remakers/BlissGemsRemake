@@ -1,2 +1,9 @@
+jdk:
+  - openjdk21
+before_install:
+  - sdk install java 21.0.4-tem
+  - sdk use java 21.0.4-tem
+  - sdk install maven
+  - mvn -v
 install:
-    - mvn clean install -DskipTests -f pom-jitpack.xml
+  - mvn clean install -DskipTests -f pom-jitpack.xml
