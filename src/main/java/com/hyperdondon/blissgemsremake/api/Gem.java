@@ -68,6 +68,7 @@ public class Gem {
         season = Settings.getSeason();
     }
 
+
     /**Constructs a gem using information you have passed.*/
     public Gem(GemType gemtype, int gemtier, Energy gemenergy, boolean allowremovebool, boolean allowdropbool) {
         id = UUID.randomUUID().toString();
