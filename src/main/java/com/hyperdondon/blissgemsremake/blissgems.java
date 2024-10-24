@@ -9,11 +9,15 @@ import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
+
 import java.io.File;
+
 import static com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers.*;
 import static com.hyperdondon.blissgemsremake.internal.gem.Wealth.Powers.*;
 
@@ -91,21 +95,17 @@ public final class blissgems extends SimplePlugin implements Listener {
         String configfilename = "config.yml";
         File settings = new File(blissgems.plugin.getDataFolder(), configfilename);
 
-        if (!settings.exists()) {
-            plugin.saveResource(configfilename, false);
-            //settings = new File(plugin.getDataFolder(), configfilename);
-        }
+        //settings = new File(plugin.getDataFolder(), configfilename);
+        if (!settings.exists()) plugin.saveResource(configfilename, false);
 
         String databasefilename = "Data.db";
         File db = new File(blissgems.plugin.getDataFolder(), "Data.db");
 
-        if (!db.exists()) {
-            plugin.saveResource("Data.db", false);
-            //db = new File(plugin.getDataFolder(), "Data.db");
-        }
+        //db = new File(plugin.getDataFolder(), "Data.db");
+        if (!db.exists()) plugin.saveResource("Data.db", false);
 
-        PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + databasefilename);
-        PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + this.getDataFolder().getAbsolutePath() + databasefilename);
+        PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);
+        PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);
 
 
         new BukkitRunnable() {
@@ -132,6 +132,4 @@ public final class blissgems extends SimplePlugin implements Listener {
         s = Common.colorize(s);
         return s;
     }
-
-
 }

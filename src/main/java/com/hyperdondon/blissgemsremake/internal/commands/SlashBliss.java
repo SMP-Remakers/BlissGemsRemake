@@ -7,6 +7,7 @@ import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.item.trader.Trader;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,7 +32,9 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, Command command, String s, String[] args) {
 
         if (args[0].equals("test")) {
-            Trader.OpenGUI((Player) commandSender);
+            //Trader.OpenGUI((Player) commandSender);
+            Player p = (Player) commandSender;
+            Bukkit.broadcastMessage(Gem.GetPlayerEnergy(p).toString());
             //commandSender.sendMessage(colorize2("&c&fSkibidi #FFD773🔮"));
             //Settings.setSeason(3);
             //Player p = (Player) commandSender;
@@ -74,21 +77,20 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
             Player p = (Player) commandSender;
 
             //Spigot/Bukkit 1.18 added support for multiple strings to be sent at the same time
-            if (MinecraftVersion.newerThan(MinecraftVersion.V.v1_17)) {
-                p.sendMessage(
-                        ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system",
-                        ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player",
-                        ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player",
-                        ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive specific player",
-                        ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set player's energy",
-                        ChatColor.AQUA + "/bliss reload " + ChatColor.GRAY + "- reload the configuration",
-                        ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive banned player",
-                        ChatColor.AQUA + "/bliss withdraw [amount] " + ChatColor.GRAY + "- withdraw energy",
-                        ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set energy for player",
-                        ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
+            if (MinecraftVersion.newerThan(MinecraftVersion.V.v1_17)) p.sendMessage(
+                    ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system",
+                    ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player",
+                    ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player",
+                    ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive specific player",
+                    ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set player's energy",
+                    ChatColor.AQUA + "/bliss reload " + ChatColor.GRAY + "- reload the configuration",
+                    ChatColor.AQUA + "/bliss revive (player) " + ChatColor.GRAY + "- revive banned player",
+                    ChatColor.AQUA + "/bliss withdraw [amount] " + ChatColor.GRAY + "- withdraw energy",
+                    ChatColor.AQUA + "/bliss setenergy (player) [amount] " + ChatColor.GRAY + "- set energy for player",
+                    ChatColor.AQUA + "/bliss particles [setting] " + ChatColor.GRAY + "- set performance setting"
 
-                );
-            } else {
+            );
+            else {
                 p.sendMessage(ChatColor.AQUA + "/bliss toggle " + ChatColor.GRAY + "-Toggles give system");
                 p.sendMessage(ChatColor.AQUA + "/bliss gem (player) (type) (tier) " + ChatColor.GRAY + "- give gem to specific player");
                 p.sendMessage(ChatColor.AQUA + "/bliss item (item) (player) [amount] " + ChatColor.GRAY + "- give specified item to specific player");
@@ -104,45 +106,43 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
         }
 
         //Usage CMDS
-        if (args.length == 1) {
-            switch (args[0]) {
-                case "gem":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
-                    return true;
-                case "item":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss item (item) (player) (amount)"));
-                    return true;
-                case "particle": case "particles":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss particles (level)"));
-                    return true;
-                case "setenergy":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss setenergy (player) [amount]"));
-                    return true;
-                case "withdraw":
-                    commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss energy amount"));
-                    return true;
-                default:
-                    return true;
-            }
+        if (args.length == 1) switch (args[0]) {
+            case "gem":
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
+                return true;
+            case "item":
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss item (item) (player) (amount)"));
+                return true;
+            case "particle":
+            case "particles":
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss particles (level)"));
+                return true;
+            case "setenergy":
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss setenergy (player) [amount]"));
+                return true;
+            case "withdraw":
+                commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss energy amount"));
+                return true;
+            default:
+                return true;
         }
-        
+
         if (args.length == 2) {
             if (args[0].equals("gem")) {
                 commandSender.sendMessage(blissgems.colorize("&cUsage: /bliss gem (player) (type) (tier)"));
                 return true;
             }
 
-            if (args[0].equals("particles") || args[0].equals("particle")) {
+            if (args[0].equals("particles") || args[0].equals("particle"))
                 if (args[1].equals("default") || args[1].equals("less") || args[1].equals("performance")) {
                     Player p = (Player) commandSender;
                     PlayerParticlePreferences.getInstance().put(p, args[1].toLowerCase());
                     p.sendMessage(blissgems.colorize("#FFD773") + "🔮 " + "" + ChatColor.GREEN + "Particle Level changed to " + ChatColor.YELLOW + args[1].toUpperCase());
                     return true;
                 }
-            }
 
         }
-        
+
         if (args.length == 4) {
             if (args[0].equals("gem")) {
                 //Check if the 2nd arg is a player
@@ -154,7 +154,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                         IsPlayer = true;
                         p = player;
                     }
-                        
+
                 if (!IsPlayer)
                     Usage = true;
 
@@ -201,7 +201,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                     // Check if number by catching the error/exception
                     Integer.parseInt(args[3]);
 
-                }catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     commandSender.sendMessage(blissgems.colorize("#FFD773\uD83D\uDD2E #FC8888Argument must be an integer/number"));
                     return true;
                 }
@@ -213,8 +213,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 Settings.setSeason(2);
                 GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
                 Gem gem = new Gem(type, tier, Energy.Scratched);
-                
-                
+
 
                 String gemmessage = "";
                 if (type == GemType.Strength)
@@ -236,9 +235,8 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + gemmessage + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                Gem.GiveGem(gem, p, false, args[3]);
+                Gem.GiveGem(gem, p, false, Integer.parseInt(args[3]));
             }
-
 
 
             if (args[0].equals("item")) {
@@ -270,7 +268,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                     // Check if number by catching the error/exception
                     Integer.parseInt(args[3]);
 
-                }catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     commandSender.sendMessage(blissgems.colorize("&cAn internal error occurred while attempting to perform this command"));
                     return true;
                 }
@@ -307,11 +305,11 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds","ds", 3));
+                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds", "ds", 3));
             }
 
         }
-        
+
         return true;
     }
 
