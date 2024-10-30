@@ -40,9 +40,7 @@ public final class blissgems extends SimplePlugin implements Listener {
     */
 
     @Override
-    public void onPluginStart() {
-
-    }
+    public void onPluginStart() {}
 
     public void onPluginStop() {
         /*
