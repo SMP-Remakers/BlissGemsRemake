@@ -13,11 +13,9 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.Common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
+import static java.util.Objects.isNull;
 import static net.md_5.bungee.api.ChatColor.*;
 
 @Getter
@@ -111,80 +109,13 @@ public class Gem {
 
         Gem gem2 = new Gem();
 
-        gem2.energy = (Energy) GetGemInfo(gem).get(1);
-        gem2.season = (int) GetGemInfo(gem).get(2);
-
-        String id3 = "";
-        String id2 = "";
-        int tier2 = 1;
-        int drop2 = 1;
-        int remove2 = 1;
-        String type2 = "";
-
-        if (gem2.season == 1) {
-            NamespacedKey idkey2 = new NamespacedKey(blissgems.getInstance(), "shard_id");
-            id3 = itemMeta.getPersistentDataContainer().get(idkey2, PersistentDataType.STRING);
-        }
-
-        if (gem2.season == 2 || gem2.season == 3) {
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-            id2 = itemMeta.getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
-
-            NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
-            tier2 = itemMeta.getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
-
-            NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-            type2 = itemMeta.getPersistentDataContainer().get(typekey, PersistentDataType.STRING);
-
-            NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
-            drop2 = itemMeta.getPersistentDataContainer().get(quicknodropkey, PersistentDataType.INTEGER);
-
-            NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
-            remove2 = itemMeta.getPersistentDataContainer().get(quicknoremovekey, PersistentDataType.INTEGER);
-        }
-        if (gem2.season == 1)
-            gem2.id = id3;
-        else {
-            gem2.id = id2;
-            gem2.tier = tier2;
-        }
-        if (gem2.season != 1) {
-            if (Objects.equals(type2, "life")) gem2.type = GemType.Life;
-            else if (Objects.equals(type2, "strength")) gem2.type = GemType.Strength;
-            else if (Objects.equals(type2, "fire")) gem2.type = GemType.Fire;
-            else if (Objects.equals(type2, "speed")) gem2.type = GemType.Speed;
-            else if (Objects.equals(type2, "wealth")) gem2.type = GemType.Wealth;
-            else if (Objects.equals(type2, "astra")) gem2.type = GemType.Astra;
-            else if (Objects.equals(type2, "puff")) gem2.type = GemType.Puff;
-            else if (Objects.equals(type2, "flux")) gem2.type = GemType.Flux;
-            else if (Objects.equals(type2, "gold")) gem2.type = GemType.Gold;
-        } else {
-            if (gem.getType() == Material.AMETHYST_SHARD)
-                gem2.tier = 1;
-            else
-                gem2.tier = 2;
-
-            gem2.allowremove = false;
-            gem2.allowdrop = false;
-            if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + BOLD + "Life " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + BOLD + "Life " + Common.colorize("#C7C7C7") + "Gem"))
-                gem2.type = GemType.Life;
-            else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + "Strength " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + BOLD + "Strength " + Common.colorize("#C7C7C7") + "Gem"))
-                gem2.type = GemType.Strength;
-            else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE8120") + BOLD + "Fire " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE8120") + BOLD + "Fire " + Common.colorize("#C7C7C7") + "Gem"))
-                gem2.type = GemType.Fire;
-            else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FEFD17") + BOLD + "Speed " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FEFD17") + BOLD + "Speed " + Common.colorize("#C7C7C7") + "Gem"))
-                gem2.type = GemType.Speed;
-            else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + BOLD + "Wealth " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + BOLD + "Wealth " + Common.colorize("#C7C7C7") + "Gem"))
-                gem2.type = GemType.Wealth;
-            else if (gem.getItemMeta().getDisplayName().contains(WHITE + "" + BOLD + "Puff Gem"))
-                gem2.type = GemType.Puff;
-        }
-
-
-        gem2.allowdrop = (drop2 == 1);
-
-
-        gem2.allowremove = (remove2 == 1);
+        gem2.energy = (Energy) GetGemInfo(gem).get(0);
+        gem2.season = (int) GetGemInfo(gem).get(1);
+        gem2.type = GetGemType(gem);
+        gem2.id = GetGemID(gem).toString();
+        gem2.tier = GetGemTier(gem);
+        gem2.allowdrop = GetGemAllowDrop(gem);
+        gem2.allowremove = GetGemAllowRemove(gem);
 
 
         //Bukkit.broadcastMessage(gem2.type.toString());
@@ -325,6 +256,10 @@ public class Gem {
      * Returns an ArrayList. The object in the first index is the energy, the second index is the season
      */
     public static ArrayList<Object> GetGemInfo(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemInfo is not a gem!");
+            return null;
+        }
         ArrayList<Object> list = new ArrayList<Object>();
         for (int i = 1; i != 6; i++)
             if (gem.getItemMeta().getLore().contains(Common.colorize("#57FFC7") + "Pristine" + WHITE + " + " + Common.colorize("#96FFD9") + i)) {
@@ -420,18 +355,167 @@ public class Gem {
     }
 
     /**
-     * Get the energy of the gem
+     * Get whether the gem is allowed to be removed from the player's inventory
+     */
+    public static boolean GetGemAllowRemove(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemAllowRemove is not a gem!");
+            return false;
+        }
+        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+        if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
+            boolean allow = false;
+            if (gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER) == 1)
+                allow = true;
+            return allow;
+        } else
+            return false;
+    }
+
+    /**
+     * Get whether the gem is allowed to be dropped
+     */
+    public static boolean GetGemAllowDrop(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemAllowDrop is not a gem!");
+            return false;
+        }
+        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+        if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
+            boolean allow = false;
+            if (gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER) == 1)
+                allow = true;
+            return allow;
+        } else
+            return false;
+    }
+
+    /**
+     * Get the tier of a gem
+     */
+    public static int GetGemTier(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemTier is not a gem!");
+            return 0;
+        }
+        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+        if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING))
+            return gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
+        else if (gem.getType() == Material.PRISMARINE_SHARD)
+            return 2;
+        else
+            return 1;
+    }
+
+    /**
+     * Get the ID of a gem
+     */
+    public static UUID GetGemID(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemID is not a gem!");
+            return null;
+        }
+        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
+            idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+        return UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING));
+    }
+
+    /**
+     * Get the energy of a gem
      */
     public static Energy GetGemEnergy(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemEnergy is not a gem!");
+            return null;
+        }
         return (Energy) GetGemInfo(gem).get(0);
+    }
+
+    /**
+     * Get the season of a gem
+     */
+    public static int GetGemSeason(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemSeason is not a gem!");
+            return 0;
+        }
+        return (int) GetGemInfo(gem).get(1);
+    }
+
+    /**
+     * Get the type of a gem
+     */
+    public static GemType GetGemType(ItemStack gem) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemType is not a gem!");
+            return null;
+        }
+        GemType type = null;
+        String type2 = "";
+        int season = GetGemSeason(gem);
+
+        if (season == 2 || season == 3) {
+            NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+            type2 = gem.getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING).toLowerCase();
+        }
+        if (season != 1) {
+            if (Objects.equals(type2, "life")) type = GemType.Life;
+            else if (Objects.equals(type2, "strength")) type = GemType.Strength;
+            else if (Objects.equals(type2, "fire")) type = GemType.Fire;
+            else if (Objects.equals(type2, "speed")) type = GemType.Speed;
+            else if (Objects.equals(type2, "wealth")) type = GemType.Wealth;
+            else if (Objects.equals(type2, "astra")) type = GemType.Astra;
+            else if (Objects.equals(type2, "puff")) type = GemType.Puff;
+            else if (Objects.equals(type2, "flux")) type = GemType.Flux;
+            else if (Objects.equals(type2, "gold")) type = GemType.Gold;
+        } else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + BOLD + "Life " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE04B4") + BOLD + "Life " + Common.colorize("#C7C7C7") + "Gem"))
+            type = GemType.Life;
+        else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + "Strength " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#F10303") + BOLD + "Strength " + Common.colorize("#C7C7C7") + "Gem"))
+            type = GemType.Strength;
+        else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE8120") + BOLD + "Fire " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FE8120") + BOLD + "Fire " + Common.colorize("#C7C7C7") + "Gem"))
+            type = GemType.Fire;
+        else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#FEFD17") + BOLD + "Speed " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#FEFD17") + BOLD + "Speed " + Common.colorize("#C7C7C7") + "Gem"))
+            type = GemType.Speed;
+        else if (gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + BOLD + "Wealth " + Common.colorize("#FFD773") + "Gem") || gem.getItemMeta().getDisplayName().contains(Common.colorize("#0EC912") + BOLD + "Wealth " + Common.colorize("#C7C7C7") + "Gem"))
+            type = GemType.Wealth;
+        else if (gem.getItemMeta().getDisplayName().contains(WHITE + "" + BOLD + "Puff Gem"))
+            type = GemType.Puff;
+        return type;
+    }
+
+    /**
+     * Checks if the player has a gem.
+     */
+    public static boolean HasAGem(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return true;
+        return false;
     }
 
     /**
      * Returns the player's energy.
      */
     public static Energy GetPlayerEnergy(Player p) {
-        for (ItemStack item : p.getInventory().getContents()) if (IsGem(item)) return GetGemEnergy(item);
+        for (ItemStack item : p.getInventory().getContents())
+            if (!isNull(item) && IsGem(item)) return GetGemEnergy(item);
         return Energy.N_A;
+    }
+
+    /**
+     * Returns the type of the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
+     */
+    public static GemType GetPlayerGemType(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return GetGemType(item);
+        return null;
+    }
+
+    /**
+     * Returns the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
+     */
+    public static ItemStack GetPlayerGem(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return item;
+        Common.log(RED + p.getName() + " doesn't have a gem!");
+        return null;
     }
 
     public static boolean IsGem(ItemStack gem) {

@@ -34,7 +34,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
         if (args[0].equals("test")) {
             //Trader.OpenGUI((Player) commandSender);
             Player p = (Player) commandSender;
-            Bukkit.broadcastMessage(Gem.GetPlayerEnergy(p).toString());
+            Gem.GiveGem(Gem.fromGemItem(Gem.fromGemItem(Gem.GetPlayerGem(p)).toItemStack()), p, false, 2);
             //commandSender.sendMessage(colorize2("&c&fSkibidi #FFD773🔮"));
             //Settings.setSeason(3);
             //Player p = (Player) commandSender;
@@ -212,7 +212,11 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 Settings.setSeason(2);
                 GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                Gem gem = new Gem(type, tier, Energy.Scratched);
+                Energy energy = Energy.Pristine;
+                if (Gem.HasAGem(p))
+                    energy = Gem.GetPlayerEnergy(p);
+
+                Gem gem = new Gem(type, tier, energy);
 
 
                 String gemmessage = "";
@@ -276,32 +280,6 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 int tier = 1;
                 if (Integer.parseInt(args[3]) == 2)
                     tier = 2;
-
-                //GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
-                //Gem gem = new Gem(type, tier, Energy.Pristine);
-
-
-
-                /*
-                String gemmessage = "";
-                if (type == GemType.Strength)
-                    gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
-                else if (type == GemType.Speed)
-                    gemmessage = blissgems.colorize("#FEFD17&lsᴘᴇᴇᴅ");
-                else if (type == GemType.Life)
-                    gemmessage = blissgems.colorize("#FE04B4&lʟɪғᴇ");
-                else if (type == GemType.Puff)
-                    gemmessage = blissgems.colorize("#EFEFEF&lᴘᴜғғ");
-                else if (type == GemType.Astra)
-                    gemmessage = blissgems.colorize("#A01FFF&lᴀsᴛʀᴀ");
-                else if (type == GemType.Flux)
-                    gemmessage = blissgems.colorize("#5ED7FF&lғʟᴜx");
-                else if (type == GemType.Fire)
-                    gemmessage = blissgems.colorize("#FE8120&lғɪʀᴇ");
-                else if (type == GemType.Wealth)
-                    gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
-                    */
-
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + "#B8FFFB gem &7Tier &b" + args[3]));
 
