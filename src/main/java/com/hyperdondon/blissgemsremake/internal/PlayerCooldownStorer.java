@@ -24,13 +24,10 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
     private static volatile PlayerCooldownStorer instance = new PlayerCooldownStorer();
 
 
-
-
-
     @Override
     protected void onConnected() {
-        this.addVariable("table", "PlayerCooldowns");
-        this.createTable(TableCreator.of("PlayerCooldowns")
+        addVariable("table", "PlayerCooldowns");
+        createTable(TableCreator.of("PlayerCooldowns")
                 .addNotNull("UUID", "LONGTEXT")
                 .add("Cooldown", "LONGTEXT")
                 .setPrimaryColumn("UUID")
@@ -41,10 +38,10 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
     public void get(String uuid, Consumer<String> consumer) {
         Common.runAsync(() -> {
             try {
-                ResultSet data = this.query("SELECT * FROM PlayerCooldowns WHERE UUID='" + uuid + "'");
+                ResultSet data = query("SELECT * FROM PlayerCooldowns WHERE UUID='" + uuid + "'");
                 consumer.accept(data.getString("Cooldown"));
 
-            } catch(Throwable t) {
+            } catch (Throwable t) {
                 Common.error(t, "Could not load data for " + uuid);
             }
         });
@@ -54,25 +51,23 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
         Common.runAsync(() -> {
             try {
                 //Put Data
-                ResultSet data = this.query("SELECT * FROM PlayerCooldowns WHERE UUID='" + uuid + "'");
-                if (data.getString("Cooldown") == null) { //if it doesnt exist
-                    this.insert(SerializedMap.ofArray(
-                            "UUID", uuid,
-                            "Cooldown", cooldown
-                    ));
-                }
+                ResultSet data = query("SELECT * FROM PlayerCooldowns WHERE UUID='" + uuid + "'");
+                //if it doesnt exist
+                //if this data already exists: update it instead of inserting new data
+                if (data.getString("Cooldown") == null) insert(SerializedMap.ofArray(
+                        "UUID", uuid,
+                        "Cooldown", cooldown
+                ));
 
-                else { //if this data already exists: update it instead of inserting new data
-                    this.update
-                            (
-                    "UPDATE PlayerCooldowns" +
-                        " SET Cooldown = '" + cooldown + "'" +
-                        " WHERE UUID = '" + uuid + "';"
-                            );
-                }
+                else update
+                        (
+                                "UPDATE PlayerCooldowns" +
+                                        " SET Cooldown = '" + cooldown + "'" +
+                                        " WHERE UUID = '" + uuid + "';"
+                        );
 
 
-            } catch(Throwable t) {
+            } catch (Throwable t) {
                 Common.error(t, "Could not load data for " + uuid);
             }
         });
@@ -80,11 +75,11 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
 
     public void updatesql(String command) {
         Common.runAsync(() -> {
-            this.update
+            update
                     (
-                        command
+                            command
 
-            );
+                    );
         });
     }
 }

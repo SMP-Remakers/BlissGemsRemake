@@ -40,7 +40,8 @@ public final class blissgems extends SimplePlugin implements Listener {
     */
 
     @Override
-    public void onPluginStart() {}
+    public void onPluginStart() {
+    }
 
     public void onPluginStop() {
         /*
@@ -97,10 +98,10 @@ public final class blissgems extends SimplePlugin implements Listener {
         if (!settings.exists()) plugin.saveResource(configfilename, false);
 
         String databasefilename = "Data.db";
-        File db = new File(blissgems.plugin.getDataFolder(), "Data.db");
+        File db = new File(blissgems.plugin.getDataFolder(), databasefilename);
 
         //db = new File(plugin.getDataFolder(), "Data.db");
-        if (!db.exists()) plugin.saveResource("Data.db", false);
+        if (!db.exists()) plugin.saveResource(databasefilename, false);
 
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);
         PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);

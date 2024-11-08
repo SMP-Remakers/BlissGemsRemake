@@ -218,7 +218,6 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 Gem gem = new Gem(type, tier, energy);
 
-
                 String gemmessage = "";
                 if (type == GemType.Strength)
                     gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
