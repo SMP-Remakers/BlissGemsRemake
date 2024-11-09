@@ -422,6 +422,23 @@ public class Gem {
     }
 
     /**
+     * Get the ID of a gem
+     */
+    public static String GetGemID(ItemStack gem, Player p) {
+        if (!IsGem(gem)) {
+            Common.log(RED + "What have been passed to GemGemID is not a gem!");
+            return null;
+        }
+        if (GetGemSeason(gem) == 1)
+            return p.getUniqueId().toString() + ":" + Gem.GetGemType(gem) + ":Tier" + Gem.GetGemTier(gem);
+        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
+            idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+
+        return gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
+    }
+
+    /**
      * Get the energy of a gem
      */
     public static Energy GetGemEnergy(ItemStack gem) {
@@ -527,5 +544,4 @@ public class Gem {
         }
         return true;
     }
-
 }

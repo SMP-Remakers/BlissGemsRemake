@@ -1,5 +1,12 @@
 package com.hyperdondon.blissgemsremake.internal.gem.Strength;
 
+import com.github.puregero.multilib.MultiLib;
+import com.hyperdondon.blissgemsremake.api.CooldownHandler;
+import com.hyperdondon.blissgemsremake.api.Gem;
+import com.hyperdondon.blissgemsremake.api.GemType;
+
+import static com.hyperdondon.blissgemsremake.api.util.TimeUtils.*;
+
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import lombok.Getter;
@@ -18,315 +25,218 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.mineacademy.fo.remain.Remain;
 
+import static net.md_5.bungee.api.ChatColor.*;
+
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
 public final class Powers implements Listener {
-
     @Getter
     private static volatile Powers instance = new Powers();
 
-
-    public static HashMap<UUID, Long> Frailer;
-    public static HashMap<UUID, Long> Chad;
-
-    public static HashMap<UUID, Integer> ChadParticles;
-
-    Powers() {
-        Frailer = new HashMap<>();
-        Chad = new HashMap<>();
-        ChadParticles = new HashMap<>();
-    }
-
     @EventHandler
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
+        if (e.getDamager().getType() != EntityType.PLAYER)
+            return;
+        Player p = (Player) e.getDamager();
+        if (!Gem.IsGem(p.getInventory().getItemInMainHand()))
+            return;
+        if (Gem.GetGemType(p.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+            return;
+        e.setCancelled(true);
+        ItemStack gem = p.getInventory().getItemInMainHand();
 
-        if (e.getDamager().getType() == EntityType.PLAYER) {
-            HumanEntity p = (HumanEntity) e.getDamager();
-            if (p.getInventory().getItemInMainHand().hasItemMeta()) {
+        String id = Gem.GetGemID(gem, p);
+
+        //checking if the item has the data
+        if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
+            return; //Add cant use power message
+
+        CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
+
+        p.sendMessage(
+                blissgems.colorize("#F10303") + "🔮" +
+                        blissgems.colorize("#B8FFFB") + " You have activated " +
+                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
+                        blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
+        );
 
 
-                ItemStack gem = p.getInventory().getItemInMainHand();
+        LivingEntity ent = (LivingEntity) e.getEntity();
 
-                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
+        for (PotionEffect pe : ent.getActivePotionEffects()) ent.removePotionEffect(pe.getType());
 
-                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
+        ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 400, 0));
 
-                if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
+        e.getEntity().getLocation().toVector().subtract(e.getDamager().getLocation().toVector()).normalize().multiply(0.1);
 
-                    if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
-                        long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
-                        if (cooldownmils - System.currentTimeMillis() >= 0) {
-                            return;
-                        }
+        Particle.DustOptions circledust = new Particle.DustOptions(Color.fromRGB(241, 3, 3), 1);
+
+        final int[] i = {0};
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (i[0] < 100) {
+                    i[0]++;
+                    Location point1 = e.getDamager().getLocation();
+                    point1.setY(point1.getY() + 1);
+
+                    Location point2 = e.getEntity().getLocation();
+                    point2.setY(point2.getY() + 1);
+
+                    World world = point1.getWorld();
+                    double distance = point1.distance(point2);
+                    Vector vector = point2.toVector().subtract(point1.toVector()).normalize().multiply(0.1);
+                    Location location = point1.clone();
+
+                    for (int i = 0; i < distance * 10; i++) {
+                        world.spawnParticle(Particle.REDSTONE, location, 0, circledust);
+
+                        world.spawnParticle(Particle.SMOKE_NORMAL, location, 0);
+
+                        location.add(vector);
                     }
-
-
-                    if (Objects.equals(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
-
-                        if (!Frailer.containsKey(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Frailer.put(UUID.fromString(p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
-                        }
-
-                        p.sendMessage(
-                                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated " +
-                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Frailer" +
-                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill on " + blissgems.colorize("&x&F&1&0&3&0&3") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
-                        );
-
-
-                        LivingEntity ent = (LivingEntity) e.getEntity();
-
-                        for (PotionEffect pe : ent.getActivePotionEffects()) {
-                            ent.removePotionEffect(pe.getType());
-                        }
-
-                        ent.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 400, 0));
-
-                        e.getEntity().getLocation().toVector().subtract(e.getDamager().getLocation().toVector()).normalize().multiply(0.1);
-
-                        Particle.DustOptions circledust = new Particle.DustOptions(org.bukkit.Color.fromRGB(241, 3, 3), 1);
-
-                        final int[] i = {0};
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (i[0] < 100) {
-                                    i[0]++;
-                                    Location point1 = e.getDamager().getLocation();
-                                    point1.setY(point1.getY() + 1);
-
-                                    Location point2 = e.getEntity().getLocation();
-                                    point2.setY(point2.getY() + 1);
-
-                                    World world = point1.getWorld();
-                                    double distance = point1.distance(point2);
-                                    Vector vector = point2.toVector().subtract(point1.toVector()).normalize().multiply(0.1);
-                                    Location location = point1.clone();
-
-                                    for (int i = 0; i < distance * 10; i++) {
-                                        world.spawnParticle(Particle.REDSTONE, location, 0, circledust);
-
-                                        world.spawnParticle(Particle.SMOKE_NORMAL, location, 0);
-
-                                        location.add(vector);
-                                    }
-                                } else {
-                                    cancel();
-                                }
-                            }
-                        }.runTaskTimer(blissgems.getInstance(), 0, 0);
-
-
-                        final int[] a = {0};
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (a[0] < 400) {
-                                    a[0]++;
-
-                                } else {
-                                    cancel();
-                                }
-                            }
-                        }.runTaskTimer(blissgems.getInstance(), 0, 0);
-
-                    }
-                }
+                } else cancel();
             }
-        }
+        }.runTaskTimer(blissgems.getInstance(), 0, 0);
+
+
+        final int[] a = {0};
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (a[0] < 400) a[0]++;
+                else cancel();
+            }
+        }.runTaskTimer(blissgems.getInstance(), 0, 0);
     }
 
     @EventHandler
     public void GroupFrailerPower(PlayerInteractEvent e) {
-        if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) { //check left click
+        //check left click
+        if (e.getAction() != Action.LEFT_CLICK_AIR && e.getAction() != Action.LEFT_CLICK_BLOCK)
+            return;
+        if (!Gem.IsGem(e.getPlayer().getInventory().getItemInMainHand()))
+            return;
+        if (Gem.GetGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+            return;
+        e.setCancelled(true);
+        ItemStack gem = e.getPlayer().getInventory().getItemInMainHand();
+        Player p = e.getPlayer();
+        String id = Gem.GetGemID(gem, p);
 
-            if (e.getPlayer().getInventory().getItemInMainHand().hasItemMeta()) {
-
-
-                ItemStack gem = e.getPlayer().getInventory().getItemInMainHand();
-
-                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
-
-                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
-
-                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
-
-                    if (Frailer.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
-                        long cooldownmils = Frailer.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
-                        if (cooldownmils - System.currentTimeMillis() >= 0) {
-                            
-                            return;
-                        }
-                    }
+        //checking if the item has the data
+        if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
+            return; //Add cant use power message
 
 
-                    if (Objects.equals(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
-
-                        if (!Frailer.containsKey(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Frailer.put(UUID.fromString(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
-                        }
-
-                        e.getPlayer().sendMessage(
-                                blissgems.colorize("#F10303") + "🔮 " +
-                                        blissgems.colorize("#B8FFFB") + "You have activated group " +
-                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer " +
-                                        blissgems.colorize("#B8FFFB") + "skill " + blissgems.colorize("&7") + "(radius 5)"
-                        );
+        CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
+        e.getPlayer().sendMessage(
+                blissgems.colorize("#F10303") + "🔮 " +
+                        blissgems.colorize("#B8FFFB") + "You have activated group " +
+                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer " +
+                        blissgems.colorize("#B8FFFB") + "skill " + blissgems.colorize("&7") + "(radius 5)"
+        );
 
 
-                        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5)) {
-                            if (entity != e.getPlayer()) {
-                                LivingEntity entity2 = (LivingEntity) entity;
-                                if (entity2 != null) {
-                                    for (PotionEffect pe : entity2.getActivePotionEffects()) {
-                                        entity2.removePotionEffect(pe.getType());
-                                    }
-                                    entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
-                                }
-                            }
-                        }
-
-
-                        Location loc = e.getPlayer().getLocation();
-
-                        double spacing = 0.05;
-                        strenghcircle(loc, 1, spacing);
-                        strenghcircle(loc, 2, spacing);
-                        strenghcircle(loc, 3, spacing);
-                        strenghcircle(loc, 4, spacing);
-
-                        final int[] i = {0};
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (i[0] < 8) {
-                                    strenghcircle(loc, 5, spacing);
-
-                                    i[0]++;
-
-                                } else {
-                                    cancel();
-                                }
-
-                            }
-                        }.runTaskTimer(blissgems.getInstance(), 0, 6);
-                    }
+        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5))
+            if (entity != e.getPlayer()) {
+                LivingEntity entity2 = (LivingEntity) entity;
+                if (entity2 != null) {
+                    for (PotionEffect pe : entity2.getActivePotionEffects())
+                        entity2.removePotionEffect(pe.getType());
+                    entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
                 }
             }
-        }
+
+
+        Location loc = e.getPlayer().getLocation();
+
+        double spacing = 0.05;
+        strenghcircle(loc, 1, spacing);
+        strenghcircle(loc, 2, spacing);
+        strenghcircle(loc, 3, spacing);
+        strenghcircle(loc, 4, spacing);
+
+        final int[] i = {0};
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (i[0] < 8) {
+                    strenghcircle(loc, 5, spacing);
+
+                    i[0]++;
+
+                } else cancel();
+
+            }
+        }.runTaskTimer(blissgems.getInstance(), 0, 6);
     }
 
 
     public static void StrengthTicks() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-
-        }
     }
 
     public static void StrengthSeconds() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (p.getInventory().getItemInMainHand().hasItemMeta() || p.getInventory().getItemInOffHand().hasItemMeta()) {
+        for (Player p : MultiLib.getAllOnlinePlayers()) {
+            if (!Gem.IsGem(p.getInventory().getItemInMainHand()) && !Gem.IsGem(p.getInventory().getItemInOffHand()))
+                continue;
+            if (Gem.GetGemType(p.getInventory().getItemInMainHand()) != GemType.Strength && Gem.GetGemType(p.getInventory().getItemInOffHand()) != GemType.Strength)
+                continue;
 
-                ItemStack gem = new ItemStack(Material.AIR);
+            ItemStack gem = new ItemStack(Material.AIR);
 
+            if (Gem.IsGem(p.getInventory().getItemInMainHand()))
+                if (Gem.GetGemType(p.getInventory().getItemInMainHand()) == GemType.Strength)
+                    gem = p.getInventory().getItemInMainHand();
 
-                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
+            if (Gem.IsGem(p.getInventory().getItemInOffHand()))
+                if (!Gem.IsGem(p.getInventory().getItemInMainHand()))
+                    if (Gem.GetGemType(p.getInventory().getItemInOffHand()) == GemType.Strength)
+                        gem = p.getInventory().getItemInOffHand();
 
-                if (p.getInventory().getItemInMainHand().hasItemMeta()) {
-                    if (p.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING)) {
-                        gem = p.getInventory().getItemInMainHand();
-                    }
-                }
+            String id = Gem.GetGemID(gem, p);
 
-                if (!gem.hasItemMeta()) {
-                    if (p.getInventory().getItemInOffHand().hasItemMeta()) {
-                        if (p.getInventory().getItemInOffHand().getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING)) {
-                            gem = p.getInventory().getItemInOffHand();
-                        }
-                    }
-                }
+            String FrailerString = blissgems.colorize("#F10303") + "\uD83E\uDD3A" + " " + GREEN + "Ready!";
+            String ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + GREEN + "Ready!";
 
-                if (gem.hasItemMeta()) {
+            //Frailer
+            {
+                Duration duration = Duration.ofMillis(CooldownHandler.getCooldown("Power-Frailer:" + id));
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
+                long minutes = duration.toMinutes();
+                long seconds = duration.toSecondsPart();
 
-
-                    UUID id = UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
-
-                    String FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
-                    String ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
-                    if (Objects.equals(gem.getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) {
-                        if (Frailer.containsKey(id)) {
-
-                            Duration duration = Duration.ofMillis(Frailer.get(id) - System.currentTimeMillis());
+                String time = "";
+                if (minutes > 0) if (seconds > 0) time = minutes + "m " + seconds + "s";
+                else time = minutes + "m";
+                else if (seconds > 0) time = seconds + "s";
 
 
-                            long minutes = duration.toMinutes();
-                            long seconds = duration.toSecondsPart();
-
-                            String time = "";
-                            if (minutes > 0) {
-
-                                if (seconds > 0) {
-                                    time = minutes + "m " + seconds + "s";
-                                } else {
-                                    time = minutes + "m";
-                                }
-
-                            } else {
-                                if (seconds > 0) {
-                                    time = seconds + "s";
-                                }
-                            }
-
-
-                            if (time.equals("")) {
-                                FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.GREEN + "Ready!";
-
-                            } else {
-                                FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + ChatColor.AQUA + time;
-                            }
-
-                        }
-
-                        typekey = null;
-                        idkey = null;
-
-                        if (Chad.containsKey(id)) {
-
-                            Duration duration = Duration.ofMillis(Chad.get(id) - System.currentTimeMillis());
-
-
-                            long minutes = duration.toMinutes();
-                            long seconds = duration.toSecondsPart();
-
-                            String time;
-                            if (minutes > 0) {
-                                time = (seconds > 0) ? minutes + "m " + seconds + "s" : minutes + "m";
-                            } else {
-                                time = (seconds > 0) ? seconds + "s" : "";
-                            }
-
-
-                            if (time.equals("")) {
-                                ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.GREEN + "Ready!";
-
-                            } else {
-                                ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + ChatColor.AQUA + time;
-                            }
-
-                        }
-                        typekey = null;
-                        idkey = null;
-
-                        Remain.sendActionBar(p, FrailerString + " " + ChadString);
-                    }
-                }
+                if (time.equals(""))
+                    FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + GREEN + "Ready!";
+                else FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + AQUA + time;
             }
+
+            {
+                Duration duration = Duration.ofMillis(CooldownHandler.getCooldown("Power-ChadStrength:" + id));
+
+                long minutes = duration.toMinutes();
+                long seconds = duration.toSecondsPart();
+
+                String time = "";
+                if (minutes > 0) if (seconds > 0) time = minutes + "m " + seconds + "s";
+                else time = minutes + "m";
+                else if (seconds > 0) time = seconds + "s";
+
+
+                if (time.equals(""))
+                    ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + GREEN + "Ready!";
+                else ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + AQUA + time;
+            }
+            Remain.sendActionBar(p, FrailerString + " " + ChadString);
         }
     }
 
@@ -343,11 +253,10 @@ public final class Powers implements Listener {
             double y = Math.sin(i) * scaleY;
             // spawn your particle here
             // for example, if 'loc' is your location object and 'world' is your World object
-            if (VersionChecker.OlderThanNBTChange()) {
+            if (VersionChecker.OlderThanNBTChange())
                 player.getWorld().spawnParticle(Particle.REDSTONE, player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-            } else {
+            else
                 player.getWorld().spawnParticle(Particle.valueOf("DUST"), player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-            }
             player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, player.getX() + x, player.getY(), player.getZ() + y, 0);
 
         }
@@ -400,98 +309,77 @@ public final class Powers implements Listener {
 
     //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, x, 0, 1);
     @EventHandler
-    public void ChadPower(PlayerInteractEvent event) {
-        if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) { //check right click
+    public void ChadPower(PlayerInteractEvent e) {
+        //check right click
+        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
+            return;
+        if (!Gem.IsGem(e.getPlayer().getInventory().getItemInMainHand()))
+            return;
+        if (Gem.GetGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+            return;
+        Player p = e.getPlayer();
+        e.setCancelled(true);
+        ItemStack gem = p.getInventory().getItemInMainHand();
 
-            if (event.getPlayer().getInventory().getItemInMainHand().hasItemMeta()) {
+        String id = Gem.GetGemID(gem, p);
 
+        //checking if the item has the data
+        if (!CooldownHandler.canUseCooldown("Power-ChadStrength:" + id))
+            return; //Add cant use power message
 
-                ItemStack gem = event.getPlayer().getInventory().getItemInMainHand();
-
-                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type"); //will be used to check and get the gem type
-
-                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id"); //will be used to get the gem id
-
-                if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(typekey, PersistentDataType.STRING)) { //checking if the item has the data
-
-
-                    if (Chad.containsKey(UUID.fromString(Objects.requireNonNull(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))))) {
-                        long cooldownmils = Chad.get(UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)));
-                        if (cooldownmils - System.currentTimeMillis() >= 0) {
-                            return;
-                        }
-                    }
+        CooldownHandler.setCooldown("Power-ChadStrength:" + id, FromMinutesAndSeconds(4, 0));
 
 
-                    if (Objects.equals(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING), "strength")) { //checking if the gem is a strength gem
-
-                        if (!Chad.containsKey(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING))) {
-                            Chad.put(UUID.fromString(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING)), System.currentTimeMillis() + 240000);
-                        }
-
-                        event.getPlayer().sendMessage(
-                                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Chad" +
-                                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 5)"
-                        );
+        e.getPlayer().sendMessage(
+                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
+                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
+                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Chad" +
+                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 5)"
+        );
 
 
-                        for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
-                            if (entity != event.getPlayer()) {
-                                LivingEntity e = (LivingEntity) entity;
-                                for (PotionEffect pe : e.getActivePotionEffects()) {
-                                    e.removePotionEffect(pe.getType());
-                                }
-                                e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
-                            }
-                        }
-
-
-                        Location loc = event.getPlayer().getLocation();
-
-                        double spacing = 0.05;
-                        strenghcircle(loc, 1, spacing);
-                        strenghcircle(loc, 2, spacing);
-                        strenghcircle(loc, 3, spacing);
-                        strenghcircle(loc, 4, spacing);
-
-                        final int[] i = {0};
-                        new BukkitRunnable() {
-                            @Override
-                            public void run() {
-                                if (i[0] < 8) {
-                                    strenghcircle(loc, 5, spacing);
-
-                                    i[0]++;
-
-                                } else {
-                                    cancel();
-                                }
-                            }
-                        }.runTaskTimer(blissgems.getInstance(), 0, 6);
-                    }
-                }
+        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5))
+            if (entity != e.getPlayer()) {
+                LivingEntity entity1 = (LivingEntity) entity;
+                for (PotionEffect pe : entity1.getActivePotionEffects()) entity1.removePotionEffect(pe.getType());
+                entity1.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
             }
-        }
+
+
+        Location loc = e.getPlayer().getLocation();
+
+        double spacing = 0.05;
+        strenghcircle(loc, 1, spacing);
+        strenghcircle(loc, 2, spacing);
+        strenghcircle(loc, 3, spacing);
+        strenghcircle(loc, 4, spacing);
+
+        final int[] i = {0};
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (i[0] < 8) {
+                    strenghcircle(loc, 5, spacing);
+
+                    i[0]++;
+
+                } else cancel();
+            }
+        }.runTaskTimer(blissgems.getInstance(), 0, 6);
     }
 
-
+    /*
     @EventHandler
     public void ChadHit(EntityDamageByEntityEvent event) {
         if (event.getDamager().getType().equals(EntityType.PLAYER)) {
             HumanEntity attacker = (HumanEntity) event.getDamager();
-            if (attacker.getInventory().getItemInMainHand().getType() == Material.AIR) {
-                if (ChadParticles.containsKey(attacker.getUniqueId())) {
+            if (attacker.getInventory().getItemInMainHand().getType() == Material.AIR)
+                if (ChadParticles.containsKey(attacker.getUniqueId()))
                     if (ChadParticles.get(attacker.getUniqueId()) < 4) {
                         Integer num = ChadParticles.get(attacker.getUniqueId()) + 1;
                         ChadParticles.put(attacker.getUniqueId(), num);
-                    } else {
-                        ChadParticles.put(attacker.getUniqueId(), 1);
-                    }
-                }
-            }
+                    } else ChadParticles.put(attacker.getUniqueId(), 1);
         }
     }
+    */
 }
-

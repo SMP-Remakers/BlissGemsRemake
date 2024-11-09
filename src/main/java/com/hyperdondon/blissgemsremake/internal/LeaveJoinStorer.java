@@ -2,6 +2,7 @@ package com.hyperdondon.blissgemsremake.internal;
 
 import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.api.Gem;
+import com.hyperdondon.blissgemsremake.api.GemType;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -10,10 +11,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class LeaveJoinStorer implements Listener {
     @Getter
@@ -48,9 +48,10 @@ public class LeaveJoinStorer implements Listener {
                 String id = "";
                 if (HasID)
                     id = gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
-                if (HasID) LoadAndRemove(id); //Need to change this, flawed
                 else
-                    LoadAndRemove(p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem)));
+                    id = p.getUniqueId().toString() + ":" + Gem.GetGemType(gem) + ":Tier" + Gem.GetGemTier(gem);
+                for (String power : GetPowers(Gem.fromGemItem(gem)))
+                    LoadAndRemove(power + ":" + id);
             }
     }
 
@@ -62,5 +63,28 @@ public class LeaveJoinStorer implements Listener {
     public static void LoadAndRemove(String name) {
         PlayerCooldownStorer.getInstance().get(name, value -> CooldownHandler.setCooldown(name, Long.valueOf(value)));
         PlayerCooldownStorer.getInstance().updatesql("DELETE FROM PlayerCooldowns" + " WHERE UUID='" + name + "';");
+    }
+
+    public static List<String> GetPowers(Gem gem) {
+        List<String> Powers = new ArrayList<String>();
+        if (gem.getType() == GemType.Strength) {
+            Powers.add("Power-Frailer");
+            Powers.add("Power-Enchanting");
+            Powers.add("Power-ChadStrength");
+            if (gem.getSeason() > 2)
+                Powers.add("Power-Bounty");
+        }
+
+        if (gem.getType() == GemType.Speed) {
+            Powers.add("Power-SpeedStorm");
+            Powers.add("Power-Enchanting");
+            if (gem.getSeason() <= 2)
+                Powers.add("Power-SlothsSedative");
+            if (gem.getSeason() > 2) {
+                Powers.add("Power-Blur");
+                Powers.add("Power-TerminalVelocity");
+            }
+        }
+        return Powers;
     }
 }

@@ -19,7 +19,6 @@ import org.mineacademy.fo.plugin.SimplePlugin;
 import java.io.File;
 
 import static com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers.*;
-import static com.hyperdondon.blissgemsremake.internal.gem.Wealth.Powers.*;
 
 public final class blissgems extends SimplePlugin implements Listener {
 
@@ -80,8 +79,6 @@ public final class blissgems extends SimplePlugin implements Listener {
 
         registerEvents(GemGiver.getInstance());
 
-        registerEvents(com.hyperdondon.blissgemsremake.internal.gem.Wealth.Powers.getInstance());
-
         registerEvents(TexturePackLoader.getInstance());
 
         getCommand("blissgems").setExecutor(SlashBliss.getInstance());
@@ -112,7 +109,6 @@ public final class blissgems extends SimplePlugin implements Listener {
             public void run() {
                 EnchantedObsidian.startGlowCheckTask();
                 StrengthTicks();
-                WealthTicks();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 0);
 
@@ -120,7 +116,6 @@ public final class blissgems extends SimplePlugin implements Listener {
             @Override
             public void run() {
                 StrengthSeconds();
-                WealthSeconds();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 20);
     }
