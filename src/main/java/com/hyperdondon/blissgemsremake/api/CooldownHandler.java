@@ -5,10 +5,11 @@ import lombok.Getter;
 import java.util.HashMap;
 
 public final class CooldownHandler {
+
     @Getter
     private static HashMap<String, Long> Cooldowns;
 
-    CooldownHandler() {
+    public static void Initialize() {
         Cooldowns = new HashMap<>();
     }
 

@@ -6,6 +6,7 @@ import com.hyperdondon.blissgemsremake.api.GemType;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -19,7 +20,7 @@ public class LeaveJoinStorer implements Listener {
     @Getter
     private static volatile LeaveJoinStorer instance = new LeaveJoinStorer();
 
-    //@EventHandler disable this shit
+    @EventHandler
     public void Store(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         for (ItemStack gem : p.getInventory().getContents())
@@ -34,11 +35,12 @@ public class LeaveJoinStorer implements Listener {
                         if (entry.getKey().contains(id))
                             SaveAndUnload(entry.getKey());
                 } else
-                    SaveAndUnload(p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem)));
+                    for (String power : GetPowers(Gem.fromGemItem(gem)))
+                        SaveAndUnload(power + ":" + p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem)));
             }
     }
 
-    //@EventHandler disable this shit
+    @EventHandler
     public void Load(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         for (ItemStack gem : p.getInventory().getContents())
@@ -49,7 +51,7 @@ public class LeaveJoinStorer implements Listener {
                 if (HasID)
                     id = gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
                 else
-                    id = p.getUniqueId().toString() + ":" + Gem.GetGemType(gem) + ":Tier" + Gem.GetGemTier(gem);
+                    id = p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem));
                 for (String power : GetPowers(Gem.fromGemItem(gem)))
                     LoadAndRemove(power + ":" + id);
             }
@@ -63,6 +65,10 @@ public class LeaveJoinStorer implements Listener {
     public static void LoadAndRemove(String name) {
         PlayerCooldownStorer.getInstance().get(name, value -> CooldownHandler.setCooldown(name, Long.valueOf(value)));
         PlayerCooldownStorer.getInstance().updatesql("DELETE FROM PlayerCooldowns" + " WHERE UUID='" + name + "';");
+    }
+
+    public static List<String> GetPowers(ItemStack gem) {
+        return GetPowers(Gem.fromGemItem(gem));
     }
 
     public static List<String> GetPowers(Gem gem) {

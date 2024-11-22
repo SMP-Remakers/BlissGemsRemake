@@ -1,5 +1,6 @@
 package com.hyperdondon.blissgemsremake;
 
+import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.internal.*;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers;
@@ -9,9 +10,7 @@ import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -89,13 +88,13 @@ public final class blissgems extends SimplePlugin implements Listener {
         getCommand("progobsidian").setExecutor(new EnchantedObsidian());
 
         String configfilename = "config.yml";
-        File settings = new File(blissgems.plugin.getDataFolder(), configfilename);
+        File settings = new File(getDataFolder(), configfilename);
 
         //settings = new File(plugin.getDataFolder(), configfilename);
         if (!settings.exists()) plugin.saveResource(configfilename, false);
 
         String databasefilename = "Data.db";
-        File db = new File(blissgems.plugin.getDataFolder(), databasefilename);
+        File db = new File(getDataFolder(), databasefilename);
 
         //db = new File(plugin.getDataFolder(), "Data.db");
         if (!db.exists()) plugin.saveResource(databasefilename, false);
@@ -103,6 +102,7 @@ public final class blissgems extends SimplePlugin implements Listener {
         PlayerParticlePreferences.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);
         PlayerCooldownStorer.getInstance().connect("jdbc:sqlite:" + getDataFolder().getAbsolutePath() + databasefilename);
 
+        CooldownHandler.Initialize();
 
         new BukkitRunnable() {
             @Override
