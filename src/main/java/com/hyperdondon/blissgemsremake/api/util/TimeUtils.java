@@ -13,4 +13,13 @@ public final class TimeUtils {
             milli += 1000;
         return milli;
     }
+
+    public static int ToSeconds(int milli) {
+        int sec = 0;
+        while (milli > 0) {
+            milli -= 1000;
+            sec++;
+        }
+        return sec;
+    }
 }

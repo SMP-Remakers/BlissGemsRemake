@@ -9,6 +9,7 @@ import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -26,6 +27,8 @@ public final class blissgems extends SimplePlugin implements Listener {
     public static BukkitAudiences adventure;
     */
     public static blissgems plugin;
+    int pluginId = 24042;
+    Metrics metrics;
 
 
     /*
@@ -63,6 +66,18 @@ public final class blissgems extends SimplePlugin implements Listener {
         this.loadLibrary("org.xerial", "sqlite-jdbc", "3.46.0.0");
          */
         //adventure = BukkitAudiences.create(this);
+
+        boolean EnableMetrics = true;
+        try {
+            Class.forName("com.hyperdondon.blissgemsremake.libs.org.bstats.bukkit.Metrics");
+        } catch (ClassNotFoundException e) {
+            Common.error(e, "Are you a developer hotswapping? If you see this and you aren't, please report this bug");
+            EnableMetrics = false;
+        }
+        if (EnableMetrics) {
+            Common.logFramed("Starting bstats metrics");
+            metrics = new Metrics(this, pluginId);
+        }
 
         plugin = this;
 

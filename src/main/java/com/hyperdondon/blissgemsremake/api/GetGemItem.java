@@ -13,6 +13,7 @@ import org.bukkit.persistence.PersistentDataType;
 //skibidi
 import java.util.Arrays;
 import java.util.UUID;
+
 import static net.md_5.bungee.api.ChatColor.*;
 
 public final class GetGemItem {
@@ -22,43 +23,29 @@ public final class GetGemItem {
 
         String energystage = "";
 
-        if (season != 1) {
-            if (energy == Energy.Pristine_5) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine"
-                        + WHITE + " + "
-                        + blissgems.colorize("#96FFD9") + "5";
-            } else if (energy == Energy.Pristine_4) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine"
-                        + WHITE + " + "
-                        + blissgems.colorize("#96FFD9") + "4";
-            } else if (energy == Energy.Pristine_3) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine"
-                        + WHITE + " + "
-                        + blissgems.colorize("#96FFD9") + "3";
-            } else if (energy == Energy.Pristine_2) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine"
-                        + WHITE + " + "
-                        + blissgems.colorize("#96FFD9") + "2";
-            } else if (energy == Energy.Pristine_1) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine"
-                        + WHITE + " + "
-                        + blissgems.colorize("#96FFD9") + "1";
-            } else if (energy == Energy.Pristine) {
-                energystage = blissgems.colorize("#57FFC7") + "Pristine";
-            } else if (energy == Energy.Scratched) {
-                energystage = blissgems.colorize("#57FF8F") + "Scratched";
-            } else if (energy == Energy.Cracked) {
-                energystage = blissgems.colorize("#7958DB") + "Cracked";
-            } else if (energy == Energy.Damaged) {
-                energystage = blissgems.colorize("#FFC929") + "Damaged";
-            } else if (energy == Energy.Ruined) {
-                energystage = blissgems.colorize("#FF1111") + "Ruined";
-            } else if (energy == Energy.Broken) {
-                energystage = WHITE + "" + BOLD + "ᴜsᴇʟᴇss";
-            } else {
-                energystage = WHITE + "" + BOLD + "ᴜsᴇʟᴇss";
-            }
-        }
+        if (season != 1) if (energy == Energy.Pristine_5) energystage = blissgems.colorize("#57FFC7") + "Pristine"
+                + WHITE + " + "
+                + blissgems.colorize("#96FFD9") + "5";
+        else if (energy == Energy.Pristine_4) energystage = blissgems.colorize("#57FFC7") + "Pristine"
+                + WHITE + " + "
+                + blissgems.colorize("#96FFD9") + "4";
+        else if (energy == Energy.Pristine_3) energystage = blissgems.colorize("#57FFC7") + "Pristine"
+                + WHITE + " + "
+                + blissgems.colorize("#96FFD9") + "3";
+        else if (energy == Energy.Pristine_2) energystage = blissgems.colorize("#57FFC7") + "Pristine"
+                + WHITE + " + "
+                + blissgems.colorize("#96FFD9") + "2";
+        else if (energy == Energy.Pristine_1) energystage = blissgems.colorize("#57FFC7") + "Pristine"
+                + WHITE + " + "
+                + blissgems.colorize("#96FFD9") + "1";
+        else if (energy == Energy.Pristine || energy == Energy.N_A)
+            energystage = blissgems.colorize("#57FFC7") + "Pristine";
+        else if (energy == Energy.Scratched) energystage = blissgems.colorize("#57FF8F") + "Scratched";
+        else if (energy == Energy.Cracked) energystage = blissgems.colorize("#7958DB") + "Cracked";
+        else if (energy == Energy.Damaged) energystage = blissgems.colorize("#FFC929") + "Damaged";
+        else if (energy == Energy.Ruined) energystage = blissgems.colorize("#FF1111") + "Ruined";
+        else if (energy == Energy.Broken) energystage = WHITE + "" + BOLD + "ᴜsᴇʟᴇss";
+        else energystage = WHITE + "" + BOLD + "ᴜsᴇʟᴇss";
 
 
         //Strength
@@ -80,20 +67,15 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(10);
@@ -145,14 +127,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(10);
                         itemMeta.setLore(Arrays.asList(
@@ -266,7 +244,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -297,22 +275,17 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(10);
 
                         String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
                             ending = ")";
-                        }
 
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
@@ -428,11 +401,11 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            itemMeta.setLore(Arrays.asList(
-                                    energystage
-                            ));
+                        itemMeta.setLore(Arrays.asList(
+                                energystage
+                        ));
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -457,20 +430,15 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(8);
@@ -527,14 +495,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#FEFD17") + BOLD + "sᴘᴇᴇᴅ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(8);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
@@ -675,7 +639,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -710,47 +674,40 @@ public final class GetGemItem {
 
                     itemMeta.setDisplayName(blissgems.colorize("#FEFD17") + BOLD + "sᴘᴇᴇᴅ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(8);
                         if (energy == Energy.Scratched)
                             itemMeta.setCustomModelData(28);
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                         String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
                             ending = ")";
-                        }
 
                         itemMeta.setLore(Arrays.asList(
-                            WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
-                            blissgems.colorize("&f(") + energystage + ending,
-                            WHITE + "",
-                            blissgems.colorize("#FEFD17") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                            GRAY + "- Speed",
-                            GRAY + "- Dolphins grace",
-                            GRAY + "- Enchants Efficiency",
-                            GRAY + "- Enchants Soul Speed",
-                            WHITE + "",
-                            blissgems.colorize("#FEFD17") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                            GRAY + "- " + blissgems.colorize("#FEFD17") + " Terminal Velocity",
-                            WHITE + "",
-                            blissgems.colorize("#FEFD17") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                            GRAY + "- " + WHITE + "\uD83C\uDFAF " + blissgems.colorize("#FFE86E") + "ʙʟᴜʀ",
-                            WHITE + "",
-                            GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                            GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDD3C"
+                                WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
+                                blissgems.colorize("&f(") + energystage + ending,
+                                WHITE + "",
+                                blissgems.colorize("#FEFD17") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Speed",
+                                GRAY + "- Dolphins grace",
+                                GRAY + "- Enchants Efficiency",
+                                GRAY + "- Enchants Soul Speed",
+                                WHITE + "",
+                                blissgems.colorize("#FEFD17") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#FEFD17") + " Terminal Velocity",
+                                WHITE + "",
+                                blissgems.colorize("#FEFD17") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "- " + WHITE + "\uD83C\uDFAF " + blissgems.colorize("#FFE86E") + "ʙʟᴜʀ",
+                                WHITE + "",
+                                GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDD3C"
                         ));
                     }
 
                     if (energy == Energy.Cracked) {
                         itemMeta.setCustomModelData(48);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
@@ -769,13 +726,11 @@ public final class GetGemItem {
                                 GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
                                 GRAY + "- " + WHITE + "\uD83C\uDF29 " + blissgems.colorize("#61FFEA") + "sᴘᴇᴇᴅʏ sᴛᴏʀᴍ " + DARK_RED + "\uD83E\uDD3C"
                         ));
-                        }
+                    }
 
                     if (energy == Energy.Damaged) {
                         itemMeta.setCustomModelData(68);
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
@@ -799,9 +754,7 @@ public final class GetGemItem {
 
                     if (energy == Energy.Ruined) {
                         itemMeta.setCustomModelData(88);
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
@@ -821,16 +774,13 @@ public final class GetGemItem {
                     }
 
 
-
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                            ));
-                        }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                        itemMeta.setLore(Arrays.asList(
+                                WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
                     item.setItemMeta(itemMeta);
                     return item;
                 }
@@ -854,20 +804,15 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(4);
@@ -922,14 +867,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#FE04B4") + BOLD + "ʟɪғᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(4);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
@@ -1050,7 +991,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -1085,20 +1026,15 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#FE04B4") + BOLD + "ʟɪғᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(4);
 
                         String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
                             ending = ")";
-                        }
 
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
@@ -1121,8 +1057,7 @@ public final class GetGemItem {
                                 GRAY + "- " + WHITE + "\uD83D\uDC96" + blissgems.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
                                 GRAY + "- " + WHITE + "\uD83D\uDC96" + blissgems.colorize("#B8FFFA") + " ᴄɪʀᴄʟᴇ ᴏғ ʟɪғᴇ " + GREEN + "\uD83E\uDD3C"
                         ));
-                        }
-
+                    }
 
 
                     if (energy == Energy.Scratched) {
@@ -1214,14 +1149,12 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                            ));
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                        itemMeta.setLore(Arrays.asList(
+                                WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                        ));
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -1246,20 +1179,15 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(6);
@@ -1310,14 +1238,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#EFEFEF") + BOLD + "ᴘᴜғғ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(6);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
@@ -1431,7 +1355,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -1464,40 +1388,35 @@ public final class GetGemItem {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
                     itemMeta.setDisplayName(blissgems.colorize("#EFEFEF") + BOLD + "ᴘᴜғғ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(6);
-                            String ending = blissgems.colorize("&f)");
-                            if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
-                                ending = ")";
-                            }
+                        String ending = blissgems.colorize("&f)");
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
+                            ending = ")";
 
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
-                                    blissgems.colorize("&f(") + energystage + ending,
-                                    WHITE + " ",
-                                    WHITE + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                    GRAY + "- Fall Damage immunity",
-                                    GRAY + "- Enchants Power",
-                                    GRAY + "- Enchants Punch",
-                                    GRAY + "- Sculk Silence",
-                                    GRAY + "- Crop Tramp-Less",
-                                    WHITE + " ",
-                                    WHITE + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                    GRAY + "- " + WHITE + "Double Jump",
-                                    WHITE + " ",
-                                    WHITE + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                    GRAY + "- " + WHITE + "☁" + blissgems.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                    GRAY + "- " + WHITE + "☁" + blissgems.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + DARK_RED + "\uD83E\uDD3C",
-                                    WHITE + "",
-                                    GRAY + "- " + WHITE + "⏫" + blissgems.colorize("#EFEFEF") + " ᴅᴀsʜ"
-                            ));
+                        itemMeta.setLore(Arrays.asList(
+                                WHITE + "" + BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
+                                blissgems.colorize("&f(") + energystage + ending,
+                                WHITE + " ",
+                                WHITE + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Fall Damage immunity",
+                                GRAY + "- Enchants Power",
+                                GRAY + "- Enchants Punch",
+                                GRAY + "- Sculk Silence",
+                                GRAY + "- Crop Tramp-Less",
+                                WHITE + " ",
+                                WHITE + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + WHITE + "Double Jump",
+                                WHITE + " ",
+                                WHITE + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "- " + WHITE + "☁" + blissgems.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "- " + WHITE + "☁" + blissgems.colorize("#FAE7E6") + " ʙʀᴇᴇᴢʏ ʙᴀsʜ " + DARK_RED + "\uD83E\uDD3C",
+                                WHITE + "",
+                                GRAY + "- " + WHITE + "⏫" + blissgems.colorize("#EFEFEF") + " ᴅᴀsʜ"
+                        ));
                     }
 
 
@@ -1589,14 +1508,12 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                            ));
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                        itemMeta.setLore(Arrays.asList(
+                                WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                        ));
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -1631,14 +1548,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#A01FFF") + BOLD + "ᴀsᴛʀᴀ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(14);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
@@ -1789,7 +1702,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -1824,19 +1737,12 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#A01FFF") + BOLD + "ᴀsᴛʀᴀ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
-                        if (energy == Energy.Scratched) {
-                            itemMeta.setCustomModelData(34);
-                        } else {
-                            itemMeta.setCustomModelData(14);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Scratched) itemMeta.setCustomModelData(34);
+                        else itemMeta.setCustomModelData(14);
                         String gemthingylols = "🔮 ";
                         if (energy == Energy.Scratched)
                             gemthingylols = "\uD83D\uDD3A ";
@@ -1927,15 +1833,13 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                            ));
-                        }
+                        for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                        itemMeta.setLore(Arrays.asList(
+                                WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                        ));
+                    }
                     item.setItemMeta(itemMeta);
                     return item;
                 }
@@ -1944,156 +1848,146 @@ public final class GetGemItem {
 
             //Flux
 
-            if (gem == GemType.Flux) {
+            if (gem == GemType.Flux) if (season == 3) {
 
 
-                if (season == 3) {
+                ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
 
 
-                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-                    ItemMeta itemMeta = item.getItemMeta();
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fb1c4eab-dfae-4302-9441-47026b6d33ae");
+
+                NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "flux");
+
+                NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "fb1c4eab-dfae-4302-9441-47026b6d33ae");
+                itemMeta.setDisplayName(blissgems.colorize("#5ED7FF") + BOLD + "ғʟᴜx " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
+                for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
-                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+                if (Gem.isPristineorHigher(energy)) {
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "flux");
-
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
-                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
-                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
-
-
-                    itemMeta.setDisplayName(blissgems.colorize("#5ED7FF") + BOLD + "ғʟᴜx " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
-
-                    if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
-
-                        itemMeta.setCustomModelData(16);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Flow State",
-                                GRAY + "- Shocking Chance",
-                                GRAY + "- Tireless",
-                                GRAY + "- Conduction",
-                                GRAY + "- Charged",
-                                WHITE + " ",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
-                                WHITE + "",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
-                                WHITE + "",
-                                GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
-                        ));
-                    }
-
-                    if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(36);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Flow State",
-                                GRAY + "- Shocking Chance",
-                                GRAY + "- Conduction",
-                                WHITE + " ",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
-                                WHITE + "",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
-                                WHITE + "",
-                                GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
-                        ));
-                    }
-
-                    if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(56);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Flow State",
-                                GRAY + "- Shocking Chance",
-                                WHITE + " ",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
-                                WHITE + "",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
-                                WHITE + "",
-                                GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
-                        ));
-                    }
-
-                    if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(76);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Flow State",
-                                WHITE + " ",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
-                                WHITE + "",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
-                                WHITE + "",
-                                GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
-                        ));
-                    }
-
-                    if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(96);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "No Passives",
-                                WHITE + " ",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
-                                WHITE + "",
-                                blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
-                                GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
-                                WHITE + "",
-                                GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
-                        ));
-                    }
-
-
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
-                        itemMeta.setCustomModelData(100);
-                            for (ItemFlag flag : ItemFlag.values()) {
-                                itemMeta.addItemFlags(flag);
-                            }
-                            itemMeta.setLore(Arrays.asList(
-                                    WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                            ));
-                    }
-                    item.setItemMeta(itemMeta);
-                    return item;
+                    itemMeta.setCustomModelData(16);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- Flow State",
+                            GRAY + "- Shocking Chance",
+                            GRAY + "- Tireless",
+                            GRAY + "- Conduction",
+                            GRAY + "- Charged",
+                            WHITE + " ",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
+                            WHITE + "",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
+                            WHITE + "",
+                            GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
+                    ));
                 }
+
+                if (energy == Energy.Scratched) {
+                    itemMeta.setCustomModelData(36);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- Flow State",
+                            GRAY + "- Shocking Chance",
+                            GRAY + "- Conduction",
+                            WHITE + " ",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
+                            WHITE + "",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
+                            WHITE + "",
+                            GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
+                    ));
+                }
+
+                if (energy == Energy.Cracked) {
+                    itemMeta.setCustomModelData(56);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- Flow State",
+                            GRAY + "- Shocking Chance",
+                            WHITE + " ",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
+                            WHITE + "",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
+                            WHITE + "",
+                            GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
+                    ));
+                }
+
+                if (energy == Energy.Damaged) {
+                    itemMeta.setCustomModelData(76);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- Flow State",
+                            WHITE + " ",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
+                            WHITE + "",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
+                            WHITE + "",
+                            GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
+                    ));
+                }
+
+                if (energy == Energy.Ruined) {
+                    itemMeta.setCustomModelData(96);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴇᴠᴇʀʏᴛʜɪɴɢ ɪs ᴀ ғʟᴜᴄᴛᴜᴀᴛɪᴏɴ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&7) "),
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "No Passives",
+                            WHITE + " ",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + " ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#03EAFF") + "Kinetic Burst",
+                            WHITE + "",
+                            blissgems.colorize("#03EAFF") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ᴇɴᴇʀɢʏ ʙᴇᴀᴍ " + DARK_RED + "🧑🏻",
+                            GRAY + "- ☄ " + blissgems.colorize("#03EAFF") + "ɢʀᴏᴜɴᴅ " + GRAY + " " + DARK_RED + "🤼",
+                            WHITE + "",
+                            GRAY + "- 🌀 " + blissgems.colorize("#03EAFF") + "Kinetic Overdrive " + GREEN + "🤼"
+                    ));
+                }
+
+
+                if (energy == Energy.Broken) {
+                    itemMeta.setCustomModelData(100);
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                    ));
+                }
+                item.setItemMeta(itemMeta);
+                return item;
             }
 
             if (gem == GemType.Fire) {
@@ -2111,20 +2005,15 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(2);
@@ -2175,14 +2064,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
                         itemMeta.setLore(Arrays.asList(
@@ -2287,7 +2172,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -2317,21 +2202,16 @@ public final class GetGemItem {
                     NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                     itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
 
                         String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
                             ending = ")";
-                        }
 
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
@@ -2442,11 +2322,11 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
-                            itemMeta.setLore(Arrays.asList(
-                                    energystage
-                            ));
+                        itemMeta.setLore(Arrays.asList(
+                                energystage
+                        ));
                     }
                     item.setItemMeta(itemMeta);
                     return item;
@@ -2469,23 +2349,18 @@ public final class GetGemItem {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                        /*NBTItem nbtItem = new NBTItem(item);
+                    /*NBTItem nbtItem = new NBTItem(item);
                         nbtItem.setInteger("HideFlags", 127);
                         item = nbtItem.getItem();*/
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                            ItemFlag.HIDE_ENCHANTS,
+                            ItemFlag.HIDE_ATTRIBUTES,
+                            ItemFlag.HIDE_UNBREAKABLE,
+                            ItemFlag.HIDE_DESTROYS,
+                            ItemFlag.HIDE_PLACED_ON,
+                            ItemFlag.HIDE_POTION_EFFECTS,
+                            ItemFlag.HIDE_DYE);
+                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(12);
@@ -2535,14 +2410,10 @@ public final class GetGemItem {
 
 
                     itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
                         itemMeta.setLore(Arrays.asList(
@@ -2647,7 +2518,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(96);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
@@ -2677,21 +2548,16 @@ public final class GetGemItem {
                     NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                    for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                     itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
 
                         String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
+                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
                             ending = ")";
-                        }
 
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
@@ -2802,7 +2668,7 @@ public final class GetGemItem {
                     }
 
 
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
+                    if (energy == Energy.Broken) {
                         itemMeta.setCustomModelData(100);
                         itemMeta.setLore(Arrays.asList(
                                 energystage
@@ -2814,329 +2680,314 @@ public final class GetGemItem {
             }
         }
 
-        if (tier == 1) {
-            if (gem == GemType.Strength) {
-                if (season == 1) {
-                    ItemStack item = new ItemStack(Material.AMETHYST_SHARD, 1);
-                    ItemMeta itemMeta = item.getItemMeta();
+        if (tier == 1) if (gem == GemType.Strength) {
+            if (season == 1) {
+                ItemStack item = new ItemStack(Material.AMETHYST_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
 
 
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
 
-                    itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "Strength " + blissgems.colorize("#C7C7C7") + "Gem");
-
-
-                    // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
-                    // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
-
-                    if (VersionChecker.OlderThanNBTChange()) {
-                        itemMeta.addItemFlags(
-                                ItemFlag.HIDE_ENCHANTS,
-                                ItemFlag.HIDE_ATTRIBUTES,
-                                ItemFlag.HIDE_UNBREAKABLE,
-                                ItemFlag.HIDE_DESTROYS,
-                                ItemFlag.HIDE_PLACED_ON,
-                                ItemFlag.HIDE_POTION_EFFECTS,
-                                ItemFlag.HIDE_DYE);
-                    } else {
-                        for (ItemFlag flag : ItemFlag.values()) {
-                            itemMeta.addItemFlags(flag);
-                        }
-                    }
+                itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "Strength " + blissgems.colorize("#C7C7C7") + "Gem");
 
 
-                    itemMeta.setCustomModelData(9);
+                // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
+                // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
+
+                if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
+                        ItemFlag.HIDE_ENCHANTS,
+                        ItemFlag.HIDE_ATTRIBUTES,
+                        ItemFlag.HIDE_UNBREAKABLE,
+                        ItemFlag.HIDE_DESTROYS,
+                        ItemFlag.HIDE_PLACED_ON,
+                        ItemFlag.HIDE_POTION_EFFECTS,
+                        ItemFlag.HIDE_DYE);
+                else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+
+
+                itemMeta.setCustomModelData(9);
+                itemMeta.setLore(Arrays.asList(
+                        WHITE + "" + BOLD + "Have the strength of 5 men",
+                        blissgems.colorize("#FFE4AB") + "Passives",
+                        GRAY + " " + blissgems.colorize("#F10303") + "🔺 " + GRAY + "Strength 1, Auto enchants all",
+                        GRAY + " swords and axes with sharpness 2",
+                        WHITE + " ",
+                        blissgems.colorize("#B8FFFB") + BOLD + "Powers",
+                        blissgems.colorize("#F10303") + "🔮 " + WHITE + BOLD + "required"
+                ));
+
+                item.setItemMeta(itemMeta);
+                return item;
+            }
+
+
+            if (season == 2) {
+
+
+                ItemStack item = new ItemStack(Material.AMETHYST_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
+
+
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "166c9cee-5354-4a29-a33b-fc49080eecc1");
+
+                NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
+
+                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
+
+                NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
+
+                NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+
+
+                itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
+                for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+
+                if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+
+                    if ((energy) == Energy.Scratched) itemMeta.setCustomModelData(29);
+                    else itemMeta.setCustomModelData(9);
                     itemMeta.setLore(Arrays.asList(
-                            WHITE + "" + BOLD + "Have the strength of 5 men",
-                            blissgems.colorize("#FFE4AB") + "Passives",
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            energystage,
                             GRAY + " " + blissgems.colorize("#F10303") + "🔺 " + GRAY + "Strength 1, Auto enchants all",
                             GRAY + " swords and axes with sharpness 2",
+                            GRAY + " Deal more damage the lower you are",
                             WHITE + " ",
-                            blissgems.colorize("#B8FFFB") + BOLD + "Powers",
+                            blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
                             blissgems.colorize("#F10303") + "🔮 " + WHITE + BOLD + "required"
                     ));
+                }
 
-                    item.setItemMeta(itemMeta);
-                    return item;
+                if (energy == Energy.Cracked) {
+                    itemMeta.setCustomModelData(49);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            energystage,
+                            GRAY + " " + blissgems.colorize("#F10303") + "🔺 " + "Strength 1",
+                            GRAY + " Auto Enchant sharpness 1",
+                            WHITE + " ",
+                            blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            blissgems.colorize("#F10303") + "🔮 " + WHITE + BOLD + "required"
+                    ));
+                }
+
+                if (energy == Energy.Damaged) {
+                    itemMeta.setCustomModelData(70);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            energystage,
+                            GRAY + " " + blissgems.colorize("#F10303") + "🔮 " + GRAY + "Auto enchants sharpness 2",
+                            WHITE + " ",
+                            blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "-" + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + BOLD + "ғʀᴀɪʟᴇʀ",
+                            GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Clears potion effects",
+                            GRAY + " gives weakness 1 for 20 seconds",
+                            GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + " Clears potion effects",
+                            GRAY + " and gives withering, " + WHITE + "40s, R5",
+                            WHITE + "",
+                            GRAY + "-" + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + WHITE + "R4 40s",
+                            GRAY + " " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                            GRAY + " " + GREEN + "\uD83E\uDD3C " + GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                    ));
+                }
+
+                if (energy == Energy.Ruined) {
+                    itemMeta.setCustomModelData(90);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            energystage,
+                            GRAY + " " + blissgems.colorize("#F10303") + "🔮 " + GRAY + "No passives",
+                            WHITE + " ",
+                            blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "-" + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + BOLD + "ғʀᴀɪʟᴇʀ",
+                            GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Clears potion effects",
+                            GRAY + " gives weakness 1 for 20 seconds",
+                            GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + " Clears potion effects",
+                            GRAY + " and gives withering, " + WHITE + "40s, R5",
+                            WHITE + "",
+                            GRAY + "-" + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + WHITE + "R4 40s",
+                            GRAY + " " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
+                            GRAY + " " + GREEN + "\uD83E\uDD3C " + GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
+                    ));
                 }
 
 
-                if (season == 2) {
-
-
-                    ItemStack item = new ItemStack(Material.AMETHYST_SHARD, 1);
-                    ItemMeta itemMeta = item.getItemMeta();
-
-
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "166c9cee-5354-4a29-a33b-fc49080eecc1");
-
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
-                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
-
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
-
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
-                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
-                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
-
-
-                    itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
-
-                    if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
-
-                        if ((energy) == Energy.Scratched) itemMeta.setCustomModelData(29); else itemMeta.setCustomModelData(9);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                energystage,
-                                GRAY + " " + blissgems.colorize("#F10303") + "🔺 " + GRAY + "Strength 1, Auto enchants all",
-                                GRAY + " swords and axes with sharpness 2",
-                                GRAY + " Deal more damage the lower you are",
-                                WHITE + " ",
-                                blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                blissgems.colorize("#F10303") + "🔮 " + WHITE + BOLD + "required"
-                        ));
-                    }
-
-                    if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(49);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                energystage,
-                                GRAY + " " + blissgems.colorize("#F10303") + "🔺 " + "Strength 1",
-                                GRAY + " Auto Enchant sharpness 1",
-                                WHITE + " ",
-                                blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                blissgems.colorize("#F10303") + "🔮 " + WHITE + BOLD + "required"
-                        ));
-                    }
-
-                    if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(70);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                energystage,
-                                GRAY + " " + blissgems.colorize("#F10303") + "🔮 " + GRAY + "Auto enchants sharpness 2",
-                                WHITE + " ",
-                                blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + BOLD + "ғʀᴀɪʟᴇʀ",
-                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Clears potion effects",
-                                GRAY + " gives weakness 1 for 20 seconds",
-                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + " Clears potion effects",
-                                GRAY + " and gives withering, " + WHITE + "40s, R5",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + WHITE + "R4 40s",
-                                GRAY + " " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
-                                GRAY + " " + GREEN + "\uD83E\uDD3C " + GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
-                        ));
-                    }
-
-                    if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(90);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                energystage,
-                                GRAY + " " + blissgems.colorize("#F10303") + "🔮 " + GRAY + "No passives",
-                                WHITE + " ",
-                                blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + BOLD + "ғʀᴀɪʟᴇʀ",
-                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Clears potion effects",
-                                GRAY + " gives weakness 1 for 20 seconds",
-                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + " Clears potion effects",
-                                GRAY + " and gives withering, " + WHITE + "40s, R5",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + WHITE + "R4 40s",
-                                GRAY + " " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Every 3 crits charges a hit that deals 2x the dmg",
-                                GRAY + " " + GREEN + "\uD83E\uDD3C " + GRAY + "Every 8 crits charges a hit that deals 2x the dmg"
-                        ));
-                    }
-
-
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
-                        itemMeta.setCustomModelData(96);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
-                        ));
-                    }
-                    item.setItemMeta(itemMeta);
-                    return item;
+                if (energy == Energy.Broken) {
+                    itemMeta.setCustomModelData(96);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ᴜsᴇʟᴇss"
+                    ));
                 }
-                if (season == 3) {
+                item.setItemMeta(itemMeta);
+                return item;
+            }
+            if (season == 3) {
 
-                    ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
-                    ItemMeta itemMeta = item.getItemMeta();
-
-
-                    NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "9f969b5e-8b9a-4dd5-b5bc-9a23774721b4");
-
-                    NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
-                    itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
-
-                    NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
-
-                    NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
-                    itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
-
-                    NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
-                    itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
+                ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
+                ItemMeta itemMeta = item.getItemMeta();
 
 
-                    for (ItemFlag flag : ItemFlag.values()) {
-                        itemMeta.addItemFlags(flag);
-                    }
+                NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+                itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "9f969b5e-8b9a-4dd5-b5bc-9a23774721b4");
 
-                    itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
-                    if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) {
-                            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-                        }
+                NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+                itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
-                        itemMeta.setCustomModelData(10);
+                NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+                itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "strength");
 
-                        String ending = blissgems.colorize("&f)");
-                        if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5) {
-                            ending = ")";
-                        }
+                NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+                itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
 
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("&f(") + energystage + ending,
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- " + GRAY + "Strength",
-                                GRAY + "- Enchants Sharpness",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
-                        ));
-                    }
+                NamespacedKey quicknoremovekey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+                itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(30);
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- " + GRAY + "Strength",
-                                GRAY + "- Enchants Sharpness",
-                                GRAY + "- " + GRAY + "Bloodthorns",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
-                        ));
-                    }
+                for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
-                    if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(50);
+                itemMeta.setDisplayName(blissgems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
+                if (Gem.isPristineorHigher(energy)) {
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- " + GRAY + "Strength",
-                                GRAY + "- Enchants Sharpness",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
-                        ));
-                    }
+                    itemMeta.setCustomModelData(10);
 
+                    String ending = blissgems.colorize("&f)");
+                    if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
+                        ending = ")";
 
-                    if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(70);
-
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- " + GRAY + "Strength",
-                                GRAY + "- Enchants Sharpness",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
-                        ));
-                    }
-
-                    if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(90);
-
-                        itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
-                                blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "No Passives",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
-                                WHITE + " ",
-                                blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
-                        ));
-                    }
-
-
-                    if (energy == Energy.Broken || energy == Energy.N_A) {
-                        itemMeta.setCustomModelData(100);
-                        itemMeta.setLore(Arrays.asList(
-                                energystage
-                        ));
-                    }
-                    item.setItemMeta(itemMeta);
-                    return item;
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("&f(") + energystage + ending,
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- " + GRAY + "Strength",
+                            GRAY + "- Enchants Sharpness",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
+                            WHITE + "",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
+                    ));
                 }
+
+
+                if (energy == Energy.Scratched) {
+                    itemMeta.setCustomModelData(30);
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- " + GRAY + "Strength",
+                            GRAY + "- Enchants Sharpness",
+                            GRAY + "- " + GRAY + "Bloodthorns",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
+                            WHITE + "",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
+                    ));
+                }
+
+                if (energy == Energy.Cracked) {
+                    itemMeta.setCustomModelData(50);
+
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- " + GRAY + "Strength",
+                            GRAY + "- Enchants Sharpness",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
+                            WHITE + "",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
+                    ));
+                }
+
+
+                if (energy == Energy.Damaged) {
+                    itemMeta.setCustomModelData(70);
+
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "- " + GRAY + "Strength",
+                            GRAY + "- Enchants Sharpness",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
+                            WHITE + "",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
+                    ));
+                }
+
+                if (energy == Energy.Ruined) {
+                    itemMeta.setCustomModelData(90);
+
+                    itemMeta.setLore(Arrays.asList(
+                            WHITE + "" + BOLD + "ʜᴀᴠᴇ ᴛʜᴇ sᴛʀᴇɴɢᴛʜ ᴏғ ᴀ ᴀʀᴍʏ",
+                            blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                            GRAY + "No Passives",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮" + " " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                            GRAY + "- " + blissgems.colorize("#F10303") + "Bounty Hunter",
+                            WHITE + " ",
+                            blissgems.colorize("#F10303") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ғʀᴀɪʟᴇʀ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "\uD83E\uDD3A " + blissgems.colorize("#B5B5B5") + "ɴᴜʟʟɪғʏ " + DARK_RED + "\uD83E\uDD3C",
+                            WHITE + "",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                            GRAY + "- " + WHITE + "⚔" + blissgems.colorize("#910D0D") + " ᴄʜᴀᴅ sᴛʀᴇɴɢᴛʜ " + GREEN + "\uD83E\uDD3C"
+                    ));
+                }
+
+
+                if (energy == Energy.Broken) {
+                    itemMeta.setCustomModelData(100);
+                    itemMeta.setLore(Arrays.asList(
+                            energystage
+                    ));
+                }
+                item.setItemMeta(itemMeta);
+                return item;
             }
         }
 

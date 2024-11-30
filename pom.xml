@@ -82,6 +82,8 @@
                                     <include>com.github.puregero:regionized-paper</include>
                                     <include>com.github.puregero:regionized-common</include>
                                     <include>com.github.puregero:regionized-bukkit</include>
+                                    <include>org.bstats:bstats-bukkit</include>
+                                    <include>org.bstats:bstats-base</include>
                                 </includes>
                             </artifactSet>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
@@ -99,14 +101,20 @@
                                 </relocation>
 
                                 <relocation>
-                                    <pattern>net.kyori.adventure</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.net.kyori.adventure
+                                    <pattern>com.github.puregero</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.com.github.puregero
                                     </shadedPattern>
                                 </relocation>
 
                                 <relocation>
-                                    <pattern>com.github.puregero</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.com.github.puregero
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.org.bstats
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>net.kyori</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.net.kyori
                                     </shadedPattern>
                                 </relocation>
                             </relocations>
@@ -176,6 +184,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
             <version>3.13.56</version>
@@ -214,7 +229,7 @@
             <artifactId>adventure-api</artifactId>
             <version>4.17.0</version>
         </dependency>
-        
+
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-platform-api</artifactId>

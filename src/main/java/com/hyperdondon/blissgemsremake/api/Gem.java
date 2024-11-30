@@ -165,7 +165,7 @@ public class Gem {
      * Checks if the energy that is given is Energy.Pristine or higher.
      */
     public static boolean isPristineorHigher(Energy en) {
-        return (en == Energy.Pristine || en == Energy.Pristine_1 || en == Energy.Pristine_2 || en == Energy.Pristine_3 || en == Energy.Pristine_4 || en == Energy.Pristine_5);
+        return (en == Energy.N_A || en == Energy.Pristine || en == Energy.Pristine_1 || en == Energy.Pristine_2 || en == Energy.Pristine_3 || en == Energy.Pristine_4 || en == Energy.Pristine_5);
     }
 
     /**
