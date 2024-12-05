@@ -46,7 +46,7 @@ public class Trader implements Listener {
 
         int tier = 1;
         String currentgem = "";
-        for (ItemStack item : p.getInventory()) {
+        for (ItemStack item : p.getInventory())
             if (item.hasItemMeta()) {
 
                 if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
@@ -81,7 +81,6 @@ public class Trader implements Listener {
                     break;
                 }
             }
-        }
         Gems.get(p.getUniqueId()).remove(currentgem);
         Bukkit.broadcastMessage(String.valueOf(Gems.get(p.getUniqueId()).size()));
         /*
@@ -95,10 +94,10 @@ public class Trader implements Listener {
         String Tier2 = ChatColor.of("#FFD773") + "ɢᴇᴍ";
 
         String puffname =
-        (tier == 2) ?
-                ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ " + Tier2
-        :
-                ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ " + Tier1;
+                (tier == 2) ?
+                        ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ " + Tier2
+                        :
+                        ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ " + Tier1;
         int PuffNormalCMD = (tier == 2) ? 6 : 5;
         int PuffGUICMD = (tier == 2) ? 106 : 105;
 
@@ -112,9 +111,9 @@ public class Trader implements Listener {
 
         String fluxname =
                 (tier == 2) ?
-                        ChatColor.of("#5ED7FF") +  "" + BOLD + "ғʟᴜx " + Tier2
+                        ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx " + Tier2
                         :
-                        ChatColor.of("#5ED7FF") +  "" + BOLD + "ғʟᴜx " + Tier1;
+                        ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx " + Tier1;
         int FluxNormalCMD = (tier == 2) ? 16 : 15;
         int FluxGUICMD = (tier == 2) ? 116 : 115;
 
@@ -159,7 +158,6 @@ public class Trader implements Listener {
         int LifeGUICMD = (tier == 2) ? 104 : 103;
 
 
-
         ItemStack puffgem = GemToGUI("puff", currentgem, puffname, tier, PuffNormalCMD, PuffGUICMD, Gems.get(p.getUniqueId()).size(), p);
         ItemStack astragem = GemToGUI("astra", currentgem, astraname, tier, AstraNormalCMD, AstraGUICMD, Gems.get(p.getUniqueId()).size(), p);
         ItemStack fluxgem = GemToGUI("flux", currentgem, fluxname, tier, FluxNormalCMD, FluxGUICMD, Gems.get(p.getUniqueId()).size(), p);
@@ -171,7 +169,7 @@ public class Trader implements Listener {
         ItemStack lifegem = GemToGUI("life", currentgem, lifename, tier, LifeNormalCMD, LifeGUICMD, Gems.get(p.getUniqueId()).size(), p);
 
         String currentenergy = "";
-        for (ItemStack item : p.getInventory()) {
+        for (ItemStack item : p.getInventory())
             if (item.hasItemMeta()) {
 
                 if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
@@ -206,7 +204,6 @@ public class Trader implements Listener {
                     break;
                 }
             }
-        }
 
         ItemStack energybtl = new ItemStack(Material.NAUTILUS_SHELL);
         ItemMeta energymta = energybtl.getItemMeta();
@@ -214,12 +211,10 @@ public class Trader implements Listener {
         energymta.setDisplayName(ChatColor.of("#96FFD9") + "" + BOLD + "ᴇɴᴇʀɢʏ " + ChatColor.of("#FFECB8") + "ɪɴ ᴀ ʙᴏᴛᴛʟᴇ");
         energymta.setLore(
                 Arrays.asList(
-                        WHITE + "Left click to trade!",
-                        WHITE + "This will leave you on the " + WHITE + "state"
+                        WHITE + "Left click to trade!"
                 )
         );
         energybtl.setItemMeta(energymta);
-
 
 
         gui.setItem(17, puffgem);
@@ -270,7 +265,7 @@ public class Trader implements Listener {
             if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#A01FFF") + "" + BOLD + "ᴀsᴛʀᴀ "))
                 clickedgem = "astra";
 
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") +  "" + BOLD + "ғʟᴜx "))
+            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx "))
                 clickedgem = "flux";
 
             if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FEFD17") + "" + BOLD + "sᴘᴇᴇᴅ "))
@@ -286,7 +281,6 @@ public class Trader implements Listener {
 
             double chance = (1.0 / Gems.get(p.getUniqueId()).size()) * 100;
             chance = Math.round(chance);
-
 
 
             for (int i = 9; i < 18; i++) {
@@ -325,8 +319,10 @@ public class Trader implements Listener {
 
         }
     }
-    
-    /** This is for internal use! */
+
+    /**
+     * This is for internal use!
+     */
     public static ItemStack GemToGUI(String type, String currentgem, String name, int tier, int NormalCMD, int GUICMD, int size, Player p) {
         ItemStack gem = new ItemStack(Material.AMETHYST_SHARD);
 
@@ -340,24 +336,22 @@ public class Trader implements Listener {
         if (currentgem.equals(type)) {
             meta.setCustomModelData(GUICMD);
             meta.setLore(
-                Arrays.asList(
-                    ChatColor.WHITE + "This is your current gem"
-                )
+                    Arrays.asList(
+                            ChatColor.WHITE + "This is your current gem"
+                    )
             );
-        }
-        else if (Gems.get(p.getUniqueId()).contains(type)) {
+        } else if (Gems.get(p.getUniqueId()).contains(type)) {
             meta.setCustomModelData(NormalCMD);
 
-            double chance =  (1.0 / size) * 100;
-            chance  = Math.round(chance);
+            double chance = (1.0 / size) * 100;
+            chance = Math.round(chance);
 
             meta.setLore(
                     Arrays.asList(
                             ChatColor.WHITE + "Chance: " + (int) chance + "%"
                     )
             );
-        }
-        else {
+        } else {
             meta.setCustomModelData(GUICMD);
             meta.setLore(
                     Arrays.asList(
@@ -367,13 +361,14 @@ public class Trader implements Listener {
         }
 
 
-
         gem.setItemMeta(meta);
 
         return gem;
     }
 
-    /** This is for internal use! */
+    /**
+     * This is for internal use!
+     */
     public static void ResetGemList(UUID id) {
         ArrayList<String> gems = new ArrayList<String>();
         gems.add("strength");
