@@ -18,7 +18,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -28,9 +27,6 @@ import org.mineacademy.fo.remain.Remain;
 import static net.md_5.bungee.api.ChatColor.*;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
 
 public final class Powers implements Listener {
     @Getter
@@ -40,15 +36,16 @@ public final class Powers implements Listener {
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
         if (e.getDamager().getType() != EntityType.PLAYER)
             return;
+
         Player p = (Player) e.getDamager();
-        if (!Gem.IsGem(p.getInventory().getItemInMainHand()))
+        if (!Gem.isGem(p.getInventory().getItemInMainHand()))
             return;
-        if (Gem.GetGemType(p.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+        if (Gem.getGemType(p.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
         e.setCancelled(true);
         ItemStack gem = p.getInventory().getItemInMainHand();
 
-        String id = Gem.GetGemID(gem, p);
+        String id = Gem.getGemID(gem, p);
 
         //checking if the item has the data
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
@@ -118,16 +115,15 @@ public final class Powers implements Listener {
         //check left click
         if (e.getAction() != Action.LEFT_CLICK_AIR && e.getAction() != Action.LEFT_CLICK_BLOCK)
             return;
-        if (!Gem.IsGem(e.getPlayer().getInventory().getItemInMainHand()))
+        if (!Gem.isGem(e.getPlayer().getInventory().getItemInMainHand()))
             return;
-        if (Gem.GetGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+        if (Gem.getGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
         e.setCancelled(true);
         ItemStack gem = e.getPlayer().getInventory().getItemInMainHand();
         Player p = e.getPlayer();
-        String id = Gem.GetGemID(gem, p);
+        String id = Gem.getGemID(gem, p);
 
-        //checking if the item has the data
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
             return; //Add cant use power message
 
@@ -181,23 +177,23 @@ public final class Powers implements Listener {
 
     public static void StrengthSeconds() {
         for (Player p : MultiLib.getAllOnlinePlayers()) {
-            if (!Gem.IsGem(p.getInventory().getItemInMainHand()) && !Gem.IsGem(p.getInventory().getItemInOffHand()))
+            if (!Gem.isGem(p.getInventory().getItemInMainHand()) && !Gem.isGem(p.getInventory().getItemInOffHand()))
                 continue;
-            if (Gem.GetGemType(p.getInventory().getItemInMainHand()) != GemType.Strength && Gem.GetGemType(p.getInventory().getItemInOffHand()) != GemType.Strength)
+            if (Gem.getGemType(p.getInventory().getItemInMainHand()) != GemType.Strength && Gem.getGemType(p.getInventory().getItemInOffHand()) != GemType.Strength)
                 continue;
 
             ItemStack gem = new ItemStack(Material.AIR);
 
-            if (Gem.IsGem(p.getInventory().getItemInMainHand()))
-                if (Gem.GetGemType(p.getInventory().getItemInMainHand()) == GemType.Strength)
+            if (Gem.isGem(p.getInventory().getItemInMainHand()))
+                if (Gem.getGemType(p.getInventory().getItemInMainHand()) == GemType.Strength)
                     gem = p.getInventory().getItemInMainHand();
 
-            if (Gem.IsGem(p.getInventory().getItemInOffHand()))
-                if (!Gem.IsGem(p.getInventory().getItemInMainHand()))
-                    if (Gem.GetGemType(p.getInventory().getItemInOffHand()) == GemType.Strength)
+            if (Gem.isGem(p.getInventory().getItemInOffHand()))
+                if (!Gem.isGem(p.getInventory().getItemInMainHand()))
+                    if (Gem.getGemType(p.getInventory().getItemInOffHand()) == GemType.Strength)
                         gem = p.getInventory().getItemInOffHand();
 
-            String id = Gem.GetGemID(gem, p);
+            String id = Gem.getGemID(gem, p);
 
             String FrailerString = blissgems.colorize("#F10303") + "\uD83E\uDD3A" + " " + GREEN + "Ready!";
             String ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + GREEN + "Ready!";
@@ -313,15 +309,15 @@ public final class Powers implements Listener {
         //check right click
         if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
             return;
-        if (!Gem.IsGem(e.getPlayer().getInventory().getItemInMainHand()))
+        if (!Gem.isGem(e.getPlayer().getInventory().getItemInMainHand()))
             return;
-        if (Gem.GetGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+        if (Gem.getGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
         Player p = e.getPlayer();
         e.setCancelled(true);
         ItemStack gem = p.getInventory().getItemInMainHand();
 
-        String id = Gem.GetGemID(gem, p);
+        String id = Gem.getGemID(gem, p);
 
         //checking if the item has the data
         if (!CooldownHandler.canUseCooldown("Power-ChadStrength:" + id))

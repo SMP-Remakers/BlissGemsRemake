@@ -2,10 +2,8 @@ package com.hyperdondon.blissgemsremake.internal.commands;
 
 import com.github.puregero.multilib.MultiLib;
 import com.hyperdondon.blissgemsremake.api.*;
-import com.hyperdondon.blissgemsremake.api.util.TimeUtils;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
-import com.hyperdondon.blissgemsremake.internal.item.trader.Trader;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -225,8 +223,8 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 Settings.setSeason(2);
                 GemType type = GemType.valueOf(args[2].substring(0, 1).toUpperCase() + args[2].substring(1));  //Make all letter lowercase then capitalize first letter
                 Energy energy = Energy.Pristine;
-                if (Gem.HasAGem(p))
-                    energy = Gem.GetPlayerEnergy(p);
+                if (Gem.hasAGem(p))
+                    energy = Gem.getPlayerEnergy(p);
 
                 Gem gem = new Gem(type, tier, energy);
 
@@ -250,7 +248,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + gemmessage + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                Gem.GiveGem(gem, p, false, Integer.parseInt(args[3]));
+                Gem.giveGem(gem, p, false, Integer.parseInt(args[3]));
             }
 
 

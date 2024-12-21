@@ -12,7 +12,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -24,19 +23,18 @@ public class LeaveJoinStorer implements Listener {
     public void Store(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         for (ItemStack gem : p.getInventory().getContents())
-            if (Gem.IsGem(gem)) {
+            if (Gem.isGem(gem)) {
                 NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
                 boolean HasID = gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING);
-                String id = "";
-                if (HasID)
-                    id = gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
                 if (HasID) {
-                    for (Map.Entry<String, Long> entry : CooldownHandler.getCooldowns().entrySet())
+                    String id = gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
+                    Set<Map.Entry<String, Long>> set = CooldownHandler.getCooldowns().entrySet();
+                    for (Map.Entry<String, Long> entry : set)
                         if (entry.getKey().contains(id))
                             SaveAndUnload(entry.getKey());
                 } else
                     for (String power : GetPowers(Gem.fromGemItem(gem)))
-                        SaveAndUnload(power + ":" + p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem)));
+                        SaveAndUnload(power + ":" + p.getUniqueId() + ": " + Gem.getGemType(gem).toString() + " Tier " + String.valueOf(Gem.getGemTier(gem)));
             }
     }
 
@@ -44,14 +42,14 @@ public class LeaveJoinStorer implements Listener {
     public void Load(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         for (ItemStack gem : p.getInventory().getContents())
-            if (Gem.IsGem(gem)) {
+            if (Gem.isGem(gem)) {
                 NamespacedKey idkey = new NamespacedKey("blissgems", "gem-id"); //will be used to get the gem id
                 boolean HasID = gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING);
                 String id = "";
                 if (HasID)
                     id = gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
                 else
-                    id = p.getUniqueId() + ": " + Gem.GetGemType(gem).toString() + " Tier " + String.valueOf(Gem.GetGemTier(gem));
+                    id = p.getUniqueId() + ": " + Gem.getGemType(gem).toString() + " Tier " + String.valueOf(Gem.getGemTier(gem));
                 for (String power : GetPowers(Gem.fromGemItem(gem)))
                     LoadAndRemove(power + ":" + id);
             }
@@ -63,7 +61,7 @@ public class LeaveJoinStorer implements Listener {
     }
 
     public static void LoadAndRemove(String name) {
-        PlayerCooldownStorer.getInstance().get(name, value -> CooldownHandler.setCooldown(name, Long.valueOf(value)));
+        PlayerCooldownStorer.getInstance().get(name, value -> CooldownHandler.setCooldown(name, Long.parseLong(value)));
         PlayerCooldownStorer.getInstance().updatesql("DELETE FROM PlayerCooldowns" + " WHERE UUID='" + name + "';");
     }
 

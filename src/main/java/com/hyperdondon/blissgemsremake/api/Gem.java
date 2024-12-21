@@ -3,7 +3,6 @@ package com.hyperdondon.blissgemsremake.api;
 import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -109,13 +108,13 @@ public class Gem {
 
         Gem gem2 = new Gem();
 
-        gem2.energy = (Energy) GetGemInfo(gem).get(0);
-        gem2.season = (int) GetGemInfo(gem).get(1);
-        gem2.type = GetGemType(gem);
-        gem2.id = GetGemID(gem).toString();
-        gem2.tier = GetGemTier(gem);
-        gem2.allowdrop = GetGemAllowDrop(gem);
-        gem2.allowremove = GetGemAllowRemove(gem);
+        gem2.energy = (Energy) getGemInfo(gem).get(0);
+        gem2.season = (int) getGemInfo(gem).get(1);
+        gem2.type = getGemType(gem);
+        gem2.id = getGemID(gem).toString();
+        gem2.tier = getGemTier(gem);
+        gem2.allowdrop = getGemAllowDrop(gem);
+        gem2.allowremove = getGemAllowRemove(gem);
 
 
         //Bukkit.broadcastMessage(gem2.type.toString());
@@ -225,7 +224,7 @@ public class Gem {
     /**
      * Gives a player the Gem you provided as an item.
      */
-    public static void GiveGem(Gem gem, Player p, boolean silent, int tier) {
+    public static void giveGem(Gem gem, Player p, boolean silent, int tier) {
         if (!silent) {
             String gemmessage = "N/A";
             if (gem.type == GemType.Strength)
@@ -255,8 +254,8 @@ public class Gem {
     /**
      * Returns an ArrayList. The object in the first index is the energy, the second index is the season
      */
-    public static ArrayList<Object> GetGemInfo(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static ArrayList<Object> getGemInfo(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemInfo is not a gem!");
             return null;
         }
@@ -357,8 +356,8 @@ public class Gem {
     /**
      * Get whether the gem is allowed to be removed from the player's inventory
      */
-    public static boolean GetGemAllowRemove(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static boolean getGemAllowRemove(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemAllowRemove is not a gem!");
             return false;
         }
@@ -375,8 +374,8 @@ public class Gem {
     /**
      * Get whether the gem is allowed to be dropped
      */
-    public static boolean GetGemAllowDrop(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static boolean getGemAllowDrop(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemAllowDrop is not a gem!");
             return false;
         }
@@ -393,8 +392,8 @@ public class Gem {
     /**
      * Get the tier of a gem
      */
-    public static int GetGemTier(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static int getGemTier(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemTier is not a gem!");
             return 0;
         }
@@ -410,8 +409,8 @@ public class Gem {
     /**
      * Get the ID of a gem
      */
-    public static UUID GetGemID(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static UUID getGemID(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemID is not a gem!");
             return null;
         }
@@ -424,13 +423,13 @@ public class Gem {
     /**
      * Get the ID of a gem
      */
-    public static String GetGemID(ItemStack gem, Player p) {
-        if (!IsGem(gem)) {
+    public static String getGemID(ItemStack gem, Player p) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemID is not a gem!");
             return null;
         }
-        if (GetGemSeason(gem) == 1)
-            return p.getUniqueId().toString() + ":" + Gem.GetGemType(gem) + ":Tier" + Gem.GetGemTier(gem);
+        if (getGemSeason(gem) == 1)
+            return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
         NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
             idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
@@ -441,36 +440,36 @@ public class Gem {
     /**
      * Get the energy of a gem
      */
-    public static Energy GetGemEnergy(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static Energy getGemEnergy(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemEnergy is not a gem!");
             return null;
         }
-        return (Energy) GetGemInfo(gem).get(0);
+        return (Energy) getGemInfo(gem).get(0);
     }
 
     /**
      * Get the season of a gem
      */
-    public static int GetGemSeason(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static int getGemSeason(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemSeason is not a gem!");
             return 0;
         }
-        return (int) GetGemInfo(gem).get(1);
+        return (int) getGemInfo(gem).get(1);
     }
 
     /**
      * Get the type of a gem
      */
-    public static GemType GetGemType(ItemStack gem) {
-        if (!IsGem(gem)) {
+    public static GemType getGemType(ItemStack gem) {
+        if (!isGem(gem)) {
             Common.log(RED + "What have been passed to GemGemType is not a gem!");
             return null;
         }
         GemType type = null;
         String type2 = "";
-        int season = GetGemSeason(gem);
+        int season = getGemSeason(gem);
 
         if (season == 2 || season == 3) {
             NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
@@ -504,39 +503,40 @@ public class Gem {
     /**
      * Checks if the player has a gem.
      */
-    public static boolean HasAGem(Player p) {
-        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return true;
+    public static boolean hasAGem(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && isGem(item)) return true;
         return false;
     }
 
     /**
      * Returns the player's energy.
      */
-    public static Energy GetPlayerEnergy(Player p) {
+    public static Energy getPlayerEnergy(Player p) {
         for (ItemStack item : p.getInventory().getContents())
-            if (!isNull(item) && IsGem(item)) return GetGemEnergy(item);
+            if (!isNull(item) && isGem(item)) return getGemEnergy(item);
         return Energy.N_A;
     }
 
     /**
      * Returns the type of the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
      */
-    public static GemType GetPlayerGemType(Player p) {
-        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return GetGemType(item);
+    public static GemType getPlayerGemType(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && isGem(item)) return getGemType(item);
         return null;
     }
 
     /**
      * Returns the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
      */
-    public static ItemStack GetPlayerGem(Player p) {
-        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && IsGem(item)) return item;
+    public static ItemStack getPlayerGem(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && isGem(item)) return item;
         Common.log(RED + p.getName() + " doesn't have a gem!");
         return null;
     }
 
-    public static boolean IsGem(ItemStack gem) {
+    public static boolean isGem(ItemStack gem) {
         NamespacedKey idkeys2 = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        if (isNull(gem)) return false;
         if (!gem.hasItemMeta()) return false;
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkeys2, PersistentDataType.STRING)) {
             NamespacedKey idkeys1 = new NamespacedKey(blissgems.getInstance(), "shard_id");
