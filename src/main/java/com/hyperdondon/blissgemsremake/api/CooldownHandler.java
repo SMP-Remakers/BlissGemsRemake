@@ -24,6 +24,7 @@ public final class CooldownHandler {
         return getCooldown(name);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean canUseCooldown(String name) {
         if (!Cooldowns.containsKey(name))
             return true;

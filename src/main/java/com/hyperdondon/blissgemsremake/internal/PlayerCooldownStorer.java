@@ -58,12 +58,12 @@ public final class PlayerCooldownStorer extends SimpleDatabase {
 
 
             } catch (Throwable t) {
-                Common.error(t, "Could not load data for " + uuid);
+                Common.error(t, "Could not put data for " + uuid);
             }
         });
     }
 
-    public void updatesql(String command) {
+    public void runSQL(String command) {
         Common.runAsync(() -> {
             update
                     (
