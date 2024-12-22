@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.remain.Remain;
 
 import static net.md_5.bungee.api.ChatColor.*;
@@ -272,7 +273,7 @@ public final class Powers implements Listener {
             loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
             loc.setZ(loc.getZ() + z);
 
-            //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
+            loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
         }
 
 

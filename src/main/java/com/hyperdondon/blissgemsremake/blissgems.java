@@ -75,7 +75,7 @@ public final class blissgems extends SimplePlugin implements Listener {
             EnableMetrics = false;
         }
         if (EnableMetrics) {
-            Common.logFramed("Starting bstats metrics");
+            Common.logFramed("Starting bStats metrics.");
             metrics = new Metrics(this, pluginId);
         }
 

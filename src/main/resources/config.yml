@@ -5,7 +5,7 @@
 #
 #
 #
-#givegemonfirstjoin: <boolean>
+#give_gem_on_first_join: <boolean>
 # false = Don't give a player a gem when they first join (Default)
 # true = Give a player a gem when they first join
 #
@@ -17,25 +17,31 @@
 #
 #
 #
-#allowdrop: <boolean>
+#allow_gem_dropping: <boolean>
 # false = Don't allow the player to drop their gem (Default)
 # true = allow the player to drop their gem
 #
 #
 #
-#allowremove: <boolean>
+#allow_gem_removing: <boolean>
 # false = Don't allow the player to remove their gem from their inventory (Default)
 # true = allow the player to remove their gem from their inventory
 #
 #
 #
-#texturepackloading: <boolean>
-# false = Don't load the texture pack
-# true = load the texture pack (Default)
+#texture_pack_loading: <boolean>
+# false = Don't load the Bliss SMP texture pack
+# true = load the Bliss SMP texture pack (Default)
+#
+#
+#
+#unload_player_cooldowns_on_leave: <boolean>
+# false = Don't free the used memory by the player's cooldowns (Causes memory leaks AKA more memory usage)
+# true = Free the used memory by the player's cooldowns (Strongly recommended) (Default)
 #
 season: 3
-givegemonfirstjoin: false
-autoupdategem: true
-allowdrop: false
-allowremove: false
-texturepackloading: true
+give_gem_on_first_join: false
+allow_gem_dropping: false
+allow_gem_removing: false
+texture_pack_loading: true
+unload_player_cooldowns_on_leave: true
