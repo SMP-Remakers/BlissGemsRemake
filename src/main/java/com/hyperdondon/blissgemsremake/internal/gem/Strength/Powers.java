@@ -48,16 +48,18 @@ public final class Powers implements Listener {
 
         String id = Gem.getGemID(gem, p);
 
-        //checking if the item has the data
-        if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
+        if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id)) {
+            String display = CooldownHandler.parseCooldown("Power-Frailer:" + id, "<#F10303>");
+            p.sendMessage(blissgems.advcolorize("<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Frailer <#FDABAA>skill is on cooldown for <#F10303>" + display));
             return; //Add cant use power message
+        }
 
         CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
 
         p.sendMessage(
                 blissgems.colorize("#F10303") + "🔮" +
                         blissgems.colorize("#B8FFFB") + " You have activated " +
-                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
+                        blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
                         blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
         );
 
@@ -118,6 +120,8 @@ public final class Powers implements Listener {
             return;
         if (!Gem.isGem(e.getPlayer().getInventory().getItemInMainHand()))
             return;
+        if (Gem.getGemSeason(e.getPlayer().getInventory().getItemInMainHand()) > 2)
+            return;
         if (Gem.getGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
         e.setCancelled(true);
@@ -133,7 +137,7 @@ public final class Powers implements Listener {
         e.getPlayer().sendMessage(
                 blissgems.colorize("#F10303") + "🔮 " +
                         blissgems.colorize("#B8FFFB") + "You have activated group " +
-                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("#F10303") + "Frailer " +
+                        blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Frailer " +
                         blissgems.colorize("#B8FFFB") + "skill " + blissgems.colorize("&7") + "(radius 5)"
         );
 
@@ -178,61 +182,21 @@ public final class Powers implements Listener {
 
     public static void StrengthSeconds() {
         for (Player p : MultiLib.getAllOnlinePlayers()) {
-            if (!Gem.isGem(p.getInventory().getItemInMainHand()) && !Gem.isGem(p.getInventory().getItemInOffHand()))
+            ItemStack i = p.getInventory().getItemInMainHand();
+            ItemStack io = p.getInventory().getItemInOffHand();
+            if (!Gem.isGem(i) && !Gem.isGem(io))
                 continue;
-            if (Gem.getGemType(p.getInventory().getItemInMainHand()) != GemType.Strength && Gem.getGemType(p.getInventory().getItemInOffHand()) != GemType.Strength)
+            ItemStack gem = (Gem.isGem(i)) ? i : io;
+            if (Gem.getGemType(gem) != GemType.Strength)
                 continue;
-
-            ItemStack gem = new ItemStack(Material.AIR);
-
-            if (Gem.isGem(p.getInventory().getItemInMainHand()))
-                if (Gem.getGemType(p.getInventory().getItemInMainHand()) == GemType.Strength)
-                    gem = p.getInventory().getItemInMainHand();
-
-            if (Gem.isGem(p.getInventory().getItemInOffHand()))
-                if (!Gem.isGem(p.getInventory().getItemInMainHand()))
-                    if (Gem.getGemType(p.getInventory().getItemInOffHand()) == GemType.Strength)
-                        gem = p.getInventory().getItemInOffHand();
-
             String id = Gem.getGemID(gem, p);
 
-            String FrailerString = blissgems.colorize("#F10303") + "\uD83E\uDD3A" + " " + GREEN + "Ready!";
-            String ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + GREEN + "Ready!";
 
-            //Frailer
-            {
-                Duration duration = Duration.ofMillis(CooldownHandler.getCooldown("Power-Frailer:" + id));
+            String FrailerString = blissgems.advcolorize("<#F10303>" + "\uD83E\uDD3A" + " " + CooldownHandler.parseCooldown("Power-Frailer:" + id));
 
-                long minutes = duration.toMinutes();
-                long seconds = duration.toSecondsPart();
-
-                String time = "";
-                if (minutes > 0) if (seconds > 0) time = minutes + "m " + seconds + "s";
-                else time = minutes + "m";
-                else if (seconds > 0) time = seconds + "s";
+            String ChadString = blissgems.advcolorize("<#F10303>" + "⚔" + " " + CooldownHandler.parseCooldown("Power-ChadStrength:" + id));
 
 
-                if (time.equals(""))
-                    FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + GREEN + "Ready!";
-                else FrailerString = blissgems.colorize("&x&F&1&0&3&0&3") + "\uD83E\uDD3A" + " " + AQUA + time;
-            }
-
-            {
-                Duration duration = Duration.ofMillis(CooldownHandler.getCooldown("Power-ChadStrength:" + id));
-
-                long minutes = duration.toMinutes();
-                long seconds = duration.toSecondsPart();
-
-                String time = "";
-                if (minutes > 0) if (seconds > 0) time = minutes + "m " + seconds + "s";
-                else time = minutes + "m";
-                else if (seconds > 0) time = seconds + "s";
-
-
-                if (time.equals(""))
-                    ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + GREEN + "Ready!";
-                else ChadString = blissgems.colorize("&x&F&1&0&3&0&3") + "⚔" + " " + AQUA + time;
-            }
             Remain.sendActionBar(p, FrailerString + " " + ChadString);
         }
     }
@@ -259,52 +223,6 @@ public final class Powers implements Listener {
         }
     }
 
-    public static void createFlameRings(final Player p) {
-        int scaleY = 1;  // use these to tune the size of your circle
-        int scaleZ = 1;
-        double density = 0.15;  // smaller numbers make the particles denser
-
-        for (double i = 0; i < 2 * Math.PI; i += density) {
-
-            double y = Math.cos(i) * scaleY;
-            double z = Math.sin(i) * scaleZ;
-
-            Location loc = p.getLocation();
-            loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
-            loc.setZ(loc.getZ() + z);
-
-            loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
-        }
-
-
-        double rotationAngle = 76;  // variable to control the rotation of the circle
-
-        for (double i = 0; i < 2 * Math.PI; i += density) {
-
-            double y = Math.cos(i) * scaleY;
-            double z = Math.sin(i) * scaleZ;
-
-            final Vector circleDir = p.getLocation().getDirection().clone().setX(100);
-            double angle = Math.acos((p.getLocation().getX() - p.getLocation().getX()) / 1);
-            //Location loc = p.getLocation().getDirection().clone().rotateAroundAxis(circleDir, 20);
-            //loc.add(p.getLocation().getDirection().clone()
-            //.rotateAroundAxis(circleDir, 20)
-            //);
-
-            //loc.setY(loc.getY() + y); // Adjust the Y coordinate to create a horizontal circle
-            //loc.setZ(loc.getZ() + z);
-
-            //loc.add(p.getLocation().getDirection().clone()
-            //.rotateAroundAxis(circleDir, angle)
-            //);
-
-
-            //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, y, z, 1);
-        }
-
-    }
-
-    //loc.getWorld().spawnParticle(Particle.END_ROD, loc, 0, 0, x, 0, 1);
     @EventHandler
     public void ChadPower(PlayerInteractEvent e) {
         //check right click
@@ -328,10 +246,10 @@ public final class Powers implements Listener {
 
 
         e.getPlayer().sendMessage(
-                blissgems.colorize("&x&F&1&0&3&0&3") + "🔮" +
-                        blissgems.colorize("&x&b&8&f&f&f&b") + " You have activated group " +
-                        blissgems.colorize("&f") + "🤺" + blissgems.colorize("&x&F&1&0&3&0&3") + "Chad" +
-                        blissgems.colorize("&x&b&8&f&f&f&b") + " skill" + blissgems.colorize("&7") + " (radius 5)"
+                blissgems.colorize("&x<white>&1&0&3&0&3") + "🔮" +
+                        blissgems.colorize("&x&b&8<white><white><white>&b") + " You have activated group " +
+                        blissgems.colorize("<white>") + "🤺" + blissgems.colorize("&x<white>&1&0&3&0&3") + "Chad" +
+                        blissgems.colorize("&x&b&8<white><white><white>&b") + " skill" + blissgems.colorize("&7") + " (radius 5)"
         );
 
 

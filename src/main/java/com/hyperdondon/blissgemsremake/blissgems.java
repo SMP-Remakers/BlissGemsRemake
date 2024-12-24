@@ -141,4 +141,10 @@ public final class blissgems extends SimplePlugin implements Listener {
         s = Common.colorize(s);
         return s;
     }
+
+    public static String advcolorize(String s) {
+        var sc = MiniMessage.miniMessage().deserialize(s);
+        s = LegacyComponentSerializer.legacySection().serialize(sc);
+        return s;
+    }
 }
