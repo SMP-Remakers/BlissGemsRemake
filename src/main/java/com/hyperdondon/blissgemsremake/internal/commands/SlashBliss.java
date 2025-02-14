@@ -76,7 +76,8 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 }
             }.runTaskTimer(blissgems.getInstance(), 0, 20);
-            Bukkit.broadcastMessage(String.valueOf(CooldownHandler.getCooldown("sigma")));
+            //Bukkit.broadcastMessage(String.valueOf(CooldownHandler.getCooldown("sigma")));
+            Bukkit.broadcastMessage("afdad");
             //commandSender.sendMessage(colorize2("&c&fSkibidi #FFD773🔮"));
             //Settings.setSeason(3);
             //Player p = (Player) commandSender;
