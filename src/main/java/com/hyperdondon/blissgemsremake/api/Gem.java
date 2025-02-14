@@ -43,8 +43,8 @@ public class Gem {
      * Constructs a gem using information you have passed.
      */
     public Gem(GemType gemtype, int gemtier, Energy gemenergy) {
-        boolean allowremovebool = Settings.getAllowRemove();
-        boolean allowdropint = Settings.getAllowDrop();
+        boolean allowremovebool = Settings.isRemovingAllowed();
+        boolean allowdropint = Settings.isDroppingAllowed();
 
         id = UUID.randomUUID().toString();
         type = gemtype;
@@ -86,8 +86,8 @@ public class Gem {
      * Constructs a gem using information you have passed.
      */
     public Gem(GemType gemtype, int gemtier, Energy gemenergy, int gemseason) {
-        boolean allowremovebool = Settings.getAllowRemove();
-        boolean allowdropbool = Settings.getAllowDrop();
+        boolean allowremovebool = Settings.isRemovingAllowed();
+        boolean allowdropbool = Settings.isDroppingAllowed();
 
         id = UUID.randomUUID().toString();
         type = gemtype;
@@ -175,13 +175,13 @@ public class Gem {
         int allowremoveint;
         int allowdropint;
 
-        if (Settings.getAllowRemove())
+        if (Settings.isRemovingAllowed())
             allowremoveint = 1;
         else
             allowremoveint = 0;
 
 
-        if (Settings.getAllowDrop())
+        if (Settings.isDroppingAllowed())
             allowdropint = 1;
         else
             allowdropint = 0;
@@ -195,8 +195,8 @@ public class Gem {
     @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint) {
         int allowremoveint;
-
-        if (Settings.getAllowRemove())
+        
+        if (Settings.isRemovingAllowed())
             allowremoveint = 1;
         else
             allowremoveint = 0;

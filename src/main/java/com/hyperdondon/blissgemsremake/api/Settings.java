@@ -2,9 +2,7 @@ package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 import org.mineacademy.fo.Common;
 
 import java.io.File;
@@ -18,25 +16,24 @@ public final class Settings {
     @Getter
     private static int season = config.getInt("season");
     @Getter
-    private static int giveGemOnJoin = config.getInt("give_gem_on_first_join");
+    private static boolean giveGemOnJoinAllowed = config.getBoolean("give_gem_on_first_join");
     @Getter
-    private static int allowDrop = config.getInt("allow_gem_dropping");
+    private static boolean droppingAllowed = config.getBoolean("allow_gem_dropping");
     @Getter
-    private static int allowRemove = config.getInt("allow_gem_removing");
+    private static boolean removingAllowed = config.getBoolean("allow_gem_removing");
     @Getter
-    private static int texturePackLoading = config.getInt("texture_pack_loading");
+    private static boolean texturePackLoadingAllowed = config.getBoolean("texture_pack_loading");
     @Getter
-    private static int unloadCooldowns = config.getInt("unload_player_cooldowns_on_leave");
-
+    private static boolean unloadCooldowns = config.getBoolean("unload_player_cooldowns_on_leave");
 
     public static void updateConfig() {
         config = YamlConfiguration.loadConfiguration(SettingsFile);
         season = config.getInt("season");
-        giveGemOnJoin = config.getInt("give_gem_on_first_join");
-        allowDrop = config.getInt("allow_gem_dropping");
-        allowRemove = config.getInt("allow_gem_removing");
-        texturePackLoading = config.getInt("texture_pack_loading");
-        unloadCooldowns = config.getInt("unload_player_cooldowns_on_leave");
+        giveGemOnJoinAllowed = config.getBoolean("give_gem_on_first_join");
+        droppingAllowed = config.getBoolean("allow_gem_dropping");
+        removingAllowed = config.getBoolean("allow_gem_removing");
+        texturePackLoadingAllowed = config.getBoolean("texture_pack_loading");
+        unloadCooldowns = config.getBoolean("unload_player_cooldowns_on_leave");
     }
 
     public static void setSeason(int number) {
@@ -61,7 +58,7 @@ public final class Settings {
 
     }
 
-    public static void setAllowDrop(boolean value) {
+    public static void setdropAllowed(boolean value) {
         config.set("allow_gem_dropping", value);
         try {
             config.save(SettingsFile);
@@ -72,7 +69,7 @@ public final class Settings {
 
     }
 
-    public static void setAllowRemove(boolean value) {
+    public static void setdropUnallowed(boolean value) {
         config.set("allow_gem_removing", value);
         try {
             config.save(SettingsFile);
