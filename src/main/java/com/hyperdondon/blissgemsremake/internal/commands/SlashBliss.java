@@ -154,7 +154,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
         }
 
-        if (args.length == 4) {
+        if (args.length > 3) {
             if (args[0].equals("gem")) {
                 //Check if the 2nd arg is a player
                 boolean Usage = false;
@@ -227,7 +227,20 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
                 if (Gem.hasAGem(p))
                     energy = Gem.getPlayerEnergy(p);
 
-                Gem gem = new Gem(type, tier, energy);
+                int season = Settings.getSeason();
+
+                if (args.length > 4) {
+                    try {
+                        // Check if number by catching the error/exception
+                        Integer.parseInt(args[4]);
+                    } catch (NumberFormatException e) {
+                        commandSender.sendMessage(blissgems.colorize("#FFD773\uD83D\uDD2E #FC8888Argument must be an integer/number"));
+                        return true;
+                    }
+                    season = Integer.parseInt(args[4]);
+                }
+
+                Gem gem = new Gem(type, tier, energy, season);
 
                 String gemmessage = "";
                 if (type == GemType.Strength)

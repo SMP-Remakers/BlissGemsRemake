@@ -32,7 +32,6 @@ public final class Powers implements Listener {
     public void SingleFrailerPower(EntityDamageByEntityEvent e) {
         if (e.getDamager().getType() != EntityType.PLAYER)
             return;
-
         Player p = (Player) e.getDamager();
         if (!Gem.isGem(p.getInventory().getItemInMainHand()))
             return;
@@ -40,25 +39,39 @@ public final class Powers implements Listener {
             return;
         e.setCancelled(true);
         ItemStack gem = p.getInventory().getItemInMainHand();
+        int season = Gem.getGemSeason(gem);
 
         String id = Gem.getGemID(gem, p);
 
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id)) {
             String display = CooldownHandler.parseCooldown("Power-Frailer:" + id, "<#F10303>");
-            p.sendMessage(blissgems.AdventureColorize(
-                    "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Frailer <#FDABAA>skill is on cooldown for <#F10303>" + display
-            ));
+            if (season < 3)
+                p.sendMessage(blissgems.AdventureColorize(
+                        "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Frailer <#FDABAA>skill is on cooldown for <#F10303>" + display
+                ));
+            else
+                p.sendMessage(blissgems.AdventureColorize(
+                        "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Nullify <#FDABAA>skill is on cooldown for <#F10303>" + display
+                ));
             return; //Add cant use power message
         }
 
         CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
 
-        p.sendMessage(
-                blissgems.colorize("#F10303") + "🔮" +
-                        blissgems.colorize("#B8FFFB") + " You have activated " +
-                        blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
-                        blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
-        );
+        if (season < 3)
+            p.sendMessage(
+                    blissgems.colorize("#F10303") + "🔮" +
+                            blissgems.colorize("#B8FFFB") + " You have used " +
+                            blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
+                            blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
+            );
+        else
+            p.sendMessage(
+                    blissgems.colorize("#F10303") + "🔮" +
+                            blissgems.colorize("#B8FFFB") + " You have used " +
+                            blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Nullify" +
+                            blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
+            );
 
 
         LivingEntity ent = (LivingEntity) e.getEntity();

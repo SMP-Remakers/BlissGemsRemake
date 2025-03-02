@@ -25,6 +25,8 @@ public final class Settings {
     private static boolean texturePackLoadingAllowed = config.getBoolean("texture_pack_loading");
     @Getter
     private static boolean unloadCooldowns = config.getBoolean("unload_player_cooldowns_on_leave");
+    @Getter
+    private static boolean metrics = config.getBoolean("metrics");
 
     public static void updateConfig() {
         config = YamlConfiguration.loadConfiguration(SettingsFile);
@@ -90,7 +92,17 @@ public final class Settings {
     }
 
     public static void setUnloadCooldowns(boolean value) {
-        config.set("UnloadCooldowns", value);
+        config.set("unload_player_cooldowns_on_leave", value);
+        try {
+            config.save(SettingsFile);
+            updateConfig();
+        } catch (Exception exc) {
+            Common.error(exc);
+        }
+    }
+
+    public static void setMetrics(boolean value) {
+        config.set("metrics", value);
         try {
             config.save(SettingsFile);
             updateConfig();

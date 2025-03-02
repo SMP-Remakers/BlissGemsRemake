@@ -1,6 +1,7 @@
 package com.hyperdondon.blissgemsremake;
 
 import com.hyperdondon.blissgemsremake.api.CooldownHandler;
+import com.hyperdondon.blissgemsremake.api.Settings;
 import com.hyperdondon.blissgemsremake.internal.*;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
 import com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers;
@@ -67,16 +68,18 @@ public final class blissgems extends SimplePlugin implements Listener {
          */
         //adventure = BukkitAudiences.create(this);
 
-        boolean EnableMetrics = true;
-        try {
-            Class.forName("com.hyperdondon.blissgemsremake.libs.org.bstats.bukkit.Metrics");
-        } catch (ClassNotFoundException e) {
-            Common.error(e, "Are you a developer hotswapping? If you see this and you aren't, please report this bug");
-            EnableMetrics = false;
-        }
-        if (EnableMetrics) {
-            Common.logFramed("Starting bStats metrics.");
-            metrics = new Metrics(this, pluginId);
+        if (Settings.isMetrics()) {
+            boolean EnableMetrics = true;
+            try {
+                Class.forName("com.hyperdondon.blissgemsremake.libs.org.bstats.bukkit.Metrics");
+            } catch (ClassNotFoundException e) {
+                Common.error(e, "Are you a developer hotswapping? If you see this and you aren't, please report this bug");
+                EnableMetrics = false;
+            }
+            if (EnableMetrics) {
+                Common.logFramed("Starting bStats metrics.");
+                metrics = new Metrics(this, pluginId);
+            }
         }
 
         plugin = this;

@@ -1,7 +1,7 @@
 #season: <int>
 #1-3
 # 3 (Default)
-# This for the season of the Bliss SMP
+# The season of Bliss SMP
 #
 #
 #
@@ -39,9 +39,16 @@
 # false = Don't free the used memory by the player's cooldowns (Causes memory leaks AKA more memory usage)
 # true = Free the used memory by the player's cooldowns (Strongly recommended) (Default)
 #
+#
+#
+#metrics: <boolean>
+# false = Don't use bStats metrics
+# true = Use bStats metrics (Default)
+#
 season: 3
 give_gem_on_first_join: false
 allow_gem_dropping: false
 allow_gem_removing: false
 texture_pack_loading: true
 unload_player_cooldowns_on_leave: true
+metrics: true
