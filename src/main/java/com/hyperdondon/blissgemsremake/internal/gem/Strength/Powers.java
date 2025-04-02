@@ -9,7 +9,9 @@ import static com.hyperdondon.blissgemsremake.api.util.TimeUtils.*;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
+import io.papermc.paper.event.player.AsyncChatEvent;
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -37,7 +39,10 @@ public final class Powers implements Listener {
             return;
         if (Gem.getGemType(p.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
-        e.setCancelled(true);
+        LivingEntity ent = (LivingEntity) e.getEntity();
+        if (!(ent instanceof Monster))
+            return;
+        //e.setCancelled(true);
         ItemStack gem = p.getInventory().getItemInMainHand();
         int season = Gem.getGemSeason(gem);
 
@@ -72,9 +77,6 @@ public final class Powers implements Listener {
                             blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Nullify" +
                             blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
             );
-
-
-        LivingEntity ent = (LivingEntity) e.getEntity();
 
         for (PotionEffect pe : ent.getActivePotionEffects()) ent.removePotionEffect(pe.getType());
 

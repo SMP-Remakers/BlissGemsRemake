@@ -43,6 +43,7 @@ public final class blissgems extends SimplePlugin implements Listener {
 
     @Override
     public void onPluginStart() {
+
     }
 
     public void onPluginStop() {
@@ -68,6 +69,8 @@ public final class blissgems extends SimplePlugin implements Listener {
          */
         //adventure = BukkitAudiences.create(this);
 
+        plugin = this;
+
         if (Settings.isMetrics()) {
             boolean EnableMetrics = true;
             try {
@@ -81,8 +84,6 @@ public final class blissgems extends SimplePlugin implements Listener {
                 metrics = new Metrics(this, pluginId);
             }
         }
-
-        plugin = this;
 
         Bukkit.getPluginManager().registerEvents(EnchantedObsidian.getInstance(), this);
 
