@@ -92,6 +92,11 @@
             <id>clojars</id>
             <url>https://repo.clojars.org</url>
         </repository>
+
+        <repository>
+            <id>dmulloy2-repo</id>
+            <url>https://repo.dmulloy2.net/repository/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -104,7 +109,14 @@
         <dependency>
             <groupId>com.github.kangarko</groupId>
             <artifactId>Foundation</artifactId>
-            <version>6.9.4</version>
+            <version>6.9.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -140,6 +152,14 @@
             <artifactId>item-nbt-api-plugin</artifactId>
             <version>2.13.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>5.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>net.kyori</groupId>
