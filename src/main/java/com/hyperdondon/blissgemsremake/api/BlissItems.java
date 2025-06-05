@@ -3,13 +3,8 @@ package com.hyperdondon.blissgemsremake.api;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTGameProfile;
 import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.NBTList;
-import io.lumine.mythic.bukkit.utils.shadows.nbt.NBTTagString;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -18,16 +13,14 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.menu.model.ItemCreator;
-import org.mineacademy.fo.menu.model.SkullCreator;
 import org.mineacademy.fo.remain.CompMaterial;
 
 import java.lang.reflect.Field;
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.UUID;
 
-public final class GetItem {
-    public static ItemStack returnitem(BlissItemType itemType, String id, String energysource, int season) {
+public final class BlissItems {
+    public static ItemStack getItem(BlissItemType itemType, String id, String energysource, int season) {
         if (itemType == BlissItemType.Trader) {
             ItemStack item =
                     ItemCreator.of(CompMaterial.PLAYER_HEAD)
@@ -50,13 +43,13 @@ public final class GetItem {
                 ));
             else
                 itemMeta.setLore(Arrays.asList(
-                    ChatColor.GRAY + "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ʏᴏᴜʀ ɢᴇᴍ ᴛʏᴘᴇ",
-                    ChatColor.GRAY + "ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ ᴀ ʀᴀɴᴅᴏᴍ ᴛɪᴇʀ ᴏɴᴇ ɢᴇᴍ",
-                    ChatColor.WHITE + "",
-                    ChatColor.RED + "ᴡᴀʀɴɪɴɢ: ᴜsɪɴɢ ᴛʜɪs ᴡɪʟʟ ʟᴏsᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ɢᴇᴍ"
-            ));
+                        ChatColor.GRAY + "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ ʏᴏᴜʀ ɢᴇᴍ ᴛʏᴘᴇ",
+                        ChatColor.GRAY + "ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ ᴀ ʀᴀɴᴅᴏᴍ ᴛɪᴇʀ ᴏɴᴇ ɢᴇᴍ",
+                        ChatColor.WHITE + "",
+                        ChatColor.RED + "ᴡᴀʀɴɪɴɢ: ᴜsɪɴɢ ᴛʜɪs ᴡɪʟʟ ʟᴏsᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ɢᴇᴍ"
+                ));
 
-            itemMeta.addEnchant(Enchantment.DURABILITY , 1, true);
+            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
             item.setItemMeta(itemMeta);
             //W CHATGPT
@@ -90,7 +83,7 @@ public final class GetItem {
                 profileField.setAccessible(true);
                 profileField.set(skullMeta, profile);
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Common.error(e, "Base64 Encoding for Trader Head encountered an exception. This could also happen because your server is in offline mode.");
             }
 
@@ -103,7 +96,6 @@ public final class GetItem {
 
             return item;
         }
-
 
 
         return null;

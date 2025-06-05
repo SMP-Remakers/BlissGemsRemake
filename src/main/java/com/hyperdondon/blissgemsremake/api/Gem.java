@@ -142,7 +142,7 @@ public class Gem {
             allowdropint = 0;
 
 
-        ItemStack item = GetGemItem.returngem(type, tier, energy, allowdropint, allowremoveint, season);
+        ItemStack item = GemItems.getGemItem(type, tier, energy, allowdropint, allowremoveint, season);
         ItemMeta itemMeta = item.getItemMeta();
 
 
@@ -186,7 +186,7 @@ public class Gem {
         else
             allowdropint = 0;
 
-        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
     /**
@@ -195,14 +195,14 @@ public class Gem {
     @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint) {
         int allowremoveint;
-        
+
         if (Settings.isRemovingAllowed())
             allowremoveint = 1;
         else
             allowremoveint = 0;
 
 
-        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
     /**
@@ -210,7 +210,7 @@ public class Gem {
      */
     @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint) {
-        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
     }
 
     /**
@@ -218,7 +218,7 @@ public class Gem {
      */
     @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint, int season) {
-        return (Gem.fromGemItem(Objects.requireNonNull(GetGemItem.returngem(gemtype, tier, energy, allowdropint, allowremoveint, season))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, season))));
     }
 
     /**

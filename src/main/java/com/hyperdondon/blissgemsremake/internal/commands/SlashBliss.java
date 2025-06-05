@@ -5,7 +5,6 @@ import com.hyperdondon.blissgemsremake.api.*;
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -287,7 +286,7 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                p.getInventory().addItem(GetItem.returnitem(BlissItemType.Trader, "ds", "ds", 3));
+                p.getInventory().addItem(BlissItems.getItem(BlissItemType.Trader, "ds", "ds", 3));
             }
 
         }

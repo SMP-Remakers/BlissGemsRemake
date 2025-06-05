@@ -2,7 +2,6 @@ package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.blissgems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -16,8 +15,8 @@ import java.util.UUID;
 
 import static net.md_5.bungee.api.ChatColor.*;
 
-public final class GetGemItem {
-    public static ItemStack returngem(GemType gem, int tier, Energy energy, int quicknodrop, int quicknoremove, int season) {
+public final class GemItems {
+    public static ItemStack getGemItem(GemType gem, int tier, Energy energy, int quicknodrop, int quicknoremove, int season) {
         //Energy
 
 
@@ -60,9 +59,8 @@ public final class GetGemItem {
 
                     NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
                     itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
-
                     itemMeta.setDisplayName(blissgems.colorize("#F10303") + "Strength " + blissgems.colorize("#FFD773") + "Gem");
-
+                    itemMeta.getPersistentDataContainer().has(idkey, PersistentDataType.STRING);
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
