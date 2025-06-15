@@ -823,7 +823,7 @@ public final class GemItems {
                             GRAY + " 2 more hearts from gapples, and 90% chance totems work",
                             WHITE + " ",
                             blissgems.colorize("#FFE4AB") + "Powers",
-                            GRAY + "-" + blissgems.colorize("#910D0D") + "\uD83D\uDC98 " + blissgems.colorize("#FE04B4") + "Heart Drainer", //emoji color is not accurate, i dont have the color for it
+                            GRAY + "-" + blissgems.colorize("#350100") + "\uD83D\uDC98 " + blissgems.colorize("#FE04B4") + "Heart Drainer", //emoji color is not accurate, i dont have the color for it
                             GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "Removes 30% of players hearts " + WHITE + "20s",
                             GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "Removes 15% of players hearts " + WHITE + "R4, 1m",
                             WHITE + "",
@@ -2397,7 +2397,7 @@ public final class GemItems {
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                     NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "fire");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "wealth");
 
                     NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
@@ -2406,111 +2406,109 @@ public final class GemItems {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
 
-                    itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
+                    itemMeta.setDisplayName(blissgems.colorize("#0EC912") + BOLD + "ᴡᴇᴀʟᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
-                        itemMeta.setCustomModelData(2);
+                        itemMeta.setCustomModelData(12);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                GRAY + " " + blissgems.colorize("#FE8120") + "🔮 " + GRAY + "Auto Smelting. Longer FireThorns.",
-                                GRAY + " Auto Enchant Flame & Fire Aspect 2",
+                                GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + GRAY + "Even cheaper villager trades, Luck",
+                                GRAY + " Auto enchants looting 3, fortune 3, mending",
+                                GRAY + " Get two more ore for every 3 ores mined",
+                                GRAY + " 2x the netherite scrap when taken out of furnace",
+                                GRAY + " Chip more of your enemies durability",
                                 WHITE + " ",
                                 blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDDE8" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ",
-                                GRAY + " Spawn a fireball that charges up passively,",
-                                GRAY + " while standing on fire blocks, charge 2x faster.",
-                                GRAY + " Deals more damage the more you charge it.",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ",
+                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "1/3 of actions canceled " + WHITE + "40s, R2",
+                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "1/2 of actions canceled " + WHITE + "40s",
                                 WHITE + "",
-                                GRAY + "-" + WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ",
-                                GRAY + " Spawn a campfire that heals 2 hearts and hunger",
-                                GRAY + " a second in a 4 block radius"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ",
+                                GRAY + " Double the ores, and double the mob drops for 5 minutes"
                         ));
                     }
 
                     if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(22);
+                        itemMeta.setCustomModelData(32);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                GRAY + " " + blissgems.colorize("#FE8120") + "🔮 " + "Longer FireThorns. Fire Res.",
-                                GRAY + " Auto Enchant Flame & Fire Aspect 2",
+                                GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + GRAY + "Even cheaper villager trades",
+                                GRAY + " Auto enchants looting 2, fortune 3, mending",
+                                GRAY + " Get two more ore for every 3 ores mined",
+                                GRAY + " 2x the netherite scrap when taken out of furnace",
+                                GRAY + " Chip more of your enemies durability",
                                 WHITE + " ",
                                 blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDDE8" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ",
-                                GRAY + " Spawn a fireball that charges up passively,",
-                                GRAY + " while standing on fire blocks charge 2x faster.",
-                                GRAY + " Deals more damage the more you charge it.",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ",
+                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "1/3 of actions canceled " + WHITE + "40s, R2",
+                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "1/2 of actions canceled " + WHITE + "40s",
                                 WHITE + "",
-                                GRAY + "-" + WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ",
-                                GRAY + " Spawn a campfire that heals 2 hearts and hunger",
-                                GRAY + " a second in a 4 block radius"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ",
+                                GRAY + " Double the ores, and double the mob drops for 5 minutes"
                         ));
                     }
 
                     if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(42);
+                        itemMeta.setCustomModelData(52);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                GRAY + " " + blissgems.colorize("#FE8120") + "🔮 " + "Fire Res.",
-                                GRAY + " Auto Enchant Flame & Fire Aspect",
+                                GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + GRAY + "Auto enchants looting 1, fortune 2, mending",
+                                GRAY + " Get two more ore for every 3 ores mined",
+                                GRAY + " 2x the netherite scrap when taken out of furnace",
                                 WHITE + " ",
                                 blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDDE8" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ",
-                                GRAY + " Spawn a fireball that charges up passively,",
-                                GRAY + " while standing on fire blocks charge 2x faster.",
-                                GRAY + " Deals more damage the more you charge it.",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ",
+                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "1/3 of actions canceled " + WHITE + "40s, R2",
+                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "1/2 of actions canceled " + WHITE + "40s",
                                 WHITE + "",
-                                GRAY + "-" + WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ",
-                                GRAY + " Spawn a campfire that heals 2 hearts and hunger",
-                                GRAY + " a second in a 4 block radius"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ",
+                                GRAY + " Double the ores, and double the mob drops for 5 minutes"
                         ));
                     }
 
                     if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(62);
+                        itemMeta.setCustomModelData(72);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                GRAY + " " + blissgems.colorize("#FE8120") + "🔮 " + "Auto Enchant Flame",
+                                GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + GRAY + "Auto enchants fortune 1, mending",
+                                GRAY + " 2x the netherite scrap when taken out of furnace",
                                 WHITE + " ",
                                 blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDDE8" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ",
-                                GRAY + " Spawn a fireball that charges up passively,",
-                                GRAY + " while standing on fire blocks charge 2x faster.",
-                                GRAY + " Deals more damage the more you charge it",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ",
+                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "1/3 of actions canceled " + WHITE + "40s, R2",
+                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "1/2 of actions canceled " + WHITE + "40s",
                                 WHITE + "",
-                                GRAY + "-" + WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ",
-                                GRAY + " Spawn a campfire that heals 2 hearts and hunger",
-                                GRAY + " a second in a 4 block radius"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ",
+                                GRAY + " Double the ores, and double the mob drops for 5 minutes"
                         ));
                     }
 
                     if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(82);
+                        itemMeta.setCustomModelData(92);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 energystage,
-                                GRAY + " " + blissgems.colorize("#FE8120") + "🔮 " + "No passives",
+                                GRAY + " " + blissgems.colorize("#0EC912") + "🔮 " + GRAY + "No passives",
                                 WHITE + " ",
                                 blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "\uD83E\uDDE8" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ",
-                                GRAY + " Spawn a fireball that charges up passively,",
-                                GRAY + " while standing on fire blocks charge 2x faster.",
-                                GRAY + " Deals more damage the more you charge it",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ",
+                                GRAY + " " + DARK_RED + "\uD83E\uDD3C " + GRAY + "1/3 of actions canceled " + WHITE + "40s, R2",
+                                GRAY + " " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB " + GRAY + "1/2 of actions canceled " + WHITE + "40s",
                                 WHITE + "",
-                                GRAY + "-" + WHITE + "\uD83E\uDD7E " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ",
-                                GRAY + " Spawn a campfire that heals 2 hearts and hunger",
-                                GRAY + " a second in a 4 block radius"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ",
+                                GRAY + " Double the ores, and double the mob drops for 5 minutes"
                         ));
                     }
 
@@ -2546,7 +2544,7 @@ public final class GemItems {
                     itemMeta.getPersistentDataContainer().set(quicknoremovekey, PersistentDataType.INTEGER, quicknoremove);
 
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
-                    itemMeta.setDisplayName(blissgems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
+                    itemMeta.setDisplayName(blissgems.colorize("#0EC912") + BOLD + "ᴡᴇᴀʟᴛʜ " + blissgems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
@@ -2557,7 +2555,7 @@ public final class GemItems {
                             ending = ")";
 
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + ending,
                                 WHITE + "",
                                 blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",

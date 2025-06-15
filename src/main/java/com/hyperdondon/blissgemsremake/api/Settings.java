@@ -36,6 +36,7 @@ public final class Settings {
         removingAllowed = config.getBoolean("allow_gem_removing");
         texturePackLoadingAllowed = config.getBoolean("texture_pack_loading");
         unloadCooldowns = config.getBoolean("unload_player_cooldowns_on_leave");
+        metrics = config.getBoolean("metrics");
     }
 
     public static void setSeason(int number) {
