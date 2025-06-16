@@ -2527,15 +2527,13 @@ public final class GemItems {
                     ItemStack item = new ItemStack(Material.PRISMARINE_SHARD, 1);
                     ItemMeta itemMeta = item.getItemMeta();
 
-
                     NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
-                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, "f3580015-6d14-4cfb-bd46-2eef14ce75e7");
-
+                    itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, UUID.randomUUID().toString());
                     NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
                     itemMeta.getPersistentDataContainer().set(tierkey, PersistentDataType.INTEGER, tier);
 
                     NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
-                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "fire");
+                    itemMeta.getPersistentDataContainer().set(typekey, PersistentDataType.STRING, "wealth");
 
                     NamespacedKey quicknodropkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
                     itemMeta.getPersistentDataContainer().set(quicknodropkey, PersistentDataType.INTEGER, quicknodrop);
@@ -2548,7 +2546,7 @@ public final class GemItems {
                     if (Gem.isPristineorHigher(energy)) {
                         if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
 
-                        itemMeta.setCustomModelData(2);
+                        itemMeta.setCustomModelData(12);
 
                         String ending = blissgems.colorize("&f)");
                         if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
@@ -2557,108 +2555,119 @@ public final class GemItems {
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + ending,
-                                WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Fire Resistance",
-                                GRAY + "- Autosmelt",
-                                GRAY + "- Flamestrike",
-                                GRAY + "- Fireshot",
                                 WHITE + " ",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#FE8120") + "Crisp",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Hero of the Village",
+                                GRAY + "- Luck",
+                                GRAY + "- Enchants Mending",
+                                GRAY + "- Enchants Fortune",
+                                GRAY + "- Enchants Looting",
+                                GRAY + "- Bonus Ores",
+                                GRAY + "- Extra EXP",
+                                GRAY + "- Durability Chip",
+                                GRAY + "- Double Debris",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#0EC912") + "Pockets",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ɪᴛᴇᴍ ʟᴏᴄᴋ " + DARK_RED + "\uD83E\uDD3C",
                                 WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ᴍᴇᴛᴇᴏʀ sʜᴏᴡᴇʀ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "🥾 " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ᴀᴍʟɪғɪᴄᴀᴛɪᴏɴ " + GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
 
                     if (energy == Energy.Scratched) {
-                        itemMeta.setCustomModelData(22);
+                        itemMeta.setCustomModelData(32);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Fire Resistance",
-                                GRAY + "- Flamestrike",
-                                GRAY + "- Fireshot",
                                 WHITE + " ",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#FE8120") + "Crisp",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Hero of the Village",
+                                GRAY + "- Enchants Mending",
+                                GRAY + "- Enchants Looting",
+                                GRAY + "- Bonus Ores",
+                                GRAY + "- Durability Chip",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#0EC912") + "Pockets",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ɪᴛᴇᴍ ʟᴏᴄᴋ " + DARK_RED + "\uD83E\uDD3C",
                                 WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ᴍᴇᴛᴇᴏʀ sʜᴏᴡᴇʀ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "🥾 " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ᴀᴍʟɪғɪᴄᴀᴛɪᴏɴ " + GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
                     if (energy == Energy.Cracked) {
-                        itemMeta.setCustomModelData(42);
+                        itemMeta.setCustomModelData(52);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Fire Resistance",
-                                GRAY + "- Flamestrike",
-                                GRAY + "- Fireshot",
                                 WHITE + " ",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#FE8120") + "Crisp",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Enchants Looting",
+                                GRAY + "- Bonus Ores",
+                                GRAY + "- Durability Chip",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#0EC912") + "Pockets",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ɪᴛᴇᴍ ʟᴏᴄᴋ " + DARK_RED + "\uD83E\uDD3C",
                                 WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ᴍᴇᴛᴇᴏʀ sʜᴏᴡᴇʀ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "🥾 " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ᴀᴍʟɪғɪᴄᴀᴛɪᴏɴ " + GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
 
                     if (energy == Energy.Damaged) {
-                        itemMeta.setCustomModelData(62);
+                        itemMeta.setCustomModelData(72);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
-                                GRAY + "- Fire Resistance",
-                                GRAY + "- Flamestrike",
                                 WHITE + " ",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#FE8120") + "Crisp",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                GRAY + "- Durability Chip",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#0EC912") + "Pockets",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ɪᴛᴇᴍ ʟᴏᴄᴋ " + DARK_RED + "\uD83E\uDD3C",
                                 WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ᴍᴇᴛᴇᴏʀ sʜᴏᴡᴇʀ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "🥾 " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ᴀᴍʟɪғɪᴄᴀᴛɪᴏɴ " + GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
                     if (energy == Energy.Ruined) {
-                        itemMeta.setCustomModelData(82);
+                        itemMeta.setCustomModelData(92);
                         itemMeta.setLore(Arrays.asList(
-                                WHITE + "" + BOLD + "ᴍᴀɴɪᴘᴜʟᴀᴛᴇ ғɪʀᴇ",
+                                WHITE + "" + BOLD + "ғᴜᴇʟ ᴀ ᴇᴍᴘɪʀᴇ",
                                 blissgems.colorize("&f(") + energystage + blissgems.colorize("&f)"),
-                                WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#FFE4AB") + "ᴘᴀssɪᴠᴇs",
                                 GRAY + "No Passives",
                                 WHITE + " ",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
-                                GRAY + "- " + blissgems.colorize("#FE8120") + "Crisp",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#82F3FF") + BOLD + "ᴀʙɪʟɪᴛʏ",
+                                GRAY + "- " + blissgems.colorize("#0EC912") + "Pockets",
+                                WHITE + " ",
+                                blissgems.colorize("#0EC912") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ᴜɴғᴏʀᴛᴜɴᴇ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83C\uDF40 " + RED + "ɪᴛᴇᴍ ʟᴏᴄᴋ " + DARK_RED + "\uD83E\uDD3C",
                                 WHITE + "",
-                                blissgems.colorize("#FE8120") + "🔮 " + blissgems.colorize("#B8FFFB") + BOLD + "ᴘᴏᴡᴇʀs",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ғɪʀᴇʙᴀʟʟ " + DARK_RED + "\uD83E\uDDD1\uD83C\uDFFB",
-                                GRAY + "-" + WHITE + "🧨" + blissgems.colorize("#FF5F33") + " ᴍᴇᴛᴇᴏʀ sʜᴏᴡᴇʀ " + DARK_RED + "\uD83E\uDD3C",
-                                WHITE + "",
-                                GRAY + "-" + WHITE + "🥾 " + blissgems.colorize("#248FD1") + "ᴄᴏᴢʏ Cᴀᴍᴘғɪʀᴇ"
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ʀɪᴄʜ ʀᴜsʜ " + GREEN + "\uD83E\uDDD1\uD83C\uDFFB",
+                                GRAY + "-" + WHITE + "\uD83D\uDCB8 " + blissgems.colorize("#FFC642") + "ᴀᴍʟɪғɪᴄᴀᴛɪᴏɴ " + GREEN + "\uD83E\uDD3C"
                         ));
                     }
 
