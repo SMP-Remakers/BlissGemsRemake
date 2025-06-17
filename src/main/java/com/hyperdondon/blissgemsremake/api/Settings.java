@@ -1,6 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.BlissGems;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.mineacademy.fo.Common;
@@ -10,7 +10,7 @@ import java.io.File;
 @Getter
 public final class Settings {
 
-    public static File SettingsFile = new File(blissgems.plugin.getDataFolder(), "config.yml");
+    public static File SettingsFile = new File(BlissGems.plugin.getDataFolder(), "config.yml");
     public static YamlConfiguration config = YamlConfiguration.loadConfiguration(SettingsFile);
 
     @Getter

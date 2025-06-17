@@ -1,6 +1,6 @@
 name: BlissGems
 version: 'dev'
-main: com.hyperdondon.blissgemsremake.blissgems
+main: com.hyperdondon.blissgemsremake.BlissGems
 description: §x§f§f§e§4§a§b§lBlissGemsRemake §fby §4Hyper_Dondon §band §0Cupm §f(Original by Pro4D)
 api-version: '1.17'
 authors:

@@ -1,5 +1,7 @@
 package com.hyperdondon.blissgemsremake.internal.item.trader;
 
+import com.hyperdondon.blissgemsremake.api.Gem;
+import com.hyperdondon.blissgemsremake.BlissGems;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
@@ -10,6 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 
 import java.util.*;
@@ -27,6 +30,7 @@ public class Trader implements Listener {
 
 
     public static void OpenGUI(Player p) {
+        if (!Gem.hasAGem(p)) return;
         if (isNull(Gems))
             Gems = new HashMap<>();
         if (isNull(CurrentGems))
@@ -44,43 +48,9 @@ public class Trader implements Listener {
         for (int i = 18; i < 27; i++)
             gui.setItem(i, glass);
 
-        int tier = 1;
-        String currentgem = "";
-        for (ItemStack item : p.getInventory())
-            if (item.hasItemMeta()) {
+        int tier = Gem.getPlayerGem(p).getTier();
+        String currentgem = Gem.getPlayerGemType(p).toString().toLowerCase();
 
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
-                    currentgem = "puff";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#F10303") + "" + BOLD + "sᴛʀᴇɴɢᴛʜ "))
-                    currentgem = "strength";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE04B4") + "" + BOLD + "ʟɪғᴇ "))
-                    currentgem = "life";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE8120") + "" + BOLD + "ғɪʀᴇ "))
-                    currentgem = "fire";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#0EC912") + "" + BOLD + "ᴡᴇᴀʟᴛʜ "))
-                    currentgem = "wealth";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#A01FFF") + "" + BOLD + "ᴀsᴛʀᴀ "))
-                    currentgem = "astra";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx "))
-                    currentgem = "flux";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FEFD17") + "" + BOLD + "sᴘᴇᴇᴅ "))
-                    currentgem = "speed";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#C7C7C7") + "ɢᴇᴍ"))
-                    break;
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FFD773") + "ɢᴇᴍ")) {
-                    tier = 2;
-                    break;
-                }
-            }
         Gems.get(p.getUniqueId()).remove(currentgem);
         Bukkit.broadcastMessage(String.valueOf(Gems.get(p.getUniqueId()).size()));
         /*
@@ -168,42 +138,6 @@ public class Trader implements Listener {
         ItemStack strengthgem = GemToGUI("strength", currentgem, strengthname, tier, StrengthNormalCMD, StrengthGUICMD, Gems.get(p.getUniqueId()).size(), p);
         ItemStack lifegem = GemToGUI("life", currentgem, lifename, tier, LifeNormalCMD, LifeGUICMD, Gems.get(p.getUniqueId()).size(), p);
 
-        String currentenergy = "";
-        for (ItemStack item : p.getInventory())
-            if (item.hasItemMeta()) {
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
-                    currentgem = "puff";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#F10303") + "" + BOLD + "sᴛʀᴇɴɢᴛʜ "))
-                    currentgem = "strength";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE04B4") + "" + BOLD + "ʟɪғᴇ "))
-                    currentgem = "life";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE8120") + "" + BOLD + "ғɪʀᴇ "))
-                    currentgem = "fire";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#0EC912") + "" + BOLD + "ᴡᴇᴀʟᴛʜ "))
-                    currentgem = "wealth";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#A01FFF") + "" + BOLD + "ᴀsᴛʀᴀ "))
-                    currentgem = "astra";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx "))
-                    currentgem = "flux";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FEFD17") + "" + BOLD + "sᴘᴇᴇᴅ "))
-                    currentgem = "speed";
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#C7C7C7") + "ɢᴇᴍ"))
-                    break;
-
-                if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FFD773") + "ɢᴇᴍ")) {
-                    tier = 2;
-                    break;
-                }
-            }
 
         ItemStack energybtl = new ItemStack(Material.NAUTILUS_SHELL);
         ItemMeta energymta = energybtl.getItemMeta();
@@ -245,34 +179,9 @@ public class Trader implements Listener {
 
             Player p = (Player) e.getWhoClicked();
 
-            String clickedgem = "";
-            int tier = 1;
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#EFEFEF") + "" + BOLD + "ᴘᴜғғ "))
-                clickedgem = "puff";
 
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#F10303") + "" + BOLD + "sᴛʀᴇɴɢᴛʜ "))
-                clickedgem = "strength";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE04B4") + "" + BOLD + "ʟɪғᴇ "))
-                clickedgem = "life";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FE8120") + "" + BOLD + "ғɪʀᴇ "))
-                clickedgem = "fire";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#0EC912") + "" + BOLD + "ᴡᴇᴀʟᴛʜ "))
-                clickedgem = "wealth";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#A01FFF") + "" + BOLD + "ᴀsᴛʀᴀ "))
-                clickedgem = "astra";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#5ED7FF") + "" + BOLD + "ғʟᴜx "))
-                clickedgem = "flux";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FEFD17") + "" + BOLD + "sᴘᴇᴇᴅ "))
-                clickedgem = "speed";
-
-            if (item.getItemMeta().getDisplayName().contains(ChatColor.of("#FFD773") + "ɢᴇᴍ"))
-                tier = 2;
+            String clickedgem = item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(BlissGems.getInstance(), "type"), PersistentDataType.STRING);
+            int tier = item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(BlissGems.getInstance(), "tier"), PersistentDataType.INTEGER);
 
             if (!item.getItemMeta().getLore().equals(Arrays.asList(ChatColor.WHITE + "Chance: 0%")))
                 Gems.get(p.getUniqueId()).remove(clickedgem);
@@ -332,6 +241,9 @@ public class Trader implements Listener {
         ItemMeta meta = gem.getItemMeta();
 
         meta.setDisplayName(name);
+
+        meta.getPersistentDataContainer().set(new NamespacedKey(BlissGems.getInstance(), "type"), PersistentDataType.STRING, type);
+        meta.getPersistentDataContainer().set(new NamespacedKey(BlissGems.getInstance(), "tier"), PersistentDataType.INTEGER, tier);
 
         if (currentgem.equals(type)) {
             meta.setCustomModelData(GUICMD);

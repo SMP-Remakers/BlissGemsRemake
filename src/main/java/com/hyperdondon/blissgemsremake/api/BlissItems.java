@@ -1,6 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.BlissGems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.tr7zw.nbtapi.NBTItem;
@@ -24,13 +24,13 @@ public final class BlissItems {
         if (itemType == BlissItemType.Trader) {
             ItemStack item =
                     ItemCreator.of(CompMaterial.PLAYER_HEAD)
-                            .name(blissgems.colorize("#E9C2FF") + ChatColor.BOLD + "ᴛʀᴀᴅᴇʀ")
+                            .name(BlissGems.colorize("#E9C2FF") + ChatColor.BOLD + "ᴛʀᴀᴅᴇʀ")
                             //.skullUrl("http://textures.minecraft.net/texture/bf624a44e77b95dbe1cc735536953e840ba6c19b0157c549d9b82534648c8ce4")
                             //.skullOwner("Bliss_SMP")
                             .make();
 
             ItemMeta itemMeta = item.getItemMeta();
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "trade_item");
+            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "trade_item");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.INTEGER, 1);
 
             itemMeta.setCustomModelData(0);

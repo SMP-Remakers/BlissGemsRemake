@@ -21,13 +21,13 @@ import java.io.File;
 
 import static com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers.*;
 
-public final class blissgems extends SimplePlugin implements Listener {
+public final class BlissGems extends SimplePlugin implements Listener {
 
     /*
     @Getter
     public static BukkitAudiences adventure;
     */
-    public static blissgems plugin;
+    public static BlissGems plugin;
     int pluginId = 24042;
     Metrics metrics;
 

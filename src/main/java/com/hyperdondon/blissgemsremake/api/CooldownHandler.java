@@ -1,14 +1,9 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import com.hyperdondon.blissgemsremake.blissgems;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 
 import java.time.Duration;
 import java.util.HashMap;
-
-import static net.md_5.bungee.api.ChatColor.AQUA;
-import static net.md_5.bungee.api.ChatColor.GREEN;
 
 public final class CooldownHandler {
 

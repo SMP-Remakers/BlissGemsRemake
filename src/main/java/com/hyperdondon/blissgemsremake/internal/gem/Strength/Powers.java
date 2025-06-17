@@ -7,11 +7,9 @@ import com.hyperdondon.blissgemsremake.api.GemType;
 
 import static com.hyperdondon.blissgemsremake.api.util.TimeUtils.*;
 
-import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.BlissGems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
-import io.papermc.paper.event.player.AsyncChatEvent;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -51,11 +49,11 @@ public final class Powers implements Listener {
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id)) {
             String display = CooldownHandler.parseCooldown("Power-Frailer:" + id, "<#F10303>");
             if (season < 3)
-                p.sendMessage(blissgems.AdventureColorize(
+                p.sendMessage(BlissGems.AdventureColorize(
                         "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Frailer <#FDABAA>skill is on cooldown for <#F10303>" + display
                 ));
             else
-                p.sendMessage(blissgems.AdventureColorize(
+                p.sendMessage(BlissGems.AdventureColorize(
                         "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Nullify <#FDABAA>skill is on cooldown for <#F10303>" + display
                 ));
             return; //Add cant use power message
@@ -65,17 +63,17 @@ public final class Powers implements Listener {
 
         if (season < 3)
             p.sendMessage(
-                    blissgems.colorize("#F10303") + "🔮" +
-                            blissgems.colorize("#B8FFFB") + " You have used " +
-                            blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Frailer" +
-                            blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
+                    BlissGems.colorize("#F10303") + "🔮" +
+                            BlissGems.colorize("#B8FFFB") + " You have used " +
+                            BlissGems.colorize("<white>") + "🤺" + BlissGems.colorize("#F10303") + "Frailer" +
+                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + e.getEntity().getName() + BlissGems.colorize("&7") + " (radius 5)"
             );
         else
             p.sendMessage(
-                    blissgems.colorize("#F10303") + "🔮" +
-                            blissgems.colorize("#B8FFFB") + " You have used " +
-                            blissgems.colorize("<white>") + "🤺" + blissgems.colorize("#F10303") + "Nullify" +
-                            blissgems.colorize("#B8FFFB") + " skill on " + blissgems.colorize("#F10303") + e.getEntity().getName() + blissgems.colorize("&7") + " (radius 5)"
+                    BlissGems.colorize("#F10303") + "🔮" +
+                            BlissGems.colorize("#B8FFFB") + " You have used " +
+                            BlissGems.colorize("<white>") + "🤺" + BlissGems.colorize("#F10303") + "Nullify" +
+                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + e.getEntity().getName() + BlissGems.colorize("&7") + " (radius 5)"
             );
 
         for (PotionEffect pe : ent.getActivePotionEffects()) ent.removePotionEffect(pe.getType());
@@ -112,7 +110,7 @@ public final class Powers implements Listener {
                     }
                 } else cancel();
             }
-        }.runTaskTimer(blissgems.getInstance(), 0, 0);
+        }.runTaskTimer(BlissGems.getInstance(), 0, 0);
 
 
         final int[] a = {0};
@@ -122,7 +120,7 @@ public final class Powers implements Listener {
                 if (a[0] < 400) a[0]++;
                 else cancel();
             }
-        }.runTaskTimer(blissgems.getInstance(), 0, 0);
+        }.runTaskTimer(BlissGems.getInstance(), 0, 0);
     }
 
     @EventHandler
@@ -146,19 +144,17 @@ public final class Powers implements Listener {
 
 
         CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
-        e.getPlayer().sendMessage(blissgems.AdventureColorize(
+        e.getPlayer().sendMessage(BlissGems.AdventureColorize(
                 "<#F10303>🔮 <#B8FFFB>You have activated group <white>🤺 <#F10303>Frailer <#B8FFFB>skill <gray>(radius 5)"
         ));
 
-        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5))
-            if (entity != e.getPlayer()) {
-                LivingEntity entity2 = (LivingEntity) entity;
-                if (entity2 != null) {
-                    for (PotionEffect pe : entity2.getActivePotionEffects())
-                        entity2.removePotionEffect(pe.getType());
-                    entity2.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
-                }
-            }
+        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5)) {
+            if (entity == e.getPlayer()) continue;
+            if (!(entity instanceof LivingEntity livingEntity)) continue;
+            for (PotionEffect pe : livingEntity.getActivePotionEffects())
+                livingEntity.removePotionEffect(pe.getType());
+            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 40, 0));
+        }
 
 
         Location loc = e.getPlayer().getLocation();
@@ -181,7 +177,7 @@ public final class Powers implements Listener {
                 } else cancel();
 
             }
-        }.runTaskTimer(blissgems.getInstance(), 0, 6);
+        }.runTaskTimer(BlissGems.getInstance(), 0, 6);
     }
 
 
@@ -200,9 +196,9 @@ public final class Powers implements Listener {
             String id = Gem.getGemID(gem, p);
 
 
-            String FrailerString = blissgems.AdventureColorize("<#F10303>" + "\uD83E\uDD3A" + " " + CooldownHandler.parseCooldown("Power-Frailer:" + id));
+            String FrailerString = BlissGems.AdventureColorize("<#F10303>" + "\uD83E\uDD3A" + " " + CooldownHandler.parseCooldown("Power-Frailer:" + id));
 
-            String ChadString = blissgems.AdventureColorize("<#F10303>" + "⚔" + " " + CooldownHandler.parseCooldown("Power-ChadStrength:" + id));
+            String ChadString = BlissGems.AdventureColorize("<#F10303>" + "⚔" + " " + CooldownHandler.parseCooldown("Power-ChadStrength:" + id));
 
 
             Remain.sendActionBar(p, FrailerString + " " + ChadString);
@@ -263,7 +259,7 @@ public final class Powers implements Listener {
 
          */
 
-        e.getPlayer().sendMessage(blissgems.AdventureColorize(
+        e.getPlayer().sendMessage(BlissGems.AdventureColorize(
                 "<#F10303>🔮 <#B8FFFB>You have activated <white>🤺<#F10303>Chad Strength"
         ));
 
@@ -295,7 +291,7 @@ public final class Powers implements Listener {
 
                 } else cancel();
             }
-        }.runTaskTimer(blissgems.getInstance(), 0, 6);
+        }.runTaskTimer(BlissGems.getInstance(), 0, 6);
     }
 
     /*

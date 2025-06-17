@@ -1,6 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import com.hyperdondon.blissgemsremake.blissgems;
+import com.hyperdondon.blissgemsremake.BlissGems;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
@@ -29,6 +29,19 @@ public class Gem {
     private boolean allowremove;
     private int season;
 
+    /**
+     * Allows you to set the id using a UUID instead of a String.
+     */
+    public void setId(UUID id) {
+        this.id = id.toString();
+    }
+
+    /**
+     * Allows you to set the id using a String.
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Internal Use only!
@@ -147,10 +160,10 @@ public class Gem {
 
 
         if (season == 2 || season == 3) {
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         } else if (season == 1) {
-            NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
             itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
         }
 
@@ -228,21 +241,21 @@ public class Gem {
         if (!silent) {
             String gemmessage = "N/A";
             if (gem.type == GemType.Strength)
-                gemmessage = blissgems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
+                gemmessage = BlissGems.colorize("#F10303&lsᴛʀᴇɴɢᴛʜ");
             else if (gem.type == GemType.Speed)
-                gemmessage = blissgems.colorize("#FEFD17&lsᴘᴇᴇᴅ");
+                gemmessage = BlissGems.colorize("#FEFD17&lsᴘᴇᴇᴅ");
             else if (gem.type == GemType.Life)
-                gemmessage = blissgems.colorize("#FE04B4&lʟɪғᴇ");
+                gemmessage = BlissGems.colorize("#FE04B4&lʟɪғᴇ");
             else if (gem.type == GemType.Puff)
-                gemmessage = blissgems.colorize("#EFEFEF&lᴘᴜғғ");
+                gemmessage = BlissGems.colorize("#EFEFEF&lᴘᴜғғ");
             else if (gem.type == GemType.Astra)
-                gemmessage = blissgems.colorize("#A01FFF&lᴀsᴛʀᴀ");
+                gemmessage = BlissGems.colorize("#A01FFF&lᴀsᴛʀᴀ");
             else if (gem.type == GemType.Flux)
-                gemmessage = blissgems.colorize("#5ED7FF&lғʟᴜx");
+                gemmessage = BlissGems.colorize("#5ED7FF&lғʟᴜx");
             else if (gem.type == GemType.Fire)
-                gemmessage = blissgems.colorize("#FE8120&lғɪʀᴇ");
+                gemmessage = BlissGems.colorize("#FE8120&lғɪʀᴇ");
             else if (gem.type == GemType.Wealth)
-                gemmessage = blissgems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
+                gemmessage = BlissGems.colorize("#0EC912&lᴡᴇᴀʟᴛʜ");
 
             p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have received a " + gemmessage + "#B8FFFB gem &7Tier &b" + tier));
         }
@@ -361,7 +374,7 @@ public class Gem {
             Common.log(RED + "What have been passed to GemGemAllowRemove is not a gem!");
             return false;
         }
-        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "quick-no-remove");
+        NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "quick-no-remove");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
             boolean allow = false;
             if (gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER) == 1)
@@ -379,7 +392,7 @@ public class Gem {
             Common.log(RED + "What have been passed to GemGemAllowDrop is not a gem!");
             return false;
         }
-        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "quick-no-drop");
+        NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "quick-no-drop");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
             boolean allow = false;
             if (gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER) == 1)
@@ -397,7 +410,7 @@ public class Gem {
             Common.log(RED + "What have been passed to GemGemTier is not a gem!");
             return 0;
         }
-        NamespacedKey tierkey = new NamespacedKey(blissgems.getInstance(), "gem-tier");
+        NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "gem-tier");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING))
             return gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
         else if (gem.getType() == Material.PRISMARINE_SHARD)
@@ -411,12 +424,12 @@ public class Gem {
      */
     public static UUID getGemID(ItemStack gem) {
         if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemID is not a gem!");
+            Common.log(RED + "What was passed to Gem#GemGemID was not a gem!");
             return null;
         }
-        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
-            idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
         return UUID.fromString(gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING));
     }
 
@@ -425,14 +438,14 @@ public class Gem {
      */
     public static String getGemID(ItemStack gem, Player p) {
         if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemID is not a gem!");
+            Common.log(RED + "What was passed to Gem#GemGemID was not a gem!");
             return null;
         }
         if (getGemSeason(gem) == 1)
             return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
-        NamespacedKey idkey = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
-            idkey = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
 
         return gem.getItemMeta().getPersistentDataContainer().get(idkey, PersistentDataType.STRING);
     }
@@ -472,7 +485,7 @@ public class Gem {
         int season = getGemSeason(gem);
 
         if (season == 2 || season == 3) {
-            NamespacedKey typekey = new NamespacedKey(blissgems.getInstance(), "gem-type");
+            NamespacedKey typekey = new NamespacedKey(BlissGems.getInstance(), "gem-type");
             type2 = gem.getItemMeta().getPersistentDataContainer().get(typekey, PersistentDataType.STRING).toLowerCase();
         }
         if (season != 1) {
@@ -528,18 +541,25 @@ public class Gem {
     /**
      * Returns the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
      */
-    public static ItemStack getPlayerGem(Player p) {
+    public static ItemStack getPlayerGemItem(Player p) {
         for (ItemStack item : p.getInventory().getContents()) if (!isNull(item) && isGem(item)) return item;
         Common.log(RED + p.getName() + " doesn't have a gem!");
         return null;
     }
 
+    /**
+     * Returns the first gem inside the player's inventory. If it returns null, it means the player doesn't have a gem.
+     */
+    public static Gem getPlayerGem(Player p) {
+        return fromGemItem(getPlayerGemItem(p));
+    }
+
     public static boolean isGem(ItemStack gem) {
-        NamespacedKey idkeys2 = new NamespacedKey(blissgems.getInstance(), "gem-id");
+        NamespacedKey idkeys2 = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (isNull(gem)) return false;
         if (!gem.hasItemMeta()) return false;
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkeys2, PersistentDataType.STRING)) {
-            NamespacedKey idkeys1 = new NamespacedKey(blissgems.getInstance(), "shard_id");
+            NamespacedKey idkeys1 = new NamespacedKey(BlissGems.getInstance(), "shard_id");
             return gem.getItemMeta().getPersistentDataContainer().has(idkeys1, PersistentDataType.STRING);
         }
         return true;
