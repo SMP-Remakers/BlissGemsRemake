@@ -28,7 +28,6 @@ public final class CooldownHandler {
     public static boolean canUseCooldown(String name) {
         if (!Cooldowns.containsKey(name))
             return true;
-        //Bukkit.broadcastMessage(getCooldown(name).toString());
         return (getCooldown(name) <= 0);
     }
 

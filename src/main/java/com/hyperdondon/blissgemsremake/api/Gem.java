@@ -441,8 +441,8 @@ public class Gem {
             Common.log(RED + "What was passed to Gem#GemGemID was not a gem!");
             return null;
         }
-        if (getGemSeason(gem) == 1)
-            return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
+        //if (getGemSeason(gem) == 1)
+        //return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
         NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
             idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");

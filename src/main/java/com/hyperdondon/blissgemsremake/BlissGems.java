@@ -18,8 +18,6 @@ import org.mineacademy.fo.plugin.SimplePlugin;
 
 import java.io.File;
 
-import static com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers.*;
-
 public final class BlissGems extends SimplePlugin implements Listener {
 
     /*
@@ -112,6 +110,7 @@ public final class BlissGems extends SimplePlugin implements Listener {
 
         CooldownHandler.Initialize();
 
+        /*
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -126,6 +125,8 @@ public final class BlissGems extends SimplePlugin implements Listener {
                 runStrengthSecondTimer();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 20);
+
+         */
     }
 
     //Bad method

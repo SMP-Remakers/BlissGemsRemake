@@ -22,7 +22,7 @@ import static java.util.Objects.isNull;
 import static net.md_5.bungee.api.ChatColor.*;
 
 @AutoRegister
-public class Trader implements Listener {
+public final class Trader implements Listener {
 
     @Getter
     private static volatile Trader instance = new Trader();
@@ -54,7 +54,6 @@ public class Trader implements Listener {
         String currentgem = Gem.getPlayerGemType(p).toString().toLowerCase();
 
         Gems.get(p.getUniqueId()).remove(currentgem);
-        Bukkit.broadcastMessage(String.valueOf(Gems.get(p.getUniqueId()).size()));
 
 
         String Tier1 = ChatColor.of("#C7C7C7") + "ɢᴇᴍ";

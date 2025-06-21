@@ -192,9 +192,8 @@ public final class SlashBliss implements CommandExecutor, TabCompleter {
 
                 p.sendMessage(Common.colorize("#FFD773🔮 #B8FFFBYou have given #FFD773" + args[1] + " #B8FFFBa " + gemmessage + "#B8FFFB gem &7Tier &b" + args[3]));
 
-                gem.setId(Objects.requireNonNull(Gem.getGemID(Gem.getPlayerGemItem(p))));
-                gem.setAllowdrop(true);
-                gem.setAllowremove(true);
+                //gem.setAllowdrop(true);
+                //gem.setAllowremove(true);
                 Gem.giveGem(gem, p, false, Integer.parseInt(args[3]));
             }
 

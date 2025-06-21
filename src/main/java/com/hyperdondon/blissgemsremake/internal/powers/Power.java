@@ -13,15 +13,12 @@ import javax.annotation.Nullable;
 public abstract class Power {
     private final Component actionText;
     private final String id;
-    private final SeasonSupport season;
-    private final PowerHandler handler;
+    private final SeasonSupport seasonSupport;
 
-    public Power(String pId, Component pActionText, SeasonSupport pSeason, PowerHandler pHandler) {
+    public Power(String pId, Component pActionText, SeasonSupport pSeason) {
         actionText = pActionText;
         id = pId;
-        season = pSeason;
-        handler = pHandler;
-        handler.registerPower(this);
+        seasonSupport = pSeason;
     }
 
     public void runTickTimer() {
@@ -30,7 +27,7 @@ public abstract class Power {
     public void runSecondTimer() {
     }
 
-    public abstract void activate(Player player, Gem gem, int season, @Nullable Event event);
+    public abstract void activate(Player player, Gem gem, SeasonSupport seasonSupport, @Nullable Event event);
 
-    public abstract void deactivate(Player player, Gem gem, int season);
+    public abstract void deactivate(Player player, Gem gem, SeasonSupport seasonSupport);
 }

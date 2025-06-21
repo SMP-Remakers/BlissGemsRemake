@@ -18,7 +18,7 @@ import org.mineacademy.fo.annotation.AutoRegister;
 import java.util.*;
 
 @AutoRegister
-public class LeaveJoinStorer implements Listener {
+public final class LeaveJoinStorer implements Listener {
     @Getter
     private static volatile LeaveJoinStorer instance = new LeaveJoinStorer();
 
