@@ -22,14 +22,16 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.mineacademy.fo.annotation.AutoRegister;
 import org.mineacademy.fo.remain.Remain;
 
+@AutoRegister
 public final class Powers implements Listener {
     @Getter
     private static volatile Powers instance = new Powers();
 
     @EventHandler
-    public void SingleFrailerPower(EntityDamageByEntityEvent e) {
+    public void activateSingleFrailerPower(EntityDamageByEntityEvent e) {
         if (e.getDamager().getType() != EntityType.PLAYER)
             return;
         Player p = (Player) e.getDamager();
@@ -49,11 +51,11 @@ public final class Powers implements Listener {
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id)) {
             String display = CooldownHandler.parseCooldown("Power-Frailer:" + id, "<#F10303>");
             if (season < 3)
-                p.sendMessage(BlissGems.AdventureColorize(
+                p.sendMessage(BlissGems.miniMessage(
                         "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Frailer <#FDABAA>skill is on cooldown for <#F10303>" + display
                 ));
             else
-                p.sendMessage(BlissGems.AdventureColorize(
+                p.sendMessage(BlissGems.miniMessage(
                         "<#F10303>🔮 <#FDABAA>Your <white>🤺<#F10303>Nullify <#FDABAA>skill is on cooldown for <#F10303>" + display
                 ));
             return; //Add cant use power message
@@ -124,19 +126,19 @@ public final class Powers implements Listener {
     }
 
     @EventHandler
-    public void GroupFrailerPower(PlayerInteractEvent e) {
+    public void activateGroupFrailerPower(PlayerInteractEvent event) {
         //check left click
-        if (e.getAction() != Action.LEFT_CLICK_AIR && e.getAction() != Action.LEFT_CLICK_BLOCK)
+        if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK)
             return;
-        if (!Gem.isGem(e.getPlayer().getInventory().getItemInMainHand()))
+        if (!Gem.isGem(event.getPlayer().getInventory().getItemInMainHand()))
             return;
-        if (Gem.getGemSeason(e.getPlayer().getInventory().getItemInMainHand()) > 2)
+        if (Gem.getGemSeason(event.getPlayer().getInventory().getItemInMainHand()) > 2)
             return;
-        if (Gem.getGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+        if (Gem.getGemType(event.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
-        e.setCancelled(true);
-        ItemStack gem = e.getPlayer().getInventory().getItemInMainHand();
-        Player p = e.getPlayer();
+        event.setCancelled(true);
+        ItemStack gem = event.getPlayer().getInventory().getItemInMainHand();
+        Player p = event.getPlayer();
         String id = Gem.getGemID(gem, p);
 
         if (!CooldownHandler.canUseCooldown("Power-Frailer:" + id))
@@ -144,12 +146,12 @@ public final class Powers implements Listener {
 
 
         CooldownHandler.setCooldown("Power-Frailer:" + id, FromMinutesAndSeconds(4, 0));
-        e.getPlayer().sendMessage(BlissGems.AdventureColorize(
+        event.getPlayer().sendMessage(BlissGems.miniMessage(
                 "<#F10303>🔮 <#B8FFFB>You have activated group <white>🤺 <#F10303>Frailer <#B8FFFB>skill <gray>(radius 5)"
         ));
 
-        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5)) {
-            if (entity == e.getPlayer()) continue;
+        for (Entity entity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
+            if (entity == event.getPlayer()) continue;
             if (!(entity instanceof LivingEntity livingEntity)) continue;
             for (PotionEffect pe : livingEntity.getActivePotionEffects())
                 livingEntity.removePotionEffect(pe.getType());
@@ -157,20 +159,20 @@ public final class Powers implements Listener {
         }
 
 
-        Location loc = e.getPlayer().getLocation();
+        Location loc = event.getPlayer().getLocation();
 
         double spacing = 0.05;
-        strenghcircle(loc, 1, spacing);
-        strenghcircle(loc, 2, spacing);
-        strenghcircle(loc, 3, spacing);
-        strenghcircle(loc, 4, spacing);
+        particleStrenghCircle(loc, 1, spacing);
+        particleStrenghCircle(loc, 2, spacing);
+        particleStrenghCircle(loc, 3, spacing);
+        particleStrenghCircle(loc, 4, spacing);
 
         final int[] i = {0};
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (i[0] < 8) {
-                    strenghcircle(loc, 5, spacing);
+                    particleStrenghCircle(loc, 5, spacing);
 
                     i[0]++;
 
@@ -181,10 +183,10 @@ public final class Powers implements Listener {
     }
 
 
-    public static void StrengthTicks() {
+    public static void runStrengthTickTimer() {
     }
 
-    public static void StrengthSeconds() {
+    public static void runStrengthSecondTimer() {
         for (Player p : MultiLib.getAllOnlinePlayers()) {
             ItemStack i = p.getInventory().getItemInMainHand();
             ItemStack io = p.getInventory().getItemInOffHand();
@@ -196,16 +198,16 @@ public final class Powers implements Listener {
             String id = Gem.getGemID(gem, p);
 
 
-            String FrailerString = BlissGems.AdventureColorize("<#F10303>" + "\uD83E\uDD3A" + " " + CooldownHandler.parseCooldown("Power-Frailer:" + id));
+            String FrailerString = BlissGems.miniMessage("<#F10303>" + "🤺" + " " + CooldownHandler.parseCooldown("Power-Frailer:" + id));
 
-            String ChadString = BlissGems.AdventureColorize("<#F10303>" + "⚔" + " " + CooldownHandler.parseCooldown("Power-ChadStrength:" + id));
+            String ChadString = BlissGems.miniMessage("<#F10303>" + "⚔" + " " + CooldownHandler.parseCooldown("Power-ChadStrength:" + id));
 
 
             Remain.sendActionBar(p, FrailerString + " " + ChadString);
         }
     }
 
-    public static void strenghcircle(Location player, int radius, double spacing) {
+    public static void particleStrenghCircle(Location player, int radius, double spacing) {
         Particle.DustOptions circledust = new Particle.DustOptions(org.bukkit.Color.fromRGB(241, 3, 3), 1);
 
         int scaleX = radius;  // use these to tune the size of your circle
@@ -228,16 +230,16 @@ public final class Powers implements Listener {
     }
 
     @EventHandler
-    public void ChadPower(PlayerInteractEvent e) {
+    public void ChadPower(PlayerInteractEvent event) {
         //check right click
-        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)
             return;
-        if (!Gem.isGem(e.getPlayer().getInventory().getItemInMainHand()))
+        if (!Gem.isGem(event.getPlayer().getInventory().getItemInMainHand()))
             return;
-        if (Gem.getGemType(e.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
+        if (Gem.getGemType(event.getPlayer().getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
             return;
-        Player p = e.getPlayer();
-        e.setCancelled(true);
+        Player p = event.getPlayer();
+        event.setCancelled(true);
         ItemStack gem = p.getInventory().getItemInMainHand();
 
         String id = Gem.getGemID(gem, p);
@@ -250,7 +252,7 @@ public final class Powers implements Listener {
 
 
         /*
-        e.getPlayer().sendMessage(
+        event.getPlayer().sendMessage(
                 blissgems.colorize("&x<white>&1&0&3&0&3") + "🔮" +
                         blissgems.colorize("&x&b&8<white><white><white>&b") + " You have activated group " +
                         blissgems.colorize("<white>") + "🤺" + blissgems.colorize("&x<white>&1&0&3&0&3") + "Chad" +
@@ -259,39 +261,10 @@ public final class Powers implements Listener {
 
          */
 
-        e.getPlayer().sendMessage(BlissGems.AdventureColorize(
+        event.getPlayer().sendMessage(BlissGems.miniMessage(
                 "<#F10303>🔮 <#B8FFFB>You have activated <white>🤺<#F10303>Chad Strength"
         ));
 
-
-        for (Entity entity : e.getPlayer().getNearbyEntities(5, 5, 5))
-            if (entity != e.getPlayer()) {
-                LivingEntity entity1 = (LivingEntity) entity;
-                for (PotionEffect pe : entity1.getActivePotionEffects()) entity1.removePotionEffect(pe.getType());
-                entity1.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 800, 0));
-            }
-
-
-        Location loc = e.getPlayer().getLocation();
-
-        double spacing = 0.05;
-        strenghcircle(loc, 1, spacing);
-        strenghcircle(loc, 2, spacing);
-        strenghcircle(loc, 3, spacing);
-        strenghcircle(loc, 4, spacing);
-
-        final int[] i = {0};
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (i[0] < 8) {
-                    strenghcircle(loc, 5, spacing);
-
-                    i[0]++;
-
-                } else cancel();
-            }
-        }.runTaskTimer(BlissGems.getInstance(), 0, 6);
     }
 
     /*

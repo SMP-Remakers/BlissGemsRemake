@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.mineacademy.fo.annotation.AutoRegister;
 
 
 import java.util.*;
@@ -20,6 +21,7 @@ import java.util.*;
 import static java.util.Objects.isNull;
 import static net.md_5.bungee.api.ChatColor.*;
 
+@AutoRegister
 public class Trader implements Listener {
 
     @Getter
@@ -53,11 +55,6 @@ public class Trader implements Listener {
 
         Gems.get(p.getUniqueId()).remove(currentgem);
         Bukkit.broadcastMessage(String.valueOf(Gems.get(p.getUniqueId()).size()));
-        /*
-        ArrayList<String> gems = Gems.get(p.getUniqueId());
-        gems.remove(currentgem);
-        Gems.replace(p.getUniqueId(), gems);
-        */
 
 
         String Tier1 = ChatColor.of("#C7C7C7") + "ɢᴇᴍ";
@@ -173,6 +170,7 @@ public class Trader implements Listener {
     public void GemClick(InventoryClickEvent e) {
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.of("#A01FFF") + "")) {
             e.setCancelled(true);
+            if (e.getCurrentItem().getType() == Material.NAUTILUS_SHELL) return;
             ItemStack item = e.getCurrentItem();
             if (item.getItemMeta().getLore().contains(ChatColor.WHITE + "Chance: 100%") || item.getItemMeta().getLore().contains(ChatColor.WHITE + "This is your current gem"))
                 return;
@@ -196,6 +194,7 @@ public class Trader implements Listener {
                 ItemStack loopitem = e.getClickedInventory().getItem(i);
                 if (isNull(loopitem))
                     continue;
+                if (loopitem.getType() == Material.NAUTILUS_SHELL) continue;
                 if ((!loopitem.getItemMeta().getLore().contains(ChatColor.WHITE + "Chance: 0%")) && (!loopitem.getItemMeta().getLore().contains(ChatColor.WHITE + "This is your current gem"))) {
                     ItemMeta meta = loopitem.getItemMeta();
 
@@ -224,6 +223,7 @@ public class Trader implements Listener {
 
     @EventHandler
     public void EnergyClick(InventoryClickEvent e) {
+        if (e.getSlot() != 17) return;
         if (e.getView().getTitle().equalsIgnoreCase(ChatColor.of("#A01FFF") + "")) {
 
         }

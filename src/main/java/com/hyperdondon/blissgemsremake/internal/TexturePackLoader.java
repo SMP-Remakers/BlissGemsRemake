@@ -5,7 +5,9 @@ import lombok.Getter;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.mineacademy.fo.annotation.AutoRegister;
 
+@AutoRegister
 public final class TexturePackLoader implements Listener {
     @Getter
     private static volatile TexturePackLoader instance = new TexturePackLoader();

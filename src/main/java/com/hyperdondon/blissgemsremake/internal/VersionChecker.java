@@ -6,7 +6,7 @@ import org.mineacademy.fo.MinecraftVersion;
 public final class VersionChecker {
 
     public static boolean OlderThanNBTChange() {
-        //return true; for testing
+        //return true; //for testing
         if (MinecraftVersion.olderThan(MinecraftVersion.V.v1_20))
             return true;
         else

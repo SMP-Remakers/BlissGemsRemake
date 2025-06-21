@@ -5,20 +5,21 @@ import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.Settings;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.mineacademy.fo.annotation.AutoRegister;
 
 import java.util.Random;
 
+@AutoRegister
 public final class GemGiver implements Listener {
     @Getter
     private static volatile GemGiver instance = new GemGiver();
 
 
     @EventHandler
-    public void givegem(PlayerJoinEvent e) {
+    public void giveGem(PlayerJoinEvent e) {
         if (!e.getPlayer().hasPlayedBefore() && Settings.isGiveGemOnJoinAllowed()) {
             GemType type = null;
             int randomNumber = 0;

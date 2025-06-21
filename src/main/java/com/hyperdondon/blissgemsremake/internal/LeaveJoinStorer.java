@@ -13,9 +13,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.mineacademy.fo.annotation.AutoRegister;
 
 import java.util.*;
 
+@AutoRegister
 public class LeaveJoinStorer implements Listener {
     @Getter
     private static volatile LeaveJoinStorer instance = new LeaveJoinStorer();

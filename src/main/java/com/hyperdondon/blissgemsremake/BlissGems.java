@@ -4,10 +4,9 @@ import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.api.Settings;
 import com.hyperdondon.blissgemsremake.internal.*;
 import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
-import com.hyperdondon.blissgemsremake.internal.gem.Strength.Powers;
-import com.hyperdondon.blissgemsremake.internal.item.trader.Trader;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bstats.bukkit.Metrics;
@@ -89,16 +88,6 @@ public final class BlissGems extends SimplePlugin implements Listener {
 
         getCommand("progobsidian").setExecutor(EnchantedObsidian.getInstance());
 
-        registerEvents(Trader.getInstance());
-
-        registerEvents(LeaveJoinStorer.getInstance());
-
-        registerEvents(Powers.getInstance());
-
-        registerEvents(GemGiver.getInstance());
-
-        registerEvents(TexturePackLoader.getInstance());
-
         getCommand("blissgems").setExecutor(SlashBliss.getInstance());
         getCommand("blissgems").setTabCompleter(SlashBliss.getInstance());
 
@@ -127,18 +116,19 @@ public final class BlissGems extends SimplePlugin implements Listener {
             @Override
             public void run() {
                 EnchantedObsidian.startGlowCheckTask();
-                StrengthTicks();
+                runStrengthTickTimer();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 0);
 
         new BukkitRunnable() {
             @Override
             public void run() {
-                StrengthSeconds();
+                runStrengthSecondTimer();
             }
         }.runTaskTimer(SimplePlugin.getInstance(), 0, 20);
     }
 
+    //Bad method
     public static String colorize(String s) {
         var sc = MiniMessage.miniMessage().deserialize(s);
         s = LegacyComponentSerializer.legacySection().serialize(sc);
@@ -146,13 +136,23 @@ public final class BlissGems extends SimplePlugin implements Listener {
         return s;
     }
 
-    public static String AdventureColorize(String string) {
+    public static Component miniMessageComponent(String string) {
+        return MiniMessage.miniMessage().deserialize(string);
+    }
+
+    public static String miniMessageComponent(Component... components) {
+        String[] texts = new String[components.length];
+        for (int i = 0; i < components.length; i++) texts[i] = miniMessageComponent(components[i]);
+        return String.join("\n", texts);
+    }
+
+    public static String miniMessage(String string) {
         return LegacyComponentSerializer.legacySection().serialize(
                 MiniMessage.miniMessage().deserialize(string)
         );
     }
 
-    public static String AdventureColorize(String... messages) {
-        return AdventureColorize(String.join("\n", messages));
+    public static String miniMessage(String... messages) {
+        return miniMessage(String.join("\n", messages));
     }
 }
