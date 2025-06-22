@@ -5,7 +5,6 @@ import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.SeasonSupport;
 import com.hyperdondon.blissgemsremake.internal.powers.PowerHandler;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
@@ -17,8 +16,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 import org.mineacademy.fo.annotation.AutoRegister;
-
-import java.util.List;
+import org.mineacademy.fo.remain.CompPotionEffectType;
 
 @AutoRegister
 public final class StrengthPowerHandler extends PowerHandler implements Listener {
@@ -26,7 +24,7 @@ public final class StrengthPowerHandler extends PowerHandler implements Listener
     private volatile static StrengthPowerHandler instance = new StrengthPowerHandler();
 
     public StrengthPowerHandler() {
-        super(GemType.Strength);
+        super(GemType.Strength, CompPotionEffectType.INCREASE_DAMAGE);
     }
 
     @EventHandler
@@ -40,10 +38,7 @@ public final class StrengthPowerHandler extends PowerHandler implements Listener
         if (event.getDamager().getType() != EntityType.PLAYER)
             return;
         Player player = (Player) event.getDamager();
-        if (!Gem.isGem(player.getInventory().getItemInMainHand()))
-            return;
-        if (Gem.getGemType(player.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
-            return;
+        if (!isPowerful(player.getInventory().getItemInMainHand(), false, player)) return;
         LivingEntity ent = (LivingEntity) event.getEntity();
         if (!(ent instanceof Monster))
             return;
@@ -56,14 +51,18 @@ public final class StrengthPowerHandler extends PowerHandler implements Listener
         Player player = event.getPlayer();
         if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK)
             return;
-        if (!Gem.isGem(player.getInventory().getItemInMainHand()))
-            return;
-        if (Gem.getGemSeason(player.getInventory().getItemInMainHand()) > 2)
-            return;
-        if (Gem.getGemType(player.getInventory().getItemInMainHand()) != GemType.Strength) //Check if the gem isn't a strength gem
-            return;
+        if (!isPowerful(player.getInventory().getItemInMainHand(), false, null)) return;
         event.setCancelled(true);
         Gem gem = Gem.getPlayerGem(player);
         Frailer.getInstance().activate(player, gem, SeasonSupport.fromInt(gem.getSeason()), event);
+    }
+
+    @EventHandler
+    public void activateSingleChadStrengthPower(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (!isPowerful(player.getInventory().getItemInMainHand(), false, player)) return;
+        event.setCancelled(true);
+        Gem gem = Gem.getPlayerGem(player);
+        ChadStrength.getInstance().activate(player, gem, SeasonSupport.fromInt(gem.getSeason()), event);
     }
 }

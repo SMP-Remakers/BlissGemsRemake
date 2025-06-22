@@ -3,34 +3,31 @@ package com.hyperdondon.blissgemsremake.internal.gem.Strength;
 import com.hyperdondon.blissgemsremake.BlissGems;
 import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.api.Gem;
-import com.hyperdondon.blissgemsremake.api.GemType;
 import com.hyperdondon.blissgemsremake.api.SeasonSupport;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import com.hyperdondon.blissgemsremake.internal.powers.Power;
-import com.hyperdondon.blissgemsremake.internal.powers.PowerHandler;
 import lombok.Getter;
-import net.kyori.adventure.text.Component;
-import org.bukkit.*;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nullable;
-
 import static com.hyperdondon.blissgemsremake.api.util.TimeUtils.FromMinutesAndSeconds;
 
 public final class Frailer extends Power {
+
     @Getter
-    public volatile static Frailer instance = new Frailer();
+    public static final Frailer instance = new Frailer();
 
     public Frailer() {
         super("Power-Frailer", BlissGems.miniMessageComponent("🤺" + " [cooldown]"), SeasonSupport.S1_S2_S3);
@@ -111,14 +108,14 @@ public final class Frailer extends Power {
                     BlissGems.colorize("#F10303") + "🔮" +
                             BlissGems.colorize("#B8FFFB") + " You have used " +
                             BlissGems.colorize("<white>") + "🤺" + BlissGems.colorize("#F10303") + "Frailer" +
-                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + pEvent.getEntity().getName() + BlissGems.colorize("&7") + " (radius 5)"
+                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + pEvent.getEntity().getName()
             );
         else
             player.sendMessage(
                     BlissGems.colorize("#F10303") + "🔮" +
                             BlissGems.colorize("#B8FFFB") + " You have used " +
                             BlissGems.colorize("<white>") + "🤺" + BlissGems.colorize("#F10303") + "Nullify" +
-                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + pEvent.getEntity().getName() + BlissGems.colorize("&7") + " (radius 5)"
+                            BlissGems.colorize("#B8FFFB") + " skill on " + BlissGems.colorize("#F10303") + pEvent.getEntity().getName()
             );
 
         for (PotionEffect pe : ent.getActivePotionEffects()) ent.removePotionEffect(pe.getType());

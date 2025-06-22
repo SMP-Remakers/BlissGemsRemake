@@ -12,7 +12,9 @@ import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
 import org.mineacademy.fo.Common;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 import static java.util.Objects.isNull;
 import static net.md_5.bungee.api.ChatColor.*;
@@ -268,10 +270,7 @@ public class Gem {
      * Returns an ArrayList. The object in the first index is the energy, the second index is the season
      */
     public static ArrayList<Object> getGemInfo(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemInfo is not a gem!");
-            return null;
-        }
+        if (!isGem(gem)) return null;
         ArrayList<Object> list = new ArrayList<Object>();
         for (int i = 1; i != 6; i++)
             if (gem.getItemMeta().getLore().contains(Common.colorize("#57FFC7") + "Pristine" + WHITE + " + " + Common.colorize("#96FFD9") + i)) {
@@ -370,10 +369,7 @@ public class Gem {
      * Get whether the gem is allowed to be removed from the player's inventory
      */
     public static boolean getGemAllowRemove(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemAllowRemove is not a gem!");
-            return false;
-        }
+        if (!isGem(gem)) return false;
         NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "quick-no-remove");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
             boolean allow = false;
@@ -388,10 +384,7 @@ public class Gem {
      * Get whether the gem is allowed to be dropped
      */
     public static boolean getGemAllowDrop(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemAllowDrop is not a gem!");
-            return false;
-        }
+        if (!isGem(gem)) return false;
         NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "quick-no-drop");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING)) {
             boolean allow = false;
@@ -406,10 +399,7 @@ public class Gem {
      * Get the tier of a gem
      */
     public static int getGemTier(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemTier is not a gem!");
-            return 0;
-        }
+        if (!isGem(gem)) return 0;
         NamespacedKey tierkey = new NamespacedKey(BlissGems.getInstance(), "gem-tier");
         if (gem.getItemMeta().getPersistentDataContainer().has(tierkey, PersistentDataType.STRING))
             return gem.getItemMeta().getPersistentDataContainer().get(tierkey, PersistentDataType.INTEGER);
@@ -423,10 +413,7 @@ public class Gem {
      * Get the ID of a gem
      */
     public static UUID getGemID(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What was passed to Gem#GemGemID was not a gem!");
-            return null;
-        }
+        if (!isGem(gem)) return null;
         NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
             idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
@@ -437,10 +424,7 @@ public class Gem {
      * Get the ID of a gem
      */
     public static String getGemID(ItemStack gem, Player p) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What was passed to Gem#GemGemID was not a gem!");
-            return null;
-        }
+        if (!isGem(gem)) return null;
         //if (getGemSeason(gem) == 1)
         //return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
         NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
@@ -454,10 +438,7 @@ public class Gem {
      * Get the energy of a gem
      */
     public static Energy getGemEnergy(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemEnergy is not a gem!");
-            return null;
-        }
+        if (!isGem(gem)) return null;
         return (Energy) getGemInfo(gem).get(0);
     }
 
@@ -465,10 +446,7 @@ public class Gem {
      * Get the season of a gem
      */
     public static int getGemSeason(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemSeason is not a gem!");
-            return 0;
-        }
+        if (!isGem(gem)) return 0;
         return (int) getGemInfo(gem).get(1);
     }
 
@@ -476,10 +454,7 @@ public class Gem {
      * Get the type of a gem
      */
     public static GemType getGemType(ItemStack gem) {
-        if (!isGem(gem)) {
-            Common.log(RED + "What have been passed to GemGemType is not a gem!");
-            return null;
-        }
+        if (!isGem(gem)) return null;
         GemType type = null;
         String type2 = "";
         int season = getGemSeason(gem);
