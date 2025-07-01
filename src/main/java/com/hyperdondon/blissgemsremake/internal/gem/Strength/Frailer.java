@@ -4,7 +4,6 @@ import com.hyperdondon.blissgemsremake.BlissGems;
 import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.api.SeasonSupport;
-import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import com.hyperdondon.blissgemsremake.internal.powers.Power;
 import lombok.Getter;
 import org.bukkit.Color;
@@ -21,6 +20,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import org.mineacademy.fo.remain.CompParticle;
 
 import static com.hyperdondon.blissgemsremake.api.util.TimeUtils.FromMinutesAndSeconds;
 
@@ -124,8 +124,6 @@ public final class Frailer extends Power {
 
         pEvent.getEntity().getLocation().toVector().subtract(pEvent.getDamager().getLocation().toVector()).normalize().multiply(0.1);
 
-        Particle.DustOptions circledust = new Particle.DustOptions(Color.fromRGB(241, 3, 3), 1);
-
         final int[] i = {0};
         new BukkitRunnable() {
             @Override
@@ -144,9 +142,8 @@ public final class Frailer extends Power {
                     Location location = point1.clone();
 
                     for (int i = 0; i < distance * 10; i++) {
-                        world.spawnParticle(Particle.REDSTONE, location, 0, circledust);
-
-                        world.spawnParticle(Particle.SMOKE_NORMAL, location, 0);
+                        CompParticle.REDSTONE.spawn(location, Color.fromRGB(241, 3, 3), 1);
+                        CompParticle.SMOKE_NORMAL.spawn(location, 0, 0);
 
                         location.add(vector);
                     }
@@ -165,7 +162,7 @@ public final class Frailer extends Power {
         }.runTaskTimer(BlissGems.getInstance(), 0, 0);
     }
 
-    public static void particleStrenghCircle(Location player, int radius, double spacing) {
+    public static void particleStrenghCircle(Location location, int radius, double spacing) {
         Particle.DustOptions circledust = new Particle.DustOptions(org.bukkit.Color.fromRGB(241, 3, 3), 1);
 
         int scaleX = radius;  // use these to tune the size of your circle
@@ -176,14 +173,11 @@ public final class Frailer extends Power {
 
             double x = Math.cos(i) * scaleX;
             double y = Math.sin(i) * scaleY;
+            Location spawnLocation = location.clone().add(x, 0, y);
             // spawn your particle here
             // for example, if 'loc' is your location object and 'world' is your World object
-            if (VersionChecker.OlderThanNBTChange())
-                player.getWorld().spawnParticle(Particle.REDSTONE, player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-            else
-                player.getWorld().spawnParticle(Particle.valueOf("DUST"), player.getX() + x, player.getY(), player.getZ() + y, 0, circledust);
-            player.getWorld().spawnParticle(Particle.SMOKE_NORMAL, player.getX() + x, player.getY(), player.getZ() + y, 0);
-
+            CompParticle.REDSTONE.spawn(spawnLocation, Color.fromRGB(241, 3, 3), 1);
+            CompParticle.SMOKE_NORMAL.spawn(spawnLocation, 0, 0);
         }
     }
 

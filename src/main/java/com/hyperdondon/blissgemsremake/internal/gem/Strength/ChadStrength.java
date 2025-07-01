@@ -52,11 +52,16 @@ public final class ChadStrength extends Power implements Listener {
         if (event.getDamager().getType() != EntityType.PLAYER)
             return;
         Player player = (Player) event.getDamager();
-        boolean isCritical = player.getFallDistance() > 0.0F &&
-                !player.isOnGround() && !player.isClimbing() &&
-                !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
-                player.getVehicle() == null &&
-                player.getAttackCooldown() > 0.9;
+        boolean isCritical;
+        try {
+            isCritical = event.isCritical(); //this wasn't implemented in older minecraft versions. i don't exactly know when it was added.
+        } catch (Throwable throwable) {
+            isCritical = player.getFallDistance() > 0.0F &&
+                    !player.isOnGround() && !player.isClimbing() &&
+                    !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
+                    player.getVehicle() == null &&
+                    player.getAttackCooldown() > 0.9;
+        }
         if (!isCritical) return;
         if (!Gem.isGem(player.getInventory().getItemInMainHand()) && !Gem.isGem(player.getInventory().getItemInOffHand()))
             return;

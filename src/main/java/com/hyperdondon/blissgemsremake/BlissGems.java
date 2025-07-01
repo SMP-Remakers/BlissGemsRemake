@@ -2,8 +2,8 @@ package com.hyperdondon.blissgemsremake;
 
 import com.hyperdondon.blissgemsremake.api.CooldownHandler;
 import com.hyperdondon.blissgemsremake.api.Settings;
-import com.hyperdondon.blissgemsremake.internal.*;
-import com.hyperdondon.blissgemsremake.internal.commands.SlashBliss;
+import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer;
+import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences;
 import com.hyperdondon.blissgemsremake.internal.progression.EnchantedObsidian;
 import com.hyperdondon.blissgemsremake.internal.progression.SlashProg;
 import net.kyori.adventure.text.Component;
@@ -12,7 +12,6 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
 
@@ -85,9 +84,6 @@ public final class BlissGems extends SimplePlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(EnchantedObsidian.getInstance(), this);
 
         getCommand("progobsidian").setExecutor(EnchantedObsidian.getInstance());
-
-        getCommand("blissgems").setExecutor(SlashBliss.getInstance());
-        getCommand("blissgems").setTabCompleter(SlashBliss.getInstance());
 
         getCommand("progression").setExecutor(new SlashProg());
 

@@ -6,13 +6,13 @@ import com.mojang.authlib.properties.Property;
 import de.tr7zw.nbtapi.NBTItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.menu.model.ItemCreator;
+import org.mineacademy.fo.remain.CompEnchantment;
 import org.mineacademy.fo.remain.CompMaterial;
 
 import java.lang.reflect.Field;
@@ -49,7 +49,8 @@ public final class BlissItems {
                         ChatColor.RED + "ᴡᴀʀɴɪɴɢ: ᴜsɪɴɢ ᴛʜɪs ᴡɪʟʟ ʟᴏsᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ɢᴇᴍ"
                 ));
 
-            itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+
+            itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
             item.setItemMeta(itemMeta);
             //W CHATGPT

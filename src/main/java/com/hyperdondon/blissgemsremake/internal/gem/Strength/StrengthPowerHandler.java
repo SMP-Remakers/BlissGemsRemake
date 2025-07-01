@@ -61,6 +61,7 @@ public final class StrengthPowerHandler extends PowerHandler implements Listener
     public void activateSingleChadStrengthPower(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (!isPowerful(player.getInventory().getItemInMainHand(), false, player)) return;
+        if (!event.getAction().toString().contains("RIGHT")) return;
         event.setCancelled(true);
         Gem gem = Gem.getPlayerGem(player);
         ChadStrength.getInstance().activate(player, gem, SeasonSupport.fromInt(gem.getSeason()), event);

@@ -1,10 +1,12 @@
 package com.hyperdondon.blissgemsremake.internal.item.trader;
 
-import com.hyperdondon.blissgemsremake.api.Gem;
 import com.hyperdondon.blissgemsremake.BlissGems;
+import com.hyperdondon.blissgemsremake.api.Gem;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,11 +17,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.mineacademy.fo.annotation.AutoRegister;
 
-
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
 
 import static java.util.Objects.isNull;
-import static net.md_5.bungee.api.ChatColor.*;
+import static net.md_5.bungee.api.ChatColor.BOLD;
+import static net.md_5.bungee.api.ChatColor.WHITE;
 
 @AutoRegister
 public final class Trader implements Listener {
@@ -166,15 +172,15 @@ public final class Trader implements Listener {
     }
 
     @EventHandler
-    public void GemClick(InventoryClickEvent e) {
-        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.of("#A01FFF") + "")) {
-            e.setCancelled(true);
-            if (e.getCurrentItem().getType() == Material.NAUTILUS_SHELL) return;
-            ItemStack item = e.getCurrentItem();
+    public void gemClick(InventoryClickEvent event) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        if (event.getView().getTitle().equalsIgnoreCase(ChatColor.of("#A01FFF") + "")) {
+            event.setCancelled(true);
+            if (event.getCurrentItem().getType() == Material.NAUTILUS_SHELL) return;
+            ItemStack item = event.getCurrentItem();
             if (item.getItemMeta().getLore().contains(ChatColor.WHITE + "Chance: 100%") || item.getItemMeta().getLore().contains(ChatColor.WHITE + "This is your current gem"))
                 return;
 
-            Player p = (Player) e.getWhoClicked();
+            Player p = (Player) event.getWhoClicked();
 
 
             String clickedgem = item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(BlissGems.getInstance(), "type"), PersistentDataType.STRING);
@@ -190,7 +196,7 @@ public final class Trader implements Listener {
 
 
             for (int i = 9; i < 18; i++) {
-                ItemStack loopitem = e.getClickedInventory().getItem(i);
+                ItemStack loopitem = event.getClickedInventory().getItem(i);
                 if (isNull(loopitem))
                     continue;
                 if (loopitem.getType() == Material.NAUTILUS_SHELL) continue;
@@ -203,7 +209,7 @@ public final class Trader implements Listener {
                             )
                     );
                     loopitem.setItemMeta(meta);
-                    e.getClickedInventory().setItem(i, loopitem);
+                    event.getClickedInventory().setItem(i, loopitem);
                 }
             }
 
@@ -216,7 +222,7 @@ public final class Trader implements Listener {
 
             ItemStack gem = GemToGUI(clickedgem, currentgem, item.getItemMeta().getDisplayName(), tier, NormalCMD, GUICMD, Gems.get(p.getUniqueId()).size(), p);
 
-            e.getClickedInventory().setItem(e.getSlot(), gem);
+            event.getClickedInventory().setItem(event.getSlot(), gem);
         }
     }
 

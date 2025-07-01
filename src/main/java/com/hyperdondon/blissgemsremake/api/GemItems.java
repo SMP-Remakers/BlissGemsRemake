@@ -4,12 +4,13 @@ import com.hyperdondon.blissgemsremake.BlissGems;
 import com.hyperdondon.blissgemsremake.internal.VersionChecker;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-//skibidi
+import org.mineacademy.fo.remain.CompEnchantment;
+import org.mineacademy.fo.remain.CompItemFlag;
+
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -63,17 +64,15 @@ public final class GemItems {
 
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
-
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
-
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     itemMeta.setCustomModelData(10);
                     itemMeta.setLore(Arrays.asList(
@@ -125,9 +124,8 @@ public final class GemItems {
 
                     itemMeta.setDisplayName(BlissGems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
-
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(10);
                         itemMeta.setLore(Arrays.asList(
@@ -276,7 +274,7 @@ public final class GemItems {
 
                     itemMeta.setDisplayName(BlissGems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(10);
 
@@ -427,15 +425,15 @@ public final class GemItems {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(8);
@@ -495,7 +493,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(8);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴡᴀᴛᴄʜ ᴛʜᴇ ᴡᴏʀʟᴅ ᴀʀᴏᴜɴᴅ ʏᴏᴜ ᴛᴜʀɴ ɪɴᴛᴏ ᴀ ʙʟᴜʀ",
@@ -671,7 +669,7 @@ public final class GemItems {
 
                     itemMeta.setDisplayName(BlissGems.colorize("#FEFD17") + BOLD + "sᴘᴇᴇᴅ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(8);
                         if (energy == Energy.Scratched)
                             itemMeta.setCustomModelData(28);
@@ -801,15 +799,15 @@ public final class GemItems {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(4);
@@ -867,7 +865,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(4);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴄᴏɴᴛʀᴏʟ ᴛʜᴇ ʙᴀʟᴀɴᴄᴇ ᴏғ ʟɪғᴇ",
@@ -1026,7 +1024,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(4);
 
                         String ending = BlissGems.colorize("&f)");
@@ -1176,15 +1174,15 @@ public final class GemItems {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(6);
@@ -1238,7 +1236,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(6);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ʙᴇ ᴛʜᴇ ʙɪɢɢᴇsᴛ ʙɪʀᴅ",
@@ -1388,7 +1386,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(6);
                         String ending = BlissGems.colorize("&f)");
                         if (energy == Energy.Pristine_1 || energy == Energy.Pristine_2 || energy == Energy.Pristine_3 || energy == Energy.Pristine_4 || energy == Energy.Pristine_5)
@@ -1548,7 +1546,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         itemMeta.setCustomModelData(14);
                         itemMeta.setLore(Arrays.asList(
                                 WHITE + "" + BOLD + "ᴍᴀɴᴀɢᴇ ᴛʜᴇ ᴛɪᴅᴇs ᴏғ ᴛʜᴇ ᴄᴏsᴍᴏs",
@@ -1737,7 +1735,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
                         if (energy == Energy.Scratched) itemMeta.setCustomModelData(34);
                         else itemMeta.setCustomModelData(14);
                         String gemthingylols = "🔮 ";
@@ -1872,7 +1870,7 @@ public final class GemItems {
                 for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                 if (Gem.isPristineorHigher(energy)) {
-                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                     itemMeta.setCustomModelData(16);
                     itemMeta.setLore(Arrays.asList(
@@ -2002,15 +2000,15 @@ public final class GemItems {
                     // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                     // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
 
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(2);
@@ -2064,7 +2062,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
                         itemMeta.setLore(Arrays.asList(
@@ -2202,7 +2200,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                     itemMeta.setDisplayName(BlissGems.colorize("#FE8120") + BOLD + "ғɪʀᴇ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(2);
 
@@ -2349,15 +2347,15 @@ public final class GemItems {
                     /*NBTItem nbtItem = new NBTItem(item);
                         nbtItem.setInteger("HideFlags", 127);
                         item = nbtItem.getItem();*/
-                    if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                            ItemFlag.HIDE_ENCHANTS,
-                            ItemFlag.HIDE_ATTRIBUTES,
-                            ItemFlag.HIDE_UNBREAKABLE,
-                            ItemFlag.HIDE_DESTROYS,
-                            ItemFlag.HIDE_PLACED_ON,
-                            ItemFlag.HIDE_POTION_EFFECTS,
-                            ItemFlag.HIDE_DYE);
-                    else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                    if (VersionChecker.OlderThanNBTChange()) {
+                        CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                        CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                        CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                        CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                        CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                        CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                        CompItemFlag.HIDE_DYE.applyTo(item);
+                    } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                     itemMeta.setCustomModelData(12);
@@ -2410,7 +2408,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(12);
                         itemMeta.setLore(Arrays.asList(
@@ -2544,7 +2542,7 @@ public final class GemItems {
                     for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
                     itemMeta.setDisplayName(BlissGems.colorize("#0EC912") + BOLD + "ᴡᴇᴀʟᴛʜ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                     if (Gem.isPristineorHigher(energy)) {
-                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                        if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                         itemMeta.setCustomModelData(12);
 
@@ -2698,16 +2696,15 @@ public final class GemItems {
 
                 // Set HideFlags to 127 if server is lower than 1.20.6, if yes: then hide all flags.
                 // due to the nbt change, it is not possible to make everything 1-1 for people using 1.20.6 and higher.
-
-                if (VersionChecker.OlderThanNBTChange()) itemMeta.addItemFlags(
-                        ItemFlag.HIDE_ENCHANTS,
-                        ItemFlag.HIDE_ATTRIBUTES,
-                        ItemFlag.HIDE_UNBREAKABLE,
-                        ItemFlag.HIDE_DESTROYS,
-                        ItemFlag.HIDE_PLACED_ON,
-                        ItemFlag.HIDE_POTION_EFFECTS,
-                        ItemFlag.HIDE_DYE);
-                else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
+                if (VersionChecker.OlderThanNBTChange()) {
+                    CompItemFlag.HIDE_ENCHANTS.applyTo(item);
+                    CompItemFlag.HIDE_ATTRIBUTES.applyTo(item);
+                    CompItemFlag.HIDE_UNBREAKABLE.applyTo(item);
+                    CompItemFlag.HIDE_DESTROYS.applyTo(item);
+                    CompItemFlag.HIDE_PLACED_ON.applyTo(item);
+                    CompItemFlag.HIDE_POTION_EFFECTS.applyTo(item);
+                    CompItemFlag.HIDE_DYE.applyTo(item);
+                } else for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
 
                 itemMeta.setCustomModelData(9);
@@ -2753,7 +2750,7 @@ public final class GemItems {
                 for (ItemFlag flag : ItemFlag.values()) itemMeta.addItemFlags(flag);
 
                 if (Gem.isPristineorHigher(energy) || energy == Energy.Scratched) {
-                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                     if ((energy) == Energy.Scratched) itemMeta.setCustomModelData(29);
                     else itemMeta.setCustomModelData(9);
@@ -2862,7 +2859,7 @@ public final class GemItems {
 
                 itemMeta.setDisplayName(BlissGems.colorize("#F10303") + BOLD + "sᴛʀᴇɴɢᴛʜ " + BlissGems.colorize("#FFD773") + "ɢᴇᴍ");
                 if (Gem.isPristineorHigher(energy)) {
-                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    if (energy == Energy.Pristine_5) itemMeta.addEnchant(CompEnchantment.DURABILITY, 1, true);
 
                     itemMeta.setCustomModelData(10);
 

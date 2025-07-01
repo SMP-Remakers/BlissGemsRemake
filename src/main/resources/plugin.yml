@@ -7,10 +7,6 @@ authors:
   - Hyper_Dondon
   - Cupm
 commands:
-  blissgems:
-    aliases: bliss
-    description: Main command for BlissGems
-    usage: /<command>
 
   progression:
     description: Command for progression

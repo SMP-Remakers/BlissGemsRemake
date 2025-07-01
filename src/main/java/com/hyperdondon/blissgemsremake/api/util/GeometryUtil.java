@@ -55,6 +55,20 @@ public class GeometryUtil {
         return clone.add(right);
     }
 
+    public static Location leftBlocksWithPitch(Location pLocation, double pBlocks) {
+        Location clone = pLocation.clone();
+        clone.setYaw(clone.getYaw() - 90);
+        Vector direction = clone.getDirection().normalize().multiply(pBlocks);
+        return clone.add(direction);
+    }
+
+    public static Location rightBlocksWithPitch(Location pLocation, double pBlocks) {
+        Location clone = pLocation.clone();
+        clone.setYaw(clone.getYaw() + 90);
+        Vector direction = clone.getDirection().normalize().multiply(pBlocks);
+        return clone.add(direction);
+    }
+
     public static Location aboveBlocks(Location pLocation, double pBlocks) {
         Location clone = pLocation.clone();
         Vector direction = clone.getDirection(); // Forward
