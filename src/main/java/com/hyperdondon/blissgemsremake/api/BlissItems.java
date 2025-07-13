@@ -3,7 +3,6 @@ package com.hyperdondon.blissgemsremake.api;
 import com.hyperdondon.blissgemsremake.BlissGems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.tr7zw.nbtapi.NBTItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +12,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.remain.CompEnchantment;
+import org.mineacademy.fo.remain.CompItemFlag;
 import org.mineacademy.fo.remain.CompMaterial;
 
 import java.lang.reflect.Field;
@@ -27,6 +27,7 @@ public final class BlissItems {
                             .name(BlissGems.colorize("#E9C2FF") + ChatColor.BOLD + "ᴛʀᴀᴅᴇʀ")
                             //.skullUrl("http://textures.minecraft.net/texture/bf624a44e77b95dbe1cc735536953e840ba6c19b0157c549d9b82534648c8ce4")
                             //.skullOwner("Bliss_SMP")
+                            .flags(CompItemFlag.values())
                             .make();
 
             ItemMeta itemMeta = item.getItemMeta();
@@ -88,12 +89,8 @@ public final class BlissItems {
                 Common.error(e, "Base64 Encoding for Trader Head encountered an exception. This could also happen because your server is in offline mode.");
             }
 
+
             item.setItemMeta(skullMeta);
-
-            NBTItem nbtItem = new NBTItem(item);
-            nbtItem.setInteger("HideFlags", 255);
-
-            item = nbtItem.getItem();
 
             return item;
         }

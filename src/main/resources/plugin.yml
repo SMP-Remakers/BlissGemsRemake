@@ -1,13 +1,12 @@
 name: BlissGems
 version: 'dev'
-main: com.hyperdondon.blissgemsremake.BlissGems
+main: com.hyperdondon.blissgemsremake.internal.BlissGems
 description: §x§f§f§e§4§a§b§lBlissGemsRemake §fby §4Hyper_Dondon §band §0Cupm §f(Original by Pro4D)
 api-version: '1.17'
 authors:
   - Hyper_Dondon
   - Cupm
 commands:
-
   progression:
     description: Command for progression
     usage: /<command>
@@ -21,3 +20,4 @@ libraries:
   - org.mariadb.jdbc:mariadb-java-client:3.0.3
   - com.mysql:mysql-connector-j:9.0.0
   - org.xerial:sqlite-jdbc:3.46.0.0
+  - org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.0

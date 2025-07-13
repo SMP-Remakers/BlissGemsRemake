@@ -12,6 +12,12 @@ out/
 
 target/
 
+build/
+
+.gradle/
+
+gradle/
+
 #################
 ## Eclipse
 #################
@@ -68,3 +74,6 @@ $RECYCLE.BIN/
 # Mac crap
 .DS_Store
 REBASE.bat
+
+# Hotswapping stuff
+copy.ps1

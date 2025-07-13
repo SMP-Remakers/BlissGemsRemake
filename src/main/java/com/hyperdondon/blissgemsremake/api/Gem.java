@@ -1,8 +1,6 @@
 package com.hyperdondon.blissgemsremake.api;
 
 import com.hyperdondon.blissgemsremake.BlissGems;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -19,8 +17,6 @@ import java.util.UUID;
 import static java.util.Objects.isNull;
 import static net.md_5.bungee.api.ChatColor.*;
 
-@Getter
-@Setter
 public class Gem {
 
     private String id;
@@ -32,34 +28,18 @@ public class Gem {
     private int season;
 
     /**
-     * Allows you to set the id using a UUID instead of a String.
-     */
-    public void setId(UUID id) {
-        this.id = id.toString();
-    }
-
-    /**
-     * Allows you to set the id using a String.
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
      * Internal Use only!
      */
     private Gem() {
 
     }
 
-    //Constructors
-
     /**
      * Constructs a gem using information you have passed.
      */
     public Gem(GemType gemtype, int gemtier, Energy gemenergy) {
-        boolean allowremovebool = Settings.isRemovingAllowed();
-        boolean allowdropint = Settings.isDroppingAllowed();
+        boolean allowremovebool = Settings.removingAllowed;
+        boolean allowdropint = Settings.droppingAllowed;
 
         id = UUID.randomUUID().toString();
         type = gemtype;
@@ -67,9 +47,8 @@ public class Gem {
         energy = gemenergy;
         allowremove = allowremovebool;
         allowdrop = allowdropint;
-        season = Settings.getSeason();
+        season = Settings.season;
     }
-
 
     /**
      * Constructs a gem using information you have passed.
@@ -81,7 +60,7 @@ public class Gem {
         energy = gemenergy;
         allowremove = allowremovebool;
         allowdrop = allowdropbool;
-        season = Settings.getSeason();
+        season = Settings.season;
     }
 
     /**
@@ -101,8 +80,8 @@ public class Gem {
      * Constructs a gem using information you have passed.
      */
     public Gem(GemType gemtype, int gemtier, Energy gemenergy, int gemseason) {
-        boolean allowremovebool = Settings.isRemovingAllowed();
-        boolean allowdropbool = Settings.isDroppingAllowed();
+        boolean allowremovebool = Settings.removingAllowed;
+        boolean allowdropbool = Settings.droppingAllowed;
 
         id = UUID.randomUUID().toString();
         type = gemtype;
@@ -112,7 +91,6 @@ public class Gem {
         allowdrop = allowdropbool;
         season = gemseason;
     }
-
 
     /**
      * Returns a Gem using the values from an ItemStack that should be a gem.
@@ -136,45 +114,6 @@ public class Gem {
         return gem2;
     }
 
-
-    /**
-     * Turns your Gem to an ItemStack using the information given.
-     */
-    @Nullable
-    public ItemStack toItemStack() {
-        int allowremoveint;
-        int allowdropint;
-
-        if (allowremove)
-            allowremoveint = 1;
-        else
-            allowremoveint = 0;
-
-
-        if (allowdrop)
-            allowdropint = 1;
-        else
-            allowdropint = 0;
-
-
-        ItemStack item = GemItems.getGemItem(type, tier, energy, allowdropint, allowremoveint, season);
-        ItemMeta itemMeta = item.getItemMeta();
-
-
-        if (season == 2 || season == 3) {
-            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
-            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
-        } else if (season == 1) {
-            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
-            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
-        }
-
-        item.setItemMeta(itemMeta);
-
-
-        return item;
-    }
-
     /**
      * Checks if the energy that is given is Energy.Pristine or higher.
      */
@@ -190,18 +129,18 @@ public class Gem {
         int allowremoveint;
         int allowdropint;
 
-        if (Settings.isRemovingAllowed())
+        if (Settings.removingAllowed)
             allowremoveint = 1;
         else
             allowremoveint = 0;
 
 
-        if (Settings.isDroppingAllowed())
+        if (Settings.droppingAllowed)
             allowdropint = 1;
         else
             allowdropint = 0;
 
-        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.season))));
     }
 
     /**
@@ -211,13 +150,13 @@ public class Gem {
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint) {
         int allowremoveint;
 
-        if (Settings.isRemovingAllowed())
+        if (Settings.removingAllowed)
             allowremoveint = 1;
         else
             allowremoveint = 0;
 
 
-        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.season))));
     }
 
     /**
@@ -225,7 +164,7 @@ public class Gem {
      */
     @Deprecated
     public static Gem GemConstructor(GemType gemtype, int tier, Energy energy, int allowdropint, int allowremoveint) {
-        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.getSeason()))));
+        return (Gem.fromGemItem(Objects.requireNonNull(GemItems.getGemItem(gemtype, tier, energy, allowdropint, allowremoveint, Settings.season))));
     }
 
     /**
@@ -395,6 +334,8 @@ public class Gem {
             return false;
     }
 
+    //Constructors
+
     /**
      * Get the tier of a gem
      */
@@ -425,8 +366,6 @@ public class Gem {
      */
     public static String getGemID(ItemStack gem, Player p) {
         if (!isGem(gem)) return null;
-        //if (getGemSeason(gem) == 1)
-        //return p.getUniqueId().toString() + ":" + Gem.getGemType(gem) + ":Tier" + Gem.getGemTier(gem);
         NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
         if (!gem.getItemMeta().getPersistentDataContainer().has(idkey, PersistentDataType.STRING))
             idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
@@ -538,5 +477,99 @@ public class Gem {
             return gem.getItemMeta().getPersistentDataContainer().has(idkeys1, PersistentDataType.STRING);
         }
         return true;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id.toString();
+    }
+
+    public GemType getType() {
+        return type;
+    }
+
+    public void setType(GemType type) {
+        this.type = type;
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+
+    public Energy getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(Energy energy) {
+        this.energy = energy;
+    }
+
+    public boolean getAllowDrop() {
+        return allowdrop;
+    }
+
+    public void setAllowDrop(boolean allowdrop) {
+        this.allowdrop = allowdrop;
+    }
+
+    public boolean getAllowRemove() {
+        return allowremove;
+    }
+
+    public void setAllowRemove(boolean allowremove) {
+        this.allowremove = allowremove;
+    }
+
+    public int getSeason() {
+        return season;
+    }
+
+    public void setSeason(int season) {
+        this.season = season;
+    }
+
+    /**
+     * Turns your Gem to an ItemStack using the information given.
+     */
+    @Nullable
+    public ItemStack toItemStack() {
+        int allowremoveint;
+        int allowdropint;
+
+        if (allowremove)
+            allowremoveint = 1;
+        else
+            allowremoveint = 0;
+
+
+        if (allowdrop)
+            allowdropint = 1;
+        else
+            allowdropint = 0;
+
+
+        ItemStack item = GemItems.getGemItem(type, tier, energy, allowdropint, allowremoveint, season);
+        ItemMeta itemMeta = item.getItemMeta();
+
+
+        if (season == 2 || season == 3) {
+            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "gem-id");
+            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
+        } else if (season == 1) {
+            NamespacedKey idkey = new NamespacedKey(BlissGems.getInstance(), "shard_id");
+            itemMeta.getPersistentDataContainer().set(idkey, PersistentDataType.STRING, id);
+        }
+
+        item.setItemMeta(itemMeta);
+
+
+        return item;
     }
 }

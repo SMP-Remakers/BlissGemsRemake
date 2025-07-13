@@ -1,0 +1,86 @@
+package com.hyperdondon.blissgemsremake
+
+import com.hyperdondon.blissgemsremake.api.CooldownHandler
+import com.hyperdondon.blissgemsremake.api.Settings
+import com.hyperdondon.blissgemsremake.internal.PlayerCooldownStorer
+import com.hyperdondon.blissgemsremake.internal.PlayerParticlePreferences
+import com.hyperdondon.blissgemsremake.internal.util.KotlinObjectAutoRegisterScanner
+import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
+import org.bstats.bukkit.Metrics
+import org.bukkit.event.Listener
+import org.mineacademy.fo.Common
+import org.mineacademy.fo.plugin.SimplePlugin
+import java.io.File
+
+class BlissGems() : SimplePlugin(), Listener {
+    var plugin: BlissGems? = null
+
+
+    var pluginId: Int = 24042
+    var metrics: Metrics? = null
+
+    public override fun onPluginStart() {
+    }
+
+    public override fun onPluginStop() {
+    }
+
+    public override fun onReloadablesStart() {
+        startPlugin()
+    }
+
+    fun startPlugin() {
+        KotlinObjectAutoRegisterScanner.registerKotlinObjectListeners()
+        plugin = this
+        instance = this
+        if (Settings.metrics) {
+            var enableMetrics = true
+            try {
+                Class.forName("com.hyperdondon.blissgemsremake.libs.org.bstats.bukkit.Metrics")
+            } catch (e: ClassNotFoundException) {
+                Common.error(
+                    e,
+                    "Are you a developer hotswapping? If you see this and you aren't, please report this bug"
+                )
+                enableMetrics = false
+            }
+            if (enableMetrics) {
+                Common.logFramed("Starting bStats metrics.")
+                metrics = Metrics(this, pluginId)
+            }
+        }
+
+        val configFileName = "config.yml"
+        val settingsFile = File(dataFolder, configFileName)
+
+        if (!settingsFile.exists()) plugin!!.saveResource(configFileName, false)
+
+        val databaseFileName = "Data.db"
+        val db = File(dataFolder, databaseFileName)
+
+        if (!db.exists()) plugin!!.saveResource(databaseFileName, false)
+
+        PlayerParticlePreferences.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
+        PlayerCooldownStorer.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
+
+        CooldownHandler.Initialize()
+    }
+
+
+    companion object {
+        @JvmStatic
+        public var instance: BlissGems? = null
+
+        //Bad method
+        @JvmStatic
+        fun colorize(s: String): String {
+            var returnedString = s;
+
+            val sc = MiniMessage.miniMessage().deserialize(returnedString);
+            returnedString = LegacyComponentSerializer.legacySection().serialize(sc);
+            returnedString = Common.colorize(returnedString);
+            return returnedString;
+        }
+    }
+}

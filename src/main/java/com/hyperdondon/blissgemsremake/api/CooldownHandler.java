@@ -1,32 +1,29 @@
 package com.hyperdondon.blissgemsremake.api;
 
-import lombok.Getter;
-
 import java.time.Duration;
 import java.util.HashMap;
 
 public final class CooldownHandler {
 
-    @Getter
-    private static HashMap<String, Long> Cooldowns;
+    public static HashMap<String, Long> cooldowns;
 
     public static void Initialize() {
-        Cooldowns = new HashMap<>();
+        cooldowns = new HashMap<>();
     }
 
     public static void setCooldown(String name, long value) {
-        Cooldowns.put(name, value + System.currentTimeMillis());
+        cooldowns.put(name, value + System.currentTimeMillis());
     }
 
     public static Long getCooldown(String name) {
-        if (Cooldowns.containsKey(name)) return Cooldowns.get(name) - System.currentTimeMillis() + 1000;
+        if (cooldowns.containsKey(name)) return cooldowns.get(name) - System.currentTimeMillis() + 1000;
         setCooldown(name, -1000);
         return getCooldown(name);
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean canUseCooldown(String name) {
-        if (!Cooldowns.containsKey(name))
+        if (!cooldowns.containsKey(name))
             return true;
         return (getCooldown(name) <= 0);
     }
