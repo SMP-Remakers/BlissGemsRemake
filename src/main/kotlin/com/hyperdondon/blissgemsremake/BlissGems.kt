@@ -14,25 +14,21 @@ import org.mineacademy.fo.plugin.SimplePlugin
 import java.io.File
 
 class BlissGems() : SimplePlugin(), Listener {
-    var plugin: BlissGems? = null
-
-
     var pluginId: Int = 24042
     var metrics: Metrics? = null
 
-    public override fun onPluginStart() {
+    protected override fun onPluginStart() {
     }
 
-    public override fun onPluginStop() {
+    protected override fun onPluginStop() {
     }
 
-    public override fun onReloadablesStart() {
+    protected override fun onReloadablesStart() {
         startPlugin()
     }
 
-    fun startPlugin() {
+    private fun startPlugin() {
         KotlinObjectAutoRegisterScanner.registerKotlinObjectListeners()
-        plugin = this
         instance = this
         if (Settings.metrics) {
             var enableMetrics = true
@@ -54,12 +50,12 @@ class BlissGems() : SimplePlugin(), Listener {
         val configFileName = "config.yml"
         val settingsFile = File(dataFolder, configFileName)
 
-        if (!settingsFile.exists()) plugin!!.saveResource(configFileName, false)
+        if (!settingsFile.exists()) saveResource(configFileName, false)
 
         val databaseFileName = "Data.db"
         val db = File(dataFolder, databaseFileName)
 
-        if (!db.exists()) plugin!!.saveResource(databaseFileName, false)
+        if (!db.exists()) saveResource(databaseFileName, false)
 
         PlayerParticlePreferences.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
         PlayerCooldownStorer.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
@@ -70,7 +66,7 @@ class BlissGems() : SimplePlugin(), Listener {
 
     companion object {
         @JvmStatic
-        public var instance: BlissGems? = null
+        var instance: BlissGems? = null
 
         //Bad method
         @JvmStatic
