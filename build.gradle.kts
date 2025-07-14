@@ -82,62 +82,66 @@ val apiJar by tasks.registering(Jar::class) {
 }
 
 //API
-publishing {
-    publications {
-        create<MavenPublication>("api") {
-            groupId = project.group.toString()
-            artifactId = "blissgemsremake-api"
-            version = project.version.toString()
+if (project.findProperty("publishAPI")?.toString()?.toBooleanStrictOrNull() ?: true) {
+    publishing {
+        publications {
+            create<MavenPublication>("api") {
+                groupId = project.group.toString()
+                artifactId = "blissgemsremake-api"
+                version = project.version.toString()
 
-            artifact(apiJar.get()) {
-                classifier = null // publish as the main artifact
-            }
+                artifact(apiJar.get()) {
+                    classifier = null // publish as the main artifact
+                }
 
-            pom {
-                name.set("BlissGemsRemake-API")
-                url.set("https://github.com/SMP-Remakers/BlissGemsRemake")
-                developers {
-                    developer {
-                        id.set("hyperdondon")
-                        name.set("Daniel Abu Dawoud")
+                pom {
+                    name.set("BlissGemsRemake-API")
+                    url.set("https://github.com/SMP-Remakers/BlissGemsRemake")
+                    developers {
+                        developer {
+                            id.set("hyperdondon")
+                            name.set("Daniel Abu Dawoud")
+                        }
                     }
                 }
             }
         }
-    }
 
-    repositories {
-        mavenLocal()
+        repositories {
+            mavenLocal()
+        }
     }
 }
 
 //The actual plugin
-publishing {
-    publications {
-        create<MavenPublication>("plugin") {
-            groupId = project.group.toString()
-            artifactId = "blissgemsremake"
-            version = project.version.toString()
+if (project.findProperty("publishPlugin")?.toString()?.toBooleanStrictOrNull() ?: true) {
+    publishing {
+        publications {
+            create<MavenPublication>("plugin") {
+                groupId = project.group.toString()
+                artifactId = "blissgemsremake"
+                version = project.version.toString()
 
-            artifact(tasks["jar"]) {
-                classifier = null // ensures it's named like blissgemsremake-0-indev.jar
-            }
+                artifact(tasks["jar"]) {
+                    classifier = null // ensures it's named like blissgemsremake-0-indev.jar
+                }
 
-            pom {
-                name.set("BlissGemsRemake")
-                url.set("https://github.com/SMP-Remakers/BlissGemsRemake")
-                developers {
-                    developer {
-                        id.set("hyperdondon")
-                        name.set("Daniel Abu Dawoud")
+                pom {
+                    name.set("BlissGemsRemake")
+                    url.set("https://github.com/SMP-Remakers/BlissGemsRemake")
+                    developers {
+                        developer {
+                            id.set("hyperdondon")
+                            name.set("Daniel Abu Dawoud")
+                        }
                     }
                 }
             }
         }
-    }
 
-    repositories {
-        mavenLocal()
+        repositories {
+            mavenLocal()
+        }
     }
 }
 
