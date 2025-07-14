@@ -2,8 +2,8 @@ jdk:
   - openjdk17
 
 install:
-  - ./gradlew clean apiJar
+  - ./gradlew clean build apiJar
 
 build:
   artifacts:
-    - build/libs/blissgemsremake-api-0.jar #TODO: Make sure to change the version every version release
+    - build/libs/blissgemsremake-api-*.jar
