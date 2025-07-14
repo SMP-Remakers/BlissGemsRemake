@@ -74,6 +74,7 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
 //should be used if you are a dev and need to test the api with a minecraft plugin that uses maven. execute publishToMavenLocal to publish to local repo
 val apiJar by tasks.registering(Jar::class) {
     archiveBaseName.set("blissgemsremake-api")
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
     archiveClassifier.set(null as String?)
     from(sourceSets.main.get().output) {
         include("com/hyperdondon/blissgemsremake/api/**")

@@ -6,4 +6,4 @@ install:
 
 build:
   artifacts:
-    - build/libs/blissgemsremake-api*.jar
+    - build/libs/blissgemsremake-api-0.jar #TODO: Make sure to change the version every version release
