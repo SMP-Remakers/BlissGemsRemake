@@ -7,3 +7,4 @@ install:
 build:
   artifacts:
     - build/libs/blissgemsremake-api-*.jar
+    - build/libs/blissgemsremake-internal-*.jar

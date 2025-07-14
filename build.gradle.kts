@@ -81,6 +81,15 @@ val apiJar by tasks.registering(Jar::class) {
     }
 }
 
+val internalJar by tasks.registering(Jar::class) {
+    archiveBaseName.set("blissgemsremake-internal")
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+    archiveClassifier.set(null as String?)
+    from(sourceSets.main.get().output) {
+        include("com/hyperdondon/blissgemsremake/**")
+    }
+}
+
 //API
 if (project.findProperty("publishAPI")?.toString()?.toBooleanStrictOrNull() ?: true) {
     publishing {
@@ -91,6 +100,38 @@ if (project.findProperty("publishAPI")?.toString()?.toBooleanStrictOrNull() ?: t
                 version = project.version.toString()
 
                 artifact(apiJar.get()) {
+                    classifier = null // publish as the main artifact
+                }
+
+                pom {
+                    name.set("BlissGemsRemake-API")
+                    url.set("https://github.com/SMP-Remakers/BlissGemsRemake")
+                    developers {
+                        developer {
+                            id.set("hyperdondon")
+                            name.set("Daniel Abu Dawoud")
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
+    }
+}
+
+//Internals
+if (project.findProperty("publishInternals")?.toString()?.toBooleanStrictOrNull() ?: true) {
+    publishing {
+        publications {
+            create<MavenPublication>("internal") {
+                groupId = project.group.toString()
+                artifactId = "blissgemsremake-internal"
+                version = project.version.toString()
+
+                artifact(internalJar.get()) {
                     classifier = null // publish as the main artifact
                 }
 
@@ -147,4 +188,5 @@ if (project.findProperty("publishPlugin")?.toString()?.toBooleanStrictOrNull() ?
 
 artifacts {
     add("archives", apiJar.get())
+    add("archives", internalJar.get())
 }
