@@ -2,7 +2,7 @@ jdk:
   - openjdk17
 
 install:
-  - ./gradlew clean build apiJar
+  - ./gradlew clean build apiJar publishToMavenLocal
 
 build:
   artifacts:
