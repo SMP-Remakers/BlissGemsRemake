@@ -95,7 +95,7 @@ abstract class PowerHandler(var gemType: GemType, var potionEffect: PotionEffect
 
     fun isPowerful(gem: ItemStack?, supportTier1: Boolean, player: Player?): Boolean {
         if (!Gem.isGem(gem)) return false
-        if (Gem.getGemType(gem) != gemType)  //Check if the gem isn't a strength gem
+        if (Gem.getGemType(gem!!) != gemType)  //Check if the gem isn't a strength gem
             return false
         if (Gem.getGemTier(gem) == 1) { //keep this last
             if (supportTier1) return true

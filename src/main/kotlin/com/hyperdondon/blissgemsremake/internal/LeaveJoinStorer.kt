@@ -27,7 +27,7 @@ object LeaveJoinStorer : Listener {
                 if (HasID) {
                     val id = gem.itemMeta.persistentDataContainer.get(idkey, PersistentDataType.STRING)
                     val set: MutableSet<MutableMap.MutableEntry<String?, Long?>> =
-                        HashSet<MutableMap.MutableEntry<String?, Long?>>(CooldownHandler.cooldowns.entries)
+                        HashSet<MutableMap.MutableEntry<String?, Long?>>(CooldownHandler.cooldowns!!.entries)
                     for (entry in set) {
                         checkNotNull(id)
                         if (entry.key!!.contains(id)) SaveAndUnload(entry.key)
@@ -60,7 +60,7 @@ object LeaveJoinStorer : Listener {
 
     fun SaveAndUnload(name: String?) {
         PlayerCooldownStorer.put(name, CooldownHandler.getCooldown(name).toString())
-        CooldownHandler.cooldowns.remove(name)
+        CooldownHandler.cooldowns!!.remove(name)
     }
 
     fun LoadAndRemove(name: String?) {
@@ -78,18 +78,18 @@ object LeaveJoinStorer : Listener {
 
     fun GetPowers(gem: Gem): MutableList<String?> {
         val Powers: MutableList<String?> = ArrayList<String?>()
-        if (gem.getType() == GemType.Strength) {
+        if (gem.type == GemType.Strength) {
             Powers.add("Power-Frailer")
             Powers.add("Power-Enchanting")
             Powers.add("Power-ChadStrength")
-            if (gem.getSeason() > 2) Powers.add("Power-Bounty")
+            if (gem.season > 2) Powers.add("Power-Bounty")
         }
 
-        if (gem.getType() == GemType.Speed) {
+        if (gem.type == GemType.Speed) {
             Powers.add("Power-SpeedStorm")
             Powers.add("Power-Enchanting")
-            if (gem.getSeason() <= 2) Powers.add("Power-SlothsSedative")
-            if (gem.getSeason() > 2) {
+            if (gem.season <= 2) Powers.add("Power-SlothsSedative")
+            if (gem.season > 2) {
                 Powers.add("Power-Blur")
                 Powers.add("Power-TerminalVelocity")
             }

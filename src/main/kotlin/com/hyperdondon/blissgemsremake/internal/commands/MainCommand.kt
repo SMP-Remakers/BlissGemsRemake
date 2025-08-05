@@ -113,12 +113,12 @@ object MainCommand : SimpleCommand("blissgems/bliss") {
                 var tier = 1
                 if (args[3].toInt() == 2) tier = 2
 
-                Settings.setSeason(2)
+                Settings.season = 2
                 val type = GemType.valueOf(
                     args[2].substring(0, 1).uppercase(Locale.getDefault()) + args[2].substring(1)
                 ) //Make all letter lowercase then capitalize the first letter
                 var energy: Energy? = Energy.Pristine
-                if (Gem.hasAGem(target)) energy = Gem.getPlayerEnergy(target)
+                if (Gem.hasAGem(target!!)) energy = Gem.getPlayerEnergy(target)
 
                 var season = Settings.season
 
@@ -197,7 +197,7 @@ object MainCommand : SimpleCommand("blissgems/bliss") {
                     ).toSectionSign()
                 )
 
-                p.inventory.addItem(BlissItems.getItem(BlissItemType.Trader, "ds", "ds", 3))
+                p.inventory.addItem(BlissItems.getItem(BlissItemType.Trader, "ds", "ds", 3)!!)
             }
         }
     }

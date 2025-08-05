@@ -7,6 +7,7 @@ plugins {
 }
 
 group = "com.hyperdondon"
+var pluginArtifactId = "blissgemsremake"
 version = 0
 
 repositories {
@@ -37,12 +38,6 @@ kotlin {
     jvmToolchain(targetJavaVersion)
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-}
-
 tasks.processResources {
     val props = mapOf("version" to version)
     inputs.properties(props)
@@ -64,8 +59,8 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
     }
 
     if (relocate) {
-        relocate("org.mineacademy.fo", "${project.group}.libs.org.mineacademy.fo")
-        relocate("org.bstats.bukkit", "${project.group}.libs.org.bstats.bukkit")
+        relocate("org.mineacademy.fo", "${project.group}.${pluginArtifactId}.libs.org.mineacademy.fo")
+        relocate("org.bstats.bukkit", "${project.group}.${pluginArtifactId}.libs.org.bstats.bukkit")
     }
 
     minimize()
@@ -96,7 +91,7 @@ if (project.findProperty("publishAPI")?.toString()?.toBooleanStrictOrNull() ?: t
         publications {
             create<MavenPublication>("api") {
                 groupId = project.group.toString()
-                artifactId = "blissgemsremake-api"
+                artifactId = pluginArtifactId
                 version = project.version.toString()
 
                 artifact(apiJar.get()) {
@@ -128,7 +123,7 @@ if (project.findProperty("publishInternals")?.toString()?.toBooleanStrictOrNull(
         publications {
             create<MavenPublication>("internal") {
                 groupId = project.group.toString()
-                artifactId = "blissgemsremake-internal"
+                artifactId = pluginArtifactId
                 version = project.version.toString()
 
                 artifact(internalJar.get()) {
@@ -160,7 +155,7 @@ if (project.findProperty("publishPlugin")?.toString()?.toBooleanStrictOrNull() ?
         publications {
             create<MavenPublication>("plugin") {
                 groupId = project.group.toString()
-                artifactId = "blissgemsremake"
+                artifactId = pluginArtifactId
                 version = project.version.toString()
 
                 artifact(tasks["jar"]) {

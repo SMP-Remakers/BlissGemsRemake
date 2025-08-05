@@ -14,7 +14,7 @@ import java.util.*
 object GemGiver : Listener {
     @EventHandler
     fun giveGem(e: PlayerJoinEvent) {
-        if (!e.getPlayer().hasPlayedBefore() && Settings.giveGemOnJoinAllowed) {
+        if (!e.getPlayer().hasPlayedBefore() && Settings.giveGemOnJoin) {
             var type: GemType? = null
             var randomNumber = 0
             if (Settings.season == 1) {

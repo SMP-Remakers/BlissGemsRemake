@@ -30,6 +30,13 @@ class BlissGems() : SimplePlugin(), Listener {
     private fun startPlugin() {
         KotlinObjectAutoRegisterScanner.registerKotlinObjectListeners()
         instance = this
+
+        val settingsFile = File(dataFolder, "config.yml")
+
+        if (!settingsFile.exists()) saveResource("config.yml", false)
+        Settings.settingsFile = settingsFile
+        Settings.loadConfig()
+
         if (Settings.metrics) {
             var enableMetrics = true
             try {
@@ -47,11 +54,6 @@ class BlissGems() : SimplePlugin(), Listener {
             }
         }
 
-        val configFileName = "config.yml"
-        val settingsFile = File(dataFolder, configFileName)
-
-        if (!settingsFile.exists()) saveResource(configFileName, false)
-
         val databaseFileName = "Data.db"
         val db = File(dataFolder, databaseFileName)
 
@@ -60,7 +62,7 @@ class BlissGems() : SimplePlugin(), Listener {
         PlayerParticlePreferences.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
         PlayerCooldownStorer.connect("jdbc:sqlite:" + dataFolder.absolutePath + databaseFileName)
 
-        CooldownHandler.Initialize()
+        CooldownHandler.init()
     }
 
 
