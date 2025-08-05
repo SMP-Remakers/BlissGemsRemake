@@ -4,6 +4,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.0"
     `java-library`
     `maven-publish`
+    id("org.jetbrains.dokka") version "2.0.0"
 }
 
 group = "com.hyperdondon"
@@ -184,4 +185,15 @@ if (project.findProperty("publishPlugin")?.toString()?.toBooleanStrictOrNull() ?
 artifacts {
     add("archives", apiJar.get())
     add("archives", internalJar.get())
+}
+
+//docs
+tasks.dokkaJavadoc {
+    dokkaSourceSets.configureEach {
+        perPackageOption {
+            // Hide the Kotlin-specific companion classes.
+            matchingRegex.set(".*\\.Companion")
+            suppress.set(true)
+        }
+    }
 }
